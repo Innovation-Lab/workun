@@ -10,7 +10,28 @@ class User extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'login_code',
+        'password',
+        'nice_name',
+        'email',
+        'sei',
+        'mei',
+        'kana_sei',
+        'kana_mei',
+        'organization_id',
+        'birth',
+        'joined',
+        'img_path',
+        'status',
+        'number',
+        'number_flg',
+        'description',
+        'department_id',
+        'position_id',
+        'grade_id',
+        'employment_id',
+        'role',
+        'memo',
     ];
 }
 
