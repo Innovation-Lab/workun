@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class self_check_sheet_targets extends Model
+class self_check_sheet_target extends Model
 {
     use HasFactory;
 
