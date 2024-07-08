@@ -21,5 +21,5 @@ Route::group([
     'prefix' => 'master',
     'as' => 'master.',
 ], function () {
-    require base_path('routes/organization.php');
+    require base_path('routes/master.php');
 });
