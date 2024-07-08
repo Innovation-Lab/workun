@@ -16,6 +16,7 @@ class self_check_sheet_rating extends Model
      */
     protected $fillable = [
         'self_check_sheet_id',
+        'target',
         'user_id',
         'answer',
         'rating',

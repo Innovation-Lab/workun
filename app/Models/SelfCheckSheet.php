@@ -16,11 +16,10 @@ class self_check_sheet extends Model
      */
     protected $fillable = [
         'organization_id',
+        'hierarchy',
         'title',
-        'year',
-        'term',
+        'period_id',
         'method',
-        'notice',
         'check_days',
         'rating_days',
         'approval_days',

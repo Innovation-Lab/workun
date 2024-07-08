@@ -17,7 +17,6 @@ class grade extends Model
     protected $fillable = [
         'organization_id',
         'name',
-        'position_id',
         'seq',
     ];
 }

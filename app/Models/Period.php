@@ -16,7 +16,8 @@ class period extends Model
      */
     protected $fillable = [
         'organization_id',
-        'year',
-        'month',
+        'name',
+        'start',
+        'end',
     ];
 }

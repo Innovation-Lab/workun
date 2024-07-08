@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class department extends Model
+class salary extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,6 @@ class department extends Model
      */
     protected $fillable = [
         'organization_id',
-        'department_id',
         'name',
         'seq',
     ];

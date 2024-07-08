@@ -26,7 +26,6 @@ class User extends Model
         'number',
         'number_flg',
         'description',
-        'department_id',
         'position_id',
         'grade_id',
         'employment_id',
