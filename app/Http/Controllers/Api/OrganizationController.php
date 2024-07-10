@@ -28,7 +28,7 @@ class OrganizationController extends Controller
      */
     public function index(Request $request)
     {
-        $organization = $this->organization_repository->search($request);
+        $organization = $this->organization_repository->find($request);
         if ($organization) {
             return response()->json([
                 'organization' => $organization

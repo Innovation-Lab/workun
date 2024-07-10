@@ -25,8 +25,8 @@ Route::group([
     'as' => 'organization.',
 ], function () {
     Route::get('/', [OrganizationController::class, 'index'])->name('index');
-    Route::get('/edit', [OrganizationController::class, 'edit'])->name('edit');
-    Route::post('/edit', [OrganizationController::class, 'update']);
+    Route::get('/edit/{organization}', [OrganizationController::class, 'edit'])->name('edit');
+    Route::post('/edit/{organization}', [OrganizationController::class, 'update']);
 
     require base_path('routes/organization.php');
 });

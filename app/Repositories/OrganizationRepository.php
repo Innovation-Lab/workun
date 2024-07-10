@@ -3,30 +3,39 @@
 namespace App\Repositories;
 
 use App\Models\Organization;
-use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\Request;
 
 class OrganizationRepository implements OrganizationRepositoryInterface
 {
     /**
      * @param Request $request
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany $query
+     * @return HasMany $query
      */
-    public function search(Request $request)
+    public function find(Request $request): HasMany
     {
-        $organization = Organization::where('access_code', $request->access_code)
+        return Organization::where('access_code', $request->access_code)
             ->where('access_key', $request->access_key)
             ->first();
-        return $organization;
     }
 
     /**
      * @param Request $request
-     * @param Organization $organization
+     * @return Builder $query
+     */
+    public function search(Request $request): Builder
+    {
+        return Organization::query();
+    }
+
+    /**
+     * @param Request $request
      * @return Organization
      * @throws Exception
      */
-    public function create(Request $request)
+    public function create(Request $request): Organization
     {
         $organization = new Organization();
         $organization->fill($request->all());
@@ -37,12 +46,12 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * @param $organization
+     * @param Organization $organization
      * @param Request $request
      * @return Organization
      * @throws Exception
      */
-    public function update(Organization $organization, Request $request)
+    public function update(Organization $organization, Request $request): Organization
     {
         $organization = $organization->fill($request->all());
         if (!$organization->update()) {
