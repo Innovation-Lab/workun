@@ -1,5 +1,7 @@
 @use "../foundation/global" as *;
-
+html{
+  min-width: 1080px;
+}
 body {
   color: var(--text-primary);
   font-family: var(--family);
