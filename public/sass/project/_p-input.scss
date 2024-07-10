@@ -1,0 +1,28 @@
+
+
+// ラベルと input field のセット
+.p-input {
+
+  & > label {
+    font: 500 var(--font-sm)/1.5 var(--family);
+    display: block;
+    margin: 0 0 .5em;
+  }
+  
+  & + & {
+    margin: var(--spacing-lg) 0 0;
+    &.space--sm{
+      margin: var(--spacing-sm) 0 0;
+    }
+    &.space--md{
+      margin: var(--spacing-md) 0 0;
+    }
+  }
+
+  // カード有効期限
+  &__creditLimit{
+    display: grid;
+    grid-template-columns: 100px 150px;
+    gap: 8px;
+  }
+}

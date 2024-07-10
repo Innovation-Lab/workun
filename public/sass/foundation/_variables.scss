@@ -1,0 +1,197 @@
+@use "../foundation/global" as *;
+
+:root {
+
+  // 0. カラー
+  // 1. サイズ
+  // 2. フォントファミリー
+
+  // --------------------------------------------------
+  // 1. カラー
+  // --------------------------------------------------
+  // プリミティブカラー（基本の色）--------------------------------------------------
+  --background-base: #F5F7FA;
+  --background-base-darken: #DCE3EF;
+  --main: #0F203E;
+  --main-light: #15294B;
+  --line-mainSeparate: #304261;
+  // ステータス
+  --assessment: #0BB7C2;
+  
+  // グレー
+  --gray-50: #F0F0F7;
+  --gray-100: #e1e1e1;
+  --gray-200: #D3D3D3;
+  --gray-300: #C1C1C1;
+  --gray-400: #AFAFAF;
+  --gray-500: #999;
+  --gray-600: #7C7C7C;
+  --gray-700: #5d5d5d;
+  --gray-800: #343434;
+  --gray-900: #202020;
+
+  // ネイビー
+  --navy-50: hsl(200, 10%, 96%);
+  --navy-100: #e6eaec;
+  --navy-200: #d7dee1;
+  --navy-300: #c1cdd2;
+  --navy-400: #6C8295;
+  --navy-500: #55697d;
+  --navy-600: #364E63;
+  --navy-700: #2b3f52;
+  --navy-800: #21303D;
+  --navy-900: #19242D;
+  --navy-999: #141b20;
+
+  // 各種カラー
+  --berry-100: #E5EEFF;
+  --berry-500: #0058FF;
+  --berry-800: #003EB2;
+  
+  --grape-100: #F2E8FF;
+  --grape-500: #9B37FF;
+  --grape-800: #6900d1;
+
+  --kiwi-100: #E9F2DD;
+  --kiwi-500: #48AE18;
+  --kiwi-800: #2F8B09;
+
+  --melon-100: #E6FAF2;
+  --melon-500: #0ACF83;
+  --melon-800: #088553;
+
+  --lime-100: #F4FBDA;
+  --lime-500: #A5E21D;
+  --lime-800: #6C9E13;
+
+  --tomato-100: hsl(0, 93%, 90%);
+  --tomato-500: #F23D74;
+  --tomato-800: #BA0E0E;
+
+  --white: #fff;
+
+
+  // トークン化　--------------------------------------------------
+  // 文字色（薄い→濃い）
+  --text-1: var(--gray-900);
+  --text-2: var(--gray-800);
+  --text-3: var(--gray-600);
+  --text-4: var(--gray-500);
+
+  // 背景色（薄い→濃い）
+  --surface-1: var(--navy-50);
+  --surface-2: var(--navy-100);
+  --surface-3: var(--navy-200);
+  --surface-4: var(--navy-300);
+
+  // 線色（薄い→濃い）
+  --border-1: var(--gray-100);
+  --border-2: var(--gray-200);
+  --border-3: var(--gray-300); 
+  --border-4: var(--gray-500);
+
+  // アラートグループ
+  --alert: var(--tomato-500);
+  --alert-light: var(--tomato-100);
+    --text-alert: var(--alert);
+    --surface-alert: var(--alert-light);
+    --border-alert: var(--alert);
+
+  // ブランドグループ
+    // ↳ プライマリ
+  --brand-primary: var(--kiwi-500);
+  --brand-primary-light: var(--kiwi-100);
+  --brand-primary-dark: var(--kiwi-800);
+    --text-brand-primary: var(--brand-primary);
+    --surface-brand-primary: var(--brand-primary-light);
+
+    // ↳ セカンダリ
+  --brand-secondary: var(--grape-500);
+  --brand-secondary-light: var(--grape-100);
+  --brand-secondary-dark: var(--grape-800);
+    --text-brand-secondary: var(--brand-secondary);
+    --surface-brand-secondary: var(--brand-secondary-light);
+
+  // ↳ ターシャリ
+  --brand-tertiary: var(--lime-500);
+  --brand-tertiary-light: var(--lime-100);
+  --brand-tertiary-dark: var(--lime-800);
+    --text-brand-tertiary: var(--brand-tertiary);
+    --surface-brand-tertiary: var(--brand-tertiary-light);
+
+  // アクセントカラー（リンクボタンなど）
+  --accent: var(--berry-500);
+  --accent-light: var(--berry-100);
+  --accent-dark: var(--berry-800);
+
+  // ボタン
+  --button-text: var(--text-primary);
+  --button-border: var(--gray-300);
+  --button-border-hover: var(--gray-300);
+  --button-surface: #fff;
+  --button-surface-hover: var(--gray-50);
+
+
+  // リンクグループ
+  --text-link-normal: var(--gray-500);
+  --text-link-normal-hover: var(--navy-700);
+
+  // --------------------------------------------------
+  //　2. サイズ
+  // --------------------------------------------------
+
+  // radius
+  --radius-none: 0px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 32px;
+  --radius-2xl: 128px;
+  --radius-3xl: 360px;
+
+
+  // 余白サイズ
+  --spacing-3xs: 4px; //.25rem
+  --spacing-2xs: 8px; //.5rem
+  --spacing-xs: 12px; //.75rem
+  --spacing-sm: 16px; //1rem
+  --spacing-md: 24px; //1.5rem
+  --spacing-lg: 32px; //2rem
+  --spacing-xl: 40px; //2.5rem
+  --spacing-2xl: 64px;
+  --spacing-3xl: 128px;
+
+  // フォントサイズ
+  --font-3xs: 10px; //.625rem
+  --font-2xs: 12px; //.75rem
+  --font-xs: 13px; //.8125rem
+  --font-sm: 14px; //.875rem
+  --font-md: 16px; //1rem
+  --font-lg: 18px; //1.125rem;
+  --font-xl: 24px; //1.5rem;
+  --font-2xl: 32px; //2rem;
+  --font-3xl: 40px; //2.5rem;
+
+  @include max(md) {
+  --font-3xs: 10px;
+  --font-2xs: 11px;
+  --font-xs: 13px;
+  --font-sm: 13px;
+  --font-md: 15px;
+  --font-lg: 16px;
+  --font-xl: 20px;
+  --font-2xl: 28px;
+  --font-3xl: 32px;
+  }
+
+
+
+
+  // --------------------------------------------------
+  //　0. フォントファミリー
+  // --------------------------------------------------
+  --family: 'Roboto', 'Noto Sans JP', "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+
+}
+
+

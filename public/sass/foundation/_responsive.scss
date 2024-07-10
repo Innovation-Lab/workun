@@ -1,0 +1,21 @@
+// no.1 レスポンシブ（min-width）
+$breakpoints: (
+  "sm": 400px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+) !default;
+
+@mixin min($breakpoint) {
+  $width: map-get($breakpoints, $breakpoint);
+  @media (width >= #{$width}) {
+    @content;
+  }
+}
+
+@mixin max($breakpoint) {
+  $width: map-get($breakpoints, $breakpoint);
+  @media (width < #{$width}) {
+    @content;
+  }
+}

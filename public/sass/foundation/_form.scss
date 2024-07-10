@@ -1,0 +1,166 @@
+// 読み込み
+@use "../foundation/global" as *;
+
+:root {
+  --form-text: var(--gray-800);
+  --form-placeholder: var(--gray-500);
+  --form-readonly: var(--gray-50);
+  --form-border: var(--gray-400);
+  --form-surface: var(--gray-50);
+  --form-accent: var(--berry-500);
+  --form-radius: 8px;
+}
+
+input[type=text],
+input[type=search],
+input[type=date],
+input[type=tel],
+input[type=email],
+input[type=number],
+input[type=password],
+select,
+textarea {
+  color: var(--form-text);
+  font: 400 var(--font-md)/1.5 var(--family);
+  border: 1px solid var(--form-border);
+  background-color: var(--form-surface);
+  border-radius: var(--form-radius);
+  width: 100%;
+  padding: var(--spacing-xs) var(--spacing-xs);
+  
+  // プレースホルダー
+  &::placeholder {
+    color: var(--form-placeholder);
+  }
+
+  // スタイル
+  &[readonly] {
+    border-color: none;
+  }
+
+  &:not([readonly]):focus {
+    outline: 1px solid var(--form-accent);
+  }
+}
+
+// リードオンリー
+input[readonly] {
+  border-color: var(--form-readonly);
+  background-color: var(--form-readonly);
+}
+input[disabled] {
+  color: var(--form-placeholder);
+  border-color: transparent;
+}
+
+// スピナー打ち消し
+input[type=number] {
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance:textfield;
+    margin: 0;
+  }
+}
+
+
+// ↑ ここまでOK
+
+select {
+  appearance: none;
+  padding-right: 1.5em;
+  background-image: url('data:image/svg+xml;utf8,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6L8 10L12 6" stroke="%235451EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-size: 1em;
+  background-position: right .25em center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+textarea {
+  font-size: var(--text-md);
+  padding: .5em .75em;
+  resize: vertical;
+  &.sm {
+    font-size: var(--text-sm);
+  }
+}
+
+
+// ラジオとチェックボックス共通
+label:has(input[type=radio], input[type=checkbox]) {
+
+  color: var(--text-form);
+  font: 400 var(--font-sm)/24px var(--family);
+  min-height: 24px;
+
+  display: inline-block;
+  position: relative;
+  padding-inline: 2em 1em;
+  
+  background-size: 20px 20px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  user-select: none;
+
+  &:has(:focus) {
+    outline: 2px solid var(--accent);
+    border-radius: var(--radius-sm);
+  }
+  :is(input[type=radio], input[type=checkbox]) {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+  }
+}
+
+// ラジオ
+label:has(input[type=radio]) {
+  $color1: 'none';
+  $color2: '%23AAAAAA';
+  $color3: 'none';
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="24" height="24" viewBox="x,y" fill="" stroke-width="1"><circle cx="12" cy="12" r="10" fill="#{$color1}" stroke="#{$color2}"/><circle cx="12" cy="12" r="3" fill="#{$color3}"/></svg>');
+
+  &:has(:checked) {
+    // color1, color2はactive色
+    $color1: '%230058FF';
+    $color2: '%230058FF';
+    $color3: 'white';
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="24" height="24" viewBox="x,y" fill="" stroke-width="1"><circle cx="12" cy="12" r="10" fill="#{$color1}" stroke="#{$color2}"/><circle cx="12" cy="12" r="3" fill="#{$color3}"/></svg>');
+  }
+}
+
+// チェックボックス
+label:has(input[type=checkbox]) {
+  $color1: 'none';
+  $color2: '%23AAAAAA';
+  $color3: 'none';
+  align-items: center;
+  background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="23" height="23" rx="5.5" fill="#{$color1}" stroke="#{$color2}"/><path d="M6 12.3333L9.77143 16L18 8" stroke="#{$color3}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+
+  &:has(:checked) {
+    // color1, color2はactive色
+    $color1: '%230058FF';
+    $color2: '%230058FF';
+    $color3: 'white';
+    background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="23" height="23" rx="5.5" fill="#{$color1}" stroke="#{$color2}"/><path d="M6 12.3333L9.77143 16L18 8" stroke="#{$color3}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  }
+}
+
+//select2
+.p-input {
+  .select2-container {
+    .select2-selection--single {
+      color: var(--text-form);
+      font: 400 var(--font-md)/1.5 var(--family);
+      border: 1px solid var(--border-form);
+      background-color: var(--surface-form);
+      border-radius: var(--radius-min);
+      padding: var(--spacing-xs) var(--spacing-xs);
+      width: 100%;
+      height: 45px;
+      .select2-selection__arrow {
+        height: 45px;
+      }
+    }
+  }
+}

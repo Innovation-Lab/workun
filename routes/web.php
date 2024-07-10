@@ -23,3 +23,6 @@ Route::group([
 ], function () {
     require base_path('routes/master.php');
 });
+
+
+Route::view('/', 'home')->name('home');

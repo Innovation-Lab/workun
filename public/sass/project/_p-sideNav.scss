@@ -1,0 +1,74 @@
+
+// 共通サイドメニュー(ログイン後)
+.p-sideNav {
+  width: 190px;
+  background: var(--main);
+  height: 100%;
+  height: 100dvh;
+  display: grid;
+  grid-auto-rows: 88px auto 80px;
+  &__head{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: solid 1px var(--line-mainSeparate);
+    padding: 0 20px;
+    .c-image--svg{
+      width: auto;
+      height: 28px;
+      max-width: 160px;
+    }
+  }
+  &__body{
+    padding: 36px 20px 24px;
+  }
+  &__list{
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    > li{
+
+    }
+    .parent{
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 16px; 
+      .c-image{
+        width: 24px; height: 24px;
+      }
+      .title{
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+    .child{
+      margin: 14px 0 0;
+      padding-left: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      a{
+        color: #D7E0F0;
+        font-size: 13px;
+        font-weight: 400;
+        display: block;
+      }
+    }
+  }
+  &__foot{
+    display: flex;
+    border-top: solid 1px var(--line-mainSeparate);
+    .logout{
+      height: 100%;
+      flex: auto;
+      min-width: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5A6E93;
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+}

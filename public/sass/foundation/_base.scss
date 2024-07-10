@@ -1,0 +1,48 @@
+@use "../foundation/global" as *;
+
+body {
+  color: var(--text-primary);
+  font-family: var(--family);
+  font-weight: 400;
+  font-size: var(--font-sm);
+  font-feature-settings: "palt" 1;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+  background: var(--background-base);
+  // ナビゲーション表示中スクロール禁止(900以下でメニューに黒幕がかかる)
+  @media (width < 900px) {
+    &:has(.is-sidebarOpen) {
+      overflow: hidden;
+    }
+  }
+  p {
+    letter-spacing: .06em;
+  }
+  a,button {
+    cursor: pointer;
+  }
+}
+// svg読み込み
+.svg-defs{
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+// レイアウト親
+.wrapper{
+  display: grid;
+  grid-template-areas: "header main";
+  grid-template-columns: auto 1fr;
+  position: relative;
+}
+
+
+/* WordPress管理者バー非表示 */
+html:not(:has(.wp-admin)):has(.role-subscriber) {
+  margin-top: 0 !important;
+  #wpadminbar {
+    display: none !important;
+  }
+}

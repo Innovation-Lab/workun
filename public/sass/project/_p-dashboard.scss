@@ -1,0 +1,17 @@
+
+// ダッシュボード
+.p-dashboard {
+  .p-todo{
+    padding: 2.5rem;
+    &__body{
+      gap: 1.5rem;
+    }
+    &__item{
+      .mainInfo{
+        .title{
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+
+// 共通フッター(ログイン後)
+.p-footer {
+  position: absolute;
+  right: 0; bottom: 0;
+  width: 100%;
+  height: 3rem;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  pointer-events: none;
+  .copyright{
+    font-size: 12px;
+  }
+}

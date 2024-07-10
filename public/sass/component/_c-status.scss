@@ -1,0 +1,27 @@
+// タスクのステータス
+.c-status {
+  width: 72px;
+  height: 18px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-size: 11px;
+  color: var(--white);
+  background: #222;
+  // 未登録
+  &--waiting{
+    background: var(--alert);
+  }
+  // 下書き
+  &--paused{
+    background: var(--gray-100);
+    color: var(--gray-400);
+    border: solid 1px var(--gray-200);
+  }
+  // 評価待ち
+  &--assessment{
+    background: var(--assessment);
+  }
+}

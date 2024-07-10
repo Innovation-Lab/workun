@@ -1,0 +1,233 @@
+@use "../component/c-button" as *;
+@use "../component/c-link" as *;
+
+// パーツ類
+.p-inputField {
+  & + & {
+    margin: var(--spacing-2xs) 0 0;
+  }
+
+  // ファイルアップロード
+  &--uploadFile {
+    label {
+      display: grid;
+      gap: var(--spacing-sm);
+      &:has(.fileName:not(:empty)) {
+        background-color: var(--accent-light);
+        border-color: var(--accent);
+      }
+    }
+    svg {
+      --strokeColor: #aaa;
+      --fillColor: transparent;
+      width: 80px;
+      height: auto;
+      aspect-ratio: 1;
+      path {
+        stroke: var(--strokeColor);
+      }
+      #svgColor {
+        fill: var(--fillColor);
+      }
+      &:has(~ .fileName:not(:empty)) {
+        --strokeColor: var(--accent);
+      }
+
+    }
+    .text {
+      &:has(~ .fileName:not(:empty)) {
+        display: none;
+      }
+    }
+    input[type=file] {
+      visibility: hidden;
+      position: absolute;
+    }
+    .fileName {
+      // background-color: var(--surface-2);
+      // padding: .5em 1em;
+      // border-radius: .5rem;
+      &:empty {
+        display: none;
+      }
+    }
+  }
+
+  // 画像アップロード
+  &--dropZone {
+    label {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      border: 1px dashed #000;
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      position: relative;
+      overflow: hidden;
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0 auto auto 0;
+        z-index: 0;
+        object-fit: contain;
+        background-color: #fff;
+        &[src=""] {
+          opacity: 0;
+          & + button {
+            visibility: hidden;
+          }
+        }
+        & + button {
+          visibility: visible;
+          position: absolute;
+          inset: 0 0 auto auto;
+          z-index: 1;
+        }
+      }
+    }
+  }
+
+  // ログイン
+  &--loginEmail,
+  &--loginPassword,
+  &--search {
+    input {
+      padding-left: 3.5em;
+      background-repeat: no-repeat;
+      background-position: left 1em center;
+      background-size: 1.4em;
+    }
+  }
+  // メールアイコンアイコン
+  &--loginEmail {
+    input {
+      padding-left: 3.5em;
+      background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.64"><path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 6L12 13L2 6" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>');
+    }
+  }
+  // パスワードアイコン
+  &--loginPassword {
+    input {
+      padding-left: 3.5em;
+      background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g opacity="0.64"><path d="M19 11H5C3.89543 11 3 11.8954 3 13V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13C21 11.8954 20.1046 11 19 11Z" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="%23333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></svg>');
+    }
+  }
+
+  // 検索アイコン
+  &--search {
+    input {
+      padding-left: 3.25em;
+      background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20.9999 20.9999L16.6499 16.6499" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    }
+  }
+
+  // ラジオ
+  &--radio{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    input{
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      + label{
+        display: flex;
+        align-items: center;
+        padding: var(--spacing-xs) 0;
+        padding-left: 24px;
+        position: relative;
+        &:before,
+        &:after{
+          content: '';
+          width: 16px; height: 16px;
+          border: solid 1px var(--border-3);
+          border-radius: 50%;
+          background: #fff;
+          position: absolute;
+          left: 0; top: 0;
+          top: 50%;
+          transform: translate(0, -50%);
+        }
+        &:after{
+          transform-origin: center;
+          transform: translate(0, -50%) scale(.5);
+          border-color: #fff;
+        }
+      }
+      &:checked{
+        + label{
+          &:before{
+            border-color: var(--accent);
+          }
+          &:after{
+            background: var(--accent);
+            border-color: var(--accent);
+          }
+        }
+      }
+    }
+    &.flexRow{
+      flex-direction: row;
+      gap: 16px;
+    }
+  }
+}
+
+// プラグインログイン用スタイル --------------------
+.pmpro_login_wrap,
+.pmpro_lost_password_wrap {
+  label {
+    display: block;
+    margin: 0 0 .5em;
+  }
+  p {
+    + p {
+      margin: 1em 0 0 !important;
+    }
+  }
+
+  // 入力フィールド
+  .login-username,
+  .pmpro_lost_password-field {
+    @extend .p-inputField;
+    @extend .p-inputField--loginEmail;
+  }
+  .login-password {
+    @extend .p-inputField;
+    @extend .p-inputField--loginPassword;
+  }
+
+  // 送信ボタン
+  input[type=submit] {
+    opacity: 1;
+    @extend .c-button;
+    @extend .c-button--full;
+    @extend .c-button--brandPrimary;
+  }
+
+  // 区切り線
+  hr {
+    display: none;
+  }
+
+  // パスワード再設定
+  .pmpro_actions_nav {
+    margin: 1em 0 0 !important;
+    text-align: right;
+    a {
+      @extend .c-link;
+      @extend .c-link--xs;
+    }
+  }
+
+  // パスワード再設定
+  .pmpro_lost_password-fields {
+    margin: 2em 0 0;
+  }
+  .pmpro_submit {
+    margin: 1em 0 0;
+  }
+}

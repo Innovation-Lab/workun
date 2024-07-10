@@ -1,0 +1,11 @@
+.c-image {
+  &--svg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg{
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+}

@@ -1,0 +1,83 @@
+
+
+// --------------------------------------------------
+// ベース
+// --------------------------------------------------
+@use "foundation/_reset.scss"; // リセット
+@use "foundation/_variables.scss"; // 変数
+@use "foundation/_base.scss"; // ベース・基礎
+@use "foundation/_form.scss"; // フォーム
+
+
+// --------------------------------------------------
+// 再利用パーツ・コンポーネント
+// --------------------------------------------------
+
+// フォーム　--------------------
+@use "project/_p-formBlock.scss"; 
+
+// 入力フィールド　--------------------
+@use "project/_p-input.scss"; 
+@use "project/_p-inputField.scss"; 
+
+// ボタン
+@use "component/_c-button.scss"; 
+
+// リンク
+@use "component/_c-link.scss"; 
+
+// 余白
+@use "component/_c-spacing.scss"; 
+
+// ユーティリティ
+@use "utility/_u-textAlign.scss"; 
+
+
+// 共通コンポーネント系
+@use "component/_c-image.scss"; // 画像・svg
+@use "component/_c-status.scss"; // タスクステータス
+
+
+
+
+// --------------------------------------------------
+// ログイン前
+// --------------------------------------------------
+
+// 認証ページ --------------------
+
+// ヘッダー
+
+// 認証ページ全般
+
+
+// ログイン --------------------
+@use "project/_p-login.scss"; 
+@use "project/_p-loginForm.scss"; 
+
+// アカウント登録
+
+
+// --------------------------------------------------
+// わーくん（ログイン後）
+// --------------------------------------------------
+
+// ページ共通 --------------------
+// layout
+@use "layout/_l-header.scss"; 
+@use "layout/_l-main.scss"; 
+// project
+@use "project/_p-header.scss"; // ヘッダー
+@use "project/_p-sideNav.scss"; // サイドメニュー
+@use "project/_p-footer.scss"; // フッター
+
+// ダッシュボード --------------------
+// layout
+@use "layout/_l-dashboard.scss"; 
+
+// project
+@use "project/_p-dashboard.scss";
+// Todo
+@use "project/_p-todo.scss";
+// クラスコ連携サービス
+@use "project/_p-crascoService.scss";

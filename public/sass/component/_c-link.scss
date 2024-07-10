@@ -1,0 +1,17 @@
+.c-link {
+  color: var(--accent);
+  font-size: inherit;
+  text-decoration: underline;
+  transition: text-underline-offset .4s ease; 
+  &:hover {
+    text-underline-offset: 4px;
+  }
+
+  &--secondary {
+    color: var(--brand-secondary);
+  }
+
+  &--xs {
+    font-size: var(--font-xs);
+  }
+}

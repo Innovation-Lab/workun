@@ -1,0 +1,12 @@
+.c-spacing {
+  display: block;
+  width: 100%;
+  height: var(--spacing-md);
+
+  &--sm {
+    height: var(--spacing-sm);
+  }
+  &--lg {
+    height: var(--spacing-lg);
+  }
+}
