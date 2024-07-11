@@ -7,6 +7,18 @@
   height: 100dvh;
   display: grid;
   grid-auto-rows: 88px auto 80px;
+  //clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  transition: all .4s ease-out;
+  overflow: hidden;
+  margin: 0;
+  &.close{
+    //clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+    transform: translate(-100%,0);
+    margin: 0 -190px 0 0;
+  }
+  > *{
+    min-width: 190px;
+  }
   &__head{
     display: flex;
     align-items: center;

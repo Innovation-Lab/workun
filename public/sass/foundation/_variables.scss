@@ -131,10 +131,15 @@
   --button-surface: #fff;
   --button-surface-hover: var(--gray-50);
 
-
   // リンクグループ
   --text-link-normal: var(--gray-500);
   --text-link-normal-hover: var(--navy-700);
+
+  // ボックス
+  --box-border: rgba(101, 147, 163, .5);
+
+  // テーブル
+  --table-tr: rgba(101, 147, 163, .2);
 
   // --------------------------------------------------
   //　2. サイズ

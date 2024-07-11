@@ -4,8 +4,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SelfCheckController;
 use Illuminate\Support\Facades\Route;
 
-// ホーム
-Route::get('/', [HomeController::class, 'index'])->name('index');
+// ダッシュボード
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 // セルフチェック
 Route::group([
@@ -28,5 +28,3 @@ Route::group([
     require base_path('routes/master.php');
 });
 
-
-Route::view('/', 'home')->name('home');

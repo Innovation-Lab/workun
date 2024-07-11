@@ -3,7 +3,7 @@
   <header class="p-header">
     {{-- サイドメニュー --}}
     @include('layout._sideNave')
-    <div class="p-header__hamburger">
+    <div class="p-header__hamburger js-toggleMenu--button">
       <div class="icon">
         <span></span>
         <span></span>

@@ -9,8 +9,8 @@ class HomeController extends Controller
     /**
      * Display index page view.
      */
-    public function index()
+    public function home()
     {
-        return view('home.index');
+        return view('home');
     }
 }
