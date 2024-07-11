@@ -10,7 +10,7 @@
         $controlItemSidebar = [
           'dashboard'=> [
             'label' => 'ダッシュボード',
-            'path' => 'home',
+            'path' => 'home.index',
             'phase' => '',
             'link' => 'link',
           ],
