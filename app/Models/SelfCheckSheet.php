@@ -30,6 +30,11 @@ class SelfCheckSheet extends Model
         return $this->belongsTo(Period::class);
     }
 
+    public function self_check_sheet_targets()
+    {
+        return $this->hasMany(SelfCheckSheetTarget::class);
+    }
+
     public function self_check_ratings()
     {
         return $this->hasMany(SelfCheckRating::class);
