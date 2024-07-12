@@ -15,39 +15,34 @@
             </div>
           </div>
           <div class="p-todo__body">
+            @if($answer_self_check_sheets->isNotEmpty())
+              <div class="p-todo__block">
+                <p class="title">実施対象</p>
+                <ul class="p-todo__list">
+                  @foreach($answer_self_check_sheets as $self_check_sheet)
+                    <x-task-list
+                      :listClass="$self_check_sheet->list_class"
+                      :statusClass="$self_check_sheet->status_class"
+                      :term="$self_check_sheet->display_term"
+                      :title="$self_check_sheet->display_title"
+                      :subTitle="$self_check_sheet->display_sub_title"
+                      :status="$self_check_sheet->display_status"
+                    />
+                  @endforeach
+                </ul>
+              </div>
+            @endif
+
+
             @foreach ([
-              '実施対象',
               '評価入力',
               '評価承認',
             ] as $key => $todoBlock)
               <div class="p-todo__block">
                 <p class="title">{!! $todoBlock; !!}</p>
                 <ul class="p-todo__list">
-                  <!-- 実施対象 -->
-                  @if($key == 0)
-                    <!-- 下書き中 / 未登録アラート -->
-                    <li class="p-todo__item p-todo__item--alert">
-                      <a href=""></a>
-                      <span class="date">2024.12.01 - 2024.12.08</span>
-                      <div class="mainInfo">
-                        <span class="c-status c-status--paused">下書き</span>
-                        <p class="title">未登録 : セルフチェック - 2024年10月</p>
-                      </div>
-                      <p class="name">第8期 | 基本挨拶、身だしなみセルフチェック表</p>
-                    </li>
-                    <!-- 通常 -->
-                    <li class="p-todo__item">
-                      <a href=""></a>
-                      <span class="date">2024.12.01 - 2024.12.08</span>
-                      <div class="mainInfo">
-                        <span class="c-status c-status--waiting">未登録</span>
-                        <p class="title">セルフチェック - 2024年11月</p>
-                      </div>
-                      <p class="name">第8期 | 基本挨拶、身だしなみセルフチェック表</p>
-                    </li>
-                  @endif
                   <!-- 評価入力 -->
-                  @if($key == 1)
+                  @if($key == 0)
                     <li class="p-todo__item p-todo__item--assessment">
                       <a href=""></a>
                       <span class="date">2024.12.01 - 2024.12.08</span>
@@ -59,7 +54,7 @@
                     </li>
                   @endif
                   <!-- 評価承認 -->
-                  @if($key == 2)
+                  @if($key == 1)
                     <li class="p-todo__item p-todo__item--clean">
                       <p class="u-tac">{!! $todoBlock; !!}タスクは0件です</p>
                     </li>
