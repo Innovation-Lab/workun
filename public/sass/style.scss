@@ -32,6 +32,8 @@
 // ユーティリティ
 @use "utility/_u-textAlign.scss"; 
 
+// ページタイトル
+@use "project/_p-head.scss"; 
 
 // 共通コンポーネント系
 @use "component/_c-image.scss"; // 画像・svg
@@ -70,6 +72,11 @@
 @use "project/_p-header.scss"; // ヘッダー
 @use "project/_p-sideNav.scss"; // サイドメニュー
 @use "project/_p-footer.scss"; // フッター
+@use "project/_p-page.scss"; // 通常一覧ページ
+@use "project/_p-table.scss"; // 一覧テーブル
+@use "project/_p-pager.scss"; // 一覧ページング
+@use "project/_p-search.scss"; // 一覧絞り込み検索
+@use "project/_p-user.scss"; // ユーザー情報
 
 // ダッシュボード --------------------
 // layout

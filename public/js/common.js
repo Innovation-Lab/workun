@@ -1,10 +1,20 @@
 /* ! ==================================================
 
-- テキストの装飾
+- 共通JS
 
 ================================================== */
-// ヒーローイメージ
-// $(document).ready(function() {
-//   var $example1 = $('.lp-hero__title .c-text__lp-primary'); // 'your-class-name' を対象のクラス名に置き換えてください
-//   $example1.arctext({radius: 300});
-// });
+// サイドメニュー開閉
+$(document).on('click', '.js-toggleMenu--button', function(){
+  let This = $(this),
+      Tag = $('.p-sideNav');
+  if(Tag.hasClass('close')){
+    This.removeClass('close');
+    Tag.removeClass('close');
+    $('body').removeClass('sideNav--close');
+  }else{
+    This.addClass('close');
+    Tag.addClass('close');
+    $('body').addClass('sideNav--close');
+  }
+});
+

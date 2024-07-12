@@ -11,7 +11,7 @@ class SelfCheckController extends Controller
      */
     public function index()
     {
-        return 'self-check';
+        return view('self-check.index');
     }
 
     /**

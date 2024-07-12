@@ -23,7 +23,7 @@
               'linkList' => [
                 [
                   'label' => 'セルフチェック',
-                  'path' => null,
+                  'path' => route('self-check.index'),
                   'phase' => '',
                 ],
               ],
@@ -48,7 +48,7 @@
                 ],
                 [
                   'label' => '従業員情報',
-                  'path' => null,
+                  'path' => route('master.member.index'),
                   'phase' => '',
                 ],
                 [
@@ -76,7 +76,7 @@
         <?php if(isset($val['megaMenu'])) { ?>
           <div class="child">
             <?php foreach($val['megaMenu']['linkList'] as $itemListVal){ ?>
-              <a href=""><?= $itemListVal['label']; ?></a>
+              <a href="<?= $itemListVal['path']; ?>"><?= $itemListVal['label']; ?></a>
             <?php } ?>
           </div>
         <?php } ?>

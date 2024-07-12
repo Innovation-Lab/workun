@@ -50,3 +50,12 @@ Route::group([
     Route::get('/edit', [UserController::class, 'edit'])->name('edit');
     Route::post('/edit', [UserController::class, 'update']);
 });
+
+
+Route::group([
+    'prefix' => 'member',
+    'as' => 'member.',
+], function () {
+    Route::view('/','master.member.index')->name('index');
+    Route::view('/edit', 'master.member.edit')->name('edit');
+});

@@ -25,6 +25,13 @@ body {
   a,button {
     cursor: pointer;
   }
+  // サイドメニューを閉じたとき
+  &.sideNav--close{
+    .p-page,
+    .p-dashboard .p-todo{
+      padding-left: 4.5rem;
+    }
+  }
 }
 // svg読み込み
 .svg-defs{
@@ -38,6 +45,7 @@ body {
   grid-template-areas: "header main";
   grid-template-columns: auto 1fr;
   position: relative;
+  max-height: 100dvh;
 }
 
 

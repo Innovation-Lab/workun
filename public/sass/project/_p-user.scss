@@ -1,0 +1,21 @@
+// ユーザー情報
+.p-user{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  &__image{
+    flex: 0 0 auto;
+    width: 32px;
+    .c-image{
+      background: #eee;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  &__text{
+    flex: auto;
+    .name{
+      white-space: nowrap;
+    }
+  }
+}

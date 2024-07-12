@@ -45,4 +45,30 @@
     <rect width="16" height="2" transform="matrix(-1 0 0 1 25 16)" fill="white"/>
     <rect x="25" y="24" width="8" height="2" transform="rotate(180 25 24)" fill="white"/>
   </symbol>
+
+  {{-- ページナビ =============== --}}
+  {{-- next --}}
+  <symbol viewBox="0 0 28 28" id="pageNav_next">
+    <mask id="path-1-inside-1_724_7083" fill="white">
+    <path d="M12.25 9.05078L7.30025 14.0005L12.25 18.9503L17.1997 14.0005L12.25 9.05078Z"/>
+    </mask>
+    <path d="M17.1997 14.0005L17.9069 13.2934L18.614 14.0005L17.9069 14.7076L17.1997 14.0005ZM11.5429 18.2432L16.4926 13.2934L17.9069 14.7076L12.9571 19.6574L11.5429 18.2432ZM16.4926 14.7076L11.5429 9.75789L12.9571 8.34367L17.9069 13.2934L16.4926 14.7076Z" fill="white" mask="url(#path-1-inside-1_724_7083)"/>
+  </symbol>
+  {{-- prev --}}
+  <symbol viewBox="0 0 28 28" id="pageNav_prev">
+    <mask id="path-1-inside-1_724_7075" fill="white">
+    <path d="M15.791 9.05078L20.7408 14.0005L15.791 18.9503L10.8413 14.0005L15.791 9.05078Z"/>
+    </mask>
+    <path d="M10.8413 14.0005L10.1342 13.2934L9.42705 14.0005L10.1342 14.7076L10.8413 14.0005ZM16.4981 18.2432L11.5484 13.2934L10.1342 14.7076L15.0839 19.6574L16.4981 18.2432ZM11.5484 14.7076L16.4981 9.75789L15.0839 8.34367L10.1342 13.2934L11.5484 14.7076Z" fill="white" mask="url(#path-1-inside-1_724_7075)"/>
+  </symbol>
+
+  {{-- close x --}}
+  <symbol viewBox="0 0 12 12" id="close">
+    <mask id="mask0_724_7089" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="12" height="12">
+    <rect width="12" height="12" fill="#D9D9D9"/>
+    </mask>
+    <g mask="url(#mask0_724_7089)">
+    <path d="M5.996 7.016L3.02 9.992L2 8.972L4.976 5.996L2 3.02L3.02 2L5.996 4.976L8.972 2L9.992 3.02L7.016 5.996L9.992 8.972L8.972 9.992L5.996 7.016Z" fill="#AAAAAA"/>
+    </g>
+  </symbol>
 </svg>

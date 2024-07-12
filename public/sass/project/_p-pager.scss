@@ -1,0 +1,50 @@
+// テーブル上下のページング
+.p-pager{
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  // 件数
+  .count{
+    font-size: 13px;
+    color: #9EADB7;
+  }
+  // ページング
+  .pageNav{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    gap: 10px;
+    .arrowButton{
+      width: 28px; height: 28px;
+      border-radius: var(--radius-sm);
+      background: var(--main);
+      cursor: pointer;
+      &:hover{
+        opacity: .7;
+      }
+      &--prev{
+
+      }
+      &--next{
+        
+      }
+      &.disabled{
+        pointer-events: none;
+        opacity: .3;
+      }
+    }
+    .p-input{
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      input{
+        width: 72px;
+        height: 28px;
+        border-radius: var(--radius-sm);
+        text-align: center;
+        background: var(--white);
+        font-size: 14px;
+      }
+    }
+  }
+}
