@@ -1,5 +1,5 @@
 @extends('layout.layout--base')
-@section('title', 'ダッシュボード')
+@section('title', '従業員一覧')
 @section('content')
   <div class="l-index">
     <div class="p-page">
@@ -17,7 +17,7 @@
               <p class="title">従業員一覧</p>
               <div class="count">
                 <span class="unit">全</span>
-                <p class="number">320</p>
+                <p class="number">{{ number_format($users->total()) }}</p>
                 <span class="unit">名</span>
               </div>
             </div>
@@ -49,11 +49,14 @@
           <div class="p-tableBox__body">
             {{-- ページング(件数のみ) --}}
             <div class="p-pager">
-              <p class="count">全 320 件中 1～20 件目</p>
+              <p class="count">
+                全 {{ number_format($users->total()) }} 件中
+                {{ number_format($users->firstItem()) }}～{{ number_format($users->lastItem()) }} 件目
+              </p>
             </div>
             {{-- テーブル一覧 --}}
             <div class="p-table">
-              <?php 
+              <?php
                 $tableHead = [
                   [
                     'title' => '氏名',
@@ -114,65 +117,50 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @for($tableBody = 0; $tableBody < 20; $tableBody++)
+                  @foreach($users as $user)
                     <tr>
                       <!-- 氏名 -->
                       <td><div class="item">
-                        <div class="p-user">
-                          <div class="p-user__image">
-                            <img class="c-image c-image--round" src="">
+                          <div class="p-user">
+                            <div class="p-user__image">
+                              <img class="c-image c-image--round" src="{{ $user->avatar_url }}" />
+                            </div>
+                            <div class="p-uesr__text">
+                              <div class="name">{{ $user->full_name }}</div>
+                            </div>
                           </div>
-                          <div class="p-uesr__text">
-                            <div class="name">酒井 雄輝</div>
-                          </div>
-                        </div>
-                      </div></td>
+                        </div></td>
                       <!-- 部署 -->
-                      <td><div class="item">売買の窓口</div></td>
-                      <!-- 役員 -->
-                      <td><div class="item">一般社員</div></td>
+                      <td><div class="item">{{ $user->department_label }}</div></td>
+                      <!-- 役職 -->
+                      <td><div class="item">{{ $user->position_label }}</div></td>
                       <!-- 等級 -->
-                      <td><div class="item">M1</div></td>
+                      <td><div class="item">{{ $user->grade_label }}</div></td>
                       <!-- 号俸 -->
-                      <td><div class="item">1</div></td>
+                      <td><div class="item">{{ $user->salary_label }}</div></td>
                       <!-- 雇用形態 -->
-                      <td><div class="item">正社員</div></td>
+                      <td><div class="item">{{ $user->employment_label }}</div></td>
                       <!-- 入社日 -->
-                      <td class="u-tac"><div class="item">2019.12.11</div></td>
+                      <td class="u-tac"><div class="item">{{ $user->display_joined }}</div></td>
                       <!-- ログインID -->
-                      <td><div class="item">shirayama</div></td>
+                      <td><div class="item">{{ $user->login_code }}</div></td>
                       <!-- 評価者/承認者 -->
                       <td><div class="item item--step">
-                        <p class="name">評価 : <span>山田 啓介</span></p>
-                        <p class="name">承認 : <span>佐々木 誠</span></p>
-                      </div></td>
+                          <p class="name">評価 : <span>山田 啓介</span></p>
+                          <p class="name">承認 : <span>佐々木 誠</span></p>
+                        </div></td>
                       <!-- 作成日 -->
-                      <td class="u-tac"><div class="item">2019.12.11</div></td>
+                      <td class="u-tac"><div class="item">{{ $user->display_created }}</div></td>
                     </tr>
-                  @endfor
+                  @endforeach
                 </tbody>
               </table>
             </div>
             {{-- ページング --}}
-            <div class="p-pager">
-              <p class="count">全 320 件中 1～20 件目</p>
-              <div class="pageNav">
-                <a href="" class="arrowButton arrowButton--prev disabled">
-                  <svg width="28" height="28"><use xlink:href="#pageNav_prev" /></svg>
-                </a>
-                <div class="p-input">
-                  <input type="text" placeholder="" value="1" id="">
-                  <span class="total">/ 1</span>
-                </div>
-                <a href="" class="arrowButton arrowButton--next">
-                  <svg width="28" height="28"><use xlink:href="#pageNav_next" /></svg>
-                </a>
-              </div>
-            </div>
+            <x-pager :pagination="$users->appends($request->all())"/>
           </div>
         </div>
       </div>
     </div>
   </div>
 @endsection
-    

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\ImageTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
@@ -9,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, ImageTrait;
 
     protected $fillable = [
         'login_code',
@@ -30,10 +31,43 @@ class User extends Authenticatable
         'description',
         'position_id',
         'grade_id',
+        'salary_id',
         'employment_id',
         'role',
         'memo',
     ];
+
+    public function departments()
+    {
+        return $this->hasManyThrough(
+            Department::class,
+            UserDepartment::class,
+            'user_id',
+            'id',
+            null,
+            'department_id'
+        );
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
+    }
+
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class);
+    }
+
+    public function salary()
+    {
+        return $this->belongsTo(Salary::class);
+    }
+
+    public function employment()
+    {
+        return $this->belongsTo(Employment::class);
+    }
 
     protected function getAnswerSelfCheckSheetsAttribute()
     {
@@ -52,6 +86,55 @@ class User extends Authenticatable
             ->leftJoin('periods', 'periods.id', 'self_check_sheets.period_id')
             ->leftJoin('self_check_sheet_targets', 'self_check_sheet_targets.self_check_sheet_id', 'self_check_sheets.id')
             ->where('self_check_sheet_targets.user_id', $this->id);
+    }
+
+    protected function getAvatarUrlAttribute()
+    {
+        if (!$this->img_path) {
+            return asset('img/common/noImage/noimage--square.svg');
+        } else {
+            return $this->getImageUrl($this->img_path);
+        }
+    }
+
+    protected function getFullNameAttribute()
+    {
+        return "{$this->sei} {$this->mei}";
+    }
+
+    protected function getDepartmentLabelAttribute()
+    {
+        return implode("、", $this->departments->pluck('name')->toArray());
+    }
+
+    protected function getPositionLabelAttribute()
+    {
+        return data_get($this, 'position.name');
+    }
+
+    protected function getGradeLabelAttribute()
+    {
+        return data_get($this, 'grade.name');
+    }
+
+    protected function getSalaryLabelAttribute()
+    {
+        return data_get($this, 'salary.name');
+    }
+
+    protected function getEmploymentLabelAttribute()
+    {
+        return data_get($this, 'employment.name');
+    }
+
+    protected function getDisplayJoinedAttribute()
+    {
+        return $this->joined ? date('Y.m.d', strtotime($this->joined)) : null;
+    }
+
+    protected function getDisplayCreatedAttribute()
+    {
+        return $this->created_at ? date('Y.m.d', strtotime($this->created_at)) : null;
     }
 }
 

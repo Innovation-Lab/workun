@@ -56,6 +56,6 @@ Route::group([
     'prefix' => 'member',
     'as' => 'member.',
 ], function () {
-    Route::view('/','master.member.index')->name('index');
+    Route::get('/', [UserController::class, 'index'])->name('index');
     Route::view('/edit', 'master.member.edit')->name('edit');
 });

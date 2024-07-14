@@ -7,6 +7,8 @@ use App\Repositories\OrganizationRepositoryInterface;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\SelfCheckSheetRepositoryInterface;
 use App\Repositories\SelfCheckSheetRepository;
+use App\Repositories\UserRepositoryInterface;
+use App\Repositories\UserRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(OrganizationRepositoryInterface::class, OrganizationRepository::class);
         $this->app->bind(SelfCheckSheetRepositoryInterface::class, SelfCheckSheetRepository::class);
+        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
 
     /**
