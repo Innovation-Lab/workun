@@ -1,11 +1,29 @@
 
 // ページタイトル
 .p-head {
-  .title{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .title {
     font-size: var(--font-xl);
     font-weight: 600;
   }
-  .action{
+  .action {
 
+  }
+  .return {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--box-border);
+    border-radius: var(--radius-sm);
+    background-color: var(--white);
+    background-image: url('data:image/svg+xml;utf8,<svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.21183 4.44468L5.65662 -0.000114918L6.86885 1.21212L2.42406 5.65691L6.86868 10.1015L5.65662 11.3136L-0.000232359 5.65674L1.21183 4.44468Z" fill="%23B2C9D1"/></svg>');  
+    background-size: 8px;
+    background-position: center;
+    background-repeat: no-repeat;
+    &:hover{
+      background-color: #f4f5f6;
+    }
   }
 }

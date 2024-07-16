@@ -6,6 +6,22 @@
     margin: 0 0 2rem;
   }
   &__body{
+    &.row2{
+      display: grid;
+      grid-template-columns: 1fr minmax(300px, 340px);;
+      gap: var(--spacing-sm);
+      align-items: flex-start;
+    }
+  }
 
+  // 従業員管理：編集
+  &--member{
+    .p-page{
+      &__body{
+        &.row2{
+          grid-template-columns: minmax(450px, 620px) minmax(280px, 320px);
+        }
+      }
+    }
   }
 }
