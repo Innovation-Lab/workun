@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class self_check_sheet_target extends Model
+class Department extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,9 @@ class self_check_sheet_target extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'self_check_sheet_id',
-        'user_id',
+        'organization_id',
+        'department_id',
+        'name',
+        'seq',
     ];
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class self_check_rating_detail extends Model
+class SelfCheckRatingDetail extends Model
 {
     use HasFactory;
 

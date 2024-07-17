@@ -27,7 +27,13 @@ class OrganizationRepository implements OrganizationRepositoryInterface
      */
     public function search(Request $request): Builder
     {
-        return Organization::query();
+        $query = Organization::query();
+
+        if ($request->get('access_code')) {
+            $query->where('organizations.access_code', $request->get('access_code'));
+        }
+
+        return $query;
     }
 
     /**

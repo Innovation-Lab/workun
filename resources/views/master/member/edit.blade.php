@@ -1,5 +1,5 @@
 @extends('layout.layout--base')
-@section('title', 'ダッシュボード')
+@section('title', '従業員情報 編集')
 @section('content')
   <div class="l-edit">
     <div class="p-page p-page--member">

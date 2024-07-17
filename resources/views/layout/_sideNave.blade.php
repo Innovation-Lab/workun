@@ -10,7 +10,7 @@
         $controlItemSidebar = [
           'dashboard'=> [
             'label' => 'ダッシュボード',
-            'path' => 'home',
+            'path' => 'home.index',
             'phase' => '',
             'link' => 'link',
           ],
@@ -43,7 +43,7 @@
                 ],
                 [
                   'label' => '組織作成',
-                  'path' => null,
+                  'path' => route('master.organization.index'),
                   'phase' => '',
                 ],
                 [
@@ -53,7 +53,7 @@
                 ],
                 [
                   'label' => '評価期間設定',
-                  'path' => null,
+                  'path' => route('master.term.index'),
                   'phase' => '',
                 ],
               ],

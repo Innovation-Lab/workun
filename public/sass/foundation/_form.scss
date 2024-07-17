@@ -3,10 +3,10 @@
 
 :root {
   --form-text: #444;
-  --form-placeholder: rgba(21,41,75,.4);
+  --form-placeholder: #B9D4E6;
   --form-readonly: var(--gray-50);
-  --form-border: var(--main-light);
-  --form-surface: var(--white);
+  --form-border: #B9D4E6;
+  --form-surface: #F5F8FA;
   --form-accent: var(--berry-500);
   --form-radius: 3px;
 }
@@ -74,13 +74,19 @@ select {
   background-size: 12px;
   background-position: right 12px center;
   background-repeat: no-repeat;
+  border-color: var(--main-light);
+  background-color: var(--white);
   cursor: pointer;
-  
 }
 textarea {
   padding: .5em .75em;
   resize: vertical;
   min-height: 140px;
+  border-color: var(--main-light);
+  background-color: var(--white);
+  &::placeholder {
+    color: rgba(21,41,75,.4);
+  }
 }
 
 

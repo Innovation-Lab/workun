@@ -79,6 +79,18 @@
     --button-surface-hover: var(--hover);
   }
 
+  &--delelte{
+    --normal: var(--alert);
+    --hover: var(--white);
+
+    --button-text: var(--white);
+    --button-text-hover: var(--normal);
+    --button-border: var(--normal);
+    --button-border-hover: var(--normal);
+    --button-surface: var(--normal) ;
+    --button-surface-hover: var(--hover);
+  }
+
   &--cancel{
     --normal: #B9D4E6;
 
@@ -86,8 +98,20 @@
     --button-text-hover: var(--normal);
     --button-border: var(--normal);
     --button-border-hover: var(--normal);
-    --button-surface: var-(-white) ;
+    --button-surface: var(--white) ;
     --button-surface-hover: #f4f5f6;
+  }
+
+  &--lineAccent{
+    --normal: var(--main-accent);
+    --hover: rgba(10,149,199,.1);
+
+    --button-text: var(--main-accent);
+    --button-text-hover: var(--main-accent);
+    --button-border: var(--normal);
+    --button-border-hover: var(--main-accent);
+    --button-surface: var(--white) ;
+    --button-surface-hover: var(--hover);
   }
 
   // サイズ
@@ -102,6 +126,22 @@
   // 横幅いっぱい
   &--full {
     width: 100%;
+  }
+
+  // 追加ボタン
+  &--add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px; 
+    border-radius: 50%;
+    background: var(--main-accent);
+    box-shadow: 0 2px 6px 0 rgba(10,149,199,.431);
+    &:hover{
+      background: #0A95D8;
+      box-shadow: none;
+    }
   }
 
   // テキスト

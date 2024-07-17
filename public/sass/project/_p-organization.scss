@@ -1,0 +1,88 @@
+.p-organization {
+  + .p-organization {
+    margin-block-start: var(--spacing-lg);
+  }
+  &__head{
+    margin-block-end: var(--spacing-sm);
+    .title{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: var(--font-md);
+      font-weight: 500;
+      line-height: 1;
+    }
+    .icon{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: var(--spacing-2xs);
+      border-radius: 50%;
+      background: var(--main);
+    }
+  }
+  &__list{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-2xs);
+  }
+  &__item{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 0;
+    max-height: 400px;
+    padding-block-end: 23px;
+    border-radius: var(--radius-md);
+    background: var(--white);
+    box-shadow: 0 4px 8px 0 rgba(53,120,144,.1);
+    .head{
+      padding: 19px var(--spacing-sm);
+      display: flex;
+      align-items: center;
+      .title{
+        font-size: var(--font-md);
+        font-weight: 700;
+      }
+      .action{
+        margin-inline-start: auto;
+        .c-button {
+          font-size: var(--font-2xs);
+          line-height: 12px;
+        }
+      }
+    }
+  }
+  .body{
+    padding-inline: var(--spacing-sm); 
+    overflow: hidden;
+    height: 100%;
+  }
+  .p-table{
+    table{
+      th{
+        .item{
+          padding: 0 .25rem .5rem !important;
+        }
+      }
+      td{
+        .item{
+          padding: .5rem .25rem !important;
+          line-height: 12px;
+          &[data-unit]{
+            padding: .5rem .25rem .25rem !important;
+          }
+        }
+      }
+    }
+  }
+
+  // 組織図の作成
+  &.chart {
+    .p-organization{
+      &__body{
+        background: #D0D6DC;
+        padding: 48px 0 56px;
+      }
+    }
+  }
+}

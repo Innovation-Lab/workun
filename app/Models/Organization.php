@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Sanctum\HasApiTokens;
 
-class organization extends Model
+class Organization extends Authenticatable
 {
     use HasApiTokens, HasFactory;
 
@@ -22,5 +22,9 @@ class organization extends Model
         'access_code',
         'access_key',
         'img',
+    ];
+
+    protected $casts = [
+        'access_key' => 'hashed',
     ];
 }

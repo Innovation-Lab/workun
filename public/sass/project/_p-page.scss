@@ -2,24 +2,38 @@
 // 通常一覧一般ページ
 .p-page {
   padding: 2rem 2.5rem;
-  &__head{
-    margin: 0 0 2rem;
+
+  &.min {
+    width: min(100%, 730px);  
   }
-  &__body{
-    &.row2{
-      display: grid;
-      grid-template-columns: 1fr minmax(300px, 340px);;
+
+  &__head {
+     margin: 0 0 2rem;
+  }
+  &__body {
+    // ２列
+    &.row2 {
+      grid-template-columns: 1fr minmax(300px, 340px);
       gap: var(--spacing-sm);
       align-items: flex-start;
     }
+    // １列（横幅：小）
+    &.min{
+      display: grid;
+      grid-template-columns: min(100%, 620px);
+    }
   }
 
-  // 従業員管理：編集
-  &--member{
-    .p-page{
-      &__body{
-        &.row2{
-          grid-template-columns: minmax(450px, 620px) minmax(280px, 320px);
+  // -------------------------------------------------------
+  // 個別のスタイル
+  //--------------------------------------------------------
+
+  // 従業員情報：編集
+  &--member {
+    .p-page {
+      &__body {
+        &.row2 {
+          grid-template-columns: minmax(480px, 620px) minmax(280px, 320px);
         }
       }
     }

@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Repositories\OrganizationRepositoryInterface;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use App\Models\Organization;
+use App\Repositories\OrganizationRepositoryInterface;
 use Exception;
+use Hash;
+use Illuminate\Http\Request;
 
-class OrganizationController extends Controller
+class OrganizationController extends ApiController
 {
-    private OrganizationRepositoryInterface $organization_repository;
-
     /**
      * @param OrganizationRepositoryInterface $organization_repository
      */
     public function __construct(
-        OrganizationRepositoryInterface $organization_repository
+        private OrganizationRepositoryInterface $organization_repository
     )
     {
-        $this->organization_repository = $organization_repository;
+        parent::__construct();
     }
 
     /**
@@ -28,16 +25,18 @@ class OrganizationController extends Controller
      */
     public function index(Request $request)
     {
-        $organization = $this->organization_repository->find($request);
-        if ($organization) {
+        try {
+            // 組織認証
+            $organization = $this->getOrganization($request);
+        } catch (Exception $exception) {
             return response()->json([
-                'organization' => $organization
-            ]);
+                'error' => $exception->getMessage()
+            ], 404);
         }
-
         return response()->json([
-            'error' => 'Organization not found'
-        ], 404);
+            'success' => true,
+            'organization_id' => $organization ? $organization->id : "",
+        ]);
     }
 
     /**
@@ -46,14 +45,13 @@ class OrganizationController extends Controller
     public function store(Request $request)
     {
         try {
+            // 登録処理
             $organization = $this->organization_repository->create($request);
         } catch (Exception $e) {
             return response()->json(['errors' => $e->getMessage()], 200);
         }
-
         return response()->json([
-            'success' => '組織を登録できました。',
-            'organization' => $organization
+            'success' => true,
         ], 201);
     }
 
@@ -63,15 +61,49 @@ class OrganizationController extends Controller
     public function update(Request $request)
     {
         try {
-            $organization = $this->organization_repository->search($request);
+            // 組織認証
+            $organization = $this->getOrganization($request);
+            // 更新処理
             $organization = $this->organization_repository->update($organization, $request);
         } catch (Exception $e) {
             return response()->json(['errors' => $e->getMessage()], 200);
         }
-
         return response()->json([
-            'success' => '組織情報を更新しました。',
-            'organization' => $organization
+            'success' => true,
         ], 201);
+    }
+
+    /**
+     * @param $request
+     * @return Organization
+     * @throws Exception
+     */
+    private function getOrganization ($request): Organization
+    {
+        // アクセスコード
+        $access_code = $request->get('access_code');
+        $access_key = $request->get('access_key');
+
+        // 必須項目
+        if (!(
+            $access_code &&
+            $access_key
+        )) {
+            throw new Exception('必須項目が不足しています。');
+        }
+
+        // 組織検索
+        $organization = $this->organization_repository
+            ->search(new Request(['access_code' => $access_code]))
+            ->first();
+
+        if ($organization) {
+            // 組織認証
+            if(!Hash::check($access_key, $organization['access_key'])) {
+                throw new Exception('組織認証に失敗しました。');
+            }
+        }
+
+        return $organization;
     }
 }

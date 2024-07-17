@@ -1,11 +1,18 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SelfCheckController;
 use Illuminate\Support\Facades\Route;
 
-// ダッシュボード
-Route::get('/', [HomeController::class, 'home'])->name('home');
+// ログイン
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+
+Route::middleware('auth:web')->group(function ()
+{
+    // ホーム
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+});
 
 // セルフチェック
 Route::group([
@@ -28,4 +35,3 @@ Route::group([
 ], function () {
     require base_path('routes/master.php');
 });
-
