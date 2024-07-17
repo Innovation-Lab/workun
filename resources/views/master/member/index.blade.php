@@ -23,29 +23,10 @@
             </div>
             <div class="action"></div>
           </div>
-          <div class="p-tableBox__middle">
-            <div class="p-search">
-              <div class="p-search__wrap">
-                <div class="p-search__keyword">
-                  <div class="p-input">
-                    <input type="search" placeholder="キーワード検索" value="" id="">
-                  </div>
-                </div>
-                <div class="p-search__action">
-                  <div class="p-search__detail">
-                    <div class="p-search__setData">
-                      <p class="title">詳細条件 : 営業部 / リーダー / M3</p>
-                      <button class="close">
-                        <svg width="12" height="12"><use xlink:href="#close" /></svg>
-                      </button>
-                    </div>
-                    <p class="c-button" data-remodal-target="modal_search">詳細検索</p>
-                  </div>
-                  <button type="submit" class="c-button c-button--brandPrimary p-search__button">絞り込む</button>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          {{--  検索機能  --}}
+          <x-users.form-index/>
+
           <div class="p-tableBox__body">
             {{-- ページング(件数のみ) --}}
             <div class="p-pager">
@@ -163,5 +144,4 @@
       </div>
     </div>
   </div>
-  @include('master.member.modal._search')
 @endsection
