@@ -60,9 +60,9 @@
             <tr data-href="">
               <td>
                 <div class="item">
-                  <p class="status--1">未評価</p>
-                  <p class="status--2">評価中</p>
-                  <p class="status--3">確定待ち</p>
+                  <span class="status--1">未評価</span>
+                  <span class="status--2">評価中</span>
+                  <span class="status--3">確定待ち</span>
                 </div>
               </td>
               <td>

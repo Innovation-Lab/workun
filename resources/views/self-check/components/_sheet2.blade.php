@@ -64,8 +64,8 @@
             <tr data-href="">
               <td>
                 <div class="item">
-                  <p class="status--1">未評価</p>
-                  <p class="status--4">評価済み</p>
+                  <span class="status--1">未評価</span>
+                  <span class="status--4">評価済み</span>
                 </div>
               </td>
               <td>

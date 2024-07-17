@@ -32,7 +32,7 @@
                         <div class="p-table__check--head">セルフチェック項目</div>
                       </th>
                       <th colspan="26">
-                        <div class="cell sticky_4 u-w300 c-border_0">期間 : 2024.07 ~ 2025.06</div>
+                        <div class="cell sticky_4 u-w200 c-border_0">期間 : 2024.07 ~ 2025.06</div>
                         <div class="p-table__cell--wrapper">
                           <div class="u-tac c-txt__min cell sticky_4" style="line-height:2.3">平均</div>
                           <div class="p-table__cell">
