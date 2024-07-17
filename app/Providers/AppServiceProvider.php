@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Routing\UrlGenerator;
 use App\Repositories\OrganizationRepositoryInterface;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\SelfCheckSheetRepositoryInterface;
@@ -25,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot(UrlGenerator $url): void
     {
-        //
+        $url->forceScheme('https');
     }
 }

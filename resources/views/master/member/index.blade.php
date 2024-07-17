@@ -55,8 +55,6 @@
               </p>
             </div>
             {{-- テーブル一覧 --}}
-            <div class="p-table">
-              <?php
             <div class="p-table c-scroll">
               <?php
                 $tableHead = [
