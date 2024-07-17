@@ -8,4 +8,5 @@ use Illuminate\Http\Request;
 interface UserRepositoryInterface
 {
     public function search(Request $request);
+    public function sync(Organization $organization, $user, Request $request);
 }

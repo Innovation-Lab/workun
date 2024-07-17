@@ -14,6 +14,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'login_code',
+        'keycode',
         'password',
         'nice_name',
         'email',
@@ -35,6 +36,22 @@ class User extends Authenticatable
         'employment_id',
         'role',
         'memo',
+    ];
+
+    protected $casts = [
+        'keycode' => 'hashed',
+    ];
+
+    /** ステータス */
+    const STATUS_TEMPORARY = 1;
+    const STATUS_ACTIVATED = 2;
+    const STATUS_FREEZED = 3;
+    const STATUS_LEAVED = 4;
+    const STATUS_LIST = [
+        self::STATUS_TEMPORARY => '仮登録',
+        self::STATUS_ACTIVATED => '本登録',
+        self::STATUS_FREEZED => '停止',
+        self::STATUS_LEAVED => '退会',
     ];
 
     public function departments()

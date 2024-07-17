@@ -39,12 +39,12 @@ class ApiController extends Controller
             throw new Exception('必須項目が不足しています。');
         }
 
-        // 組織認証
+        // API認証
         if(!(
             $access_key === env('WORKUN_ACCESS_KEY') &&
             Hash::check($secret_key, env('WORKUN_SECRET_KEY'))
         )) {
-            throw new Exception('組織認証に失敗しました。');
+            throw new Exception('API認証に失敗しました。');
         }
     }
 }

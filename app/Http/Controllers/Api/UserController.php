@@ -3,18 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Organization;
+use App\Models\User;
 use App\Repositories\OrganizationRepositoryInterface;
+use App\Repositories\UserRepositoryInterface;
 use Exception;
 use Hash;
 use Illuminate\Http\Request;
 
-class OrganizationController extends ApiController
+class UserController extends ApiController
 {
     /**
-     * @param OrganizationRepositoryInterface $organization_repository
+     * @param UserRepositoryInterface $user_repository
      */
     public function __construct(
-        private OrganizationRepositoryInterface $organization_repository
+        private OrganizationRepositoryInterface $organization_repository,
+        private UserRepositoryInterface $user_repository
     )
     {
         parent::__construct();
@@ -28,6 +31,8 @@ class OrganizationController extends ApiController
         try {
             // 組織認証
             $organization = $this->getOrganization($request);
+            // ユーザー認証
+            $user = $this->getUser($request);
         } catch (Exception $exception) {
             return response()->json([
                 'error' => $exception->getMessage()
@@ -35,36 +40,22 @@ class OrganizationController extends ApiController
         }
         return response()->json([
             'success' => true,
-            'organization_id' => $organization ? $organization->id : "",
+            'user_id' => $user ? $user->id : "",
         ]);
-    }
-
-    /**
-     * Create the specified resource in storage.
-     */
-    public function store(Request $request)
-    {
-        try {
-            // 登録処理
-            $organization = $this->organization_repository->create($request);
-        } catch (Exception $e) {
-            return response()->json(['errors' => $e->getMessage()], 200);
-        }
-        return response()->json([
-            'success' => true,
-        ], 201);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function sync(Request $request)
     {
         try {
             // 組織認証
             $organization = $this->getOrganization($request);
-            // 更新処理
-            $organization = $this->organization_repository->update($organization, $request);
+            // ユーザー認証
+            $user = $this->getUser($request);
+            // ユーザー処理
+            $user = $this->user_repository->sync($organization, $user, $request);
         } catch (Exception $e) {
             return response()->json(['errors' => $e->getMessage()], 200);
         }
@@ -96,14 +87,49 @@ class OrganizationController extends ApiController
         $organization = $this->organization_repository
             ->search(new Request(['access_code' => $access_code]))
             ->first();
+        if (!$organization) {
+            throw new Exception('組織が見つかりませんでした。');
+        }
 
-        if ($organization) {
-            // 組織認証
-            if(!Hash::check($access_key, $organization['access_key'])) {
-                throw new Exception('組織認証に失敗しました。');
-            }
+        // 組織認証
+        if(!Hash::check($access_key, $organization['access_key'])) {
+            throw new Exception('組織認証に失敗しました。');
         }
 
         return $organization;
+    }
+
+    /**
+     * @param $request
+     * @return User|null
+     * @throws Exception
+     */
+    private function getUser ($request): User|null
+    {
+        // アクセスコード
+        $login_code = $request->get('login_code');
+        $keycode = $request->get('keycode');
+
+        // 必須項目
+        if (!(
+            $login_code &&
+            $keycode
+        )) {
+            throw new Exception('必須項目が不足しています。');
+        }
+
+        // ユーザー検索
+        $user = $this->user_repository
+            ->search(new Request(['login_code' => $login_code]))
+            ->first();
+
+        if ($user) {
+            // ユーザー認証
+            if(!Hash::check($keycode, $user['keycode'])) {
+                throw new Exception('ユーザー認証に失敗しました。');
+            }
+        }
+
+        return $user;
     }
 }
