@@ -150,6 +150,10 @@
       -webkit-mask: url('data:image/svg+xml;utf8,<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.1777 13.124V19.124C18.1777 19.6545 17.967 20.1632 17.5919 20.5382C17.2169 20.9133 16.7082 21.124 16.1777 21.124H5.17773C4.6473 21.124 4.13859 20.9133 3.76352 20.5382C3.38845 20.1632 3.17773 19.6545 3.17773 19.124V8.12402C3.17773 7.59359 3.38845 7.08488 3.76352 6.70981C4.13859 6.33474 4.6473 6.12402 5.17773 6.12402H11.1777" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15.1777 3.12402H21.1777V9.12402" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.1777 14.124L21.1777 3.12402" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
       mask-size: contain;
     }
+    &::after {
+      -webkit-mask: url('data:image/svg+xml;utf8,<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.3604 15.0781V19.0781C21.3604 19.6086 21.1496 20.1173 20.7746 20.4923C20.3995 20.8674 19.8908 21.0781 19.3604 21.0781H5.36035C4.82992 21.0781 4.32121 20.8674 3.94614 20.4923C3.57107 20.1173 3.36035 19.6086 3.36035 19.0781V15.0781" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.3604 8.07812L12.3604 3.07812L7.36035 8.07812" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.3604 3.07812V15.0781" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+      mask-size: contain;
+    }
     .br-md-block {
       display: none;
       @include max(md) {
@@ -157,11 +161,20 @@
       }
     }
   }
-  // upload
-  &--upload {
-    &::after {
-      -webkit-mask: url('data:image/svg+xml;utf8,<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.3604 15.0781V19.0781C21.3604 19.6086 21.1496 20.1173 20.7746 20.4923C20.3995 20.8674 19.8908 21.0781 19.3604 21.0781H5.36035C4.82992 21.0781 4.32121 20.8674 3.94614 20.4923C3.57107 20.1173 3.36035 19.6086 3.36035 19.0781V15.0781" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.3604 8.07812L12.3604 3.07812L7.36035 8.07812" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.3604 3.07812V15.0781" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
-      mask-size: contain;
+  &__back{
+    background-color: var(--white);
+    border: 1px solid var(--box-border);
+    border-radius:var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    aspect-ratio: 1;
+    svg{
+      fill: var(--box-border);
+    }
+    &:hover{
+      background-color: var(--background-base);
     }
   }
 

@@ -12,12 +12,18 @@
   // プリミティブカラー（基本の色）--------------------------------------------------
   --background-base: #F5F7FA;
   --background-base-darken: #DCE3EF;
+  --background-darken: rgba(21, 41, 75, 6%);
+  --background-sort: #F5F8FA;
   --main: #0F203E;
   --main-light: #15294B;
   --main-accent: #0A95C7;
   --line-mainSeparate: #304261;
   // ステータス
   --assessment: #0BB7C2;
+  --status-1: #F23D74;
+  --status-2: #8CC31F;
+  --status-3: #02A0E4;
+  --status-4: #aaa;
   
   // グレー
   --gray-50: #F0F0F7;
@@ -78,6 +84,7 @@
   --text-2: var(--gray-800);
   --text-3: var(--gray-600);
   --text-4: var(--gray-500);
+  --text-table-th: #9EADB7;
 
   // 背景色（薄い→濃い）
   --surface-1: var(--navy-50);

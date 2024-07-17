@@ -13,13 +13,20 @@ class SelfCheckController extends Controller
     {
         return view('self-check.index');
     }
+    /**
+     * Display all sheets page view.
+     */
+    public function all()
+    {
+        return view('self-check.all');
+    }
 
     /**
      * Display answer page view.
      */
     public function answer()
     {
-        return 'self-check-answer';
+        return view('self-check.answer');
     }
 
     /**
@@ -35,7 +42,7 @@ class SelfCheckController extends Controller
      */
     public function rating()
     {
-        return 'self-check-rating';
+        return view('self-check.rating');
     }
 
     /**
@@ -43,7 +50,7 @@ class SelfCheckController extends Controller
      */
     public function approval()
     {
-        return 'self-check-approval';
+        return view('self-check.approval');
     }
 
     /**
@@ -51,6 +58,6 @@ class SelfCheckController extends Controller
      */
     public function result()
     {
-        return 'self-check-result';
+        return view('self-check.result');
     }
 }

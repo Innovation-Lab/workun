@@ -13,6 +13,7 @@ Route::group([
     'as' => 'self-check.',
 ], function () {
     Route::get('/', [SelfCheckController::class, 'index'])->name('index');
+    Route::get('/all', [SelfCheckController::class, 'all'])->name('all');
     Route::get('/answer', [SelfCheckController::class, 'answer'])->name('answer');
     Route::post('/answer', [SelfCheckController::class, 'update']);
     Route::get('/rating', [SelfCheckController::class, 'rating'])->name('rating');

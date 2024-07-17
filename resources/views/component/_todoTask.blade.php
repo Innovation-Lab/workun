@@ -5,9 +5,15 @@
       <p class="title">TODO</p>
       <p class="desc">以下のタスクを完了させましょう</p>
     </div>
+    <?php
+        $url = $_SERVER['REQUEST_URI'];
+    ?>
+    @if(!strstr($url,'self-check'))
     <div class="p-todo__action">
       <a href="" class="c-button c-button--brandPrimary">全ての人事業務を評価</a>
     </div>
+    @else
+    @endif
   </div>
   <div class="p-todo__body">
     @foreach ([

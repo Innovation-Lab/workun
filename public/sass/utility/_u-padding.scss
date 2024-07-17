@@ -1,0 +1,9 @@
+@for $i from 1 through 10 {
+  $num: $i * 4;
+  .u-pd#{$num} {
+    padding: #{$num}px;
+  }
+}
+.u-p0{
+  padding: 0 !important;
+}
