@@ -53,7 +53,7 @@
                 ],
                 [
                   'label' => '評価期間設定',
-                  'path' => null,
+                  'path' => route('master.term.index'),
                   'phase' => '',
                 ],
               ],

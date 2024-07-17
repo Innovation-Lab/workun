@@ -37,6 +37,7 @@ Route::group([
     'as' => 'term.',
 ], function () {
     Route::get('/', [TermController::class, 'index'])->name('index');
+    Route::get('/add', [TermController::class, 'add'])->name('add');
     Route::get('/edit', [TermController::class, 'edit'])->name('edit');
     Route::post('/edit', [TermController::class, 'update']);
 });
@@ -51,7 +52,7 @@ Route::group([
     Route::post('/edit', [UserController::class, 'update']);
 });
 
-
+// 従業員情報
 Route::group([
     'prefix' => 'member',
     'as' => 'member.',

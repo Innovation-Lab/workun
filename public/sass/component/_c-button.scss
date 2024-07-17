@@ -104,6 +104,22 @@
     width: 100%;
   }
 
+  // 追加ボタン
+  &--add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px; 
+    border-radius: 50%;
+    background: var(--main-accent);
+    box-shadow: 0 2px 6px 0 rgba(10,149,199,.431);
+    &:hover{
+      background: #0A95D8;
+      box-shadow: none;
+    }
+  }
+
   // テキスト
   &--text {
     background-color: transparent;

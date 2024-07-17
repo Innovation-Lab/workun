@@ -12,15 +12,21 @@ class TermController extends Controller
      */
     public function index()
     {
-        return 'master-term';
+        return view('master.term.index');
     }
+
+    public function add()
+    {
+        return view('master.term.add');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit()
     {
-        return 'master-term-edit';
+        return view('master.term.edit');
     }
 
     /**
