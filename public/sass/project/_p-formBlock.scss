@@ -33,6 +33,11 @@
     & + .p-formBlock__foot {
       margin-block-start: var(--spacing-md);
     }
+    &:has(.c-button--text){
+      & + .p-formBlock__foot {
+        margin-block-start: var(--spacing-lg);
+      }
+    }
   }
   // フォームを囲っているタグ
   &__form{

@@ -43,7 +43,7 @@
                 ],
                 [
                   'label' => '組織作成',
-                  'path' => null,
+                  'path' => route('master.organization.index'),
                   'phase' => '',
                 ],
                 [

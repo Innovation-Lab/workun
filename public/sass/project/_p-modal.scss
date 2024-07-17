@@ -1,12 +1,13 @@
 .p-modal {
   --border: #B9D4E6;
   --border-gray: #eee;
+  --border-delete: #B4BDCB;
 
   text-align: left;
   display: inline-flex;
   flex-direction: column;
   width: min(100%, 640px);
-  min-height: 450px;
+  min-height: 320px;
   max-height: 640px;
   padding: var(--spacing-lg) 20px;
   margin: 0;
@@ -92,9 +93,29 @@
       padding: 10px 1em;
     }
   }
+  // 削除
+  &--delete{
+    justify-content: space-between;
+    max-width: 580px;
+    border-top-color: var(--alert);
+    .p-modal{
+      &__head{
+        border: none;
+        .title{
+          color: var(--alert);
+        }
+      }
+      &__body{
+        .p-formBlock__action {
+          border-top-color: var(--border-delete);
+        }
+      }
+    }
+  }
   // 絞り込み検索
   &--search {
     width: min(100%, 480px);
+    min-height: 450px;
     padding: 0;
     border-top: none;
     .p-modal {

@@ -48,7 +48,7 @@
             <col style="width: {!! $theadItem['width'] !!}" />
           @endforeach
         </colgroup>
-          <thead>
+        <thead>
           <tr>
             @foreach($tableHead as $key => $theadItem)
               @if ($theadItem['class'] === 'checkbox')

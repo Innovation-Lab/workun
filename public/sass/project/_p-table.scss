@@ -80,6 +80,18 @@
           font-size: 13px;
           color: #444;
         }
+        // 単位あり
+        &[data-unit]{ 
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: baseline;
+          font-size: 14px;
+          gap: .5rem;     
+          &::after{
+            content: attr(data-unit);
+            font-size: 10px;
+          }
+        }
         // 評価者・承認者
         &--step{
           .name{
