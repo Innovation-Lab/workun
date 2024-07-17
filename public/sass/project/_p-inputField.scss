@@ -3,8 +3,23 @@
 
 // パーツ類
 .p-inputField {
-  & + & {
-    margin: var(--spacing-2xs) 0 0;
+
+  // labelとinputが横並び
+  &.row{
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: span 2;
+    align-items: center;
+    .label{
+      color: initial;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      margin-block-end: 0;
+    }
+    .alert{
+      grid-column: 2 / 3;
+    }
   }
 
   // ファイルアップロード
@@ -125,109 +140,206 @@
   }
 
   // ラジオ
-  &--radio{
+  &--radio,
+  &--checkbox{
     display: flex;
     flex-direction: column;
     gap: 12px;
-    input{
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-      + label{
-        display: flex;
-        align-items: center;
-        padding: var(--spacing-xs) 0;
-        padding-left: 24px;
-        position: relative;
-        &:before,
-        &:after{
-          content: '';
-          width: 16px; height: 16px;
-          border: solid 1px var(--border-3);
-          border-radius: 50%;
-          background: #fff;
-          position: absolute;
-          left: 0; top: 0;
-          top: 50%;
-          transform: translate(0, -50%);
-        }
-        &:after{
-          transform-origin: center;
-          transform: translate(0, -50%) scale(.5);
-          border-color: #fff;
-        }
-      }
-      &:checked{
-        + label{
-          &:before{
-            border-color: var(--accent);
-          }
-          &:after{
-            background: var(--accent);
-            border-color: var(--accent);
-          }
-        }
-      }
-    }
+    // input{
+    //   position: absolute;
+    //   opacity: 0;
+    //   pointer-events: none;
+    //   + label{
+    //     display: flex;
+    //     align-items: center;
+    //     padding: var(--spacing-xs) 0;
+    //     padding-left: 24px;
+    //     position: relative;
+    //     &:before,
+    //     &:after{
+    //       content: '';
+    //       width: 16px; height: 16px;
+    //       border: solid 1px var(--border-3);
+    //       border-radius: 50%;
+    //       background: #fff;
+    //       position: absolute;
+    //       left: 0; top: 0;
+    //       top: 50%;
+    //       transform: translate(0, -50%);
+    //     }
+    //     &:after{
+    //       transform-origin: center;
+    //       transform: translate(0, -50%) scale(.5);
+    //       border-color: #fff;
+    //     }
+    //   }
+    //   &:checked{
+    //     + label{
+    //       &:before{
+    //         border-color: var(--accent);
+    //       }
+    //       &:after{
+    //         background: var(--accent);
+    //         border-color: var(--accent);
+    //       }
+    //     }
+    //   }
+    // }
     &.flexRow{
       flex-direction: row;
+      flex-wrap: wrap;
       gap: 16px;
     }
   }
-}
 
-// プラグインログイン用スタイル --------------------
-.pmpro_login_wrap,
-.pmpro_lost_password_wrap {
-  label {
+
+  // テストエリア
+  &--textarea {
+    grid-column: 1/3;
+    margin-block-start: var(--spacing-sm);
+  }
+
+  // 従業員情報：編集（評価者/承認者 選択）
+  &--userSelect {
+    display: grid;
+    gap: 6px;
+    .c-button {
+      color: rgba(10,149,199,.4);
+      font-size: var(--font-xs);
+      font-weight: 500;
+      line-height: 1;
+      width: 100%;
+      min-height: 40px;
+      padding:  var(--spacing-xs) var(--spacing-2xs);
+      border: 1px dotted rgba(10,149,199,.2);
+      border-radius: 3px;
+      background: rgba(10,149,199,.04);
+      &:hover{
+        color: rgba(10,149,199,.7);
+        background: rgba(10,149,199,.2);
+      }
+    }
+    .p-user {
+      padding: 5px var(--spacing-2xs);
+      border: 1px solid var(--main-light);
+      border-radius: 3px;
+      padding-right: 2rem;
+      position: relative;
+      &__image {
+        width: 28px;
+        height: 28px;
+      }
+      &__delete {
+        // display: block;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 8px;
+        cursor: pointer;
+        &:hover{
+          opacity: .5;
+        }
+      }
+    }
+  } 
+
+  // 横幅いっぱい
+  &--full {
+    grid-column: 1/3;
+  }
+
+  // ラベル
+  .label {
+    color: #6B767D;
+    font-size: 11px;
+    line-height: 1;
     display: block;
-    margin: 0 0 .5em;
+    margin-block-end: 6px;
   }
-  p {
-    + p {
-      margin: 1em 0 0 !important;
+
+  // アラート
+  .alert {
+    color: var(--text-alert);
+    font-size: var(--font-2xs);
+    margin-block-start: 2px;
+    &Box {
+      color: var(--text-alert);
+      font-size: var(--font-xs);
+      border: 1px solid var(--alert);
+      padding: 10px;
+      margin-block-start: 0;
+      background: rgba(255,0,0,.02);
     }
-  }
-
-  // 入力フィールド
-  .login-username,
-  .pmpro_lost_password-field {
-    @extend .p-inputField;
-    @extend .p-inputField--loginEmail;
-  }
-  .login-password {
-    @extend .p-inputField;
-    @extend .p-inputField--loginPassword;
-  }
-
-  // 送信ボタン
-  input[type=submit] {
-    opacity: 1;
-    @extend .c-button;
-    @extend .c-button--full;
-    @extend .c-button--brandPrimary;
-  }
-
-  // 区切り線
-  hr {
-    display: none;
-  }
-
-  // パスワード再設定
-  .pmpro_actions_nav {
-    margin: 1em 0 0 !important;
-    text-align: right;
-    a {
-      @extend .c-link;
-      @extend .c-link--xs;
-    }
-  }
-
-  // パスワード再設定
-  .pmpro_lost_password-fields {
-    margin: 2em 0 0;
-  }
-  .pmpro_submit {
-    margin: 1em 0 0;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // プラグインログイン用スタイル --------------------
+// .pmpro_login_wrap,
+// .pmpro_lost_password_wrap {
+//   label {
+//     display: block;
+//     margin: 0 0 .5em;
+//   }
+//   p {
+//     + p {
+//       margin: 1em 0 0 !important;
+//     }
+//   }
+
+//   // 入力フィールド
+//   .login-username,
+//   .pmpro_lost_password-field {
+//     @extend .p-inputField;
+//     @extend .p-inputField--loginEmail;
+//   }
+//   .login-password {
+//     @extend .p-inputField;
+//     @extend .p-inputField--loginPassword;
+//   }
+
+//   // 送信ボタン
+//   input[type=submit] {
+//     opacity: 1;
+//     @extend .c-button;
+//     @extend .c-button--full;
+//     @extend .c-button--brandPrimary;
+//   }
+
+//   // 区切り線
+//   hr {
+//     display: none;
+//   }
+
+//   // パスワード再設定
+//   .pmpro_actions_nav {
+//     margin: 1em 0 0 !important;
+//     text-align: right;
+//     a {
+//       @extend .c-link;
+//       @extend .c-link--xs;
+//     }
+//   }
+
+//   // パスワード再設定
+//   .pmpro_lost_password-fields {
+//     margin: 2em 0 0;
+//   }
+//   .pmpro_submit {
+//     margin: 1em 0 0;
+//   }
+// }

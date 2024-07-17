@@ -1,9 +1,10 @@
 @use "../foundation/global" as *;
 html{
   min-width: 1080px;
+  overflow-x: hidden;
 }
 body {
-  color: var(--text-primary);
+  color: #222;
   font-family: var(--family);
   font-weight: 400;
   font-size: var(--font-sm);
@@ -24,7 +25,7 @@ body {
   }
   a,button {
     cursor: pointer;
-  }
+  } 
   // サイドメニューを閉じたとき
   &.sideNav--close{
     .p-page,

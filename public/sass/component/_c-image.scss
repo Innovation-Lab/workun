@@ -9,3 +9,12 @@
     }
   }
 }
+
+.c-noImage{
+  background-image: url(../../img/common/noImage/noimage.webp);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+  overflow: hidden
+}

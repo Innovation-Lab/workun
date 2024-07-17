@@ -18,3 +18,21 @@ $(document).on('click', '.js-toggleMenu--button', function(){
   }
 });
 
+// table tr　リンク
+$('tr[data-href]').click(function (e) {
+  if (!$(e.target).is('a')) {
+    window.location = $(e.target).data('href');
+  };
+});
+
+// チェックボックス 一括チェック
+$('#all').on('click',function() {
+  $('input[name="check[]"]').prop('checked',this.checked);
+});
+$('input[name="check[]"]').on('click',function(){
+  if ($('input[name="check[]"]').length === $('input[name="check[]"]:checked').length) {
+    $('#all').prop('checked', true);
+  } else {
+    $('#all').prop('checked', false);
+  }
+});

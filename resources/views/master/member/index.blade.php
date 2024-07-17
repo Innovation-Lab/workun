@@ -39,7 +39,7 @@
                         <svg width="12" height="12"><use xlink:href="#close" /></svg>
                       </button>
                     </div>
-                    <p class="c-button">詳細検索</p>
+                    <p class="c-button" data-remodal-target="modal_search">詳細検索</p>
                   </div>
                   <button type="submit" class="c-button c-button--brandPrimary p-search__button">絞り込む</button>
                 </div>
@@ -56,6 +56,8 @@
             </div>
             {{-- テーブル一覧 --}}
             <div class="p-table">
+              <?php
+            <div class="p-table c-scroll">
               <?php
                 $tableHead = [
                   [
@@ -118,11 +120,11 @@
                 </thead>
                 <tbody>
                   @foreach($users as $user)
-                    <tr>
+                    <tr data-href="{{ route('master.member.edit') }}">
                       <!-- 氏名 -->
                       <td><div class="item">
                           <div class="p-user">
-                            <div class="p-user__image">
+                            <div class="p-user__image c-noImage">
                               <img class="c-image c-image--round" src="{{ $user->avatar_url }}" />
                             </div>
                             <div class="p-uesr__text">
@@ -163,4 +165,5 @@
       </div>
     </div>
   </div>
+  @include('master.member.modal._search')
 @endsection

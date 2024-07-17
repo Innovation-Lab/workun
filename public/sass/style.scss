@@ -29,8 +29,12 @@
 // 余白
 @use "component/_c-spacing.scss"; 
 
+// スクロール
+@use "component/_c-scroll.scss"; 
+
 // ユーティリティ
 @use "utility/_u-textAlign.scss"; 
+@use "utility/_u-width.scss"; 
 
 // ページタイトル
 @use "project/_p-head.scss"; 
@@ -40,6 +44,11 @@
 @use "component/_c-status.scss"; // タスクステータス
 
 
+// --------------------------------------------------
+// js　ライブラリ
+// --------------------------------------------------
+@use "library/remodal.scss"; // Remodal
+@use "library/remodal-default-theme.scss"; // Remodal
 
 
 // --------------------------------------------------
@@ -77,6 +86,8 @@
 @use "project/_p-pager.scss"; // 一覧ページング
 @use "project/_p-search.scss"; // 一覧絞り込み検索
 @use "project/_p-user.scss"; // ユーザー情報
+@use "project/_p-modal.scss"; // モーダル
+@use "project/_p-organization.scss"; // 組織作成
 
 // ダッシュボード --------------------
 // layout

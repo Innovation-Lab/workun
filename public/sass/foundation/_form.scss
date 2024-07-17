@@ -2,13 +2,13 @@
 @use "../foundation/global" as *;
 
 :root {
-  --form-text: var(--gray-800);
-  --form-placeholder: var(--gray-500);
+  --form-text: #444;
+  --form-placeholder: #B9D4E6;
   --form-readonly: var(--gray-50);
-  --form-border: var(--gray-400);
-  --form-surface: var(--gray-50);
+  --form-border: #B9D4E6;
+  --form-surface: #F5F8FA;
   --form-accent: var(--berry-500);
-  --form-radius: 8px;
+  --form-radius: 3px;
 }
 
 input[type=text],
@@ -21,11 +21,12 @@ input[type=password],
 select,
 textarea {
   color: var(--form-text);
-  font: 400 var(--font-md)/1.5 var(--family);
+  font: 400 var(--font-xs)/1 var(--family);
   border: 1px solid var(--form-border);
   background-color: var(--form-surface);
   border-radius: var(--form-radius);
   width: 100%;
+  min-height: 40px;
   padding: var(--spacing-xs) var(--spacing-xs);
   
   // プレースホルダー
@@ -69,18 +70,22 @@ input[type=number] {
 select {
   appearance: none;
   padding-right: 1.5em;
-  background-image: url('data:image/svg+xml;utf8,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6L8 10L12 6" stroke="%235451EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
-  background-size: 1em;
-  background-position: right .25em center;
+  background-image: url('data:image/svg+xml;utf8,<svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.51667e-05 0.999965L4.24268 5.24261L8.48532 0.999965L7.77821 0.292858L4.24268 3.82839L0.707142 0.292858L3.51667e-05 0.999965Z" fill="%2315294B"/></svg>');
+  background-size: 12px;
+  background-position: right 12px center;
   background-repeat: no-repeat;
+  border-color: var(--main-light);
+  background-color: var(--white);
   cursor: pointer;
 }
 textarea {
-  font-size: var(--text-md);
   padding: .5em .75em;
   resize: vertical;
-  &.sm {
-    font-size: var(--text-sm);
+  min-height: 140px;
+  border-color: var(--main-light);
+  background-color: var(--white);
+  &::placeholder {
+    color: rgba(21,41,75,.4);
   }
 }
 
@@ -88,24 +93,24 @@ textarea {
 // ラジオとチェックボックス共通
 label:has(input[type=radio], input[type=checkbox]) {
 
-  color: var(--text-form);
-  font: 400 var(--font-sm)/24px var(--family);
-  min-height: 24px;
+  color: var(--form-text);
+  font: 400 var(--font-xs)/1 var(--family);
+  min-height: 14px;
 
   display: inline-block;
   position: relative;
-  padding-inline: 2em 1em;
+
   
-  background-size: 20px 20px;
+  background-size: 14px 14px;
   background-position: left center;
   background-repeat: no-repeat;
   cursor: pointer;
   user-select: none;
 
-  &:has(:focus) {
-    outline: 2px solid var(--accent);
-    border-radius: var(--radius-sm);
-  }
+  // &:has(:focus) {
+  //   outline: 2px solid var(--accent);
+  //   border-radius: var(--radius-sm);
+  // }
   :is(input[type=radio], input[type=checkbox]) {
     -webkit-appearance: none;
     appearance: none;
@@ -116,14 +121,14 @@ label:has(input[type=radio], input[type=checkbox]) {
 // ラジオ
 label:has(input[type=radio]) {
   $color1: 'none';
-  $color2: '%23AAAAAA';
+  $color2: '%23B9D4E6';
   $color3: 'none';
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="24" height="24" viewBox="x,y" fill="" stroke-width="1"><circle cx="12" cy="12" r="10" fill="#{$color1}" stroke="#{$color2}"/><circle cx="12" cy="12" r="3" fill="#{$color3}"/></svg>');
 
   &:has(:checked) {
     // color1, color2はactive色
-    $color1: '%230058FF';
-    $color2: '%230058FF';
+    $color1: '%230A95C7';
+    $color2: '%230A95C7';
     $color3: 'white';
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="24" height="24" viewBox="x,y" fill="" stroke-width="1"><circle cx="12" cy="12" r="10" fill="#{$color1}" stroke="#{$color2}"/><circle cx="12" cy="12" r="3" fill="#{$color3}"/></svg>');
   }
@@ -132,17 +137,39 @@ label:has(input[type=radio]) {
 // チェックボックス
 label:has(input[type=checkbox]) {
   $color1: 'none';
-  $color2: '%23AAAAAA';
+  $color2: '%23B9D4E6';
   $color3: 'none';
   align-items: center;
   background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="23" height="23" rx="5.5" fill="#{$color1}" stroke="#{$color2}"/><path d="M6 12.3333L9.77143 16L18 8" stroke="#{$color3}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
 
   &:has(:checked) {
     // color1, color2はactive色
-    $color1: '%230058FF';
-    $color2: '%230058FF';
+    $color1: '%230A95C7';
+    $color2: '%230A95C7';
     $color3: 'white';
     background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="23" height="23" rx="5.5" fill="#{$color1}" stroke="#{$color2}"/><path d="M6 12.3333L9.77143 16L18 8" stroke="#{$color3}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  }
+
+  &.tab {
+    padding-inline: 44px 10px;
+    padding-block: var(--spacing-xs);
+    background-position: left 10px center;
+    border: 1px solid var(--main-accent);
+    &--ghost {
+      border-color: transparent;
+      $color1: 'none';
+      $color2: '%230A95C7';
+      $color3: 'none';
+      background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="23" height="23" rx="5.5" fill="#{$color1}" stroke="#{$color2}"/><path d="M6 12.3333L9.77143 16L18 8" stroke="#{$color3}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+      &:has(:checked) {
+        color: var(--main-accent);
+        // color1, color2はactive色
+        $color1: '%230A95C7';
+        $color2: '%230A95C7';
+        $color3: 'white';
+        background-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="0.5" y="0.5" width="23" height="23" rx="5.5" fill="#{$color1}" stroke="#{$color2}"/><path d="M6 12.3333L9.77143 16L18 8" stroke="#{$color3}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+      }
+    }
   }
 }
 

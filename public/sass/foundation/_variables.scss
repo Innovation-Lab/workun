@@ -14,6 +14,7 @@
   --background-base-darken: #DCE3EF;
   --main: #0F203E;
   --main-light: #15294B;
+  --main-accent: #0A95C7;
   --line-mainSeparate: #304261;
   // ステータス
   --assessment: #0BB7C2;
@@ -91,7 +92,7 @@
   --border-4: var(--gray-500);
 
   // アラートグループ
-  --alert: var(--tomato-500);
+  --alert: #FD2323;
   --alert-light: var(--tomato-100);
     --text-alert: var(--alert);
     --surface-alert: var(--alert-light);
