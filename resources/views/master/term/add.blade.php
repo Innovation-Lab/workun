@@ -6,7 +6,9 @@
       <div class="p-page__head">
         <!-- ページタイトル -->
         <div class="p-head">
-          <a href="{{route('master.term.index')}}" class="return"></a>
+          <a href="{{route('master.term.index')}}" class="return">
+            <svg width="28" height="28"><use xlink:href="#chevron_left" /></svg>
+          </a>
           <p class="title">評価期間の新規作成</p>
         </div>
       </div>

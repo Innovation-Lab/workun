@@ -29,6 +29,7 @@
   &__body {
     // ２列
     &.row2 {
+      display: grid;
       grid-template-columns: 1fr minmax(300px, 340px);
       gap: var(--spacing-sm);
       align-items: flex-start;

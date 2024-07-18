@@ -6,7 +6,9 @@
       <div class="p-page__head">
         <!-- ページタイトル -->
         <div class="p-head">
-          <a href="{{route('master.organization.index')}}" class="return"></a>
+          <a href="{{route('master.organization.index')}}" class="return">
+            <svg width="28" height="28"><use xlink:href="#chevron_left" /></svg>
+          </a>
           <p class="title">雇用形態の新規作成</p>
         </div>
       </div>
