@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -16,6 +18,7 @@ class BaseController extends Controller
     protected string $model_name = "";
     protected $model;
     protected $repository;
+    protected Authenticatable $auth_user;
 
     public function __construct()
     {
@@ -24,6 +27,10 @@ class BaseController extends Controller
             $this->model = App::make("App\Models\\{$modelClass}");
             $this->repository = App::make("App\Repositories\\{$modelClass}RepositoryInterface");
         }
+        $this->middleware(function ($request, $next) {
+            $this->auth_user = Auth::user();
+            return $next($request);
+        });
     }
 
     /**
@@ -36,7 +43,10 @@ class BaseController extends Controller
         $plural = Str::plural($this->model_name);
         return view("{$this->directory}.index", [
             'request' => $request,
-            $plural => $this->repository->search($request)->organization()->paginate(),
+            $plural => $this->repository
+                ->search($request)
+                ->organization($this->auth_user->id)
+                ->paginate(),
         ]);
     }
 
@@ -58,7 +68,9 @@ class BaseController extends Controller
      */
     public function add(): View
     {
-        return view("{$this->directory}.add");
+        return view("{$this->directory}.add", [
+            $this->model_name => new $this->model,
+        ]);
     }
 
     /**
@@ -86,7 +98,8 @@ class BaseController extends Controller
         # 更新処理
         DB::beginTransaction();
         try {
-            $this->repository->create($request);
+            $request->merge(['organization_id' => $this->auth_user->organization_id]);
+            $entity = $this->repository->create($request);
         } catch (Exception $exception) {
             DB::rollBack();
             return redirect()
@@ -96,8 +109,9 @@ class BaseController extends Controller
         }
         DB::commit();
 
+        $edit_route = str_replace("/", ".", $this->directory) . ".edit";
         return redirect()
-            ->back()
+            ->route($edit_route, $entity)
             ->with('success', '更新しました。');
     }
 
@@ -141,6 +155,7 @@ class BaseController extends Controller
         # 更新処理
         DB::beginTransaction();
         try {
+            $request->merge(['organization_id' => $this->auth_user->organization_id]);
             $this->repository->update($entity, $request);
         } catch (Exception $exception) {
             DB::rollBack();
@@ -188,6 +203,9 @@ class BaseController extends Controller
     {
         $entity = $this->model->find($id);
         if (!$entity) abort(404);
+        if ($this->auth_user->cannot('view', $entity)) {
+            abort(403);
+        }
         return $entity;
     }
 }

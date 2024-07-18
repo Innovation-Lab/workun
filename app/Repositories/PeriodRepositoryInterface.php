@@ -10,4 +10,5 @@ interface PeriodRepositoryInterface
     public function search(Request $request);
     public function create(Request $request);
     public function update(Period $period, Request $request);
+    public function delete(Period $period);
 }

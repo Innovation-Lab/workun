@@ -54,8 +54,10 @@ Route::group([
 ], function () {
     Route::get('/', [TermController::class, 'index'])->name('index');
     Route::get('/add', [TermController::class, 'add'])->name('add');
-    Route::get('/edit', [TermController::class, 'edit'])->name('edit');
-    Route::post('/edit', [TermController::class, 'update']);
+    Route::post('/add', [TermController::class, 'store']);
+    Route::get('/edit/{period}', [TermController::class, 'edit'])->name('edit');
+    Route::post('/edit/{period}', [TermController::class, 'update']);
+    Route::delete('/edit/{period}', [TermController::class, 'destroy']);
 });
 
 // 顧客

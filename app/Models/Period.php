@@ -22,6 +22,11 @@ class Period extends Model
         'end',
     ];
 
+    public function self_check_sheets()
+    {
+        return $this->hasMany(SelfCheckSheet::class);
+    }
+
     protected function getDisplayStartAttribute ()
     {
         return date('Y年m月', strtotime("{$this->start}-01"));
@@ -48,9 +53,8 @@ class Period extends Model
         return $query;
     }
 
-    protected function scopeOrganization ($query)
+    protected function scopeOrganization ($query, $organization_id)
     {
-        $user = Auth::user();
-        return $query->where('periods.organization_id', $user->organization_id);
+        return $query->where('periods.organization_id', $organization_id);
     }
 }

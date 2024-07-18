@@ -16,7 +16,8 @@ class PeriodRepository implements PeriodRepositoryInterface
     public function search(Request $request): Builder
     {
         return Period::query()
-            ->keyword($request->get('keyword'));
+            ->keyword($request->get('keyword'))
+            ->orderBy('periods.id', 'desc');
     }
 
     /**
@@ -47,5 +48,17 @@ class PeriodRepository implements PeriodRepositoryInterface
             throw new Exception("評価期間の更新に失敗しました。");
         }
         return $period;
+    }
+
+    /**
+     * @param Period $period
+     * @return void
+     * @throws Exception
+     */
+    public function delete(Period $period): void
+    {
+        if (!$period->delete()) {
+            throw new Exception("評価期間の更新に失敗しました。");
+        }
     }
 }

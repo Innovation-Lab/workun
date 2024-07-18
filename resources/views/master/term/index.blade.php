@@ -82,7 +82,7 @@
                 </thead>
                 <tbody>
                   @foreach($periods as $period)
-                    <tr data-href="{{ route('master.term.edit') }}">
+                    <tr data-href="{{ route('master.term.edit', $period) }}">
                       <!-- タイトル -->
                       <td><div class="item title">{{ $period->name }}</div></td>
                       <!-- 評価開始年月 -->
