@@ -2,16 +2,16 @@
 @section('title', 'セルフチェック-人事業務詳細')
 @section('content')
   <div class="l-index">
-    <div class="p-index">
-      <div class="p-index__head">
-        <h1 class="p-index__head--title u-align">
+    <div class="p-page">
+      <div class="p-page__head">
+        <h1 class="p-page__head--title u-align">
           <a href="javascript:history.back()" class="c-button__back">
             <svg width="20" height="20"><use xlink:href="#chevron_left" /></svg>
           </a>
           セルフチェック詳細
         </h1>
       </div>
-      <div class="p-index__body">
+      <div class="p-page__body">
         
       <div class="p-tableBox">
           <div class="p-tableBox__head">

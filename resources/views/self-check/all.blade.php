@@ -1,19 +1,19 @@
 @extends('layout.layout--base')
 @section('title', 'セルフチェック-人事業務')
 @section('content')
-  <div class="l-index__devide">
+  <div class="l-index__split">
     @include('component._todoTask')
-    <div class="p-index">
-      <div class="p-index__head">
-        <h1 class="p-index__head--title">セルフチェック</h1>
-        <div class="p-index__head--action">
+    <div class="p-page">
+      <div class="p-page__head u-align u-gap40">
+        <h1 class="p-page__head--title">セルフチェック</h1>
+        <div class="p-page__head--action">
           <a href="{{ route('self-check.index') }}"  class="c-button--text">対象シート</a>
           <a class="c-button--text is-current">すべてのシート</a>
         </div>
       </div>
-      <div class="p-index__body">
+      <div class="p-page__body">
         
-      <div class="p-tableBox">
+        <div class="p-tableBox">
           <div class="p-tableBox__head">
             <div class="mainText">
               <p class="title">シート一覧</p>
@@ -62,7 +62,7 @@
                   ]
                 ]
               ?>
-              <table class="u-w__inherit sticky">
+              <table class="t-table__900 u-w__inherit sticky">
                 <colgroup>
                   @foreach($tableHead as $key => $theadItem)
                     <col class="u-w{!! $theadItem['width'] !!}" />

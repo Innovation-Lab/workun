@@ -55,18 +55,16 @@
               </p>
             </div>
             {{-- テーブル一覧 --}}
-            <div class="p-table">
-              <?php
             <div class="p-table c-scroll">
               <?php
                 $tableHead = [
                   [
                     'title' => '氏名',
-                    'width' => '150px',
+                    'width' => '150',
                     'class' => null,
                   ],[
                     'title' => '部署',
-                    'width' => '130px',
+                    'width' => '130',
                     'class' => null,
                   ],[
                     'title' => '役職',
@@ -74,31 +72,31 @@
                     'class' => null,
                   ],[
                     'title' => '等級',
-                    'width' => '100px',
+                    'width' => '100',
                     'class' => null,
                   ],[
                     'title' => '号俸',
-                    'width' => '100px',
+                    'width' => '100',
                     'class' => null,
                   ],[
                     'title' => '雇用形態',
-                    'width' => '100px',
+                    'width' => '100',
                     'class' => null,
                   ],[
                     'title' => '入社日',
-                    'width' => '100px',
+                    'width' => '100',
                     'class' => 'u-tac',
                   ],[
                     'title' => 'ログインID',
-                    'width' => '120px',
+                    'width' => '120',
                     'class' => null,
                   ],[
                     'title' => '評価者/承認者',
-                    'width' => '120px',
+                    'width' => '120',
                     'class' => null,
                   ],[
                     'title' => '作成日',
-                    'width' => '100px',
+                    'width' => '100',
                     'class' => 'u-tac',
                   ]
                 ]
@@ -106,7 +104,7 @@
               <table>
                 <colgroup>
                   @foreach($tableHead as $key => $theadItem)
-                    <col style="width: {!! $theadItem['width'] !!}" />
+                    <col class="u-w{!! $theadItem['width'] !!}" />
                   @endforeach
                 </colgroup>
                 <thead>
@@ -127,7 +125,7 @@
                             <div class="p-user__image c-noImage">
                               <img class="c-image c-image--round" src="{{ $user->avatar_url }}" />
                             </div>
-                            <div class="p-uesr__text">
+                            <div class="p-user__text">
                               <div class="name">{{ $user->full_name }}</div>
                             </div>
                           </div>

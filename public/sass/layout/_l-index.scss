@@ -1,6 +1,6 @@
 // セルフチェック indexレイアウト
 .l-index {
-  &__devide{
+  &__split{
     display: grid;
     grid-template-columns: 330px auto;
     height: 100%;
