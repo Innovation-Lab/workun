@@ -99,7 +99,7 @@
                 </thead>
                 <tbody>
                   @foreach($users as $user)
-                    <tr data-href="{{ route('master.member.edit') }}">
+                    <tr data-href="{{ route('master.member.edit', $user) }}">
                       <!-- 氏名 -->
                       <td><div class="item">
                           <div class="p-user">

@@ -61,6 +61,34 @@ class UserRepository implements UserRepositoryInterface
     }
 
     /**
+     * @param User $user
+     * @param Request $request
+     * @throws Exception
+     * @return User $user
+     */
+    public function update(User $user, Request $request): User
+    {
+        $attributes = $this->makeAttributes($request);
+        $user = $user->fill($attributes);
+        if (!$user->save()) {
+            throw new Exception("ユーザーの更新に失敗しました。");
+        }
+
+        return $user;
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    private function makeAttributes (Request $request): array
+    {
+        $attributes = $request->all();
+
+        return $attributes;
+    }
+
+    /**
      * @param Organization $organization
      * @param $user
      * @param Request $request
