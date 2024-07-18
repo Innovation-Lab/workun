@@ -19,8 +19,8 @@
 
   // プライマリカラーボタン
   &--primary {
-    --normal: var(--melon-500);
-    --hover: var(--melon-800);
+    --normal: var(--main-accent);
+    --hover: var(--main-accent-lighten);
 
     --button-text: var(--white);
     --button-border: var(--normal);

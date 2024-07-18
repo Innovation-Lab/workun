@@ -17,17 +17,17 @@
         display: flex;
         align-items: baseline;
         gap: 1.5rem;
+        .c-txt__xs{
+          padding-inline-start: 1.5rem;
+          border-left: 1px solid var(--box-border);
+          span{
+            line-height: 1;
+          }
+        }
       }
       .title{
         font-size: 20px;
         font-weight: 600;
-      }
-      .c-txt__xs{
-        padding-inline-start: 1.5rem;
-        border-left: 1px solid var(--box-border);
-        span{
-          line-height: 1;
-        }
       }
       .count{
         display: flex;
@@ -199,62 +199,125 @@
       }
     }
   }
-  &__cell{
-    width: calc(90px * 13);
+  &__cell,&__cell--input{
     display: grid;
     grid-template-columns: repeat(12, 90px);
+    >*{
+      min-width: 1px;
+    }
+    .u-flex{
+      border-bottom: solid 1px var(--box-border);
+      border-right: solid 1px var(--box-border);
+      background-color: var(--white);
+      &:last-of-type{
+        border-right: none;
+      }
+    }
+    .c-txt__weight--600,.c-txt__gray-600{
+      padding: 1.5rem 6px;
+      flex: auto;
+      // min-width: 45px;
+      text-align: center;
+      background-color: var(--white);
+    }
+    .c-txt__gray-600{
+      background-color: #FAFBFB;
+      // width: 45px;
+      // flex: 0 0 45px;
+      border-right: solid 1px var(--box-border);
+    }
     &--wrapper{
       display: grid;
       grid-template-columns: 90px 1fr;
       >*{
         min-width: 1px;
-        height:100%;
-        width:100%;
         .c-txt__weight--600,.c-txt__gray-600{
-          width: 45px;
           padding: 1.5rem 6px;
-          border-right: solid 1px var(--box-border);
+          flex: auto;
+          // min-width: 45px;
           text-align: center;
           background-color: var(--white);
         }
         .c-txt__gray-600{
+          // width: 45px;
+          // flex: 0 0 45px;
           background-color: #FAFBFB;
+          border-right: solid 1px var(--box-border);
         }
       }
       .u-flex{
         border-bottom: solid 1px var(--box-border);
       }
     }
-    >*{
-      min-width: 1px;
-      height:100%;
-      width:100%;
-      .c-txt__weight--600,.c-txt__gray-600{
-        width: 45px;
-        padding: 1.5rem 6px;
-        border-right: solid 1px var(--box-border);
-        text-align: center;
-        background-color: var(--white);
+    &--input{
+      display: flex;
+      .p-table__cell{
+        grid-template-columns: repeat(12, 60px);
       }
       .c-txt__gray-600{
-        background-color: #FAFBFB;
+        width: 37px;
       }
+    }
+    &--select{
+      color: var(--main-accent);
+      font-size: 1rem;
+      flex: auto;
+      border-radius: 0;
+      border: none;
+      background: var(--white) url(../img/common/icon/chevron_select.svg) no-repeat right 5px center;
+      background-size:10px;
+    }
+    .c-txt__lg{
+      font-size: 18px;
+    }
+    .u-w90.c-txt__xs{
+      align-content: center;
+      text-decoration: underline;
     }
   }
   &__check{
     max-height: 70vh;
-    overflow: auto;
     display: flex;
     .t-wrapper{
       flex:auto;
     }
     &--head{
       padding: 1rem;
-      min-width: 500px;
+      width: 540px;
+    }
+    &--month{
+      width: calc(100vw - 810px);
+      button{
+        background-color: transparent;
+        color: var(--white);
+        border: none;
+        padding: 0;
+        fill: var(--white);
+        display:flex;
+        align-items:center;
+        gap:.25rem;
+        font-size: 15px;
+        transition: all 0.2s;
+        &:hover{
+          color: var(--main-accent);
+          fill: var(--main-accent);
+        }
+        &[disabled]{
+          opacity: .3;
+          cursor: auto;
+          &:hover{
+            color: var(--white);
+            fill: var(--white);
+          }
+        }
+      }
     }
     .t-table{
       width: 100%;
       min-width: 1710px;
+      &__narrow{
+        min-width:calc(540px + 50vw);
+      }
       th,td{
         font-size: 13px;
       }
@@ -267,7 +330,7 @@
           background-color: var(--main);
           padding: 0;
           .cell{
-            padding: 5px 1rem;
+            padding: 5px .25rem;
             border: 1px solid #2C436C;
             background-color: var(--main);
           }

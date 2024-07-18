@@ -141,6 +141,29 @@
       }
     }
   }
+  &:has(.p-tableBox){
+    border: none;
+    padding: 0;
+    max-height:90vh;
+    width: 100%;
+    max-width:95vw;
+    .p-table{
+      &Box{
+        border-radius:0;
+        &__head{
+          .action{
+            padding-inline-end: 2.5rem;
+          }
+        }
+      }
+      &__check{
+        max-height:75vh;
+        &--month{
+          width: calc(95vw - 540px);
+        }
+      }
+    }
+  }
 }
 // 背景
 .remodal-overlay {
