@@ -1,8 +1,8 @@
-<div class="remodal p-modal" data-remodal-id="modal_rater" data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
+<div class="remodal p-modal" data-remodal-id="modal_tergeter" data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
   <button data-remodal-action="close" class="remodal-close p-modal__close">閉じる</button>
   <div class="p-modal__head">
-    <p class="title">人事業務の評価者の選択</p>
-    <p class="description">人事業務の評価者を設定してください。</p>
+    <p class="title">対象者の選択</p>
+    <p class="description">セルフチェックシートの対象者を設定してください。</p>
   </div>
   <div class="p-modal__middle">
     <div class="p-inputField">
@@ -55,7 +55,7 @@
                 <th class="{!! $theadItem['class'] !!}">
                   <!-- チェックボックス専用のHTML -->
                   <div class="item">
-                    <label for="" class="none">
+                    <label for="all">
                       <input type="checkbox" name="all_check" id="all">
                     </label>
                   </div>
@@ -80,7 +80,7 @@
               <!-- 氏名 -->
               <td><div class="item">
                 <div class="p-user">
-                  <div class="p-user__image">
+                  <div class="p-user__image c-noImage">
                     <img class="c-image c-image--round" src="">
                   </div>
                   <div class="p-uesr__text">
@@ -99,7 +99,7 @@
     </div>
     <div class="p-formBlock__action">
       <button data-remodal-action="close" class="c-button c-button--cancel u-w120">キャンセル</button>
-      <button class="c-button c-button--brandPrimary u-w160">評価者を登録</button>
+      <button class="c-button c-button--brandPrimary u-w160">対象者を登録</button>
     </div>
   </div>
 </div>

@@ -18,6 +18,7 @@ input[type=tel],
 input[type=email],
 input[type=number],
 input[type=password],
+input[type=url],
 select,
 textarea {
   color: var(--form-text);
@@ -74,9 +75,11 @@ select {
   background-size: 12px;
   background-position: right 12px center;
   background-repeat: no-repeat;
-  border-color: var(--main-light);
-  background-color: var(--white);
   cursor: pointer;
+  &.primary{
+    border-color: var(--main-light);
+    background-color: var(--white);
+  }
 }
 textarea {
   padding: .5em .75em;

@@ -244,7 +244,112 @@
         }
       }
     }
-  } 
+    .p-table{
+      table{
+        td {
+          .item{
+            padding: var(--spacing-2xs) !important;
+            font-size: 12px;
+            .p-user{
+              padding: 0;
+              border: 0;
+              &__image{
+                width: 24px;
+                height: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .c-scroll{
+      max-height: 240px;
+    }
+    .c-button{
+      &--large{
+        height: 120px;
+      }
+    }
+  }
+
+  // セルフチェックシート 項目
+  &--sheetItem{
+    + *{
+      margin-block-start: 10px;
+    }
+    &Box{
+      + .p-inputField--sheetItemBox{
+        border-top: 1px solid #eee;
+        padding-block-start: var(--spacing-xs);
+        margin-block-start: var(--spacing-xs);
+      }
+      .p-formBlock__action{
+        border: none;
+        padding-block-start: 0 !important;
+        margin-block-start: 10px;
+      }
+      // 階層1の削除ボタン
+      &:first-child{
+        .layer1{
+          .p-formBlock__action{
+            .delete-layer1{
+              display: none;
+            }
+          }
+          .layer2-container{
+            &:has(.layer2){
+              + .p-formBlock__action{
+                .delete-layer1{
+                  display: block;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    // 階層2
+    .layer2{
+      padding-inline-start: 32px;
+      margin-block-start: 10px;
+      .layer3-container{
+        &:has(.layer3){
+          + .p-formBlock__action{
+            display: none;
+          }
+        }
+      }
+    }
+    // 階層3
+    .layer3{
+      padding-inline-start: 48px;
+      margin-block-start: 10px; 
+    }
+    // 共通
+    .layer{
+      &--label{
+        position: relative;
+        &::before{
+          content: "";
+          display: block;
+          width: .5rem;
+          height: .5rem;
+          background-image: url('data:image/svg+xml,%3Csvg%20width%3D%228%22%20height%3D%228%22%20viewBox%3D%220%200%208%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M0%200V8H8V7H1V0H0Z%22%20fill%3D%22%23B9D4E6%22/%3E%3C/svg%3E');
+          background-repeat: no-repeat;
+          background-size: contain;
+          position: absolute;
+          top: 0;
+          left: -1rem;
+        }
+      }
+      &--item{
+        display: grid;
+        grid-template-columns: 0.65fr 1fr;
+        gap: 6px 4px;
+      }
+    }
+  }
 
   // 横幅いっぱい
   &--full {
