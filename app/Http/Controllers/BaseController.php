@@ -36,7 +36,7 @@ class BaseController extends Controller
         $plural = Str::plural($this->model_name);
         return view("{$this->directory}.index", [
             'request' => $request,
-            $plural => $this->repository->search($request)->paginate(),
+            $plural => $this->repository->search($request)->organization()->paginate(),
         ]);
     }
 
