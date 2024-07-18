@@ -74,5 +74,6 @@ Route::group([
     'as' => 'member.',
 ], function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
-    Route::view('/edit', 'master.member.edit')->name('edit');
+    Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
+    Route::post('/edit/{user}', [UserController::class, 'update']);
 });
