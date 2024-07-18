@@ -61,7 +61,7 @@
         </thead>
         <tbody>
           @for($tableBody = 0; $tableBody < 20; $tableBody++)
-            <tr data-href="">
+            <tr data-href="{{ route('self-check.confirm') }}">
               <td>
                 <div class="item">
                   <span class="status--1">未評価</span>

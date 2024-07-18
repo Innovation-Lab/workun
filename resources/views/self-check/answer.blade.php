@@ -16,5 +16,6 @@
       </div>
     </div>
   </div>
+  @include('self-check.components.modal._submission')
 @endsection
     

@@ -46,6 +46,13 @@ class SelfCheckController extends Controller
     }
 
     /**
+     * Display confirm page view.
+     */
+    public function confirm()
+    {
+        return view('self-check.confirm');
+    }
+    /**
      * Display approval page view.
      */
     public function approval()
@@ -58,6 +65,13 @@ class SelfCheckController extends Controller
      */
     public function result()
     {
-        return view('self-check.result');
+        return view('self-check.result.index');
+    }
+    /**
+     * Display resultall page view.
+     */
+    public function resultall()
+    {
+        return view('self-check.result.all');
     }
 }

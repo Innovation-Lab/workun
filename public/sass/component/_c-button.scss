@@ -161,6 +161,16 @@
       color: #2b2e38;
     } 
   }
+  &--underline{
+    color: var(--main-accent);
+    font-size: var(--font-2xs);
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: underline;
+    &:hover{
+      color: var(--main-accent-lighten);
+    }
+  }
   // ターゲットブランク
   &[target=_blank],
   &--upload {
