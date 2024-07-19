@@ -2,8 +2,10 @@
   <div class="p-inputField p-inputField--full row">
     <label class="label" for="">名称</label>
     <div class="u-w370">
-      <input type="text" value="" placeholder="号俸">
+      <input type="text" name="name" placeholder="号俸" value="{{ old('name', $salary->name) }}">
     </div>
-    <p class="alert">号俸の名称を入力してください</p>
+    @if ($errors->has('name'))
+      <p class="alert">{{ $errors->first('name') }}</p>
+    @endif
   </div>
 </div>

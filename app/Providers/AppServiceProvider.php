@@ -12,6 +12,8 @@ use App\Repositories\PeriodRepositoryInterface;
 use App\Repositories\PeriodRepository;
 use App\Repositories\PositionRepositoryInterface;
 use App\Repositories\PositionRepository;
+use App\Repositories\SalaryRepositoryInterface;
+use App\Repositories\SalaryRepository;
 use App\Repositories\SelfCheckSheetRepositoryInterface;
 use App\Repositories\SelfCheckSheetRepository;
 use App\Repositories\UserRepositoryInterface;
@@ -28,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(OrganizationRepositoryInterface::class, OrganizationRepository::class);
         $this->app->bind(PeriodRepositoryInterface::class, PeriodRepository::class);
         $this->app->bind(PositionRepositoryInterface::class, PositionRepository::class);
+        $this->app->bind(SalaryRepositoryInterface::class, SalaryRepository::class);
         $this->app->bind(SelfCheckSheetRepositoryInterface::class, SelfCheckSheetRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }

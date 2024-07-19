@@ -6,6 +6,7 @@ use App\Http\Controllers\Master\Organization\DepartmentController;
 use App\Http\Controllers\Master\Organization\EmploymentController;
 use App\Http\Controllers\Master\Organization\GradeController;
 use App\Http\Controllers\Master\Organization\PositionController;
+use App\Http\Controllers\Master\Organization\SalaryController;
 
 // 部署・部門
 Route::group([
@@ -52,4 +53,15 @@ Route::group([
     Route::post('/edit/{grade}', [GradeController::class, 'update']);
     Route::delete('/edit/{grade}', [GradeController::class, 'destroy']);
 });
+
+// 号俸
+Route::group([
+    'prefix' => 'salary',
+    'as' => 'salary.',
+], function () {
+    Route::get('/add', [SalaryController::class, 'add'])->name('add');
+    Route::post('/add', [SalaryController::class, 'store']);
+    Route::get('/edit/{salary}', [SalaryController::class, 'edit'])->name('edit');
+    Route::post('/edit/{salary}', [SalaryController::class, 'update']);
+    Route::delete('/edit/{salary}', [SalaryController::class, 'destroy']);
 });
