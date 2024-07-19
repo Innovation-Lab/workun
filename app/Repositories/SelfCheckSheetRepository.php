@@ -2,12 +2,67 @@
 
 namespace App\Repositories;
 
-use App\Models\SelfCheckRating;
 use App\Models\SelfCheckSheet;
+use App\Models\SelfCheckRating;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
 {
+    /**
+     * @param Request $request
+     * @return Builder $query
+     */
+    public function search(Request $request): Builder
+    {
+        return SelfCheckSheet::query()
+            ->keyword($request->get('keyword'))
+            ->orderBy('self_check_sheets.id', 'desc');
+    }
+
+    /**
+     * @param Request $request
+     * @return SelfCheckSheet
+     * @throws Exception
+     */
+    public function create(Request $request): SelfCheckSheet
+    {
+        $self_check_sheet = new SelfCheckSheet();
+        $self_check_sheet->fill($request->all());
+        if (!$self_check_sheet->save()) {
+            throw new Exception("セルフチェックシートの作成に失敗しました。");
+        }
+        return $self_check_sheet;
+    }
+
+    /**
+     * @param SelfCheckSheet $self_check_sheet
+     * @param Request $request
+     * @return SelfCheckSheet
+     * @throws Exception
+     */
+    public function update(SelfCheckSheet $self_check_sheet, Request $request): SelfCheckSheet
+    {
+        $self_check_sheet = $self_check_sheet->fill($request->all());
+        if (!$self_check_sheet->update()) {
+            throw new Exception("セルフチェックシートの更新に失敗しました。");
+        }
+        return $self_check_sheet;
+    }
+
+    /**
+     * @param SelfCheckSheet $self_check_sheet
+     * @return void
+     * @throws Exception
+     */
+    public function delete(SelfCheckSheet $self_check_sheet): void
+    {
+        if (!$self_check_sheet->delete()) {
+            throw new Exception("セルフチェックシートの更新に失敗しました。");
+        }
+    }
+
     /**
      * @param User $user
      * @param string $term

@@ -8,7 +8,7 @@
         <div class="p-head">
           <p class="title">評価期間設定</p>
           <div class="action">
-            <a href="{{route('master.term.add')}}" class="c-button--add">
+            <a href="{{ route('master.term.add') }}" class="c-button--add">
               <svg width="12" height="12"><use xlink:href="#add_btn" /></svg>
             </a>
           </div>

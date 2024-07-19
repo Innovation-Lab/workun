@@ -27,4 +27,9 @@ class Organization extends Authenticatable
     protected $casts = [
         'access_key' => 'hashed',
     ];
+
+    public function periods()
+    {
+        return $this->hasMany(Period::class);
+    }
 }

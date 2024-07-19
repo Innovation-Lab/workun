@@ -45,7 +45,7 @@ class BaseController extends Controller
             'request' => $request,
             $plural => $this->repository
                 ->search($request)
-                ->organization($this->auth_user->id)
+                ->organization($this->auth_user->organization_id)
                 ->paginate(),
         ]);
     }

@@ -23,6 +23,14 @@ class SelfCheckSheet extends Model
         'check_days',
         'rating_days',
         'approval_days',
+        'user_id'
+    ];
+
+    const METHOD_TRUE_FALSE = 1;
+    const METHOD_FIVE_GRADE = 2;
+    const METHOD_LIST = [
+        self::METHOD_TRUE_FALSE => '○×評価',
+        self::METHOD_FIVE_GRADE => '5点評価',
     ];
 
     public function period()
@@ -40,10 +48,55 @@ class SelfCheckSheet extends Model
         return $this->hasMany(SelfCheckRating::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     protected function getDisplayTitleAttribute()
     {
         return data_get($this, 'period.name') . " | " . $this->title;
+    }
+
+    protected function getMethodLabelAttribute()
+    {
+        return data_get(self::METHOD_LIST, $this->method);
+    }
+
+    protected function getPeriodNameAttribute()
+    {
+        return data_get($this, 'period.name');
+    }
+
+    protected function getDisplayCreatedAttribute()
+    {
+        return date('Y.m.d', strtotime($this->created_at));
+    }
+
+    protected function scopeKeyword ($query, $keyword = null)
+    {
+        if ($keyword) {
+            // 全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($keyword, 's');
+            // 単語を半角スペースで区切り、配列にする
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+            $query->where(function ($q) use ($wordArraySearched) {
+                foreach ($wordArraySearched as $word) {
+                    $q->where('self_check_sheets.title', 'LIKE', "%{$word}%");
+                }
+            });
+        }
+        return $query;
+    }
+
+    protected function getUserFullNameAttribute()
+    {
+        return data_get($this, 'user.full_name');
+    }
+
+    protected function scopeOrganization ($query, $organization_id)
+    {
+        return $query->where('self_check_sheets.organization_id', $organization_id);
     }
 
     protected function scopeOnTerm($query, $term)

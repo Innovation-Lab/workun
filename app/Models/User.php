@@ -64,6 +64,11 @@ class User extends Authenticatable
         self::ROLE_ADMIN => '管理',
     ];
 
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
     public function departments()
     {
         return $this->hasManyThrough(
