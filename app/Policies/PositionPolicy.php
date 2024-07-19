@@ -37,7 +37,7 @@ class PositionPolicy
     public function update(User $user, Position $position): bool
     {
         return $this->view($user, $position) &&
-            $position->self_check_sheets()->count() === 0;
+            $position->users()->count() === 0;
     }
 
     /**

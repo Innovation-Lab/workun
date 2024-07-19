@@ -13,19 +13,27 @@
         </div>
       </div>
       <div class="p-page__body min">
-        <form method="POST" action="{{ route('master.organization.position.add') }}">
+        <form class="p-formBlock" method="post">
           @csrf
-          <div class="p-formBlock">
             <div class="p-formBlock__body">
               @include('master.organization.position._form')
             </div>
             <div class="p-formBlock__foot">
               <div class="p-formBlock__action">
-                <a href="{{route('master.organization.index')}}" class="c-button c-button--cancel c-button--sm u-w120">戻る</a>
-                <button class="c-button c-button--brandPrimary c-button--sm u-w220">役職を追加する</button>
+                <a
+                  href="{{route('master.organization.index')}}"
+                  class="c-button c-button--cancel c-button--sm u-w120"
+                >
+                  戻る
+                </a>
+                <button
+                  type="submit"
+                  class="c-button c-button--brandPrimary c-button--sm u-w220"
+                >
+                  役職を追加する
+                </button>
               </div>
             </div>
-          </div>
         </form>
       </div>
     </div>
