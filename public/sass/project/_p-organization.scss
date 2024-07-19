@@ -82,6 +82,18 @@
       &__body{
         background: #D0D6DC;
         padding: 48px 0 56px;
+        position: relative;
+      }
+    }
+    .c-button{
+      border-color: var(--main-accent);
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,0,.12);
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      &:hover{
+        box-shadow: none;
       }
     }
   }

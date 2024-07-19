@@ -239,7 +239,9 @@
             </p>
           </div>
           <div class="p-organization__body">
-            
+            <a href="{{route('master.organization.edit')}}" class="c-button c-button--lineAccent ">
+              <svg width="20" height="20"><use xlink:href="#organizational_chart_edit" /></svg>
+            </a>
           </div>
         </div>
       </div>

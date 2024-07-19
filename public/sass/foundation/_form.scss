@@ -43,6 +43,19 @@ textarea {
   &:not([readonly]):focus {
     outline: 1px solid var(--form-accent);
   }
+
+  &.primary{
+    border-color: var(--main-light);
+    background-color: var(--white);
+  }
+  &.gray{
+    border-color: rgba(21,41,75,.3);
+    background-color: var(--white);
+    &::placeholder {
+      color: #444;
+      opacity: .3;
+    }
+  }
 }
 
 // リードオンリー
@@ -76,10 +89,6 @@ select {
   background-position: right 10px center;
   background-repeat: no-repeat;
   cursor: pointer;
-  &.primary{
-    border-color: var(--main-light);
-    background-color: var(--white);
-  }
 }
 textarea {
   padding: .5em .75em;
@@ -121,19 +130,20 @@ label:has(input[type=radio], input[type=checkbox]) {
   }
 }
 
-// ラジオ
-label:has(input[type=radio]) {
+// ラジオ / チェックボックス(ラウンド)
+label:has(input[type=radio]),
+label.round:has(input[type=checkbox])  {
   $color1: 'none';
   $color2: '%23B9D4E6';
   $color3: 'none';
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="24" height="24" viewBox="x,y" fill="" stroke-width="1"><circle cx="12" cy="12" r="10" fill="#{$color1}" stroke="#{$color2}"/><circle cx="12" cy="12" r="3" fill="#{$color3}"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="24" height="24" viewBox="x,y" fill="" stroke-width="1"><circle cx="12" cy="12" r="10" fill="#{$color1}" stroke="#{$color2}"/><circle cx="12" cy="12" r="5" fill="#{$color3}"/></svg>');
 
   &:has(:checked) {
     // color1, color2はactive色
-    $color1: '%230A95C7';
+    $color1: 'none';
     $color2: '%230A95C7';
-    $color3: 'white';
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="24" height="24" viewBox="x,y" fill="" stroke-width="1"><circle cx="12" cy="12" r="10" fill="#{$color1}" stroke="#{$color2}"/><circle cx="12" cy="12" r="3" fill="#{$color3}"/></svg>');
+    $color3: '%230A95C7';
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" width="24" height="24" viewBox="x,y" fill="" stroke-width="1"><circle cx="12" cy="12" r="10" fill="#{$color1}" stroke="#{$color2}"/><circle cx="12" cy="12" r="5" fill="#{$color3}"/></svg>');
   }
 }
 
