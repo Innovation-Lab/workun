@@ -12,9 +12,9 @@ class LoginController extends Controller
      */
     public function index()
     {
-        $user = User::find(1);
-        Auth::login($user);
-        return redirect()->back();
-        //return redirect(config('url.retech_portal'));
+        if (Auth::check()) {
+            return  redirect()->to(route('home.index'));
+        }
+        return redirect(config('url.retech_portal') . "/login/workun");
     }
 }
