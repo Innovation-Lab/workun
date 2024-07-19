@@ -36,10 +36,11 @@ Route::group([
     'prefix' => 'employment',
     'as' => 'employment.',
 ], function () {
-    Route::get('/create', [EmploymentController::class, 'create'])->name('create');
-    Route::post('/create', [EmploymentController::class, 'store']);
-    Route::get('/edit', [EmploymentController::class, 'edit'])->name('edit');
-    Route::post('/edit', [EmploymentController::class, 'update']);
+    Route::get('/add', [EmploymentController::class, 'add'])->name('add');
+    Route::post('/add', [EmploymentController::class, 'store']);
+    Route::get('/edit/{employment}', [EmploymentController::class, 'edit'])->name('edit');
+    Route::post('/edit/{employment}', [EmploymentController::class, 'update']);
+    Route::delete('/edit/{employment}', [EmploymentController::class, 'destroy']);
 });
 
 // 等級

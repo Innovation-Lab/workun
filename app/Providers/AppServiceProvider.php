@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\UrlGenerator;
+use App\Repositories\EmploymentRepositoryInterface;
+use App\Repositories\EmploymentRepository;
 use App\Repositories\GradeRepositoryInterface;
 use App\Repositories\GradeRepository;
 use App\Repositories\OrganizationRepositoryInterface;
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->bind(EmploymentRepositoryInterface::class, EmploymentRepository::class);
         $this->app->bind(GradeRepositoryInterface::class, GradeRepository::class);
         $this->app->bind(OrganizationRepositoryInterface::class, OrganizationRepository::class);
         $this->app->bind(PeriodRepositoryInterface::class, PeriodRepository::class);

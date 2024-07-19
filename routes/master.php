@@ -28,10 +28,6 @@ Route::group([
     // Route::get('/edit/{organization}', [OrganizationController::class, 'edit'])->name('edit');
     // Route::post('/edit/{organization}', [OrganizationController::class, 'update']);
 
-    // 雇用形態
-    Route::view('/add/employment', 'master.organization.employment.add')->name('employment.add');
-    Route::view('/edit/employment', 'master.organization.employment.edit')->name('employment.edit');
-
     // 組織項目
     require base_path('routes/organization.php');
 });
