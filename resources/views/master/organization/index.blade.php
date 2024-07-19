@@ -229,7 +229,7 @@
           </div>
         </div>
         <!-- 組織図の作成 -->
-        <div class=" p-organization chart">
+        <div class="p-organization chart">
           <div class="p-organization__head">
             <p class="title">
               <span class="icon">
@@ -242,6 +242,8 @@
             <a href="{{route('master.organization.edit')}}" class="c-button c-button--lineAccent ">
               <svg width="20" height="20"><use xlink:href="#organizational_chart_edit" /></svg>
             </a>
+            <!-- 組織図 -->
+            @include('master.organization._chart')
           </div>
         </div>
       </div>

@@ -80,9 +80,12 @@
   &.chart {
     .p-organization{
       &__body{
-        background: #D0D6DC;
-        padding: 48px 0 56px;
+        background: #E6EAEE;
+        padding: 48px 16px 56px;
         position: relative;
+        overflow: auto;
+        max-height: 560px;
+        max-width: 100%;
       }
     }
     .c-button{
@@ -94,6 +97,230 @@
       right: 1rem;
       &:hover{
         box-shadow: none;
+      }
+    }
+  }
+  // 組織図結果表示
+  &Chart{
+    // 各階層のトップ
+    &__layer{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      &.layer3,
+      &.layer4{
+        .p-organizationChart__item{
+          width: 100%;
+        }
+      }
+      &.layer1{
+        gap: 0;
+        > .p-organizationChart__field{
+          padding-bottom: 32px;
+          position: relative;
+          &:before{
+            content: '';
+            width: 4px;
+            height: 32px;
+            background: #D0D6DC;
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%, 0);
+          }
+        }
+        > .p-organizationChart__underLayer{
+          gap: 0;
+        }
+        > * > .p-organizationChart__item{
+          background: #0F203E;
+          color: #fff;
+          padding: 4px 16px;
+          min-height: 48px;
+          min-width: 240px;
+          .name{
+            font-size: 18px;
+          }
+        }
+      }
+      &.layer2{
+        gap: 0px;
+        position: relative;
+        padding-block: 32px 0;
+        &:before,
+        &:after{
+          content: '';
+          height: 4px;
+          width: 50%;
+          background: #D0D6DC;
+          position: absolute;
+          top: 0; left: 0;
+        }
+        &:after{
+          left: auto; right: 0;
+        }
+        &:first-of-type{
+          &:before{
+            display: none;
+          }
+        }
+        &:last-of-type{
+          &:after{
+            display: none;
+          }
+        }
+        > .p-organizationChart__field{
+          position: relative;
+          &:before{
+            content: '';
+            width: 4px;
+            height: 32px;
+            background: #D0D6DC;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translate(-50%, -100%);
+          }
+        }
+        > .p-organizationChart__underLayer{
+          padding: 24px 8px 0;
+          gap: 0;
+          position: relative;
+          &:before{
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: #D0D6DC;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translate(-50%, 0);
+          }
+        }
+        > * > .p-organizationChart__item{
+          background: #fff;
+          color: #0F203E;
+          border: solid 1px #0F203E;
+          padding: 4px 16px;
+          min-height: 40px;
+          min-width: 200px;
+          .name{
+            font-size: 16px;
+          }
+        }
+      }
+      &.layer3{
+        gap: 0;
+        width: 100%;
+        padding: 24px 8px 0;
+        position: relative;
+        &:before,
+        &:after{
+          content: '';
+          height: 4px;
+          width: 50%;
+          background: #D0D6DC;
+          position: absolute;
+          top: 0; left: 0;
+        }
+        &:after{
+          left: auto; right: 0;
+        }
+        &:first-of-type{
+          &:before{
+            display: none;
+          }
+        }
+        &:last-of-type{
+          &:after{
+            display: none;
+          }
+        }
+        &:not(:has(> .p-organizationChart__field)){
+          .p-organizationChart__underLayer{
+            position: relative;
+            &:before{
+              content: '';
+              width: 4px;
+              height: 24px;
+              background: #D0D6DC;
+              position: absolute;
+              left: 50%;
+              top: -1px;
+              transform: translate(-50%, -100%);
+            }
+          }
+        }
+        > .p-organizationChart__field{
+          position: relative;
+          &:before{
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: #D0D6DC;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translate(-50%, -100%);
+          }
+        }
+        .p-organizationChart__underLayer{
+          flex-direction: column;
+          padding: 12px;
+          background: #fff;
+          border: solid 1px #0F203E;
+          width: 100%;
+          gap: 4px;
+        }
+        > * > .p-organizationChart__item{
+          background: #0F203E;
+          color: #fff;
+          padding: 4px 12px;
+          min-height: 32px;
+          .name{
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+          }
+        }
+      }
+      &.layer4{
+        > * > .p-organizationChart__item{
+          background: #AFBCD4;
+          color: #333F56;
+          min-height: 28px;
+          padding: 4px 8px;
+          min-width: 140px;
+          .name{
+            font-size: 12px;
+          }
+        }
+      }
+      
+    }
+    // 各下層のwrap
+    &__underLayer{
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+    }
+    // ボックスwrap
+    &__field{
+      width: 100%;
+      text-align: center;
+    }
+    // ボックス
+    &__item{
+      min-height: 32px;
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      background: #eee;
+      padding: 1rem;
+      //width: 100%;
+      .name{
+        font-weight: 600;
       }
     }
   }
