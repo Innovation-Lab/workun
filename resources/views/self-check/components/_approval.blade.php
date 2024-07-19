@@ -234,7 +234,7 @@
         @if(strstr($url,'confirm')){{-- 評価用 --}}
           <input type="submit" class="c-button--text" value="下書き保存する">
           <!-- <input type="submit" class="c-button c-button--primary u-w160" value="承認を依頼する"> -->
-          <a data-remodal-target="modal_approval" class="c-button c-button--primary u-w160">承認を依頼する</a>
+          <a data-remodal-target="modal_request" class="c-button c-button--primary u-w160">承認を依頼する</a>
         @elseif(strstr($url,'approval')){{-- 承認用 --}}
           <input type="submit" class="c-button--text" value="下書き保存する">
           <!-- <input type="submit" class="c-button c-button--primary u-w160" value="この結果を承認する"> -->

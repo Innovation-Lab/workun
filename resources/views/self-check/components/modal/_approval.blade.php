@@ -9,7 +9,7 @@
       <div class="p-formBlock__action">
         <button data-remodal-action="close" class="c-button c-button--cancel u-w120">キャンセル</button>
         <!-- <button class="c-button c-button--brandPrimary u-w130">承認する</button> -->
-        <a href="{{ route('self-check.result') }}" class="c-button c-button--brandPrimary u-w130">承認する</a>
+        <a href="{{ route('self-check.result') }}?flash=successEvaluate" class="c-button c-button--brandPrimary u-w130">承認する</a>
       </div>
     </form>
   </div>

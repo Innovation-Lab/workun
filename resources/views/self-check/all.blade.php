@@ -24,7 +24,7 @@
               <div class="p-search__wrap">
                 <div class="p-search__keyword">
                   <div class="p-input">
-                    <input type="search" placeholder="キーワード検索" value="" id="">
+                    <input type="search" placeholder="キーワード検索" value="">
                   </div>
                 </div>
                 <div class="p-search__action">
@@ -35,7 +35,7 @@
                         <svg width="12" height="12"><use xlink:href="#close" /></svg>
                       </button>
                     </div>
-                    <p class="c-button" data-remodal-target="modal_search">詳細検索</p>
+                    <a class="c-button" data-remodal-target="modal_search">詳細検索</a>
                   </div>
                   <button type="submit" class="c-button c-button--brandPrimary p-search__button">絞り込む</button>
                 </div>
@@ -125,5 +125,6 @@
       </div>
     </div>
   </div>
+  @include('self-check.components.modal._search')
 @endsection
     
