@@ -230,7 +230,6 @@
         height: 28px;
       }
       &__delete {
-        // display: block;
         width: 20px;
         height: 20px;
         display: flex;
@@ -263,7 +262,7 @@
       }
     }
     .c-scroll{
-      max-height: 240px;
+      max-height: 246px;
     }
     .c-button{
       &--large{
@@ -274,44 +273,41 @@
 
   // セルフチェックシート 項目
   &--sheetItem{
-    + *{
+    .p-formBlock__action{
+      border: none;
+      padding-block-start: 0 !important;
       margin-block-start: 10px;
+      &:has(.add-layer3){
+        margin-block-start: 6px;
+      }
     }
-    &Box{
-      + .p-inputField--sheetItemBox{
+    // 階層1
+    .layer1{
+      + .layer1{
         border-top: 1px solid #eee;
         padding-block-start: var(--spacing-xs);
         margin-block-start: var(--spacing-xs);
       }
-      .p-formBlock__action{
-        border: none;
-        padding-block-start: 0 !important;
-        margin-block-start: 10px;
-      }
-      // 階層1の削除ボタン
       &:first-child{
-        .layer1{
-          .p-formBlock__action{
-            .delete-layer1{
-              display: none;
-            }
+        .p-formBlock__action{
+          .delete-layer1{
+            display: none;
           }
-          .layer2-container{
-            &:has(.layer2){
-              + .p-formBlock__action{
-                .delete-layer1{
-                  display: block;
-                }
+        }
+        .layer2-container{
+          &:has(.layer2){
+            + .p-formBlock__action{
+              .delete-layer1{
+                display: block;
               }
             }
           }
         }
       }
     }
-    
     // 階層2
     .layer2{
-      padding-inline-start: 32px;
+      padding-inline-start: 1rem;
       margin-block-start: 10px;
       .layer3-container{
         &:has(.layer3){
@@ -323,7 +319,7 @@
     }
     // 階層3
     .layer3{
-      padding-inline-start: 48px;
+      padding-inline-start: 1rem;
       margin-block-start: 10px; 
     }
     // 共通
@@ -347,6 +343,14 @@
         display: grid;
         grid-template-columns: 0.65fr 1fr;
         gap: 6px 4px;
+        .video{
+          display: none;
+        }
+        &.active{
+          .video{
+            display: block;
+          }
+        }
       }
     }
   }
@@ -363,6 +367,15 @@
     line-height: 1;
     display: block;
     margin-block-end: 6px;
+    &.md{
+      font-size: 12px;
+    }
+    &.lg{
+      font-size: 13px;
+    }
+    &.navy{
+      color: var(--main);
+    }
   }
 
   // アラート
@@ -377,6 +390,14 @@
       padding: 10px;
       margin-block-start: 0;
       background: rgba(255,0,0,.02);
+    }
+  }
+
+  .p-tableBox__head{
+    min-height: 0;
+    margin-block-end: var(--spacing-2xs);
+    .label{
+      margin-block-end: 0;
     }
   }
 }

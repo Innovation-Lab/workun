@@ -42,6 +42,14 @@
           font-size: var(--font-2xs);
           font-weight: 600;
         }
+        &.min{
+          .number{
+            font-size: var(--font-md);
+          }
+          .unit{
+            font-size: var(--font-3xs);
+          }
+        }
       }
       .action{
         margin-left: auto;

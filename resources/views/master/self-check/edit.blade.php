@@ -2,7 +2,7 @@
 @section('title', 'セルフチェックシート 編集')
 @section('content')
   <div class="l-edit">
-    <div class="p-page p-page--term">
+    <div class="p-page p-page--selfCheck">
       <div class="p-page__head">
         <!-- ページタイトル -->
         <div class="p-head">
@@ -12,10 +12,11 @@
           <p class="title">セルフチェックシート 編集</p>
         </div>
       </div>
-      <div class="p-page__body min">
-        
-      </div>
+      <form class="p-page__body row2">
+        @include('master.self-check._form_layer')
+        @include('master.self-check._form_sheet')
+        @include('master.self-check.modal._alert_sheet')
+      </form>
     </div>
   </div>
 @endsection
-    
