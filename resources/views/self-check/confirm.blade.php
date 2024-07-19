@@ -1,5 +1,5 @@
 @extends('layout.layout--base')
-@section('title', 'セルフチェック-人事業務承認')
+@section('title', 'セルフチェック-人事業務評価')
 @section('content')
   <div class="l-index p-approval">
     <div class="p-page">
@@ -8,7 +8,7 @@
           <a href="javascript:history.back()" class="c-button__back">
             <svg width="20" height="20"><use xlink:href="#chevron_left" /></svg>
           </a>
-          セルフチェック承認
+          セルフチェック評価
         </h1>
       </div>
       <div class="p-page__body">
@@ -18,5 +18,4 @@
   </div>
   @include('self-check.components.modal._selfCheck')
   @include('self-check.components.modal._approval')
-
 @endsection
