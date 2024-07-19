@@ -9,7 +9,6 @@
       <form method="post">
         @csrf
         @method('delete')
-        <input type="hidden" name="_method" value="delete" />
         <button data-remodal-action="close" class="c-button c-button--cancel u-w130">キャンセル</button>
         <button
           type="submit"

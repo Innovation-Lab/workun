@@ -37,6 +37,7 @@ class SelfCheckSheetPolicy
     public function update(User $user, SelfCheckSheet $self_check_sheet): bool
     {
         return $this->view($user, $self_check_sheet) &&
+            $user->id === $self_check_sheet->user_id &&
             $self_check_sheet->self_check_ratings()->count() === 0 &&
             $self_check_sheet->self_check_sheet_targets()->count() === 0;
     }

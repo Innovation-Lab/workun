@@ -15,8 +15,9 @@ Route::group([
     Route::get('/', [SelfCheckController::class, 'index'])->name('index');
     Route::get('/add', [SelfCheckController::class, 'add'])->name('add');
     Route::post('/add', [SelfCheckController::class, 'store']);
-    Route::get('/edit', [SelfCheckController::class, 'edit'])->name('edit');
-    Route::post('/edit', [SelfCheckController::class, 'update']);
+    Route::get('/edit/{self_check_sheet}', [SelfCheckController::class, 'edit'])->name('edit');
+    Route::post('/edit/{self_check_sheet}', [SelfCheckController::class, 'update']);
+    Route::delete('/edit/{self_check_sheet}', [SelfCheckController::class, 'destroy']);
 });
 
 // 組織
