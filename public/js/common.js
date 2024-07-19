@@ -19,10 +19,9 @@ $(document).on('click', '.js-toggleMenu--button', function(){
 });
 
 // table tr　リンク
-$('tr[data-href]').click(function (e) {
-  if (!$(e.target).is('a')) {
-    window.location = $(e.target).data('href');
-  };
+$('[data-href]').on('click', function(e) {
+  const href = $(this).data('href');
+  window.location.href = href;
 });
 
 // チェックボックス 一括チェック

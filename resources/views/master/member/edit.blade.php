@@ -16,7 +16,7 @@
             <p class="title">部署設定</p>
           </div>
           <div class="p-formBlock__body">
-            @include('master.member._form')
+            <x-users.form-edit :$user/>
           </div>
         </div>
         <div class="p-formBlock min">

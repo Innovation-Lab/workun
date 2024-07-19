@@ -54,6 +54,16 @@ class User extends Authenticatable
         self::STATUS_LEAVED => '退会',
     ];
 
+    /** 権限 */
+    const ROLE_GENERAL = 1;
+    const ROLE_MANAGER = 2;
+    const ROLE_ADMIN = 9;
+    const ROLE_LIST = [
+        self::ROLE_GENERAL => '一般',
+        self::ROLE_MANAGER => 'マネージャー',
+        self::ROLE_ADMIN => '管理',
+    ];
+
     public function departments()
     {
         return $this->hasManyThrough(
