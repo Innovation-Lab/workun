@@ -12,7 +12,8 @@ class SelfCheckController extends Controller
      */
     public function index()
     {
-        return 'master-self-check';
+        return view('master.self-check.index');
+
     }
 
     /**
@@ -20,7 +21,7 @@ class SelfCheckController extends Controller
      */
     public function create()
     {
-        return 'master-self-check-create';
+        return view('master.self-check.add');
     }
 
     /**
@@ -36,7 +37,7 @@ class SelfCheckController extends Controller
      */
     public function edit()
     {
-        return 'master-self-check-edit';
+        return view('master.self-check.edit');
     }
 
     /**

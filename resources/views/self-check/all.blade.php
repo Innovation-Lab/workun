@@ -81,7 +81,7 @@
                 </thead>
                 <tbody>
                   @for($tableBody = 0; $tableBody < 20; $tableBody++)
-                    <tr data-href="">
+                    <tr data-href="{{ route('self-check.resultall') }}">
                       <td>
                         <div class="item">
                           第8期 | 基本挨拶、身だしなみセルフチェック表

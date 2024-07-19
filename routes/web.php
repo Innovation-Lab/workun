@@ -24,8 +24,10 @@ Route::group([
     Route::get('/answer', [SelfCheckController::class, 'answer'])->name('answer');
     Route::post('/answer', [SelfCheckController::class, 'update']);
     Route::get('/rating', [SelfCheckController::class, 'rating'])->name('rating');
+    Route::get('/confirm', [SelfCheckController::class, 'confirm'])->name('confirm');
     Route::get('/approval', [SelfCheckController::class, 'approval'])->name('approval');
     Route::get('/result', [SelfCheckController::class, 'result'])->name('result');
+    Route::get('/result/all', [SelfCheckController::class, 'resultall'])->name('resultall');
 });
 
 // マスター画面

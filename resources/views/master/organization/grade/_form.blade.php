@@ -8,14 +8,14 @@
   </div>
   <div class="p-inputField p-inputField--full row">
     <label class="label" for="">権限</label>
-    <select name="" id="" class="u-w190">
+    <select name="" id="" class="u-w190 primary">
       <option value="">権限を選択</option>
     </select>
     <p class="alert">役職の権限を選択してください</p>
   </div>
   <div class="p-inputField p-inputField--full row">
     <label class="label" for="">親役職の設定</label>
-    <select name="" id="" class="u-w190">
+    <select name="" id="" class="u-w190 primary">
       <option value="">親役職を選択</option>
     </select>
     <p class="alert">親役職を選択してください</p>

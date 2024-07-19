@@ -127,9 +127,9 @@
                       <td><div class="item">{{ $user->login_code }}</div></td>
                       <!-- 評価者/承認者 -->
                       <td><div class="item item--step">
-                          <p class="name">評価 : <span>山田 啓介</span></p>
-                          <p class="name">承認 : <span>佐々木 誠</span></p>
-                        </div></td>
+                        <p class="name">評価 : <span>山田 啓介</span></p>
+                        <p class="name">承認 : <span>佐々木 誠</span></p>
+                      </div></td>
                       <!-- 作成日 -->
                       <td class="u-tac"><div class="item">{{ $user->display_created }}</div></td>
                     </tr>

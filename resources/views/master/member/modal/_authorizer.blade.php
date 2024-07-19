@@ -7,13 +7,13 @@
   <div class="p-modal__middle">
     <div class="p-inputField">
       <label class="label" for="">部署</label>
-      <select name=""  class="u-w190">
+      <select name=""  class="u-w190 primary">
         <option value="">全て</option>
       </select>
     </div>
     <div class="p-inputField">
       <label class="label" for="">役職</label>
-      <select name=""  class="u-w140">
+      <select name=""  class="u-w140 primary">
         <option value="">全て</option>
       </select>
     </div>

@@ -2,7 +2,6 @@
   --border: #B9D4E6;
   --border-gray: #eee;
   --border-delete: #B4BDCB;
-
   text-align: left;
   display: inline-flex;
   flex-direction: column;
@@ -14,6 +13,15 @@
   border-top: 8px solid var(--main-accent);
   border-radius: var(--radius-sm);
   box-shadow: 0 40px 60px 0 rgba(21,46,85,.3);
+  &__selfCheck{
+    border-top: 8px solid var(--main-accent-green);
+    justify-content: space-between;
+    .p-modal{
+      &__head {
+        border-bottom: none;
+      }
+    }
+  }
   &__close {
     color: #9EB4C2;
     font-size: 11px;
@@ -163,6 +171,17 @@
         }
       }
     }
+  }
+}
+.p-check{
+  padding-inline: 1.25rem;
+  margin-block-end: 2.5rem;
+  &__account{
+    padding: .5rem;
+    border: 1px solid var(--main-accent);
+    border-radius:6px;
+    flex:auto;
+    background-color: var(--background-base);
   }
 }
 // 背景

@@ -57,27 +57,16 @@
               <td>
                 <div class="p-table__cell--wrapper">
                   <div class="u-flex sticky_4">
-                    <p class="c-txt__md c-txt__gray-600">3.2</p>
+                    <p class="c-txt__md c-txt__gray-400">3.2</p>
                     <p class="c-txt__md c-txt__weight--600">4.6</p>
                   </div>
                   <div class="p-table__cell">
+                    <?php for($p = 1; $p < 12; $p++){ ?>
                     <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
+                      <p class="c-txt__md c-txt__gray-400">3</p>
                       <p class="c-txt__md c-txt__weight--600">4</p>
                     </div>
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
+                    <?php }?>
                     <div class="u-flex"></div>
                   </div>
                 </div>
@@ -93,27 +82,16 @@
               <td>
                 <div class="p-table__cell--wrapper">
                   <div class="u-flex sticky_4">
-                    <p class="c-txt__md c-txt__gray-600">3.2</p>
+                    <p class="c-txt__md c-txt__gray-400">3.2</p>
                     <p class="c-txt__md c-txt__weight--600">4.6</p>
                   </div>
                   <div class="p-table__cell">
+                    <?php for($p = 1; $p < 12; $p++){ ?>
                     <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
+                      <p class="c-txt__md c-txt__gray-400">3</p>
                       <p class="c-txt__md c-txt__weight--600">4</p>
                     </div>
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
+                    <?php }?>
                     <div class="u-flex"></div>
                   </div>
                 </div>
@@ -129,27 +107,16 @@
               <td>
                 <div class="p-table__cell--wrapper">
                   <div class="u-flex sticky_4">
-                    <p class="c-txt__md c-txt__gray-600">3.2</p>
+                    <p class="c-txt__md c-txt__gray-400">3.2</p>
                     <p class="c-txt__md c-txt__weight--600">4.6</p>
                   </div>
                   <div class="p-table__cell">
+                    <?php for($p = 1; $p < 12; $p++){ ?>
                     <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
+                      <p class="c-txt__md c-txt__gray-400">3</p>
                       <p class="c-txt__md c-txt__weight--600">4</p>
                     </div>
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
+                    <?php }?>
                     <div class="u-flex"></div>
                   </div>
                 </div>
@@ -168,27 +135,16 @@
               <td>
                 <div class="p-table__cell--wrapper">
                   <div class="u-flex sticky_4">
-                    <p class="c-txt__md c-txt__gray-600">3.2</p>
+                    <p class="c-txt__md c-txt__gray-400">3.2</p>
                     <p class="c-txt__md c-txt__weight--600">4.6</p>
                   </div>
                   <div class="p-table__cell">
+                    <?php for($p = 1; $p < 12; $p++){ ?>
                     <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
+                      <p class="c-txt__md c-txt__gray-400">3</p>
                       <p class="c-txt__md c-txt__weight--600">4</p>
                     </div>
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
+                    <?php }?>
                     <div class="u-flex"></div>
                   </div>
                 </div>
@@ -205,27 +161,16 @@
               <td>
                 <div class="p-table__cell--wrapper">
                   <div class="u-flex sticky_4">
-                    <p class="c-txt__md c-txt__gray-600">3.2</p>
+                    <p class="c-txt__md c-txt__gray-400">3.2</p>
                     <p class="c-txt__md c-txt__weight--600">4.6</p>
                   </div>
                   <div class="p-table__cell">
+                    <?php for($p = 1; $p < 12; $p++){ ?>
                     <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
+                      <p class="c-txt__md c-txt__gray-400">3</p>
                       <p class="c-txt__md c-txt__weight--600">4</p>
                     </div>
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
+                    <?php }?>
                     <div class="u-flex"></div>
                   </div>
                 </div>
@@ -241,136 +186,16 @@
               <td>
                 <div class="p-table__cell--wrapper">
                   <div class="u-flex sticky_4">
-                    <p class="c-txt__md c-txt__gray-600">3.2</p>
+                    <p class="c-txt__md c-txt__gray-400">3.2</p>
                     <p class="c-txt__md c-txt__weight--600">4.6</p>
                   </div>
                   <div class="p-table__cell">
+                    <?php for($p = 1; $p < 12; $p++){ ?>
                     <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
+                      <p class="c-txt__md c-txt__gray-400">3</p>
                       <p class="c-txt__md c-txt__weight--600">4</p>
                     </div>
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"></div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th rowspan="3" class="u-w100 sticky_1">チーム活性化行動</th>
-              <th class="u-w140 sticky_2">組織開発</th>
-              <th class="u-w300 sticky_3">
-                <p class="c-txt__xs">
-                  組織ビジョン、GOFAN、目標をチームに浸透させ、チーム全員で 実行、成果を達成することをマネジメントできていたか？
-                </p>
-              </th>
-              <td>
-                <div class="p-table__cell--wrapper">
-                  <div class="u-flex sticky_4">
-                    <p class="c-txt__md c-txt__gray-600">3.2</p>
-                    <p class="c-txt__md c-txt__weight--600">4.6</p>
-                  </div>
-                  <div class="p-table__cell">
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"></div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th class="u-w140 sticky_2">人材育成力</th>
-              <th class="u-w300 sticky_3">
-                <p class="c-txt__xs">
-                  組織ビジョン、GOFAN、目標をチームに浸透させ、チーム全員で 実行、成果を達成することをマネジメントできていたか？
-                </p>
-              </th>
-              <td>
-                <div class="p-table__cell--wrapper">
-                  <div class="u-flex sticky_4">
-                    <p class="c-txt__md c-txt__gray-600">3.2</p>
-                    <p class="c-txt__md c-txt__weight--600">4.6</p>
-                  </div>
-                  <div class="p-table__cell">
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"></div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th class="u-w140 sticky_2">育成（業務分担書）</th>
-              <th class="u-w300 sticky_3">
-                <p class="c-txt__xs">
-                  組織ビジョン、GOFAN、目標をチームに浸透させ、チーム全員で 実行、成果を達成することをマネジメントできていたか？
-                </p>
-              </th>
-              <td>
-                <div class="p-table__cell--wrapper">
-                  <div class="u-flex sticky_4">
-                    <p class="c-txt__md c-txt__gray-600">3.2</p>
-                    <p class="c-txt__md c-txt__weight--600">4.6</p>
-                  </div>
-                  <div class="p-table__cell">
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__gray-600">3</p>
-                      <p class="c-txt__md c-txt__weight--600">4</p>
-                    </div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
-                    <div class="u-flex"><p class="c-txt__md c-txt__gray-600">3</p><p class="c-txt__md c-txt__weight--600">4</p></div>
+                    <?php }?>
                     <div class="u-flex"></div>
                   </div>
                 </div>

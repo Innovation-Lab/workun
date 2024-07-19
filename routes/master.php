@@ -13,8 +13,8 @@ Route::group([
     'as' => 'self-check.',
 ], function () {
     Route::get('/', [SelfCheckController::class, 'index'])->name('index');
-    Route::get('/create', [SelfCheckController::class, 'create'])->name('create');
-    Route::post('/create', [SelfCheckController::class, 'store']);
+    Route::get('/add', [SelfCheckController::class, 'create'])->name('add');
+    Route::post('/add', [SelfCheckController::class, 'store']);
     Route::get('/edit', [SelfCheckController::class, 'edit'])->name('edit');
     Route::post('/edit', [SelfCheckController::class, 'update']);
 });
