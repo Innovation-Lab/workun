@@ -15,6 +15,9 @@ use Illuminate\View\View;
 class BaseController extends Controller
 {
     protected string $directory = "";
+    // 追加した時のリダイレクト先を指定
+    protected string $redirect_after_addition = "";
+    protected string $redirect_after_delete = "";
     protected string $model_name = "";
     protected $model;
     protected $repository;
@@ -109,9 +112,14 @@ class BaseController extends Controller
         }
         DB::commit();
 
-        $edit_route = str_replace("/", ".", $this->directory) . ".edit";
+        $route = str_replace("/", ".", $this->directory) . ".edit";
+        // リダイレクト先が指定されている場合
+        if ($this->redirect_after_addition) {
+            $route = str_replace("/", ".", $this->redirect_after_addition);
+        }
+
         return redirect()
-            ->route($edit_route, $entity)
+            ->route($route, $entity)
             ->with('success', '更新しました。');
     }
 
@@ -193,9 +201,13 @@ class BaseController extends Controller
         }
         DB::commit();
 
-        $index_route = str_replace("/", ".", $this->directory) . ".index";
+        $route = str_replace("/", ".", $this->directory) . ".index";
+        // リダイレクト先が指定されている場合
+        if ($this->redirect_after_delete) {
+            $route = str_replace("/", ".", $this->redirect_after_delete);
+        }
         return redirect()
-            ->route($index_route)
+            ->route($route)
             ->with('success', '削除しました。');
     }
 

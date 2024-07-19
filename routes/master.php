@@ -28,10 +28,6 @@ Route::group([
     // Route::get('/edit/{organization}', [OrganizationController::class, 'edit'])->name('edit');
     // Route::post('/edit/{organization}', [OrganizationController::class, 'update']);
 
-    // 役職
-    Route::view('/add/position', 'master.organization.position.add')->name('position.add');
-    Route::view('/edit/position', 'master.organization.position.edit')->name('position.edit');
-
     // 等級
     Route::view('/add/grade', 'master.organization.grade.add')->name('grade.add');
     Route::view('/edit/grade', 'master.organization.grade.edit')->name('grade.edit');
@@ -44,6 +40,7 @@ Route::group([
     Route::view('/add/employment', 'master.organization.employment.add')->name('employment.add');
     Route::view('/edit/employment', 'master.organization.employment.edit')->name('employment.edit');
 
+    // 組織項目
     require base_path('routes/organization.php');
 });
 

@@ -2,40 +2,13 @@
 
 namespace App\Http\Controllers\Master\Organization;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
-class PositionController extends Controller
+class PositionController extends BaseController
 {
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return 'master-organization-position-create';
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit()
-    {
-        return 'master-organization-position-edit';
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
-    {
-        //
-    }
+    protected string $directory = "master/organization/position";
+    protected string $redirect_after_addition = "master/organization.index";
+    protected string $redirect_after_delete = "master/organization.index";
+    protected string $model_name = "position";
 }

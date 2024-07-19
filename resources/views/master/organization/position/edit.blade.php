@@ -13,23 +13,26 @@
         </div>
       </div>
       <div class="p-page__body min">
-        <form class="p-formBlock">
-          <div class="p-formBlock__body">
-            @include('master.organization.position._form')
-          </div>
-          <div class="p-formBlock__middle u-tar">
-            <button data-remodal-target="modal_delete" class="c-button--text">この項目を削除する</button>
-          </div>
-          <div class="p-formBlock__foot">
-            <div class="p-formBlock__action">
-              <a href="{{route('master.organization.index')}}" class="c-button c-button--cancel c-button--sm u-w120">戻る</a>
-              <button class="c-button c-button--brandPrimary c-button--sm u-w220">役職を変更する</button>
+        <form method="POST" action="{{ route('master.organization.position.edit', $position) }}">
+          @csrf
+          <div class="p-formBlock">
+            <div class="p-formBlock__body">
+              @include('master.organization.position._form')
+            </div>
+            <div class="p-formBlock__middle u-tar">
+              <button data-remodal-target="modal_delete" class="c-button--text">この項目を削除する</button>
+            </div>
+            <div class="p-formBlock__foot">
+              <div class="p-formBlock__action">
+                <a href="{{route('master.organization.index')}}" class="c-button c-button--cancel c-button--sm u-w120">戻る</a>
+                <button class="c-button c-button--brandPrimary c-button--sm u-w220">役職を変更する</button>
+              </div>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-  
+
   @include('master.organization.position.modal._delete')
 @endsection

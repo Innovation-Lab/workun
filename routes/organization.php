@@ -23,10 +23,11 @@ Route::group([
     'prefix' => 'position',
     'as' => 'position.',
 ], function () {
-    Route::get('/create', [PositionController::class, 'create'])->name('create');
-    Route::post('/create', [PositionController::class, 'store']);
-    Route::get('/edit', [PositionController::class, 'edit'])->name('edit');
-    Route::post('/edit', [PositionController::class, 'update']);
+    Route::get('/add', [PositionController::class, 'add'])->name('add');
+    Route::post('/add', [PositionController::class, 'store']);
+    Route::get('/edit/{position}', [PositionController::class, 'edit'])->name('edit');
+    Route::post('/edit/{position}', [PositionController::class, 'update']);
+    Route::delete('/edit/{position}', [PositionController::class, 'destroy']);
 });
 
 // 雇用形態
