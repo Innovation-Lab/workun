@@ -28,10 +28,6 @@ Route::group([
     // Route::get('/edit/{organization}', [OrganizationController::class, 'edit'])->name('edit');
     // Route::post('/edit/{organization}', [OrganizationController::class, 'update']);
 
-    // 等級
-    Route::view('/add/grade', 'master.organization.grade.add')->name('grade.add');
-    Route::view('/edit/grade', 'master.organization.grade.edit')->name('grade.edit');
-
     // 号俸
     Route::view('/add/salary', 'master.organization.salary.add')->name('salary.add');
     Route::view('/edit/salary', 'master.organization.salary.edit')->name('salary.edit');

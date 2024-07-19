@@ -46,8 +46,10 @@ Route::group([
     'prefix' => 'grade',
     'as' => 'grade.',
 ], function () {
-    Route::get('/create', [GradeController::class, 'create'])->name('create');
-    Route::post('/create', [GradeController::class, 'store']);
-    Route::get('/edit', [GradeController::class, 'edit'])->name('edit');
-    Route::post('/edit', [GradeController::class, 'update']);
+    Route::get('/add', [GradeController::class, 'add'])->name('add');
+    Route::post('/add', [GradeController::class, 'store']);
+    Route::get('/edit/{grade}', [GradeController::class, 'edit'])->name('edit');
+    Route::post('/edit/{grade}', [GradeController::class, 'update']);
+    Route::delete('/edit/{grade}', [GradeController::class, 'destroy']);
+});
 });

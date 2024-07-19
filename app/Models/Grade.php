@@ -19,4 +19,9 @@ class Grade extends Model
         'name',
         'seq',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
