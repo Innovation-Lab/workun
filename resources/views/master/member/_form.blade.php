@@ -1,34 +1,34 @@
 <form class="p-formBlock__form">
   <div class="p-inputField">
-    <label class="label" for="">部署</label>
+    <label class="label" >部署</label>
     <select name="" id="">
       <option value="">部署を選択</option>
     </select>
     <p class="alert">部署を選択してください</p>
   </div>
   <div class="p-inputField">
-    <label class="label" for="">役職</label>
+    <label class="label" >役職</label>
     <select name="" id="">
       <option value="">役職を選択</option>
     </select>
     <p class="alert">役職を選択してください</p>
   </div>
   <div class="p-inputField">
-    <label class="label" for="">等級</label>
+    <label class="label" >等級</label>
     <select name="" id="">
       <option value="">等級を選択</option>
     </select>
     <p class="alert">等級を選択してください</p>
   </div>
   <div class="p-inputField">
-    <label class="label" for="">雇用形態</label>
+    <label class="label" >雇用形態</label>
     <select name="" id="">
       <option value="">雇用形態を選択</option>  
     </select>
     <p class="alert">雇用形態を選択してください</p>
   </div>
   <div class="p-inputField">
-    <label class="label" for="">評価者</label>
+    <label class="label" >評価者</label>
     <div class="p-inputField--userSelect">
       <div class="p-user">
         <input type="hidden">
@@ -47,7 +47,7 @@
     </div>
   </div>
   <div class="p-inputField">
-    <label class="label" for="">承認者</label>
+    <label class="label" >承認者</label>
     <div class="p-inputField--userSelect">
       <div class="p-user">
         <input type="hidden">
@@ -66,14 +66,14 @@
     </div>
   </div>
   <div class="p-inputField">
-    <label class="label" for="">アカウント権限</label>
+    <label class="label" >アカウント権限</label>
     <select name="" id="">
       <option value="">等級を選択</option>
     </select>
     <p class="alert">アカウント権限を選択してください</p>
   </div>
   <div class="p-inputField p-inputField--textarea">
-    <label class="label" for="">わーくんメモ</label>
+    <label class="label" >わーくんメモ</label>
     <textarea name="" id="" placeholder="わーくんメモを記入"></textarea>
   </div>
   <div class="p-formBlock__action">

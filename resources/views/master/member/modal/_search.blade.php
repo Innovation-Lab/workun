@@ -6,7 +6,7 @@
     closeOnOutsideClick: false,
     appendTo: #search_form
   "
-  >
+>
   <button data-remodal-action="close" class="remodal-close p-modal__close">閉じる</button>
   <div class="p-modal__head">
     <p class="title">詳細検索</p>
@@ -50,7 +50,7 @@
         </select>
       </div>
       <div class="p-inputField p-inputField--full">
-        <span class="label" for="">表示条件</span>
+        <span class="label" >表示条件</span>
         <div class="p-inputField--checkbox">
           <label for="display_format" class="tab tab--ghost">
             <input type="checkbox" id="display_format" name="" value="">評価者 / 承認者 の未登録ユーザーのみを表示

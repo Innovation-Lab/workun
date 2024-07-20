@@ -25,3 +25,66 @@
     background: var(--assessment);
   }
 }
+// 下層用ステータス
+.status{
+  &--1{
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--status-1);
+    &:before{
+      content: '';
+      height:.75rem;
+      width:.75rem;
+      outline: 4px solid var(--status-1);
+      outline-offset: -4px;
+      border-radius:50%;
+      display: inline-block;
+      margin:0 4px -1px 0;
+    }
+  }
+  &--2{
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--status-2);
+    &:before{
+      content: '';
+      height:.75rem;
+      width:.75rem;
+      outline: 4px solid var(--status-2);
+      outline-offset: -4px;
+      border-radius:50%;
+      display: inline-block;
+      margin:0 4px -1px 0;
+    }
+  }
+  &--3{
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--status-3);
+    &:before{
+      content: '';
+      height:.75rem;
+      width:.75rem;
+      outline: 4px solid var(--status-3);
+      outline-offset: -4px;
+      border-radius:50%;
+      display: inline-block;
+      margin:0 4px -1px 0;
+    }
+  }
+  &--4{
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--status-4);
+    &:before{
+      content: '';
+      height:.75rem;
+      width:.75rem;
+      outline: 4px solid var(--status-4);
+      outline-offset: -4px;
+      border-radius:50%;
+      display: inline-block;
+      margin:0 4px -1px 0;
+    }
+  }
+}

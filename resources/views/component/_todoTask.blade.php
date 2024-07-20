@@ -5,9 +5,15 @@
       <p class="title">TODO</p>
       <p class="desc">以下のタスクを完了させましょう</p>
     </div>
+    <?php
+        $url = $_SERVER['REQUEST_URI'];
+    ?>
+    @if(!strstr($url,'self-check'))
     <div class="p-todo__action">
       <a href="" class="c-button c-button--brandPrimary">全ての人事業務を評価</a>
     </div>
+    @else
+    @endif
   </div>
   <div class="p-todo__body">
     @foreach ([
@@ -22,7 +28,7 @@
         @if($key == 0)
         <!-- 下書き中 / 未登録アラート -->
         <li class="p-todo__item p-todo__item--alert">
-          <a href=""></a>
+          <a href="{{ route('self-check.answer') }}"></a>
           <span class="date">2024.12.01 - 2024.12.08</span>
           <div class="mainInfo">
             <span class="c-status c-status--paused">下書き</span>

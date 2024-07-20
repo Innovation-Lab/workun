@@ -1,0 +1,40 @@
+
+.u{
+  &-flex{
+    display:flex;
+  }
+  &-auto{
+    flex:auto;
+  }
+  &-align {
+    display:flex;
+    flex-wrap:wrap;
+    align-items: center;
+    gap: 1rem;
+    // 縦並び
+    &--horizontal {
+      @extend .u-align;
+      flex-direction: column;
+    }
+    // 中央よせ
+    &--center {
+      @extend .u-align;
+      justify-content: center;
+    }
+    &--start {
+      @extend .u-align;
+      justify-content: flex-start;
+    }
+    &--end {
+      @extend .u-align;
+      justify-content: flex-end;
+    }
+    &--bottom{
+      @extend .u-align;
+      align-items: flex-end;
+    }
+  }
+}
+.between{
+  justify-content: space-between;
+}

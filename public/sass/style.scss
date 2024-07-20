@@ -32,9 +32,21 @@
 // スクロール
 @use "component/_c-scroll.scss"; 
 
+// ボックス
+@use "component/_c-box.scss"; 
+
+// タブ
+@use "component/_c-tab.scss";
+
+// テキスト
+@use "component/_c-text.scss"; 
+
 // ユーティリティ
 @use "utility/_u-textAlign.scss"; 
 @use "utility/_u-width.scss"; 
+@use "utility/_u-flex.scss"; 
+@use "utility/_u-gap.scss"; 
+@use "utility/_u-padding.scss"; 
 
 // ページタイトル
 @use "project/_p-head.scss"; 
@@ -99,3 +111,8 @@
 @use "project/_p-todo.scss";
 // クラスコ連携サービス
 @use "project/_p-crascoService.scss";
+
+// セルフチェック --------------------
+// layout
+@use "layout/_l-index.scss"; 
+// project
