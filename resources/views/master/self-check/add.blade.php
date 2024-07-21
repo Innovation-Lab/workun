@@ -12,7 +12,7 @@
           <p class="title">セルフチェックシート 新規作成</p>
         </div>
       </div>
-      <x-self-check-sheet.form-edit :self_check_sheet="$selfCheckSheet" />
+      <x-self-check-sheet.form-edit :selfCheckSheet="$selfCheckSheet" />
     </div>
   </div>
 @endsection

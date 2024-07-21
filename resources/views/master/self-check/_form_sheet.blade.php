@@ -3,51 +3,74 @@
     <div class="p-formBlock__form spance_min">
       <div class="p-inputField p-inputField--full">
         <label class="label md navy" >シートタイトル</label>
-        <input type="text" value="" placeholder="シートタイトルを記入してください">
-        <p class="alert">シートタイトルを記入してください</p>
+        <input
+          type="text"
+          name="title"
+          value="{{ old('title', $selfCheckSheet->title) }}"
+          placeholder="シートタイトルを記入してください"
+        >
+        <x-form.alert type="title" />
       </div>
       <div class="p-inputField p-inputField--full">
         <label class="label md navy" >評価期間</label>
-        <select name="" id="">
-          <option value="">評価期間を選択</option>
-        </select>
-        <p class="alert">評価期間を選択してください</p>
+        <x-form.select
+          id=""
+          class=""
+          name="period_id"
+          empty="評価期間を選択"
+          :selects="$period_list"
+          :value="old('period_id', $selfCheckSheet->period_id)"
+        />
+        <x-form.alert type="period_id" />
       </div>
       <div class="p-inputField p-inputField--full">
         <label class="label md navy" >評価方法</label>
-        <select name="" id="" class="u-w140">
-          <option value="">評価方法を選択</option>
-        </select>
-        <p class="alert">評価方法を選択してください</p>
-      </div>  
-      <hr>
-      <div class="p-inputField p-inputField--full">
-        <label class="label md navy" >タスク通知</label>
-        <select name="" id="">
-          <option value="">タスク通知を選択</option>
-        </select>
-        <p class="alert">タスク通知を選択してください</p>
+        <x-form.select
+          id=""
+          class="u-w140"
+          name="method"
+          empty=""
+          :selects="$method_list"
+          :value="old('method', $selfCheckSheet->method)"
+        />
+        <x-form.alert type="method" />
       </div>
+      <hr>
       <div class="p-inputField">
         <label class="label md navy" >入力期限</label>
-        <select name="" id="">
-          <option value="">入力期限を選択</option>
-        </select>
-        <p class="alert">入力期限を選択してください</p>
+        <x-form.select
+          id=""
+          class="u-w140"
+          name="check_days"
+          empty="入力期限を選択"
+          :selects="$day_list"
+          :value="old('check_days', $selfCheckSheet->check_days)"
+        />
+        <x-form.alert type="check_days" />
       </div>
       <div class="p-inputField left">
         <label class="label md navy" >評価期限</label>
-        <select name="" id="">
-          <option value="">評価期限を選択</option>
-        </select>
-        <p class="alert">評価期限を選択してください</p>
+        <x-form.select
+          id=""
+          class="u-w140"
+          name="rating_days"
+          empty="評価期限を選択"
+          :selects="$day_list"
+          :value="old('rating_days', $selfCheckSheet->rating_days)"
+        />
+        <x-form.alert type="rating_days" />
       </div>
       <div class="p-inputField">
         <label class="label md navy" >承認期限</label>
-        <select name="" id="">
-          <option value="">承認期限を選択</option>
-        </select>
-        <p class="alert">承認期限を選択してください</p>
+        <x-form.select
+          id=""
+          class="u-w140"
+          name="approval_days"
+          empty="承認期限を選択"
+          :selects="$day_list"
+          :value="old('approval_days', $selfCheckSheet->approval_days)"
+        />
+        <x-form.alert type="approval_days" />
       </div>
       <div class="p-inputField p-inputField--full">
         <div class="p-tableBox__head between u-p0">
@@ -63,7 +86,7 @@
           </div>
           --}}
         </div>
-       
+
         <div class="p-inputField--userSelect">
           <div data-remodal-target="modal_tergeter" class="c-button c-button--large">対象者を選択</div>
           {{-- 対象者を選択したら表示されるテーブル
@@ -100,7 +123,7 @@
                           <div class="name">酒井 雄輝</div>
                         </div>
                       </div>
-                    </div></td>          
+                    </div></td>
                     <!-- 部署 -->
                     <td><div class="item">売買の窓口</div></td>
                   </tr>
@@ -109,7 +132,6 @@
             </table>
           </div>
           --}}
-          <p class="alert">対象者を登録してください</p>
         </div>
         @include('master.self-check.modal._tergeter')
       </div>

@@ -27,6 +27,15 @@ class SelfCheckSheet extends Model
         'user_id'
     ];
 
+    const HIERARCHY_SINGLE = 1;
+    const HIERARCHY_TWICE = 2;
+    const HIERARCHY_TRIPLE = 3;
+    const HIERARCHY_LIST = [
+        self::HIERARCHY_TRIPLE => '3階層',
+        self::HIERARCHY_TWICE => '2階層',
+        self::HIERARCHY_SINGLE => '1階層',
+    ];
+
     const METHOD_TRUE_FALSE = 1;
     const METHOD_FIVE_GRADE = 2;
     const METHOD_LIST = [
@@ -47,6 +56,11 @@ class SelfCheckSheet extends Model
     public function self_check_ratings()
     {
         return $this->hasMany(SelfCheckRating::class);
+    }
+
+    public function self_check_sheet_items()
+    {
+        return $this->hasMany(SelfCheckSheetItem::class);
     }
 
     public function user()
@@ -74,6 +88,11 @@ class SelfCheckSheet extends Model
         return date('Y.m.d', strtotime($this->created_at));
     }
 
+    protected function getHierarchyLabelAttribute()
+    {
+        return data_get(self::HIERARCHY_LIST, $this->hierarchy);
+    }
+
     protected function scopeKeyword ($query, $keyword = null)
     {
         if ($keyword) {
@@ -88,6 +107,15 @@ class SelfCheckSheet extends Model
             });
         }
         return $query;
+    }
+
+    public function getFirstSelfCheckSheetItemsAttribute()
+    {
+        return $this
+            ->self_check_sheet_items()
+            ->firstHierarchy()
+            ->orderBy('self_check_sheet_items.id')
+            ->get();
     }
 
     protected function getUserFullNameAttribute()

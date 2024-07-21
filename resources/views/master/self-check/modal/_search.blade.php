@@ -11,19 +11,14 @@
     <div class="p-formBlock__form">
       <div class="p-inputField p-inputField--full">
         <label class="label" for="">評価期間</label>
-        <select name="period_id" class="primary">
-          <option value="">評価期間を選択</option>
-          @foreach($period_list as $period_key => $period_label)
-            <option
-              value="{{ $period_key }}"
-              @if($period_key == request('period_id'))
-                selected
-              @endif
-            >
-              {{ $period_label }}
-            </option>
-          @endforeach
-        </select>
+        <x-form.select
+          id=""
+          class="primary"
+          name="period_id"
+          empty="評価期間を選択"
+          :selects="$period_list"
+          :value="request('period_id')"
+        />
       </div>
 {{--      <div class="p-inputField">--}}
 {{--        <label class="label" for="">部署</label>--}}
