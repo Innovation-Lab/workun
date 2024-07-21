@@ -8,7 +8,12 @@
   @endif
 >
   <label class="label md navy layer--label" for="">階層2</label>
-  <div class="layer--item ">
+  <div
+    class="layer--item"
+    @if($hierarchy < \App\Models\SelfCheckSheetItem::HIERARCHY_SECOND)
+      style="display: none;"
+    @endif
+  >
     <input
       type="text"
       name="self_check_sheet_items[{{ $first_index }}][self_check_sheet_items][{{ $second_index }}][title]"
@@ -22,6 +27,7 @@
     <div class="list">
       @foreach(data_get($second_self_check_sheet_item, 'third_self_check_sheet_items', []) as $third_self_check_sheet_item)
         @include('master.self-check._third', [
+          'hierarchy' => $hierarchy,
           'first_index' => $first_index,
           'second_index' => $second_index,
           'third_index' => $loop->index,

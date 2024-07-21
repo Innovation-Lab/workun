@@ -175,8 +175,43 @@
     // });
   });
 
+  function addFirst(self)
+  {
+    let hierarchy = $('[name=hierarchy]').val()
+    let container = $(self).parents('.layer1-container')
+    let first_index = $(container).find('.layer1').length
+    $.ajax({
+      url:'{{ route('master.self-check._loadFirst') }}',
+      type:'GET',
+      data:{
+        'hierarchy': hierarchy,
+        'first_index': first_index,
+      }
+    })
+      .done(function (data) {
+        container.children('.list').append(data)
+      })
+      .fail(function () {
+        alert('エラーが発生しました。')
+      })
+  }
+
+  function deleteFirst(self)
+  {
+    let third_index = $(self).parents('.layer1-container').find('.layer1:not(.delete)').length
+    if (third_index < 2) {
+      alert("階層1は１つ以上必要です。")
+    } else {
+      let layer = $(self).parents('.layer1')
+      layer.find('.delete').val(1)
+      layer.addClass('delete')
+      layer.hide()
+    }
+  }
+
   function addSecond(self)
   {
+    let hierarchy = $('[name=hierarchy]').val()
     let first_index = $(self).parents('.layer1').data('index')
     let container = $(self).parents('.layer2-container')
     let second_index = $(container).find('.layer2').length
@@ -184,6 +219,7 @@
       url:'{{ route('master.self-check._loadSecond') }}',
       type:'GET',
       data:{
+        'hierarchy': hierarchy,
         'first_index': first_index,
         'second_index': second_index,
       }
@@ -211,6 +247,7 @@
 
   function addThird(self)
   {
+    let hierarchy = $('[name=hierarchy]').val()
     let first_index = $(self).parents('.layer1').data('index')
     let second_index = $(self).parents('.layer2').data('index')
     let container = $(self).parents('.layer3-container')
@@ -219,6 +256,7 @@
         url:'{{ route('master.self-check._loadThird') }}',
         type:'GET',
         data:{
+          'hierarchy': hierarchy,
           'first_index': first_index,
           'second_index': second_index,
           'third_index': third_index,
