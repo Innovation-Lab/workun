@@ -18,6 +18,9 @@ Route::group([
     Route::get('/edit/{self_check_sheet}', [SelfCheckController::class, 'edit'])->name('edit');
     Route::post('/edit/{self_check_sheet}', [SelfCheckController::class, 'update']);
     Route::delete('/edit/{self_check_sheet}', [SelfCheckController::class, 'destroy']);
+
+    Route::get('/_loadSecond', [SelfCheckController::class, '_loadSecond'])->name('_loadSecond');
+    Route::get('/_loadThird', [SelfCheckController::class, '_loadThird'])->name('_loadThird');
 });
 
 // 組織

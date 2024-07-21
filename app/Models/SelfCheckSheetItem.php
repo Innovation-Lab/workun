@@ -24,11 +24,11 @@ class SelfCheckSheetItem extends Model
     ];
 
     const HIERARCHY_FIRST = 1;
-    const HIERARCHY_SCECOND = 2;
+    const HIERARCHY_SECOND = 2;
     const HIERARCHY_THIRD = 3;
     const HIERARCHY_LIST = [
         self::HIERARCHY_FIRST => '1階層',
-        self::HIERARCHY_SCECOND => '2階層',
+        self::HIERARCHY_SECOND => '2階層',
         self::HIERARCHY_THIRD => '3階層',
     ];
 
@@ -37,11 +37,11 @@ class SelfCheckSheetItem extends Model
         return $this->hasMany(SelfCheckSheetItem::class, 'parent_self_check_sheet_item_id', 'id');
     }
 
-    public function getScecondSelfCheckSheetItemsAttribute()
+    public function getSecondSelfCheckSheetItemsAttribute()
     {
         return $this
             ->self_check_sheet_items()
-            ->scecondHierarchy()
+            ->secondHierarchy()
             ->orderBy('self_check_sheet_items.id')
             ->get();
     }
@@ -60,9 +60,9 @@ class SelfCheckSheetItem extends Model
         return $query->where('self_check_sheet_items.hierarchy', self::HIERARCHY_FIRST);
     }
 
-    protected function scopeScecondHierarchy($query)
+    protected function scopeSecondHierarchy($query)
     {
-        return $query->where('self_check_sheet_items.hierarchy', self::HIERARCHY_SCECOND);
+        return $query->where('self_check_sheet_items.hierarchy', self::HIERARCHY_SECOND);
     }
 
     protected function scopeThirdHierarchy($query)
