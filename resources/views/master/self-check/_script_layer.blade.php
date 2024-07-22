@@ -282,4 +282,71 @@
       layer.hide()
     }
   }
+
+  function searchUsers()
+  {
+    let department_id = $("#user_select_form [name=department_id]").val()
+    let position_id = $("#user_select_form [name=position_id]").val()
+    $.ajax({
+        url:'{{ route('master.self-check._loadUsers') }}',
+        type:'GET',
+        data:{
+          'department_id': department_id,
+          'position_id': position_id,
+        }
+      })
+      .done(function (data) {
+        $('#user_list').html(data)
+      })
+      .fail(function () {
+        alert('エラーが発生しました。')
+      })
+  }
+
+  function selectUsers()
+  {
+    let selected_users_table = $('#selected_users tbody')
+    let selected_users = $("#user_select [name=user_id]:checked")
+    for (let user_index = 0; user_index < selected_users.length; user_index++) {
+      let selected_user = selected_users[user_index]
+      let user_id = $(selected_user).data('id')
+      if ($(`#selected_users [data-user_id=${user_id}]`).length > 0) {
+        continue
+      }
+      let user_image = $(selected_user).data('image')
+      let user_name = $(selected_user).data('name')
+      let user_department = $(selected_user).data('department')
+      selected_users_table.append(`
+<tr data-user_id="${user_id}">
+  <td>
+    <input
+      type="hidden"
+      name="self_check_sheet_targets[][user_id]"
+      value="${user_id}"
+    />
+    <div class="item">
+      <div class="p-user">
+        <div class="p-user__image c-noImage">
+          <img
+            class="c-image c-image--round"
+            src="${user_image}"
+          />
+        </div>
+        <div class="p-uesr__text">
+          <div class="name">
+            ${user_name}
+          </div>
+        </div>
+      </div>
+    </div>
+  </td>
+  <td>
+    <div class="item">
+      ${user_department}
+    </div>
+  </td>
+</tr>
+        `)
+    }
+  }
 </script>

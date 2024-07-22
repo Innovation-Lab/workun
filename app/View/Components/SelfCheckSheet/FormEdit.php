@@ -2,6 +2,8 @@
 
 namespace App\View\Components\SelfCheckSheet;
 
+use App\Models\Department;
+use App\Models\Position;
 use App\Models\SelfCheckSheet;
 use Auth;
 use Closure;
@@ -14,6 +16,9 @@ class FormEdit extends Component
     public $period_list;
     public array $method_list;
     public array $day_list;
+    public $users;
+    public $departments;
+    public $positions;
 
     /**
      * Create a new component instance.
@@ -23,6 +28,7 @@ class FormEdit extends Component
     )
     {
         $user = Auth::user();
+        $organization = $user->organization;
 
         // シート階層
         $this->hierarchy_list = SelfCheckSheet::HIERARCHY_LIST;
@@ -40,6 +46,15 @@ class FormEdit extends Component
         foreach (range(1, 10) as $day) {
             $this->day_list[$day] = "{$day}日間";
         }
+
+        // 従業員
+        $this->users = $organization->valid_users;
+
+        // 部署
+        $this->departments = $organization->departments()->pluck('name', 'id');
+
+        // 役職
+        $this->positions = $organization->positions()->pluck('name', 'id');
     }
 
     /**

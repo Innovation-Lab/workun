@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SelfCheckSheet extends Model
@@ -43,27 +45,27 @@ class SelfCheckSheet extends Model
         self::METHOD_FIVE_GRADE => '5点評価',
     ];
 
-    public function period()
+    public function period(): BelongsTo
     {
         return $this->belongsTo(Period::class);
     }
 
-    public function self_check_sheet_targets()
+    public function self_check_sheet_targets(): HasMany
     {
         return $this->hasMany(SelfCheckSheetTarget::class);
     }
 
-    public function self_check_ratings()
+    public function self_check_ratings(): HasMany
     {
         return $this->hasMany(SelfCheckRating::class);
     }
 
-    public function self_check_sheet_items()
+    public function self_check_sheet_items(): HasMany
     {
         return $this->hasMany(SelfCheckSheetItem::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

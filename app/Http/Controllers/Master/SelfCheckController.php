@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\BaseController;
 use App\Models\SelfCheckSheetItem;
+use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -11,6 +12,13 @@ class SelfCheckController extends BaseController
 {
     protected string $directory = "master/self-check";
     protected string $model_name = "selfCheckSheet";
+
+    public function __construct(
+        public UserRepositoryInterface $user_repository
+    )
+    {
+        parent::__construct();
+    }
 
     public function _loadFirst(Request $request)
     {
@@ -51,6 +59,17 @@ class SelfCheckController extends BaseController
             'second_index' => $request->get('second_index'),
             'third_index' => $request->get('third_index'),
             'third_self_check_sheet_item' => []
+        ]);
+    }
+
+    public function _loadUsers(Request $request)
+    {
+        return view('master.self-check.modal._users', [
+            'users' => $this
+                ->user_repository
+                ->search($request)
+                ->organization($this->auth_user->organization_id)
+                ->get(),
         ]);
     }
 }

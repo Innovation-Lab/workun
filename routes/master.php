@@ -22,6 +22,7 @@ Route::group([
     Route::get('/_loadFirst', [SelfCheckController::class, '_loadFirst'])->name('_loadFirst');
     Route::get('/_loadSecond', [SelfCheckController::class, '_loadSecond'])->name('_loadSecond');
     Route::get('/_loadThird', [SelfCheckController::class, '_loadThird'])->name('_loadThird');
+    Route::get('/_loadUsers', [SelfCheckController::class, '_loadUsers'])->name('_loadUsers');
 });
 
 // 組織
