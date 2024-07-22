@@ -79,7 +79,7 @@
           <div class="u-flex baseline u-gap8">
             <div class="count min">
               <span class="unit">全</span>
-              <p class="number">
+              <p id="selected_user_count" class="number">
                 {{ number_format(count(
                   old(
                     'self_check_sheet_targets',
@@ -102,56 +102,70 @@
         <div class="p-inputField--userSelect">
           @if($selfCheckSheet->self_check_sheet_targets->isEmpty())
             <div
+              id="no_user_area"
               class="c-button c-button--large"
               data-remodal-target="modal_tergeter"
               onclick="searchUsers()"
             >
               対象者を選択
             </div>
-          @else
-            <div class="p-table c-scroll">
-              <?php
-                $tableHead = [
-                  [
-                    'title' => '対象者',
-                    'width' => '150',
-                    'class' => null,
-                  ],[
-                    'title' => '部署',
-                    'width' => 'atuo',
-                    'class' => null,
-                  ]
-                ]
-              ?>
-              <table
-                id="selected_users"
-                class="w-auto"
-              >
-                <colgroup>
-                  @foreach($tableHead as $key => $theadItem)
-                  <col class="u-w{!! $theadItem['width'] !!}" />
-                  @endforeach
-                </colgroup>
-                <tbody>
-                  @foreach(
-                    old(
-                      'self_check_sheet_targets',
-                      $selfCheckSheet->self_check_sheet_targets->pluck('user_id')
-                    ) as $self_check_sheet_target
-                  )
-                    <x-self-check-sheet.form-selected-user :id="$self_check_sheet_target" />
-                  @endforeach
-                </tbody>
-              </table>
-            </div>
           @endif
+          <div class="p-table c-scroll">
+            <?php
+              $tableHead = [
+                [
+                  'title' => '対象者',
+                  'width' => '150',
+                  'class' => null,
+                ],[
+                  'title' => '部署',
+                  'width' => 'atuo',
+                  'class' => null,
+                ]
+              ]
+            ?>
+            <table
+              id="selected_users"
+              class="w-auto"
+            >
+              <colgroup>
+                @foreach($tableHead as $key => $theadItem)
+                <col class="u-w{!! $theadItem['width'] !!}" />
+                @endforeach
+              </colgroup>
+              <tbody>
+                @foreach(
+                  old(
+                    'self_check_sheet_targets',
+                    $selfCheckSheet->self_check_sheet_targets->pluck('user_id')
+                  ) as $self_check_sheet_target
+                )
+                  <x-self-check-sheet.form-selected-user :id="$self_check_sheet_target" />
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
         @include('master.self-check.modal._tergeter')
       </div>
       <div class="p-formBlock__action center u-align--horizontal">
-        <button class="c-button c-button--brandAccent c-button--md u-w240">セルフチェックシートを作成</button>
-        @if(Route::current()->getName() == 'master.self-check.edit')
-          <button class="c-button--text" data-remodal-target="modal_alert_sheet">このシートを削除する</button>
+        <button class="c-button c-button--brandAccent c-button--md u-w240">
+          @if(!$selfCheckSheet->id)
+            セルフチェックシートを作成
+          @else
+            セルフチェックシートを更新
+          @endif
+        </button>
+        @if($selfCheckSheet->id)
+          @can('delete', $selfCheckSheet)
+            <button
+              type="button"
+              class="c-button--text"
+              data-remodal-target="modal_delete_{{ $selfCheckSheet->id }}"
+            >
+              このシートを削除する
+            </button>
+          @endcan
         @endif
       </div>
     </div>

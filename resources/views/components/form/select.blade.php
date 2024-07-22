@@ -8,6 +8,12 @@
   @if($class)
     class="{{ $class }}"
   @endif
+  @if($readonly)
+    readonly
+  @endif
+  @if($disabled)
+    disabled
+  @endif
 >
   @if($empty)
     <option value="">

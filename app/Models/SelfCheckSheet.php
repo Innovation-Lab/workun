@@ -26,7 +26,7 @@ class SelfCheckSheet extends Model
         'check_days',
         'rating_days',
         'approval_days',
-        'user_id'
+        'user_id',
     ];
 
     const HIERARCHY_SINGLE = 1;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

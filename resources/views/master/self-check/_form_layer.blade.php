@@ -9,7 +9,11 @@
         empty=""
         :selects="$hierarchy_list"
         :value="old('hierarchy', data_get($selfCheckSheet, 'hierarchy', \App\Models\SelfCheckSheet::HIERARCHY_TRIPLE))"
+        :disabled="$selfCheckSheet->id ? true : false"
       />
+      @if($selfCheckSheet->id)
+        <input type="hidden" name="hierarchy" value="{{ $selfCheckSheet->hierarchy }}" />
+      @endif
       <x-form.alert type="hierarchy" />
     </div>
   </div>

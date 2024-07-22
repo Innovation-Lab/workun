@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\BaseController;
-use App\Models\SelfCheckSheetItem;
+use App\Models\SelfCheckSheet;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -18,6 +18,19 @@ class SelfCheckController extends BaseController
     )
     {
         parent::__construct();
+    }
+
+    /**
+     * 編集ページ
+     * @return View
+     */
+    public function add(): View
+    {
+        $selfCheckSheet = new SelfCheckSheet();
+        $selfCheckSheet->hierarchy = request()->get('hierarchy', SelfCheckSheet::HIERARCHY_TRIPLE);
+        return view("{$this->directory}.add", [
+            'selfCheckSheet' => $selfCheckSheet,
+        ]);
     }
 
     public function _loadFirst(Request $request)

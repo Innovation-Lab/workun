@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\SelfCheckSheet;
 use App\Models\SelfCheckRating;
 use App\Models\SelfCheckSheetItem;
+use App\Models\SelfCheckSheetTarget;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -31,27 +32,20 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
      */
     public function create(Request $request): SelfCheckSheet
     {
-        DB::beginTransaction();
-        try {
-            $self_check_sheet = new SelfCheckSheet();
+        $self_check_sheet = new SelfCheckSheet();
 
-            # self_check_sheets の更新
-            $self_check_sheet = $self_check_sheet->fill($request->except(['self_check_sheet_items']));
-            if (!$self_check_sheet->save()) {
-                throw new Exception();
-            }
-
-            # self_check_sheet_items の更新
-            $this->syncItems($self_check_sheet, $request->get('self_check_sheet_items', []));
-
-            # self_check_sheet_targets の更新
-            # todo
-
-            DB::commit();
-        } catch (Exception) {
-            DB::rollBack();
-            throw new Exception("セルフチェックシートの登録に失敗しました。");
+        # self_check_sheets の更新
+        $self_check_sheet = $self_check_sheet->fill($request->except(['self_check_sheet_items']));
+        if (!$self_check_sheet->save()) {
+            throw new Exception();
         }
+
+        # self_check_sheet_items の更新
+        $this->syncItems($self_check_sheet, $request->get('self_check_sheet_items', []));
+
+        # self_check_sheet_targets の更新
+        $this->syncTargets($self_check_sheet, $request->get('self_check_sheet_targets', []));
+
         return $self_check_sheet;
     }
 
@@ -63,25 +57,18 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
      */
     public function update(SelfCheckSheet $self_check_sheet, Request $request): SelfCheckSheet
     {
-        DB::beginTransaction();
-        try {
-            # self_check_sheets の更新
-            $self_check_sheet = $self_check_sheet->fill($request->except(['self_check_sheet_items']));
-            if (!$self_check_sheet->update()) {
-                throw new Exception();
-            }
-
-            # self_check_sheet_items の更新
-            $this->syncItems($self_check_sheet, $request->get('self_check_sheet_items', []));
-
-            # self_check_sheet_targets の更新
-            # todo
-
-            DB::commit();
-        } catch (Exception) {
-            DB::rollBack();
-            throw new Exception("セルフチェックシートの登録に失敗しました。");
+        # self_check_sheets の更新
+        $self_check_sheet = $self_check_sheet->fill($request->except(['self_check_sheet_items']));
+        if (!$self_check_sheet->update()) {
+            throw new Exception();
         }
+
+        # self_check_sheet_items の更新
+        $this->syncItems($self_check_sheet, $request->get('self_check_sheet_items', []));
+
+        # self_check_sheet_targets の更新
+        $this->syncTargets($self_check_sheet, $request->get('self_check_sheet_targets', []));
+
         return $self_check_sheet;
     }
 
@@ -166,6 +153,51 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
                     $third_self_check_sheet_item->movie_title = data_get($third_self_check_sheet_item_array, 'movie_title');
                     $third_self_check_sheet_item->movie_url = data_get($third_self_check_sheet_item_array, 'movie_url');
                     if (!$third_self_check_sheet_item->save()) {
+                        throw new Exception();
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function syncTargets(
+        SelfCheckSheet $self_check_sheet,
+        array $self_check_sheet_targets
+    )
+    {
+        $current_self_check_sheet_targets = $self_check_sheet->self_check_sheet_targets;
+        for (
+            $target_index = 0;
+            $target_index < max($current_self_check_sheet_targets->count(), count($self_check_sheet_targets));
+            $target_index++
+        ) {
+            $current_self_check_sheet_target = data_get($current_self_check_sheet_targets, $target_index);
+            $new_self_check_sheet_target = data_get($self_check_sheet_targets, $target_index);
+            if ($current_self_check_sheet_target) {
+                // 既存レコードがある場合
+                if ($new_self_check_sheet_target) {
+                    // レコードの更新
+                    $current_self_check_sheet_target->user_id = (int)$new_self_check_sheet_target;
+                    if (!$current_self_check_sheet_target->save()) {
+                        throw new Exception();
+                    }
+                } else {
+                    // レコードの削除
+                    if (!$current_self_check_sheet_target->delete()) {
+                        throw new Exception();
+                    }
+                }
+            } else {
+                // 既存レコードがない場合
+                if ($new_self_check_sheet_target) {
+                    // レコードの作成
+                    $self_check_sheet_target = new SelfCheckSheetTarget();
+                    $self_check_sheet_target->self_check_sheet_id = $self_check_sheet->id;
+                    $self_check_sheet_target->user_id = (int)$new_self_check_sheet_target;
+                    if (!$self_check_sheet_target->save()) {
                         throw new Exception();
                     }
                 }

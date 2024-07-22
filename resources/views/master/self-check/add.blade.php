@@ -13,6 +13,7 @@
         </div>
       </div>
       <x-self-check-sheet.form-edit :selfCheckSheet="$selfCheckSheet" />
+      @include('master.self-check.modal._alert_sheet')
     </div>
   </div>
 @endsection
