@@ -33,8 +33,8 @@ class SelfCheckSheetRequest extends FormRequest
             'self_check_sheet_items.*.title' => 'required|max:100',
             'self_check_sheet_items.*.self_check_sheet_items.*.title' => 'required|max:100',
             'self_check_sheet_items.*.self_check_sheet_items.*.self_check_sheet_items.*.title' => 'required|max:100',
-            'self_check_sheet_items.*.self_check_sheet_items.*.self_check_sheet_items.*.movie_title' => 'required|max:30',
-            'self_check_sheet_items.*.self_check_sheet_items.*.self_check_sheet_items.*.movie_url' => 'required|max:200',
+            'self_check_sheet_items.*.self_check_sheet_items.*.self_check_sheet_items.*.movie_title' => 'max:30',
+            'self_check_sheet_items.*.self_check_sheet_items.*.self_check_sheet_items.*.movie_url' => 'max:200',
         ];
 
         return $rules;

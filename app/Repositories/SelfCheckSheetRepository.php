@@ -4,9 +4,12 @@ namespace App\Repositories;
 
 use App\Models\SelfCheckSheet;
 use App\Models\SelfCheckRating;
+use App\Models\SelfCheckSheetItem;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
 {
@@ -28,10 +31,26 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
      */
     public function create(Request $request): SelfCheckSheet
     {
-        $self_check_sheet = new SelfCheckSheet();
-        $self_check_sheet->fill($request->all());
-        if (!$self_check_sheet->save()) {
-            throw new Exception("セルフチェックシートの作成に失敗しました。");
+        DB::beginTransaction();
+        try {
+            $self_check_sheet = new SelfCheckSheet();
+
+            # self_check_sheets の更新
+            $self_check_sheet = $self_check_sheet->fill($request->except(['self_check_sheet_items']));
+            if (!$self_check_sheet->save()) {
+                throw new Exception();
+            }
+
+            # self_check_sheet_items の更新
+            $this->syncItems($self_check_sheet, $request->get('self_check_sheet_items', []));
+
+            # self_check_sheet_targets の更新
+            # todo
+
+            DB::commit();
+        } catch (Exception) {
+            DB::rollBack();
+            throw new Exception("セルフチェックシートの登録に失敗しました。");
         }
         return $self_check_sheet;
     }
@@ -44,11 +63,114 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
      */
     public function update(SelfCheckSheet $self_check_sheet, Request $request): SelfCheckSheet
     {
-        $self_check_sheet = $self_check_sheet->fill($request->all());
-        if (!$self_check_sheet->update()) {
-            throw new Exception("セルフチェックシートの更新に失敗しました。");
+        DB::beginTransaction();
+        try {
+            # self_check_sheets の更新
+            $self_check_sheet = $self_check_sheet->fill($request->except(['self_check_sheet_items']));
+            if (!$self_check_sheet->update()) {
+                throw new Exception();
+            }
+
+            # self_check_sheet_items の更新
+            $this->syncItems($self_check_sheet, $request->get('self_check_sheet_items', []));
+
+            # self_check_sheet_targets の更新
+            # todo
+
+            DB::commit();
+        } catch (Exception) {
+            DB::rollBack();
+            throw new Exception("セルフチェックシートの登録に失敗しました。");
         }
         return $self_check_sheet;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function syncItems(
+        SelfCheckSheet $self_check_sheet,
+        array $first_self_check_sheet_items
+    )
+    {
+        $current_first_self_check_sheet_items = $self_check_sheet->first_self_check_sheet_items;
+        foreach ($first_self_check_sheet_items as $first_self_check_sheet_item_index => $first_self_check_sheet_item_array) {
+            # 第１階層の更新
+            $first_self_check_sheet_item = data_get($current_first_self_check_sheet_items, $first_self_check_sheet_item_index);
+            if ($first_self_check_sheet_item) {
+                if (data_get($first_self_check_sheet_item_array, 'delete')) {
+                    if (!$first_self_check_sheet_item->delete()) {
+                        throw new Exception();
+                    }
+                    continue;
+                }
+            } else {
+                if (data_get($first_self_check_sheet_item_array, 'delete')) {
+                    continue;
+                }
+                $first_self_check_sheet_item = new SelfCheckSheetItem();
+                $first_self_check_sheet_item->self_check_sheet_id = $self_check_sheet->id;
+                $first_self_check_sheet_item->hierarchy = SelfCheckSheetItem::HIERARCHY_FIRST;
+            }
+            $first_self_check_sheet_item->title = data_get($first_self_check_sheet_item_array, 'title');
+            if (!$first_self_check_sheet_item->save()) {
+                throw new Exception();
+            }
+
+            $current_second_self_check_sheet_items = $first_self_check_sheet_item->second_self_check_sheet_items;
+            foreach (data_get($first_self_check_sheet_item_array, 'self_check_sheet_items', []) as $second_self_check_sheet_item_index => $second_self_check_sheet_item_array) {
+                # 第２階層の更新
+                $second_self_check_sheet_item = data_get($current_second_self_check_sheet_items, $second_self_check_sheet_item_index);
+                if ($second_self_check_sheet_item) {
+                    if (data_get($second_self_check_sheet_item_array, 'delete')) {
+                        if (!$second_self_check_sheet_item->delete()) {
+                            throw new Exception();
+                        }
+                        continue;
+                    }
+                } else {
+                    if (data_get($second_self_check_sheet_item_array, 'delete')) {
+                        continue;
+                    }
+                    $second_self_check_sheet_item = new SelfCheckSheetItem();
+                    $second_self_check_sheet_item->self_check_sheet_id = $self_check_sheet->id;
+                    $second_self_check_sheet_item->parent_self_check_sheet_item_id = $first_self_check_sheet_item->id;
+                    $second_self_check_sheet_item->hierarchy = SelfCheckSheetItem::HIERARCHY_SECOND;
+                }
+                $second_self_check_sheet_item->title = data_get($second_self_check_sheet_item_array, 'title');
+                if (!$second_self_check_sheet_item->save()) {
+                    throw new Exception();
+                }
+
+                $current_third_self_check_sheet_items = $second_self_check_sheet_item->third_self_check_sheet_items;
+                foreach (data_get($second_self_check_sheet_item_array, 'self_check_sheet_items', []) as $third_self_check_sheet_item_index => $third_self_check_sheet_item_array) {
+                    # 第３階層の更新
+                    $third_self_check_sheet_item = data_get($current_third_self_check_sheet_items, $third_self_check_sheet_item_index);
+                    if ($third_self_check_sheet_item) {
+                        if (data_get($third_self_check_sheet_item_array, 'delete')) {
+                            if (!$third_self_check_sheet_item->delete()) {
+                                throw new Exception();
+                            }
+                            continue;
+                        }
+                    } else {
+                        if (data_get($third_self_check_sheet_item_array, 'delete')) {
+                            continue;
+                        }
+                        $third_self_check_sheet_item = new SelfCheckSheetItem();
+                        $third_self_check_sheet_item->self_check_sheet_id = $self_check_sheet->id;
+                        $third_self_check_sheet_item->parent_self_check_sheet_item_id = $second_self_check_sheet_item->id;
+                        $third_self_check_sheet_item->hierarchy = SelfCheckSheetItem::HIERARCHY_THIRD;
+                    }
+                    $third_self_check_sheet_item->title = data_get($third_self_check_sheet_item_array, 'title');
+                    $third_self_check_sheet_item->movie_title = data_get($third_self_check_sheet_item_array, 'movie_title');
+                    $third_self_check_sheet_item->movie_url = data_get($third_self_check_sheet_item_array, 'movie_url');
+                    if (!$third_self_check_sheet_item->save()) {
+                        throw new Exception();
+                    }
+                }
+            }
+        }
     }
 
     /**
