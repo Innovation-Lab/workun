@@ -6,7 +6,7 @@
     closeOnOutsideClick: false,
     appendTo: #search_form
   "
-  >
+>
   <button data-remodal-action="close" class="remodal-close p-modal__close">閉じる</button>
   <div class="p-modal__head">
     <p class="title">詳細検索</p>

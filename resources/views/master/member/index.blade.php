@@ -82,7 +82,7 @@
                   ]
                 ]
               ?>
-              <table>
+              <table class="sticky">
                 <colgroup>
                   @foreach($tableHead as $key => $theadItem)
                     <col class="u-w{!! $theadItem['width'] !!}" />

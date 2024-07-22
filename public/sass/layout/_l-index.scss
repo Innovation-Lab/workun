@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: 280px auto;
     height: 100%;
-    >*{
+    > *{
       min-width: 1px;
     }
     @media screen and ( min-width:1200px ) {

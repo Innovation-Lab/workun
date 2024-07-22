@@ -2,38 +2,10 @@
 
 namespace App\Http\Controllers\Master;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
 
-class TermController extends Controller
+class TermController extends BaseController
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        return view('master.term.index');
-    }
-
-    public function add()
-    {
-        return view('master.term.add');
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit()
-    {
-        return view('master.term.edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
-    {
-        //
-    }
+    protected string $directory = "master/term";
+    protected string $model_name = "period";
 }

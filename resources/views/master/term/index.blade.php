@@ -22,28 +22,33 @@
             </div>
             <div class="action"></div>
           </div>
-          <div class="p-tableBox__middle">
-            <div class="p-search">
-              <div class="p-search__wrap">
-                <div class="p-search__keyword">
-                  <div class="p-input">
-                    <input type="search" placeholder="キーワード検索" value="" id="">
+          <form>
+            <div class="p-tableBox__middle">
+              <div class="p-search">
+                <div class="p-search__wrap">
+                  <div class="p-search__keyword">
+                    <div class="p-input">
+                      <input type="search" name="keyword" placeholder="キーワード検索" value="{{ request('keyword') }}" />
+                    </div>
                   </div>
-                </div>
-                <div class="p-search__action">
-                  <button type="submit" class="c-button c-button--brandPrimary p-search__button">絞り込む</button>
+                  <div class="p-search__action">
+                    <button type="submit" class="c-button c-button--brandPrimary p-search__button">絞り込む</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
           <div class="p-tableBox__body">
             {{-- ページング(件数のみ) --}}
             <div class="p-pager">
-              <p class="count">全 7 件中 1～7 件目</p>
+              <p class="count">
+                全 {{ number_format($periods->total()) }} 件中
+                {{ number_format($periods->firstItem()) }}～{{ number_format($periods->lastItem()) }} 件目
+              </p>
             </div>
             {{-- テーブル一覧 --}}
             <div class="p-table c-scroll">
-              <?php 
+              <?php
                 $tableHead = [
                   [
                     'title' => 'タイトル',
@@ -76,39 +81,24 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @for($tableBody = 0; $tableBody < 7; $tableBody++)
-                    <tr data-href="{{ route('master.term.edit') }}">
+                  @foreach($periods as $period)
+                    <tr data-href="{{ route('master.term.edit', $period) }}">
                       <!-- タイトル -->
-                      <td><div class="item title">2024年 四半期 (10月~ 12月)</div></td>                      
+                      <td><div class="item title">{{ $period->name }}</div></td>
                       <!-- 評価開始年月 -->
-                      <td class="u-tac"><div class="item term_arrow">2024年 10月</div></td>
+                      <td class="u-tac"><div class="item term_arrow">{{ $period->display_start }}</div></td>
                       <!-- 評価終了年月 -->
-                      <td class="u-tac"><div class="item">2024年 12月</div></td>
+                      <td class="u-tac"><div class="item">{{ $period->display_end }}</div></td>
                     </tr>
-                  @endfor
+                  @endforeach
                 </tbody>
               </table>
             </div>
             {{-- ページング --}}
-            <div class="p-pager">
-              <p class="count">全 7 件中 1～7 件目</p>
-              <div class="pageNav">
-                <a href="" class="arrowButton arrowButton--prev disabled">
-                  <svg width="28" height="28"><use xlink:href="#pageNav_prev" /></svg>
-                </a>
-                <div class="p-input">
-                  <input type="text" placeholder="" value="1" id="">
-                  <span class="total">/ 1</span>
-                </div>
-                <a href="" class="arrowButton arrowButton--next">
-                  <svg width="28" height="28"><use xlink:href="#pageNav_next" /></svg>
-                </a>
-              </div>
-            </div>
+            <x-pager :pagination="$periods->appends($request->all())"/>
           </div>
         </div>
       </div>
     </div>
   </div>
 @endsection
-    

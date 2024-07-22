@@ -16,7 +16,10 @@ class HomeController extends Controller
         public SelfCheckSheetRepositoryInterface $selfCheckSheetRepository
     )
     {
-        $this->auth_user = Auth::user();
+        $this->middleware(function ($request, $next) {
+            $this->auth_user = Auth::user();
+            return $next($request);
+        });
     }
 
     /**
