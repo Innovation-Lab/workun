@@ -96,6 +96,11 @@ class User extends Authenticatable
         return $this->belongsTo(Employment::class);
     }
 
+    protected function scopeOrganization($query)
+    {
+        return $query;
+    }
+
     protected function getAnswerSelfCheckSheetsAttribute()
     {
         return SelfCheckSheet::query()
