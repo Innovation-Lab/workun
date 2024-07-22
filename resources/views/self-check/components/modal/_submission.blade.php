@@ -21,7 +21,7 @@
           <div class="p-check__select u-align__center">
             評価者を選択してください
             <div class="p-check__select--list">
-              <p class="c-txt__xs">評価者を選択してください（複数選択可）</p>
+              <p class="c-txt__xs u-align between">評価者を選択してください（複数選択可）</p>
               <ul>
                 <li>
                   <label class="p-check__checkbox p-check__account">

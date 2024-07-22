@@ -1,8 +1,8 @@
 <div class="remodal p-modal p-modal__selfCheck" data-remodal-id="modal_request" data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
   <button data-remodal-action="close" class="remodal-close p-modal__close">閉じる</button>
   <div class="p-modal__head">
-    <p class="title">評価内容を確定 / 最終承認を依頼</p>
-    <p class="description">セルフチェックシートの評価を完了します。よろしいですか。<br />完了後は承認者がシートを承認するフローへ進みます。</p>
+    <p class="title">承認内容を確定 / 最終承認を依頼</p>
+    <p class="description">セルフチェックシートの承認を完了します。よろしいですか。<br />完了後は承認者がシートを承認するフローへ進みます。</p>
   </div>
   <div class="p-modal__body">
     <form action="">
@@ -21,9 +21,9 @@
         <div class="p-check__account--wrap">
           {{-- ↓↓↓↓初期状態　選択したら消える。全員消したら表示する --}}
           <div class="p-check__select u-align__center">
-            評価者を選択してください
+            承認者を選択してください
             <div class="p-check__select--list">
-              <p class="c-txt__xs">評価者を選択してください（複数選択可）</p>
+              <p class="c-txt__xs u-align between">承認者を選択してください（複数選択可）</p>
               <ul>
                 <li>
                   <label class="p-check__checkbox p-check__account">
@@ -49,7 +49,7 @@
           <div class="p-check__account u-align u-gap8">
             <div class="p-user__image" style="background-image:url(../../img/common/noImage/noimage.webp)"></div>
             <div class="p-user__text">
-              <p class="c-txt__min c-txt__gray-500">評価者</p>
+              <p class="c-txt__min c-txt__gray-500">承認者</p>
               <p>酒井 雄輝</p>
             </div>
             <button type="button" class="p-check__account--delete"><svg width="12" height="12"><use xlink:href="#close" /></svg></button>
@@ -57,7 +57,7 @@
           <div class="p-check__account u-align u-gap8">
             <div class="p-user__image" style="background-image:url(../../img/common/noImage/noimage.webp)"></div>
             <div class="p-user__text">
-              <p class="c-txt__min c-txt__gray-500">評価者</p>
+              <p class="c-txt__min c-txt__gray-500">承認者</p>
               <p>田中 太郎</p>
             </div>
             <button type="button" class="p-check__account--delete"><svg width="12" height="12"><use xlink:href="#close" /></svg></button>
