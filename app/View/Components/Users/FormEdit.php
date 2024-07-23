@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Employment;
 use App\Models\Grade;
 use App\Models\Position;
+use App\Models\Reviewer;
 use App\Models\User;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -19,6 +20,7 @@ class FormEdit extends Component
     public $positions;
     public $grades;
     public $employments;
+    public $reviewers;
 
     /**
      * Create a new component instance.
@@ -31,6 +33,7 @@ class FormEdit extends Component
         $this->employments = Employment::all();
         $this->grades = Grade::all();
         $this->positions = Position::all();
+        $this->reviewers = $this->getReviewers($user->id);
     }
 
 
@@ -51,6 +54,13 @@ class FormEdit extends Component
     private function getApprovers($user_id)
     {
         return Approver::where('user_id', $user_id)
+            ->with('manager')
+            ->get();
+    }
+
+    private function getReviewers($user_id)
+    {
+        return Reviewer::where('user_id', $user_id)
             ->with('manager')
             ->get();
     }

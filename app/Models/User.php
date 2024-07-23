@@ -109,6 +109,11 @@ class User extends Authenticatable
         return $this->HasMany(Approver::class);
     }
 
+    public function reviewers(): HasMany
+    {
+        return $this->HasMany(Reviewer::class);
+    }
+
     protected function getAnswerSelfCheckSheetsAttribute()
     {
         return SelfCheckSheet::query()
