@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Traits\ImageTrait;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
@@ -64,7 +66,12 @@ class User extends Authenticatable
         self::ROLE_ADMIN => '管理',
     ];
 
-    public function departments()
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class);
+    }
+
+    public function departments(): HasManyThrough
     {
         return $this->hasManyThrough(
             Department::class,
@@ -76,22 +83,22 @@ class User extends Authenticatable
         );
     }
 
-    public function position()
+    public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class);
     }
 
-    public function grade()
+    public function grade(): BelongsTo
     {
         return $this->belongsTo(Grade::class);
     }
 
-    public function salary()
+    public function salary(): BelongsTo
     {
         return $this->belongsTo(Salary::class);
     }
 
-    public function employment()
+    public function employment(): BelongsTo
     {
         return $this->belongsTo(Employment::class);
     }
@@ -167,6 +174,16 @@ class User extends Authenticatable
     protected function getDisplayCreatedAttribute()
     {
         return $this->created_at ? date('Y.m.d', strtotime($this->created_at)) : null;
+    }
+
+    protected function scopeOrganization($query, $organization_id)
+    {
+        return $query->where('users.organization_id', $organization_id);
+    }
+
+    protected function scopeValid($query)
+    {
+        return $query->where('users.status', self::STATUS_ACTIVATED);
     }
 }
 

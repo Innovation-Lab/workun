@@ -27,4 +27,29 @@ class Organization extends Authenticatable
     protected $casts = [
         'access_key' => 'hashed',
     ];
+
+    public function departments()
+    {
+        return $this->hasMany(Department::class);
+    }
+
+    public function positions()
+    {
+        return $this->hasMany(Position::class);
+    }
+
+    public function periods()
+    {
+        return $this->hasMany(Period::class);
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    protected function getValidUsersAttribute()
+    {
+        return $this->users()->valid()->get();
+    }
 }

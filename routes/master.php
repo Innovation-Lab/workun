@@ -13,10 +13,18 @@ Route::group([
     'as' => 'self-check.',
 ], function () {
     Route::get('/', [SelfCheckController::class, 'index'])->name('index');
-    Route::get('/create', [SelfCheckController::class, 'create'])->name('create');
-    Route::post('/create', [SelfCheckController::class, 'store']);
-    Route::get('/edit', [SelfCheckController::class, 'edit'])->name('edit');
-    Route::post('/edit', [SelfCheckController::class, 'update']);
+    Route::get('/add', [SelfCheckController::class, 'add'])->name('add');
+    Route::post('/add', [SelfCheckController::class, 'store']);
+    Route::get('/edit/{self_check_sheet}', [SelfCheckController::class, 'edit'])->name('edit');
+    Route::post('/edit/{self_check_sheet}', [SelfCheckController::class, 'update']);
+    Route::delete('/edit/{self_check_sheet}', [SelfCheckController::class, 'destroy']);
+    Route::get('/copy/{self_check_sheet}', [SelfCheckController::class, 'copy'])->name('copy');
+
+
+    Route::get('/_loadFirst', [SelfCheckController::class, '_loadFirst'])->name('_loadFirst');
+    Route::get('/_loadSecond', [SelfCheckController::class, '_loadSecond'])->name('_loadSecond');
+    Route::get('/_loadThird', [SelfCheckController::class, '_loadThird'])->name('_loadThird');
+    Route::get('/_loadUsers', [SelfCheckController::class, '_loadUsers'])->name('_loadUsers');
 });
 
 // 組織

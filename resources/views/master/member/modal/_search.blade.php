@@ -15,7 +15,7 @@
     <div class="p-formBlock__form">
       <div class="p-inputField">
         <label class="label" for="">部署</label>
-        <select name="department_id" id="">
+        <select name="department_id" id="" class="primary">
           <option value="">部署を選択</option>
           @foreach($departments as $department)
             <option value="{{ $department->id }}">{{ $department->name }}</option>
@@ -24,7 +24,7 @@
       </div>
       <div class="p-inputField">
         <label class="label" for="">役職</label>
-        <select name="position_id" id="">
+        <select name="position_id" id="" class="primary">
           <option value="">役職を選択</option>
           @foreach($positions as $position)
             <option value="{{ $position->id }}">{{ $position->name }}</option>
@@ -33,7 +33,7 @@
       </div>
       <div class="p-inputField">
         <label class="label" for="">等級</label>
-        <select name="grade_id" id="">
+        <select name="grade_id" id="" class="primary">
           <option value="">等級を選択</option>
           @foreach($grades as $grade)
             <option value="{{ $grade->id }}">{{ $grade->name }}</option>
@@ -42,7 +42,7 @@
       </div>
       <div class="p-inputField">
         <label class="label" for="employment_id">雇用形態</label>
-        <select name="employment_id" id="">
+        <select name="employment_id" id="" class="primary">
           <option value="">雇用形態を選択</option>
           @foreach($employments as $employment)
             <option value="{{ $employment->id }}">{{ $employment->name }}</option>

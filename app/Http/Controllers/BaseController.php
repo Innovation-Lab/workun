@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class BaseController extends Controller
             'request' => $request,
             $plural => $this->repository
                 ->search($request)
-                ->organization($this->auth_user->id)
+                ->organization($this->auth_user->organization_id)
                 ->paginate(),
         ]);
     }

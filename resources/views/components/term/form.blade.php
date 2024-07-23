@@ -13,7 +13,7 @@
   </div>
   <div class="p-inputField p-inputField--full row">
     <label class="label" for="">評価開始年月</label>
-    <select name="start" class="u-w190">
+    <select name="start" class="u-w190 primary">
       @foreach($month_list as $month_key => $month_label)
         <option
           value="{{ $month_key }}"
@@ -39,7 +39,7 @@
   </div>
   <div class="p-inputField p-inputField--full row">
     <label class="label" for="">評価終了年月</label>
-    <select name="end" class="u-w190">
+    <select name="end" class="u-w190 primary">
       @foreach($month_list as $month_key => $month_label)
         <option
           value="{{ $month_key }}"

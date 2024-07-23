@@ -30,7 +30,7 @@
     // ２列
     &.row2 {
       display: grid;
-      grid-template-columns: 1fr minmax(300px, 340px);
+      grid-template-columns: 1fr 340px;
       gap: var(--spacing-sm);
       align-items: flex-start;
     }
@@ -55,11 +55,28 @@
       }
     }
   }
+
+  // セルフチェックマスタ
+  &--selfCheck{
+    .p-formBlock{
+      &__body{
+        &.min{
+          .p-formBlock__action{
+            padding-block-start: var(--spacing-md);
+            margin-block-start: var(--spacing-sm);
+          }
+        }
+      }
+    }
+  }
 }
 
 
 .p-approval{
   .u-flex{
     width: 90px;
+    .c-txt__gray-400{
+      flex: 0 0 37px;
+    }
   }
 }

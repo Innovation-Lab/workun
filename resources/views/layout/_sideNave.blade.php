@@ -38,7 +38,7 @@
               'linkList' => [
                 [
                   'label' => 'セルフチェック',
-                  'path' => null,
+                  'path' => route('master.self-check.index'),
                   'phase' => '',
                 ],
                 [

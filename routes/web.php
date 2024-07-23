@@ -12,6 +12,14 @@ Route::middleware('auth:web')->group(function ()
 {
     // ホーム
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+    // マスター画面
+    Route::group([
+        'prefix' => 'master',
+        'as' => 'master.',
+    ], function () {
+        require base_path('routes/master.php');
+    });
 });
 
 // セルフチェック
@@ -24,14 +32,8 @@ Route::group([
     Route::get('/answer', [SelfCheckController::class, 'answer'])->name('answer');
     Route::post('/answer', [SelfCheckController::class, 'update']);
     Route::get('/rating', [SelfCheckController::class, 'rating'])->name('rating');
+    Route::get('/confirm', [SelfCheckController::class, 'confirm'])->name('confirm');
     Route::get('/approval', [SelfCheckController::class, 'approval'])->name('approval');
     Route::get('/result', [SelfCheckController::class, 'result'])->name('result');
-});
-
-// マスター画面
-Route::group([
-    'prefix' => 'master',
-    'as' => 'master.',
-], function () {
-    require base_path('routes/master.php');
+    Route::get('/result/all', [SelfCheckController::class, 'resultall'])->name('resultall');
 });
