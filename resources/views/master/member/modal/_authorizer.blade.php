@@ -4,7 +4,7 @@
     <p class="title">人事業務の承認者の選択</p>
     <p class="description">人事業務の承認者を設定してください。</p>
   </div>
-  <div class="p-modal__middle">
+  <div class="p-modal__middle p-formBlock__form list">
     <div class="p-inputField">
       <label class="label" for="">部署</label>
       <select name=""  class="u-w190 primary">

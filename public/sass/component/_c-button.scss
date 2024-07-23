@@ -104,8 +104,16 @@
 
   &--white{
     --button-text: var(--main);
-    --button-border: vvar(--white);
+    --button-border: var(--white);
     --button-surface: var(--white);
+  }
+  &--gray{
+    --normal: #B7BCC5;
+
+    --button-text: var(--main);
+    --button-border: var(--normal);
+    --button-surface: var(--normal);
+    --button-surface-hover: #979daa;
   }
 
   &--cancel{

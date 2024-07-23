@@ -6,27 +6,45 @@
   </div>
   <div class="p-modal__body">
     <form action="">
-      <div class="u-align between p-check">
+      {{-- ↓↓↓↓初期状態↓↓↓↓ --}}
+      <div class="between p-check">
+      {{-- ↑↑↑↑↑初期状態↑↑↑↑↑ --}}
+
+      {{-- ↓↓↓↓評価者の選択がない場合は「p-check--noSelect」クラスを追加↓↓↓↓ --}}
+      <!-- <div class="between p-check p-check--noSelect"> -->
+      {{-- ↑↑↑↑評価者の選択がない場合は「p-check--noSelect」クラスを追加↑↑↑↑ --}}
+
+
         <div class="p-check__account u-align u-gap8">
           <div class="p-user__image" style="background-image:url(../../img/common/noImage/noimage.webp)"></div>
           <div class="p-user__text">
             <p>酒井 雄輝</p>
           </div>
         </div>
-        <div>
+        <div class="u-align p-check__arrow">
           <img src="/img/common/icon/chevron_three.svg" height="20" width="20" alt="矢印アイコン">
         </div>
-        <div class="p-check__account--wrap">
-          {{-- ↓↓↓↓初期状態　選択したら消える。全員消したら表示する --}}
-          <div class="p-check__select u-align__center">
-            評価者を選択してください
+        <div class="p-check__select--wrap">
+
+          {{-- ↓↓↓↓初期状態↓↓↓↓ --}}
+          <div class="p-check__select u-align">
+          {{-- ↑↑↑↑↑初期状態↑↑↑↑↑ --}}
+          
+          {{-- ↓↓↓↓ユーザーが選択された状態の時に「p-check__select--user」クラスを追加↓↓↓↓ --}}
+          <!-- <div class="p-check__select u-align p-check__select--user"> -->
+          {{-- ↑↑↑↑↑ユーザーが選択された状態の時に「p-check__select--user」クラスを追加↑↑↑↑↑ --}}
+
+
+            {{-- ↓↓↓↓初期状態↓↓↓↓ --}}
+            <span class="p-check__select--text">従業員を選択</span>
             <div class="p-check__select--list">
-              <p class="c-txt__xs u-align between">評価者を選択してください（複数選択可）</p>
               <ul>
                 <li>
                   <label class="p-check__checkbox p-check__account">
                     <input type="checkbox" name="">
-                    <div class="p-user__image" style="background-image:url(../../img/common/noImage/noimage.webp)"></div>
+                    <div class="p-user__image c-noImage">
+                      <img src="" alt="" class="c-image c-image--round">
+                    </div>
                     <div class="p-user__text">
                       <p>酒井 雄輝</p>
                     </div>
@@ -34,31 +52,31 @@
                 </li>
                 <?php for($p = 1; $p < 4; $p++){ ?>
                 <li>
-                  <label class="p-check__checkbox p-check__account"><input type="checkbox" name=""><div class="p-user__image" style="background-image:url(../../img/common/noImage/noimage.webp)"></div><div class="p-user__text"><p>勅使河原 雄太郎</p></div></label>
+                  <label class="p-check__checkbox p-check__account">
+                    <input type="checkbox" name="">
+                    <div class="p-user__image c-noImage">
+                      <img src="" alt="" class="c-image c-image--round">
+                    </div>
+                    <div class="p-user__text">
+                      <p>酒井 雄輝</p>
+                    </div>
+                  </label>
                 </li>
                 <?php }?>
               </ul>
-              <div class="u-align--center">
-                <button type="button" class="c-button c-button--primary">選択を決定</button>
+            </div>
+            {{-- ↑↑↑↑↑初期状態↑↑↑↑↑ --}}
+
+            {{-- ↓↓↓↓ユーザーが選択された状態の時に表示↓↓↓↓ --}}
+            <!-- <div class="u-align u-gap8 p-user">
+              <div class="p-user__image" style="background-image:url(../../img/common/noImage/noimage.webp)"></div>
+              <div class="p-user__text">
+                <span class="label">評価者</span>
+                <p>酒井 雄輝</p>
               </div>
-            </div>
-          </div>
-          {{-- ↑↑↑↑↑初期状態　選択したら消える。全員消したら表示する --}}
-          <div class="p-check__account u-align u-gap8">
-            <div class="p-user__image" style="background-image:url(../../img/common/noImage/noimage.webp)"></div>
-            <div class="p-user__text">
-              <p class="c-txt__min c-txt__gray-500">評価者</p>
-              <p>酒井 雄輝</p>
-            </div>
-            <button type="button" class="p-check__account--delete"><svg width="12" height="12"><use xlink:href="#close" /></svg></button>
-          </div>
-          <div class="p-check__account u-align u-gap8">
-            <div class="p-user__image" style="background-image:url(../../img/common/noImage/noimage.webp)"></div>
-            <div class="p-user__text">
-              <p class="c-txt__min c-txt__gray-500">評価者</p>
-              <p>田中 太郎</p>
-            </div>
-            <button type="button" class="p-check__account--delete"><svg width="12" height="12"><use xlink:href="#close" /></svg></button>
+            </div> -->
+            {{-- ↑↑↑↑↑ユーザーが選択された状態の時に表示↑↑↑↑↑ --}}
+
           </div>
         </div>
       </div>

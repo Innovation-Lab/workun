@@ -58,6 +58,7 @@
     // 検索を格納
     &__middle{
       padding: 0 1.5rem;
+      
     }
     // テーブル / ページャーを格納
     &__body{
@@ -94,6 +95,7 @@
         justify-content: center;
         font-size: 13px;
         color: #444;
+        word-break: break-all;
         &.row{
           flex-direction: row;
           align-items: center;
@@ -205,6 +207,7 @@
       thead{
         position:sticky;
         top:0;
+        z-index: 10;
         tr{
           position:relative;
           &:after{

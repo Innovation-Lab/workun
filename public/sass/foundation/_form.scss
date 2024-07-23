@@ -47,6 +47,9 @@ textarea {
   &.primary{
     border-color: var(--main-light);
     background-color: var(--white);
+    &::placeholder {
+      color: rgba(21,41,75,.4);
+    }
   }
   &.gray{
     border-color: rgba(21,41,75,.3);

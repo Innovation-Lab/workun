@@ -19,6 +19,7 @@
     opacity: 1;
   }
   &__selfCheck{
+    max-width: 580px;
     border-top: 8px solid var(--main-accent-green);
     justify-content: space-between;
     .p-modal{
@@ -54,33 +55,7 @@
     }
   }
   &__middle {
-    display: flex;
-    gap: var(--spacing-sm);
-    padding: 20px 0 var(--spacing-sm);
-    .p-inputField{
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      .label {
-        color: var(--main);
-        font-size: 13px;
-        font-weight: 500;;
-        min-width: max-content;
-        margin-block-end: 0;
-      }
-      input[type=text],
-      input[type=search],
-      input[type=date],
-      input[type=tel],
-      input[type=email],
-      input[type=number],
-      input[type=password],
-      select,
-      textarea {
-        padding: var(--spacing-2xs) var(--spacing-xs);
-        min-height: 32px;
-      }
-    }
+    padding: 20px 0 var(--spacing-sm) !important;
   }
   &__body{
     .c-scroll{
@@ -205,30 +180,45 @@
     }
   }
 }
+// ユーザー選択
 .p-check{
+  display: grid;
+  grid-template-columns: 1fr 20px 1fr;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 14px;
   padding-inline: 1.25rem;
   margin-block-end: 2.5rem;
   &__select{
+    height: 100%;
     padding: .5rem;
-    background-color: var(--gray-50);
-    border: 1px solid var(--gray-200);
-    border-radius:6px;
+    background-color: var(--background-base);
+    border: 1px solid var(--main-accent);
+    border-radius: 6px;
     font-size: .75rem;
-    color: var(--gray-500);
+    color: var(--main-accent);;
     cursor: pointer;
+    background-image: url('data:image/svg+xml;utf8,<svg width="9" height="6" viewBox="0 0 9 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.51667e-05 0.999965L4.24268 5.24261L8.48532 0.999965L7.77821 0.292858L4.24268 3.82839L0.707142 0.292858L3.51667e-05 0.999965Z" fill="%230A95C7"/></svg>');
+    background-size: 10px;
+    background-position: right 10px center;
+    background-repeat: no-repeat;
     &:hover{
       background-color: var(--white);
     }
+    &.primary{
+      background-color: var(--white);
+      border-color: var(--main-light);
+      color: #444;
+    }
+    &--wrap{
+      position: relative;
+    }
     &--list{
+      width: 100%;
       display:none;
       position:absolute;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      padding: 1rem;
-      background-color: var(--white);
-      border: 1px solid var(--border);
-      border-radius:4px;
+      top: 56px;
+      left: 0;
       .c-txt__xs{
         &:after{
           content: '閉じる';
@@ -239,14 +229,23 @@
       }
       ul{
         display: grid;
-        gap: .25rem;
-        grid-template-columns: repeat(2, 1fr);
+        border: 1px solid #DCE2EA;
+        > li {
+          &:last-child{
+            .p-check__account{
+              border: none;
+            }
+          }
+        }
       }
       .p-check__checkbox{
         display:flex;
         gap: .5rem;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid #DCE2EA;
+        background-color: var(--white);
         background-image: none !important;
-        width: 10rem;
         input{
           display:none;
         }
@@ -256,12 +255,26 @@
         }
       }
     }
+    // ユーザーが選択された時
+    &--user{
+      .p-user {
+        display: b;
+      }
+      .p-user__text{
+        color: initial;
+        .label{
+          color: #888;
+          font-size: 10px;
+        }
+      }
+    }
     &.is-open{
+      outline: 1px solid var(--form-accent);
       .p-check__select--list{
         display: flex;
         flex-direction: column;
         gap: .5rem;
-        z-index: 1;
+        z-index: 20;
       }
     }
   }
@@ -272,11 +285,12 @@
     border-radius:6px;
     flex:auto;
     position:relative;
-    &--wrap{
-      display:flex;
-      flex-direction: column;
-      flex:auto;
-      gap: .25rem;
+    .p-user__text{
+      color: initial;
+      .label{
+        color: #888;
+        font-size: 10px;
+      }
     }
     &--delete{
       padding: 0;
@@ -291,6 +305,13 @@
       &:hover{
         background-color: var(--gray-100);
       }
+    }
+  }
+  // ユーザー選択しないとき
+  &--noSelect{
+    .p-check__select {
+      background-image: none;
+      pointer-events: none;
     }
   }
 }

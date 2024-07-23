@@ -88,7 +88,7 @@
 // ページ共通 --------------------
 // layout
 @use "layout/_l-header.scss"; 
-@use "layout/_l-main.scss"; 
+@use "layout/_l-main.scss";  
 // project
 @use "project/_p-flash.scss"; // フラッシュメッセージ
 @use "project/_p-header.scss"; // ヘッダー
@@ -117,3 +117,7 @@
 // layout
 @use "layout/_l-index.scss"; 
 // project
+
+// マスタ --------------------
+// layout
+@use "layout/_l-edit.scss"; 
