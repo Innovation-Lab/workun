@@ -2,10 +2,12 @@
   --border: #B9D4E6;
   --border-gray: #eee;
   --border-delete: #B4BDCB;
+  opacity: 0;
   text-align: left;
   display: inline-flex;
   flex-direction: column;
   width: min(100%, 640px);
+  max-width: none;
   min-height: 320px;
   max-height: 640px;
   padding: var(--spacing-lg) 20px;
@@ -13,6 +15,9 @@
   border-top: 8px solid var(--main-accent);
   border-radius: var(--radius-sm);
   box-shadow: 0 40px 60px 0 rgba(21,46,85,.3);
+  &.remodal-is-opened{
+    opacity: 1;
+  }
   &__selfCheck{
     border-top: 8px solid var(--main-accent-green);
     justify-content: space-between;
@@ -147,6 +152,32 @@
             align-items: center;
           }
         }
+      }
+    }
+  }
+  // プレビュー
+  &--preview{
+    width: min(100%, 840px);
+    padding: 0;
+    border: none;
+    .p-modal{
+      &__close{
+        color: #CFD7DB;
+        right: 1.5rem;
+      }
+      &__head{
+        background: #222;
+        padding: 1rem 1.5rem;
+        border-bottom: none;
+        .title{
+          font-size: 1rem;
+          line-height: 1;
+          color: #fff;
+        }
+      }
+      &__body{
+        background: #E6EAEE;
+        padding: 48px 0 56px;
       }
     }
   }

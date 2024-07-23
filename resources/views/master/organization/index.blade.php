@@ -242,12 +242,15 @@
             <a href="{{route('master.organization.edit')}}" class="c-button c-button--lineAccent ">
               <svg width="20" height="20"><use xlink:href="#organizational_chart_edit" /></svg>
             </a>
-            <!-- 組織図 -->
-            @include('master.organization._chart')
+            <div class="c-scroll h-auto" id="scrollContainer">
+               <!-- 組織図 -->
+              @include('master.organization._chart')
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  @include('master.organization._script_layer')
 @endsection
     

@@ -117,3 +117,46 @@
 
   });
 </script>
+
+<script>
+  $(document).ready(function() {
+
+    // 組織図　幅
+    var totalWidth = 0;
+    $('.p-organizationChart__underLayer .p-organizationChart__layer.layer2').each(function() {
+      totalWidth += $(this).outerWidth();
+    });
+    var finalWidth = totalWidth + 80;
+    $('.p-organizationChart').css('width', finalWidth);
+
+
+    // スクロール位置　真ん中
+    function centerScrollContainer() {
+      var $container = $('#scrollContainer');
+      var containerWidth = $container.width();
+      var contentWidth = $container[0].scrollWidth;
+      var scrollPosition = (contentWidth - containerWidth) / 2;
+      $container.scrollLeft(scrollPosition);
+    }
+    centerScrollContainer();
+    $(window).on('resize', function() {
+      centerScrollContainer();
+    });
+
+
+    // モーダルが開いた後にスクロール位置を設定する
+    $(document).on('opening.remodal', function(e) {
+      if ($(e.target).is('[data-remodal-id="modal_preview"]')) {
+        // モーダルが開いた後にスクロール位置を設定
+        setTimeout(function() {
+          var $container = $('#scrollContainer');
+          var containerWidth = $container.width();
+          var contentWidth = $container[0].scrollWidth;
+          var scrollPosition = (contentWidth - containerWidth) / 2;
+          $container.scrollLeft(scrollPosition);
+        }, 0);
+      }
+    });
+
+  });
+</script>

@@ -36,7 +36,7 @@ $('input[name="check[]"]').on('click',function(){
   }
 });
 
-// <!-- フラッシュメッセージ -->
+// フラッシュメッセージ
 $(function() {
   var query = location.search;
   var value = query.split('=');
