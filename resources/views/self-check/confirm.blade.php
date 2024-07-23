@@ -17,5 +17,5 @@
     </div>
   </div>
   @include('self-check.components.modal._selfCheck')
-  @include('self-check.components.modal._approval')
+  @include('self-check.components.modal._request')
 @endsection

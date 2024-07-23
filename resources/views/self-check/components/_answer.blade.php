@@ -153,9 +153,10 @@
                 </td>
               </tr>
 
+              <?php for($p = 0; $p < 6; $p++){ ?>
               <tr>
                 <th rowspan="" class="u-w100 sticky_1">行動規範</th>
-                <th class="u-w140 sticky_2">クラスコ100%</th>
+                <th class="u-w140 sticky_2">クラスコ10<?= $p; ?>%</th>
                 <th class="u-w300 sticky_3">
                   <p class="c-txt__xs">
                     組織ビジョン、GOFAN、目標をチームに浸透させ、チーム全員で 実行、成果を達成することをマネジメントできていたか？
@@ -181,13 +182,21 @@
                           <option value="1">1</option>
                         </select>
                       </div>
-                      <?php for($p = 0; $p < 10; $p++){ ?>
                       <div class="u-flex"></div>
-                      <?php }?>
+                      <div class="u-flex"></div>
+                      <div class="u-flex"></div>
+                      <div class="u-flex"></div>
+                      <div class="u-flex"></div>
+                      <div class="u-flex"></div>
+                      <div class="u-flex"></div>
+                      <div class="u-flex"></div>
+                      <div class="u-flex"></div>
+                      <div class="u-flex"></div>
                     </div>
                   </div>
                 </td>
               </tr>
+              <?php }?>
             </tbody>
           </table>
 

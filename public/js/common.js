@@ -35,3 +35,16 @@ $('input[name="check[]"]').on('click',function(){
     $('#all').prop('checked', false);
   }
 });
+
+// <!-- フラッシュメッセージ -->
+$(function() {
+  var query = location.search;
+  var value = query.split('=');
+  if(decodeURIComponent(value[1]) == 'successReset' || decodeURIComponent(value[1]) == 'success_reissue' ||  decodeURIComponent(value[1]) == 'on') {
+    $('.p-flash').addClass('is-active');
+  }
+});
+// モーダル内
+$('.p-check__select').on('click',function(){
+  $(this).toggleClass('is-open');
+});
