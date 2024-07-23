@@ -100,7 +100,12 @@
         </div>
 
         <div class="p-inputField--userSelect">
-          @if($selfCheckSheet->self_check_sheet_targets->isEmpty())
+          @if(count(
+            old(
+              'self_check_sheet_targets',
+              $selfCheckSheet->self_check_sheet_targets->pluck('user_id')
+            )
+          ) < 1)
             <div
               id="no_user_area"
               class="c-button c-button--large"

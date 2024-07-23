@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\BaseController;
 use App\Models\SelfCheckSheet;
 use App\Repositories\UserRepositoryInterface;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -31,6 +32,55 @@ class SelfCheckController extends BaseController
         return view("{$this->directory}.add", [
             'selfCheckSheet' => $selfCheckSheet,
         ]);
+    }
+
+    /**
+     * 複製
+     * @return RedirectResponse
+     */
+    public function copy(SelfCheckSheet $selfCheckSheet): RedirectResponse
+    {
+        $attributes = [
+            'hierarchy' => $selfCheckSheet->hierarchy,
+            'title' => $selfCheckSheet->title,
+            'period_id' => $selfCheckSheet->period_id,
+            'method' => $selfCheckSheet->method,
+            'check_days' => $selfCheckSheet->check_days,
+            'rating_days' => $selfCheckSheet->rating_days,
+            'approval_days' => $selfCheckSheet->approval_days,
+            'self_check_sheet_items' => [],
+            'self_check_sheet_targets' => [],
+        ];
+        foreach ($selfCheckSheet->first_self_check_sheet_items as $first_self_check_sheet_item) {
+            $first_self_check_sheet_items = [
+                'title' => $first_self_check_sheet_item->title,
+                'self_check_sheet_items' => [],
+            ];
+            foreach ($first_self_check_sheet_item->second_self_check_sheet_items as $second_self_check_sheet_item) {
+                $second_self_check_sheet_items = [
+                    'title' => $second_self_check_sheet_item->title,
+                    'third_check_sheet_items' => [],
+                ];
+                foreach ($second_self_check_sheet_item->third_self_check_sheet_items as $third_self_check_sheet_item) {
+                    $third_self_check_sheet_items = [
+                        'title' => $third_self_check_sheet_item->title,
+                        'movie_title' => $third_self_check_sheet_item->movie_title,
+                        'movie_url' => $third_self_check_sheet_item->movie_url,
+                    ];
+                    $second_self_check_sheet_items['self_check_sheet_items'][] = $third_self_check_sheet_items;
+                }
+                $first_self_check_sheet_items['self_check_sheet_items'][] = $second_self_check_sheet_items;
+            }
+            $attributes['self_check_sheet_items'][] = $first_self_check_sheet_items;
+        }
+        foreach ($selfCheckSheet->self_check_sheet_targets as $self_check_sheet_target) {
+            $attributes['self_check_sheet_targets'][] = [
+                'user_id' => $self_check_sheet_target->user_id
+            ];
+        }
+        return redirect()
+            ->to(route('master.self-check.add', ['hierarchy' => $selfCheckSheet->hierarchy]))
+            ->withInput($attributes);
     }
 
     public function _loadFirst(Request $request)

@@ -100,7 +100,7 @@
                       <td>
                         <div class="item row">
                           <a href="{{ route('master.self-check.edit', $selfCheckSheet) }}" class="c-button--text">編集</a>
-                          <a href="" class="c-button--text">複製</a>
+                          <a href="{{ route('master.self-check.copy', $selfCheckSheet) }}" class="c-button--text">複製</a>
                           @can('delete', $selfCheckSheet)
                             <a href="" class="c-button--text" data-remodal-target="modal_delete_{{ $selfCheckSheet->id }}">削除</a>
                             @include('master.self-check.modal._delete')
