@@ -102,6 +102,12 @@
     --button-surface-hover: var(--hover);
   }
 
+  &--white{
+    --button-text: var(--main);
+    --button-border: vvar(--white);
+    --button-surface: var(--white);
+  }
+
   &--cancel{
     --normal: #B9D4E6;
 
@@ -123,6 +129,13 @@
     --button-border-hover: var(--main-accent);
     --button-surface: var(--white) ;
     --button-surface-hover: var(--hover);
+  }
+
+  &.disabled{
+    pointer-events: none;
+    --button-text: var(--main);
+    --button-border: var(--navy-400);
+    --button-surface: var(--navy-400) ;
   }
 
   // サイズ
