@@ -27,8 +27,9 @@
       </div>
     </div>
   </div>
-
-  @include('master.member.modal._rater')
-  @include('master.member.modal._authorizer')
 @endsection
-    
+
+@section('scripts')
+  @include('master.member._script')
+@endsection
+

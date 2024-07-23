@@ -67,21 +67,24 @@
     </div>
     <div class="p-inputField">
       <label class="label" for="">承認者</label>
-      <div class="p-inputField--userSelect">
-        <div class="p-user">
-          <input type="hidden">
-          <div class="p-user__image c-noImage">
-            <img class="c-image c-image--round" src="">
-          </div>
-          <div class="p-user__text">
-            <div class="name">酒井 雄輝</div>
-          </div>
-          <span class="p-user__delete">
-            <svg width="14" height="14"><use xlink:href="#close" /></svg>
-          </span>
+      <div class="p-inputField--userSelect" id="selected-approvers">
+        @foreach (
+          old(
+            'approvers',
+            $approvers->pluck('manager_user_id')
+          ) as $approver
+        )
+          {{--  承認者一覧  --}}
+          <x-users.form-selected-approvers :id="$approver" />
+        @endforeach
+        <div
+          data-remodal-target="modal_approver"
+          class="c-button"
+          onclick="serachApprover()"
+        >
+          承認者を登録
         </div>
-        <div data-remodal-target="modal_authorizer" class="c-button">承認者を登録</div>
-        <p class="alert">承認者を登録してください</p>
+        {{--  <p class="alert">承認者を登録してください</p>  --}}
       </div>
     </div>
     <div class="p-inputField">
@@ -105,3 +108,6 @@
   </div>
 
 </form>
+
+@include('master.member.modal._rater')
+@include('master.member.modal._approver')

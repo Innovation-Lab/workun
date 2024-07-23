@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Users;
 
+use App\Models\Approver;
 use App\Models\Department;
 use App\Models\Employment;
 use App\Models\Grade;
@@ -13,6 +14,7 @@ use Illuminate\View\Component;
 
 class FormEdit extends Component
 {
+    public $approvers;
     public $departments;
     public $positions;
     public $grades;
@@ -24,6 +26,7 @@ class FormEdit extends Component
     public function __construct(
         public $user
     ) {
+        $this->approvers = $this->getApprovers($user->id);
         $this->departments = Department::all();
         $this->employments = Employment::all();
         $this->grades = Grade::all();
@@ -43,5 +46,12 @@ class FormEdit extends Component
             'positions' => $this->positions,
             'roles' => User::ROLE_LIST,
         ]);
+    }
+
+    private function getApprovers($user_id)
+    {
+        return Approver::where('user_id', $user_id)
+            ->with('manager')
+            ->get();
     }
 }
