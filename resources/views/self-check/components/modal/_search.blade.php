@@ -7,31 +7,31 @@
     <div class="p-formBlock__form">
       <div class="p-inputField p-inputField--full">
         <label class="label">評価期間</label>
-        <select name="department_id">
+        <select name="department_id" class="primary">
           <option value="">評価期間を選択</option>
         </select>
       </div>
       <div class="p-inputField">
         <label class="label">部署</label>
-        <select name="department_id">
+        <select name="department_id" class="primary">
           <option value="">部署を選択</option>
         </select>
       </div>
       <div class="p-inputField">
         <label class="label">役職</label>
-        <select name="position_id">
+        <select name="position_id" class="primary">
           <option value="">役職を選択</option>
         </select>
       </div>
       <div class="p-inputField">
         <label class="label">等級</label>
-        <select name="grade_id">
+        <select name="grade_id" class="primary">
           <option value="">等級を選択</option>
         </select>
       </div>
       <div class="p-inputField">
         <label class="label" for="employment_id">雇用形態</label>
-        <select name="employment_id">
+        <select name="employment_id" class="primary">
           <option value="">雇用形態を選択</option>
         </select>
       </div>
