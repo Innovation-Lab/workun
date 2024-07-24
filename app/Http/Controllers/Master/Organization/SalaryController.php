@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Master\Organization;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
-class GradeController extends BaseController
+class SalaryController extends BaseController
 {
-    protected string $directory = "master/organization/grade";
+    protected string $directory = "master/organization/salary";
     protected string $redirect_after_addition = "master/organization.index";
     protected string $redirect_after_delete = "master/organization.index";
-    protected string $model_name = "grade";
+    protected string $model_name = "salary";
 }
