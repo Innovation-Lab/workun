@@ -20,4 +20,9 @@ class Department extends Model
         'name',
         'seq',
     ];
+
+    public function childDepartments()
+    {
+        return $this->hasMany(Department::class, 'department_id');
+    }
 }

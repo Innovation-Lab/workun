@@ -243,8 +243,8 @@
               <svg width="20" height="20"><use xlink:href="#organizational_chart_edit" /></svg>
             </a>
             <div class="c-scroll h-auto" id="scrollContainer">
-               <!-- 組織図 -->
-              @include('master.organization._chart')
+              <!-- 組織図 -->
+              <x-organizations.form-index />
             </div>
           </div>
         </div>

@@ -52,4 +52,9 @@ class Organization extends Authenticatable
     {
         return $this->users()->valid()->get();
     }
+
+    protected function scopeOrganization($query, $organization_id)
+    {
+        return $query->where('id', $organization_id);
+    }
 }
