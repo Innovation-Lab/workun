@@ -23,7 +23,7 @@ class EmploymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:85',
+            'name' => 'required|max:30',
         ];
     }
 

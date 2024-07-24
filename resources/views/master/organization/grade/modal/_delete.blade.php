@@ -2,7 +2,7 @@
   <button data-remodal-action="close" class="remodal-close p-modal__close">閉じる</button>
   <div class="p-modal__head">
     <p class="title">等級「{{ $grade->name }}」の削除</p>
-    <p class="description">等級「{{ $grade->name }}」を削除します。よろしいですか。<br>従業員情報に紐付いたこの値は全て空欄になります。</p>
+    <p class="description">等級「{{ $grade->name }}」を削除します。よろしいですか。</p>
   </div>
   <div class="p-modal__body">
     <div class="p-formBlock__action">
