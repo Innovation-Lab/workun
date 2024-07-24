@@ -144,6 +144,28 @@
     });
 
 
+    // 組織図に紐づいている従業員リストの表示
+    $('.p-organizationChart__item .button').on('click', function() {
+      var $button = $(this);
+      var $userList = $button.closest('.p-organizationChart').siblings('.p-organizationChart__userList');
+      $button.addClass('is-open');
+      $userList.addClass('is-open');
+    });
+    $('.p-organizationChart__userList .item .close').on('click', function() {
+      $('.p-organizationChart__item .button').removeClass('is-open');
+      $('.p-organizationChart__userList').removeClass('is-open');
+    });
+    $('.p-organizationChart__item .button').hover(
+      function() {
+        $(this).closest('.button__area').addClass('hover');
+      }, 
+      function() {
+        $(this).closest('.button__area').removeClass('hover');
+      }
+    );
+
+
+
     // モーダルが開いた後にスクロール位置を設定する
     $(document).on('opening.remodal', function(e) {
       if ($(e.target).is('[data-remodal-id="modal_preview"]')) {

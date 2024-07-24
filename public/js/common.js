@@ -44,6 +44,7 @@ $(function() {
     $('.p-flash').addClass('is-active');
   }
 });
+
 // モーダル内
 $('.p-check__select').on('click',function(){
   $(this).toggleClass('is-open');
