@@ -71,4 +71,5 @@ Route::group([
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
     Route::post('/edit/{user}', [UserController::class, 'update']);
+    Route::get('/_lodeUsers', [UserController::class, '_lodeUsers'])->name('_lodeUsers');
 });

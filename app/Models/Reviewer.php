@@ -18,4 +18,9 @@ class Reviewer extends Model
         'user_id',
         'manager_user_id',
     ];
+
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager_user_id');
+    }
 }

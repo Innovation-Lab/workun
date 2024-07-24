@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
+use App\Models\Approver;
 use App\Models\Organization;
+use App\Models\Reviewer;
 use App\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
@@ -68,6 +70,41 @@ class UserRepository implements UserRepositoryInterface
      */
     public function update(User $user, Request $request): User
     {
+        $approvers = $request->get('approvers');
+        $reviewers = $request->get('reviewers');
+
+        if ($approvers) {
+            Approver::where('user_id', $user->id)->delete();
+            foreach ($approvers as $manager_user_id) {
+                $approver = new Approver();
+                $approver_attributes = [
+                    'user_id' => $user->id,
+                    'manager_user_id' => $manager_user_id,
+                ];
+
+                $approver = $approver->fill($approver_attributes);
+                if (!$approver->save()) {
+                    throw new Exception("承認者の登録に失敗しました。");
+                }
+            }
+        }
+
+        if ($reviewers) {
+            Reviewer::where('user_id', $user->id)->delete();
+            foreach ($reviewers as $manager_user_id) {
+                $reviewer = new Reviewer();
+                $reviewer_attributes = [
+                    'user_id' => $user->id,
+                    'manager_user_id' => $manager_user_id,
+                ];
+
+                $reviewer = $reviewer->fill($reviewer_attributes);
+                if (!$reviewer->save()) {
+                    throw new Exception("評価者の登録に失敗しました。");
+                }
+            }
+        }
+
         $attributes = $this->makeAttributes($request);
         $user = $user->fill($attributes);
         if (!$user->save()) {

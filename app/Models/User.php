@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\ImageTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -101,6 +102,16 @@ class User extends Authenticatable
     public function employment(): BelongsTo
     {
         return $this->belongsTo(Employment::class);
+    }
+
+    public function approvers(): HasMany
+    {
+        return $this->HasMany(Approver::class);
+    }
+
+    public function reviewers(): HasMany
+    {
+        return $this->HasMany(Reviewer::class);
     }
 
     protected function getAnswerSelfCheckSheetsAttribute()

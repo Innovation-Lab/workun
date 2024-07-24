@@ -14,5 +14,6 @@
     <!-- script -->
     <script src="{{secure_asset('js/common.js')}}" type="text/javascript"></script>
     <script src="{{secure_asset('js/library/remodal.js')}}" type="text/javascript"></script>
+    @yield('scripts')
   </body>
 </html>
