@@ -147,6 +147,11 @@ class User extends Authenticatable
         return "{$this->sei} {$this->mei}";
     }
 
+    protected function getFullNameKanaAttribute()
+    {
+        return "{$this->kana_sei} {$this->kana_mei}";
+    }
+
     protected function getDepartmentLabelAttribute()
     {
         return implode("、", $this->departments->pluck('name')->toArray());
@@ -170,6 +175,16 @@ class User extends Authenticatable
     protected function getEmploymentLabelAttribute()
     {
         return data_get($this, 'employment.name');
+    }
+
+    protected function getDisplayBirthAttribute()
+    {
+        return $this->birth ? date('Y年 m月 d日', strtotime($this->birth)) : null;
+    }
+
+    protected function getDisplayJoinedForEditAttribute()
+    {
+        return $this->joined ? date('Y年 m月 d日', strtotime($this->joined)) : null;
     }
 
     protected function getDisplayJoinedAttribute()

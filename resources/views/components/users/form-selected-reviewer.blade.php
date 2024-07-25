@@ -4,7 +4,7 @@
     name="reviewers[]"
     value="{{ $user->id }}">
   <div class="p-user__image">
-    <img class="c-image c-image--round" src="{{ $user->img_path }}">
+    <img class="c-image c-image--round" src="{{ $user->avatar_url }}">
   </div>
   <div class="p-user__text">
     <div class="name">
