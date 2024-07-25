@@ -13,9 +13,9 @@
   <div class="p-tableBox__body" style="padding:0">
     <form action="">
       {{-- テーブル一覧 --}}
-      <div class="p-table__check c-scroll">
+      <div class="p-table__check c-scroll noneBtn">
         <div class="t-wrapper">
-          <table class="t-table t-table__narrow">
+          <table class="t-table t-table__narrow  t-table__resultall">
             <thead>
               <tr>
                 <th colspan="3" rowspan="2" class="sticky_1">
@@ -38,7 +38,7 @@
                     </div>
                   </div>
                   <div class="p-table__cell--input">
-                    <div class="u-tac u-w80 c-txt__sm cell sticky_4" style="line-height: 2.101;">平均</div>
+                    <div class="u-tac u-w80 c-txt__sm cell sticky_4 c-border_r2" style="line-height: 2.101; border-right: 0;">平均</div>
                     <div class="cell u-w140 u-tac c-txt__xs">
                       <a data-remodal-target="modal_selfCheck" class="name">山口 太郎</a>
                     </div>
@@ -67,7 +67,7 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4">
+                    <div class="u-w80 sticky_4 c-border_r2">
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
@@ -92,7 +92,7 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4">
+                    <div class="u-w80 sticky_4 c-border_r2">
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
@@ -117,7 +117,7 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4">
+                    <div class="u-w80 sticky_4 c-border_r2">
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
@@ -142,7 +142,7 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4">
+                    <div class="u-w80 sticky_4 c-border_r2">
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
@@ -168,7 +168,7 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4">
+                    <div class="u-w80 sticky_4 c-border_r2">
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
@@ -193,7 +193,7 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4">
+                    <div class="u-w80 sticky_4 c-border_r2">
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                     <?php for($p = 0; $p < 10; $p++){ ?>
@@ -214,19 +214,7 @@
 
         </div>
       </div>
-      <div class="u-align--end u-pd24">
-        <?php
-            $url = $_SERVER['REQUEST_URI'];
-        ?>
-        @if(strstr($url,'confirm'))
-          <input type="submit" class="c-button--text" value="下書き保存する">
-          <input type="submit" class="c-button c-button--primary" value="承認を依頼する">
-        @elseif(strstr($url,'approval'))
-          <input type="submit" class="c-button--text" value="下書き保存する">
-          <input type="submit" class="c-button c-button--primary" value="この結果を承認する">
-        @else
-        @endif
-      </div>
+      <div class="u-align--end u-pd12"></div>
     </form>
   </div>
 </div>

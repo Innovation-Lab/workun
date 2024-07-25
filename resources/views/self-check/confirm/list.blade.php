@@ -6,7 +6,7 @@
       <div class="p-page__head">
         <!-- ページタイトル -->
         <div class="p-head">
-          <a href="{{route('master.member.index')}}" class="return">
+          <a href="javascript:history.back()" class="c-button__back">
             <svg width="28" height="28"><use xlink:href="#chevron_left" /></svg>
           </a>
           <p class="title">2024年 9月 :  基幹職 仕事ぶりチェック</p>

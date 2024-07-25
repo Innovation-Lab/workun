@@ -137,7 +137,9 @@
       
     }
     .p-inputField{
-      padding-inline: 20px;  
+      &.space{
+        padding-inline: 20px;  
+      }
     }
     .p-formBlock__action{
       margin-block-start: -1px;
@@ -243,12 +245,11 @@
       &__check{
         max-height:75vh;
         &--month{
-          width: calc(70vw - 540px);
+          width: calc(70vw - 368px);
         }
         .sticky_4 {
-          &::before,&::after{
-            display: none;
-          }
+          border-right: 0;
+          border-bottom: 0;
           .cell--number{
             border-bottom: none;
           }

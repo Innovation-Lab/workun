@@ -13,11 +13,11 @@
           <table class="t-table t-table__narrow">
             <thead>
               <tr>
-                <th colspan="3" rowspan="2" class="sticky_1">
+                <th colspan="3" rowspan="2" class="sticky_1 c-border_r2">
                   <div class="p-table__check--head">セルフチェック項目</div>
                 </th>
                 <th colspan="24">
-                  <div class="cell sticky_5 p-table__check--month c-border_0 u-tac">期間 : 2024.07 ~ 2025.06</div>
+                  <div class="cell sticky_4 p-table__check--month c-border_0 u-tac">期間 : 2024.07 ~ 2025.06</div>
                   <div class="p-table__cell--input">
                     <div class="p-table__cell">
                       <div class="u-tac c-txt__xs cell u-w140">
@@ -42,7 +42,7 @@
               <tr>
                 <th rowspan="3" class="u-w100 sticky_1">業務遂行力</th>
                 <th class="u-w140 sticky_2">マネジメント力</th>
-                <th class="u-w300 sticky_3">
+                <th class="u-w300 sticky_3 c-border_r2">
                   <p class="c-txt__xs">
                     組織ビジョン、GOFAN、目標をチームに浸透させ、チーム全員で 実行、成果を達成することをマネジメントできていたか？
                   </p>
@@ -79,7 +79,7 @@
               </tr>
               <tr>
                 <th rowspan="" class="sticky_2">成長力</td>
-                <th class="sticky_3">
+                <th class="sticky_3 c-border_r2">
                   <p class="c-txt__xs">
                   業務を遂行する上で、今期の成長課題を克服したか？
                   </p>
@@ -116,7 +116,7 @@
               </tr>
               <tr>
                 <th rowspan="" class="sticky_2">成長（業務分担書）</th>
-                <th class="sticky_3">
+                <th class="sticky_3 c-border_r2">
                   <p class="c-txt__xs">
                   業務を遂行するか？
                   </p>
@@ -156,7 +156,7 @@
               <tr>
                 <th rowspan="" class="u-w100 sticky_1">行動規範</th>
                 <th class="u-w140 sticky_2">クラスコ10<?= $p; ?>%</th>
-                <th class="u-w300 sticky_3">
+                <th class="u-w300 sticky_3 c-border_r2">
                   <p class="c-txt__xs">
                     組織ビジョン、GOFAN、目標をチームに浸透させ、チーム全員で 実行、成果を達成することをマネジメントできていたか？
                   </p>
@@ -207,17 +207,11 @@
         <?php
             $url = $_SERVER['REQUEST_URI'];
         ?>
-        @if(strstr($url,'answer'))
-        <a data-remodal-target="modal_submission" class="c-button c-button--primary u-w160">記入を完了する</a>
-        <!-- <input type="submit" class="c-button c-button--primary u-w160" value="記入を完了する"> -->
-        @elseif(strstr($url,'confirm'))
+        @if(strstr($url,'confirm'))
         <a data-remodal-target="modal_remand" class="c-button c-button--delete u-w100">差戻し</a>
-        <a data-remodal-target="modal_request" class="c-button c-button--primary u-w160">この結果を承認する</a>
+        <a data-remodal-target="modal_request" class="c-button c-button--primary u-w160">承認を依頼する</a>
         @elseif(strstr($url,'approval'))
         <a class="c-button c-button--primary u-w160">入力内容を反映</a>
-        @elseif(strstr($url,'result'))
-        <a data-remodal-target="modal_submission" class="c-button c-button--primary u-w160">入力内容を反映する</a>
-        <!-- <input type="submit" class="c-button c-button--primary u-w160" value="入力内容を反映する"> -->
         @else
         @endif
       </div>

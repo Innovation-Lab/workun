@@ -21,7 +21,7 @@
                 <th colspan="3" rowspan="2" class="sticky_1">
                   <div class="p-table__check--head">セルフチェック項目</div>
                 </th>
-                <th colspan="" rowspan="2" class="sticky_4">
+                <th colspan="" rowspan="2" class="sticky_4 c-border_r2">
                   <div class="p-table__check--head2">確認動画</div>
                 </th>
                 <th colspan="24">
@@ -55,7 +55,7 @@
                     組織ビジョン、GOFAN、目標をチームに浸透させ、チーム全員で 実行、成果を達成することをマネジメントできていたか？
                   </p>
                 </th>
-                <th class="u-w200 sticky_4">
+                <th class="u-w200 sticky_4 c-border_r2">
                   <a class="c-button--underline">
                     確認動画
                   </a>
@@ -94,7 +94,7 @@
                   業務を遂行する上で、今期の成長課題を克服したか？
                   </p>
                 </th>
-                <th class="u-w200 sticky_4">
+                <th class="u-w200 sticky_4 c-border_r2">
                   <a class="c-button--underline">
                     確認動画
                   </a>
@@ -133,7 +133,7 @@
                   業務を遂行するか？
                   </p>
                 </th>
-                <th class="u-w200 sticky_4">
+                <th class="u-w200 sticky_4 c-border_r2">
                   <a class="c-button--underline">
                     確認動画
                   </a>
@@ -175,7 +175,7 @@
                     組織ビジョン、GOFAN、目標をチームに浸透させ、チーム全員で 実行、成果を達成することをマネジメントできていたか？
                   </p>
                 </th>
-                <th class="u-w200 sticky_4">
+                <th class="u-w200 sticky_4 c-border_r2">
                   <a class="c-button--underline">
                     確認動画
                   </a>

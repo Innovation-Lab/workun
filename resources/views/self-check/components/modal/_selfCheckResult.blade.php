@@ -35,7 +35,7 @@
                       <div class="cell sticky_4 p-table__check--month c-border_0 u-tac">期間 : 2024.07 ~ 2025.06</div>
                       <div class="p-table__cell--input">
                         <div class="p-table__cell">
-                          <div class="u-tac u-w100 c-txt__sm cell sticky_4" style="line-height: 2.2;">平均</div>
+                          <div class="u-tac u-w100 c-txt__sm cell sticky_4 c-border_r2" style="line-height: 2.2; border-right: 0;">平均</div>
                           <div class="u-tac c-txt__xs cell u-w140">
                             <strong class="c-txt__lg c-txt__weight--700">7</strong>月
                           </div>
@@ -65,7 +65,7 @@
                     </th>
                     <td>
                       <div class="p-table__cell--input">
-                        <div class="u-w100 sticky_4 u-flex cell cell--item">
+                        <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
                           <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                           <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                         </div>
@@ -91,7 +91,7 @@
                     </th>
                     <td>
                       <div class="p-table__cell--input">
-                        <div class="u-w100 sticky_4 u-flex cell cell--item">
+                        <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
                           <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                           <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                         </div>
@@ -117,7 +117,7 @@
                     </th>
                     <td>
                       <div class="p-table__cell--input">
-                        <div class="u-w100 sticky_4 u-flex cell cell--item">
+                        <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
                           <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                           <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                         </div>
@@ -143,7 +143,7 @@
                     </th>
                     <td>
                       <div class="p-table__cell--input">
-                        <div class="u-w100 sticky_4 u-flex cell cell--item">
+                        <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
                           <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                           <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                         </div>
@@ -170,7 +170,7 @@
                     </th>
                     <td>
                       <div class="p-table__cell--input">
-                        <div class="u-w100 sticky_4 u-flex cell cell--item">
+                        <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
                           <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                           <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                         </div>
@@ -196,7 +196,7 @@
                     </th>
                     <td>
                       <div class="p-table__cell--input">
-                        <div class="u-w100 sticky_4 u-flex cell cell--item">
+                        <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
                           <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                           <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                         </div>

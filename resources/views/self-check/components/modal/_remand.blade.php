@@ -14,7 +14,7 @@
   </div>
   <div class="p-modal__body">
     <form action="">
-      <div class="p-inputField">
+      <div class="p-inputField space">
         <label for="" class="label">差戻し理由</label>
         <textarea name="" id="" placeholder="記入された数値が適当ではないため、記入のやり直しをお願いします。"></textarea>
       </div>

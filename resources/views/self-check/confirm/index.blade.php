@@ -6,7 +6,7 @@
       <div class="p-page__head">
         <h1 class="p-page__head--title u-align">
           <a href="javascript:history.back()" class="c-button__back">
-            <svg width="20" height="20"><use xlink:href="#chevron_left" /></svg>
+            <svg width="28" height="28"><use xlink:href="#chevron_left" /></svg>
           </a>
           セルフチェック評価
         </h1>
