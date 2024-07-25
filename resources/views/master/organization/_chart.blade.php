@@ -26,6 +26,22 @@
             'layer4' => [
               [
                 'name' => '賃貸戦略室',
+                'layer5' => [
+                  [
+                    'name' => '賃貸戦略室',
+                  ],
+                  [
+                    'name' => '賃貸戦略室',
+                    'layer6' => [
+                      [
+                        'name' => '賃貸戦略室',
+                      ],
+                      [
+                        'name' => '賃貸戦略室',
+                      ]
+                    ]
+                  ]
+                ]
               ],
               [
                 'name' => '法人課',
@@ -74,7 +90,7 @@
           <p class="name"><?= $organization['name']; ?></p>
           <div class="button__area">
             <div class="button">
-              <svg width="10" height="10"><use xlink:href="#organizational_user_list" /></svg>
+              <svg width="16" height="16"><use xlink:href="#organizational_user_list" /></svg>
             </div>
           </div>
         </div>
@@ -104,6 +120,24 @@
         <?php foreach ($organization['layer4'] as $layer4) { ?>
           <div class="p-organizationChart__layer layer4">
             <?php displayOrganization($layer4, $level + 1);?>
+          </div>
+        <?php } ?>
+      </div>
+    <?php } ?>
+    <?php if(isset($organization['layer5'])) { ?>
+      <div class="p-organizationChart__underLayer">
+        <?php foreach ($organization['layer5'] as $layer5) { ?>
+          <div class="p-organizationChart__layer layer5">
+            <?php displayOrganization($layer5, $level + 1);?>
+          </div>
+        <?php } ?>
+      </div>
+    <?php } ?>
+    <?php if(isset($organization['layer6'])) { ?>
+      <div class="p-organizationChart__underLayer">
+        <?php foreach ($organization['layer6'] as $layer6) { ?>
+          <div class="p-organizationChart__layer layer6">
+            <?php displayOrganization($layer6, $level + 1);?>
           </div>
         <?php } ?>
       </div>
