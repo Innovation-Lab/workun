@@ -24,4 +24,9 @@ class Position extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    protected function scopeOrganization ($query, $organization_id)
+    {
+        return $query->where('positions.organization_id', $organization_id);
+    }
 }
