@@ -182,6 +182,12 @@ class User extends Authenticatable
         return $this->created_at ? date('Y.m.d', strtotime($this->created_at)) : null;
     }
 
+    // memo: login_codeが未定義のプロパティとエラーが起きるので別の書き方で対応。
+    protected function getLoginCodeAttribute()
+    {
+        return strstr($this->attributes['login_code'], '#', true) ? strstr($this->attributes['login_code'], '#', true) : $this->attributes['login_code'];
+    }
+
     protected function scopeOrganization($query, $organization_id)
     {
         return $query->where('users.organization_id', $organization_id);
