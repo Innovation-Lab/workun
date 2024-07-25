@@ -59,6 +59,11 @@ class UserRepository implements UserRepositoryInterface
             $query->where('users.employment_id', $request->get('employment_id'));
         }
 
+        if ($request->get('unregistered_reviewer_and_approver')) {
+            $query->whereDoesntHave('approvers')
+                ->whereDoesntHave('reviewers');
+        }
+
         return $query;
     }
 

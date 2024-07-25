@@ -18,7 +18,12 @@
         <select name="department_id" id="" class="primary">
           <option value="">部署を選択</option>
           @foreach($departments as $department)
-            <option value="{{ $department->id }}">{{ $department->name }}</option>
+            <option
+              value="{{ $department->id }}"
+              {{ request('department_id') == $department->id ? 'selected' : '' }}
+            >
+              {{ $department->name }}
+            </option>
           @endforeach
         </select>
       </div>
@@ -27,7 +32,12 @@
         <select name="position_id" id="" class="primary">
           <option value="">役職を選択</option>
           @foreach($positions as $position)
-            <option value="{{ $position->id }}">{{ $position->name }}</option>
+          <option
+            value="{{ $position->id }}"
+            {{ request('position_id') == $position->id ? 'selected' : '' }}
+          >
+            {{ $position->name }}
+          </option>
           @endforeach
         </select>
       </div>
@@ -36,7 +46,12 @@
         <select name="grade_id" id="" class="primary">
           <option value="">等級を選択</option>
           @foreach($grades as $grade)
-            <option value="{{ $grade->id }}">{{ $grade->name }}</option>
+          <option
+            value="{{ $grade->id }}"
+            {{ request('grade_id') == $grade->id ? 'selected' : '' }}
+          >
+            {{ $grade->name }}
+          </option>
           @endforeach
         </select>
       </div>
@@ -45,7 +60,12 @@
         <select name="employment_id" id="" class="primary">
           <option value="">雇用形態を選択</option>
           @foreach($employments as $employment)
-            <option value="{{ $employment->id }}">{{ $employment->name }}</option>
+          <option
+            value="{{ $employment->id }}"
+            {{ request('employment_id') == $employment->id ? 'selected' : '' }}
+          >
+            {{ $employment->name }}
+          </option>
           @endforeach
         </select>
       </div>
@@ -53,7 +73,14 @@
         <span class="label" >表示条件</span>
         <div class="p-inputField--checkbox">
           <label for="display_format" class="tab tab--ghost">
-            <input type="checkbox" id="display_format" name="" value="">評価者 / 承認者 の未登録ユーザーのみを表示
+            <input
+              type="checkbox"
+              id="display_format"
+              name="unregistered_reviewer_and_approver"
+              value="1"
+              {{ request('unregistered_reviewer_and_approver') ? 'checked' : '' }}
+            >
+              評価者 / 承認者 の未登録ユーザーのみを表示
           </label>
         </div>
       </div>
