@@ -73,8 +73,9 @@ class UserRepository implements UserRepositoryInterface
         $approvers = $request->get('approvers');
         $reviewers = $request->get('reviewers');
 
+        Approver::where('user_id', $user->id)->delete();
+        // 承認者を登録
         if ($approvers) {
-            Approver::where('user_id', $user->id)->delete();
             foreach ($approvers as $manager_user_id) {
                 $approver = new Approver();
                 $approver_attributes = [
@@ -89,8 +90,9 @@ class UserRepository implements UserRepositoryInterface
             }
         }
 
+        Reviewer::where('user_id', $user->id)->delete();
+        // 評価者を登録
         if ($reviewers) {
-            Reviewer::where('user_id', $user->id)->delete();
             foreach ($reviewers as $manager_user_id) {
                 $reviewer = new Reviewer();
                 $reviewer_attributes = [
