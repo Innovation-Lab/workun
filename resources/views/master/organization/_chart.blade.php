@@ -27,7 +27,7 @@
     <?php if(isset($organization->child_departments)) { ?>
       <div class="p-organizationChart__underLayer">
         <?php foreach ($organization->child_departments as $child) { ?>
-          <div c
+          <div class="p-organizationChart__layer layer<?= $level + 1 ?>">
             <?php displayOrganization($child, $level + 1);?>
           </div>
         <?php } ?>
