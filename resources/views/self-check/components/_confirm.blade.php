@@ -1,12 +1,7 @@
 <div class="p-tableBox">
-  <div class="p-tableBox__head">
+  <div class="p-tableBox__head between">
     <div class="mainText">
-      <p class="status--1">実施中</p>
-      <p class="title">基幹職 仕事ぶりチェック</p>
-    </div>
-    <div class="comment">
-      <svg width="20" height="20"><use xlink:href="#remand_comment" /></svg>
-      <p>「チーム活性化行動」に関して再度記入のし直しをお願いします。</p>
+      <p class="title">2024年 9月 評価入力  :  基幹職 仕事ぶりチェック</p>
     </div>
   </div>
   
@@ -15,14 +10,11 @@
       {{-- テーブル一覧 --}}
       <div class="p-table__check c-scroll">
         <div class="t-wrapper">
-          <table class="t-table t-table__narrow">
+          <table class="t-table t-table__narrow t-table__confirm">
             <thead>
               <tr>
                 <th colspan="3" rowspan="2" class="sticky_1">
                   <div class="p-table__check--head">セルフチェック項目</div>
-                </th>
-                <th colspan="" rowspan="2" class="sticky_4">
-                  <div class="p-table__check--head2">確認動画</div>
                 </th>
                 <th colspan="24">
                   <div class="cell sticky_5 p-table__check--month c-border_0 u-tac">期間 : 2024.07 ~ 2025.06</div>
@@ -32,12 +24,12 @@
                         <strong class="c-txt__lg c-txt__weight--700">7</strong>月
                       </div>
                       <?php for($p = 8; $p < 13; $p++){ ?>  
-                      <div class="u-tac c-txt__xs cell u-w100">
+                      <div class="u-tac c-txt__xs cell u-w140">
                         <strong class="c-txt__lg c-txt__weight--700"><?= $p; ?></strong>月
                       </div>
                       <?php }?>
                       <?php for($p = 1; $p < 7; $p++){ ?>  
-                      <div class="u-tac c-txt__xs cell u-w100">
+                      <div class="u-tac c-txt__xs cell u-w140">
                         <strong class="c-txt__lg c-txt__weight--700"><?= $p; ?></strong>月
                       </div>
                       <?php }?>
@@ -55,33 +47,31 @@
                     組織ビジョン、GOFAN、目標をチームに浸透させ、チーム全員で 実行、成果を達成することをマネジメントできていたか？
                   </p>
                 </th>
-                <th class="u-w200 sticky_4">
-                  <a class="c-button--underline">
-                    確認動画
-                  </a>
-                </th>
                 <td>
                   <div class="p-table__cell--input">
                     <div class="p-table__cell">
                       <div class="u-flex u-w140 cell cell--item">
-                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
-                        <div class="cell--number c-txt__md c-txt__weight--600">4</div>
+                        <div class="cell--number full c-txt__md c-txt__weight--600">4</div>
                         <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
 来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
 
 来月も頑張りましょう!</p>
                       </div>
-                      <div class="u-flex cell cell--item u-w100">
-                        <select name="" class="p-table__cell--select full">
-                          <option value="5">5</option>
-                          <option value="4">4</option>
-                          <option value="3" selected>3</option>
-                          <option value="2">2</option>
-                          <option value="1">1</option>
-                        </select>
+                      <div class="u-flex u-w140 cell cell--item currentMonth">
+                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
+                        <div class="cell--number c-txt__md c-txt__weight--600">
+                          <select name="" class="p-table__cell--select">
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3" selected>3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                          </select>
+                        </div>
+                        <p class="comment c-empty" data-remodal-target="modal_commentForm">備考があれば記入</p>
                       </div>
-                      <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex cell cell--item u-w100"></div>
+                      <?php for($p = 0; $p < 8; $p++){ ?>
+                        <div class="u-flex u-w140 cell cell--item"></div>
                       <?php }?>
                     </div>
                   </div>
@@ -94,33 +84,31 @@
                   業務を遂行する上で、今期の成長課題を克服したか？
                   </p>
                 </th>
-                <th class="u-w200 sticky_4">
-                  <a class="c-button--underline">
-                    確認動画
-                  </a>
-                </th>
                 <td>
                   <div class="p-table__cell--input">
                     <div class="p-table__cell">
-                      <div class="u-flex cell u-w140 cell--item">
-                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
-                        <div class="cell--number c-txt__md c-txt__weight--600">4</div>
+                      <div class="u-flex u-w140 cell cell--item">
+                        <div class="cell--number full c-txt__md c-txt__weight--600">4</div>
                         <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
 来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
 
 来月も頑張りましょう!</p>
                       </div>
-                      <div class="u-flex cell cell--item u-w100">
-                        <select name="" class="p-table__cell--select full">
-                          <option value="5">5</option>
-                          <option value="4">4</option>
-                          <option value="3" selected>3</option>
-                          <option value="2">2</option>
-                          <option value="1">1</option>
-                        </select>
+                      <div class="u-flex u-w140 cell cell--item currentMonth">
+                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
+                        <div class="cell--number c-txt__md c-txt__weight--600">
+                          <select name="" class="p-table__cell--select">
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3" selected>3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                          </select>
+                        </div>
+                        <p class="comment c-empty" data-remodal-target="modal_commentForm">備考があれば記入</p>
                       </div>
-                      <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex cell cell--item u-w100"></div>
+                      <?php for($p = 0; $p < 8; $p++){ ?>
+                        <div class="u-flex u-w140 cell cell--item"></div>
                       <?php }?>
                     </div>
                   </div>
@@ -133,33 +121,31 @@
                   業務を遂行するか？
                   </p>
                 </th>
-                <th class="u-w200 sticky_4">
-                  <a class="c-button--underline">
-                    確認動画
-                  </a>
-                </th>
                 <td>
                   <div class="p-table__cell--input">
                     <div class="p-table__cell">
-                      <div class="u-flex cell u-w140 cell--item">
-                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
-                        <div class="cell--number c-txt__md c-txt__weight--600">4</div>
+                      <div class="u-flex u-w140 cell cell--item">
+                        <div class="cell--number full c-txt__md c-txt__weight--600">4</div>
                         <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
 来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
 
 来月も頑張りましょう!</p>
                       </div>
-                      <div class="u-flex cell cell--item u-w100">
-                        <select name="" class="p-table__cell--select full">
-                          <option value="5">5</option>
-                          <option value="4">4</option>
-                          <option value="3" selected>3</option>
-                          <option value="2">2</option>
-                          <option value="1">1</option>
-                        </select>
+                      <div class="u-flex u-w140 cell cell--item currentMonth">
+                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
+                        <div class="cell--number c-txt__md c-txt__weight--600">
+                          <select name="" class="p-table__cell--select">
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3" selected>3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                          </select>
+                        </div>
+                        <p class="comment c-empty" data-remodal-target="modal_commentForm">備考があれば記入</p>
                       </div>
-                      <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex cell cell--item u-w100"></div>
+                      <?php for($p = 0; $p < 8; $p++){ ?>
+                        <div class="u-flex u-w140 cell cell--item"></div>
                       <?php }?>
                     </div>
                   </div>
@@ -175,41 +161,37 @@
                     組織ビジョン、GOFAN、目標をチームに浸透させ、チーム全員で 実行、成果を達成することをマネジメントできていたか？
                   </p>
                 </th>
-                <th class="u-w200 sticky_4">
-                  <a class="c-button--underline">
-                    確認動画
-                  </a>
-                </th>
                 <td>
                   <div class="p-table__cell--input">
                     <div class="p-table__cell">
-                      <div class="u-flex cell u-w140 cell--item">
-                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
-                        <div class="cell--number c-txt__md c-txt__weight--600">4</div>
+                      <div class="u-flex u-w140 cell cell--item">
+                        <div class="cell--number full c-txt__md c-txt__weight--600">4</div>
                         <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
 来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
 
 来月も頑張りましょう!</p>
                       </div>
-                      <div class="u-flex cell cell--item u-w100">
-                        <select name="" class="p-table__cell--select full">
-                          <option value="5">5</option>
-                          <option value="4">4</option>
-                          <option value="3" selected>3</option>
-                          <option value="2">2</option>
-                          <option value="1">1</option>
-                        </select>
+                      <div class="u-flex u-w140 cell cell--item currentMonth">
+                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
+                        <div class="cell--number c-txt__md c-txt__weight--600">
+                          <select name="" class="p-table__cell--select">
+                            <option value="5">5</option>
+                            <option value="4">4</option>
+                            <option value="3" selected>3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                          </select>
+                        </div>
+                        <p class="comment c-empty" data-remodal-target="modal_commentForm">備考があれば記入</p>
                       </div>
-                      <div class="u-flex cell cell--item u-w100"></div>
-                      <div class="u-flex cell cell--item u-w100"></div>
-                      <div class="u-flex cell cell--item u-w100"></div>
-                      <div class="u-flex cell cell--item u-w100"></div>
-                      <div class="u-flex cell cell--item u-w100"></div>
-                      <div class="u-flex cell cell--item u-w100"></div>
-                      <div class="u-flex cell cell--item u-w100"></div>
-                      <div class="u-flex cell cell--item u-w100"></div>
-                      <div class="u-flex cell cell--item u-w100"></div>
-                      <div class="u-flex cell cell--item u-w100"></div>
+                      <div class="u-flex u-w140 cell cell--item"></div>
+                      <div class="u-flex u-w140 cell cell--item"></div>
+                      <div class="u-flex u-w140 cell cell--item"></div>
+                      <div class="u-flex u-w140 cell cell--item"></div>
+                      <div class="u-flex u-w140 cell cell--item"></div>
+                      <div class="u-flex u-w140 cell cell--item"></div>
+                      <div class="u-flex u-w140 cell cell--item"></div>
+                      <div class="u-flex u-w140 cell cell--item"></div>
                     </div>
                   </div>
                 </td>
@@ -228,6 +210,11 @@
         @if(strstr($url,'answer'))
         <a data-remodal-target="modal_submission" class="c-button c-button--primary u-w160">記入を完了する</a>
         <!-- <input type="submit" class="c-button c-button--primary u-w160" value="記入を完了する"> -->
+        @elseif(strstr($url,'confirm'))
+        <a data-remodal-target="modal_remand" class="c-button c-button--delete u-w100">差戻し</a>
+        <a data-remodal-target="modal_request" class="c-button c-button--primary u-w160">この結果を承認する</a>
+        @elseif(strstr($url,'approval'))
+        <a class="c-button c-button--primary u-w160">入力内容を反映</a>
         @elseif(strstr($url,'result'))
         <a data-remodal-target="modal_submission" class="c-button c-button--primary u-w160">入力内容を反映する</a>
         <!-- <input type="submit" class="c-button c-button--primary u-w160" value="入力内容を反映する"> -->

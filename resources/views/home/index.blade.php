@@ -11,7 +11,7 @@
               <p class="desc">以下のタスクを完了させましょう</p>
             </div>
             <div class="p-todo__action">
-              <a href="" class="c-button c-button--brandPrimary">全ての人事業務を評価</a>
+              <a href="{{route('self-check.index')}}" class="c-button c-button--brandPrimary">全ての人事業務を評価</a>
             </div>
           </div>
           <div class="p-todo__body">

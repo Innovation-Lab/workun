@@ -1,12 +1,8 @@
 <div class="p-tableBox">
   <div class="p-tableBox__head">
     <div class="mainText">
-      <p class="status--1">実施中</p>
+      <p class="status--4">結果確定</p>
       <p class="title">基幹職 仕事ぶりチェック</p>
-    </div>
-    <div class="comment">
-      <svg width="20" height="20"><use xlink:href="#remand_comment" /></svg>
-      <p>「チーム活性化行動」に関して再度記入のし直しをお願いします。</p>
     </div>
   </div>
   
@@ -31,7 +27,12 @@
                       <div class="u-tac c-txt__xs cell u-w140">
                         <strong class="c-txt__lg c-txt__weight--700">7</strong>月
                       </div>
-                      <?php for($p = 8; $p < 13; $p++){ ?>  
+                      <?php for($p = 7; $p < 8; $p++){ ?>  
+                      <div class="u-tac c-txt__xs cell u-w140">
+                        <strong class="c-txt__lg c-txt__weight--700"><?= $p; ?></strong>月
+                      </div>
+                      <?php }?>
+                      <?php for($p = 9; $p < 13; $p++){ ?>  
                       <div class="u-tac c-txt__xs cell u-w100">
                         <strong class="c-txt__lg c-txt__weight--700"><?= $p; ?></strong>月
                       </div>
@@ -71,14 +72,13 @@
 
 来月も頑張りましょう!</p>
                       </div>
-                      <div class="u-flex cell cell--item u-w100">
-                        <select name="" class="p-table__cell--select full">
-                          <option value="5">5</option>
-                          <option value="4">4</option>
-                          <option value="3" selected>3</option>
-                          <option value="2">2</option>
-                          <option value="1">1</option>
-                        </select>
+                      <div class="u-flex u-w140 cell cell--item">
+                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
+                        <div class="cell--number c-txt__md c-txt__weight--600">4</div>
+                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
+来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+来月も頑張りましょう!</p>
                       </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
                       <div class="u-flex cell cell--item u-w100"></div>
@@ -110,14 +110,13 @@
 
 来月も頑張りましょう!</p>
                       </div>
-                      <div class="u-flex cell cell--item u-w100">
-                        <select name="" class="p-table__cell--select full">
-                          <option value="5">5</option>
-                          <option value="4">4</option>
-                          <option value="3" selected>3</option>
-                          <option value="2">2</option>
-                          <option value="1">1</option>
-                        </select>
+                      <div class="u-flex u-w140 cell cell--item">
+                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
+                        <div class="cell--number c-txt__md c-txt__weight--600">4</div>
+                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
+来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+来月も頑張りましょう!</p>
                       </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
                       <div class="u-flex cell cell--item u-w100"></div>
@@ -149,14 +148,13 @@
 
 来月も頑張りましょう!</p>
                       </div>
-                      <div class="u-flex cell cell--item u-w100">
-                        <select name="" class="p-table__cell--select full">
-                          <option value="5">5</option>
-                          <option value="4">4</option>
-                          <option value="3" selected>3</option>
-                          <option value="2">2</option>
-                          <option value="1">1</option>
-                        </select>
+                      <div class="u-flex u-w140 cell cell--item">
+                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
+                        <div class="cell--number c-txt__md c-txt__weight--600">4</div>
+                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
+来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+来月も頑張りましょう!</p>
                       </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
                       <div class="u-flex cell cell--item u-w100"></div>
@@ -191,14 +189,13 @@
 
 来月も頑張りましょう!</p>
                       </div>
-                      <div class="u-flex cell cell--item u-w100">
-                        <select name="" class="p-table__cell--select full">
-                          <option value="5">5</option>
-                          <option value="4">4</option>
-                          <option value="3" selected>3</option>
-                          <option value="2">2</option>
-                          <option value="1">1</option>
-                        </select>
+                      <div class="u-flex u-w140 cell cell--item">
+                        <div class="cell--number targeter c-txt__md c-txt__weight--600">4</div>
+                        <div class="cell--number c-txt__md c-txt__weight--600">4</div>
+                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
+来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+来月も頑張りましょう!</p>
                       </div>
                       <div class="u-flex cell cell--item u-w100"></div>
                       <div class="u-flex cell cell--item u-w100"></div>

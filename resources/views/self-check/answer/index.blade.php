@@ -1,7 +1,7 @@
 @extends('layout.layout--base')
-@section('title', 'セルフチェック-人事業務結果')
+@section('title', 'セルフチェック-人事業務入力')
 @section('content')
-  <div class="l-index p-approval">
+  <div class="l-index">
     <div class="p-page">
       <div class="p-page__head">
         <h1 class="p-page__head--title u-align">
@@ -12,10 +12,11 @@
         </h1>
       </div>
       <div class="p-page__body">
-        @include('self-check.components._resultall')
+        @include('self-check.components._answer')
       </div>
     </div>
   </div>
-  @include('self-check.components.modal._selfCheckResult')
+  @include('self-check.components.modal._submission')
+  @include('self-check.components.modal._comment')
 @endsection
     

@@ -36,7 +36,7 @@
 
 
             {{-- ↓↓↓↓初期状態↓↓↓↓ --}}
-            <span class="p-check__select--text">従業員を選択</span>
+            <span class="p-check__select--text">承認者を選択</span>
             <div class="p-check__select--list">
               <ul>
                 <li>

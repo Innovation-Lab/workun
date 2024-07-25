@@ -12,10 +12,13 @@
         </h1>
       </div>
       <div class="p-page__body">
-        @include('self-check.components._approval')
+        @include('self-check.components._confirm')
       </div>
     </div>
   </div>
   @include('self-check.components.modal._selfCheck')
   @include('self-check.components.modal._request')
+  @include('self-check.components.modal._comment')
+  @include('self-check.components.modal._comment_form')
+  @include('self-check.components.modal._remand')
 @endsection
