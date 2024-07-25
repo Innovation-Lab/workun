@@ -2,16 +2,20 @@
   <div class="p-tableBox__head">
     <div class="mainText">
       <p class="title">2024年 評価承認  :  基幹職 仕事ぶりチェック</p>
-      <p class="c-txt__xs">対象者 <span class="c-txt__lg c-txt__weight--700">12</span> 名</p>
+      <div class="count border">
+        <span class="unit">対象者</span>
+        <p class="number">12</p>
+        <span class="unit">名</span>
+      </div>
     </div>
   </div>
   
   <div class="p-tableBox__body" style="padding:0">
     <form action="">
       {{-- テーブル一覧 --}}
-      <div class="p-table__check c-scroll">
+      <div class="p-table__check c-scroll noneBtn">
         <div class="t-wrapper">
-          <table class="t-table t-table__narrow">
+          <table class="t-table t-table__narrow  t-table__resultall">
             <thead>
               <tr>
                 <th colspan="3" rowspan="2" class="sticky_1">
@@ -34,20 +38,20 @@
                     </div>
                   </div>
                   <div class="p-table__cell--input">
-                    <div class="u-tac u-w90 c-txt__sm cell sticky_4" style="line-height:2.3">平均</div>
-                    <div class="cell u-w90 u-tac c-txt__xs">
+                    <div class="u-tac u-w80 c-txt__sm cell sticky_4 c-border_r2" style="line-height: 2.101; border-right: 0;">平均</div>
+                    <div class="cell u-w140 u-tac c-txt__xs">
                       <a data-remodal-target="modal_selfCheck" class="name">山口 太郎</a>
                     </div>
                     {{-- 上と同じ開発時に削除 --}}
-                    <div class="cell u-w90 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheckAnswer" class="name">佐藤 英恵</a></div>
-                    <div class="cell u-w90 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheckAnswer" class="name">勅使河原 倫太郎</a></div>
-                    <div class="cell u-w90 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheckAnswer" class="name">和久 明</a></div>
-                    <div class="cell u-w90 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheckAnswer" class="name">林 健</a></div>
-                    <div class="cell u-w90 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheckAnswer" class="name">田井中川 一郎</a></div>
-                    <div class="cell u-w90 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheckAnswer" class="name">綾小路 康太</a></div>
-                    <div class="cell u-w90 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheckAnswer" class="name">斎藤 加奈子</a></div>
-                    <div class="cell u-w90 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheckAnswer" class="name">長良川 花梨</a></div>
-                    <div class="cell u-w90 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheckAnswer" class="name">金子 真由</a></div>
+                    <div class="cell u-w140 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheck" class="name">佐藤 英恵</a></div>
+                    <div class="cell u-w140 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheck" class="name">勅使河原 倫太郎</a></div>
+                    <div class="cell u-w140 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheck" class="name">和久 明</a></div>
+                    <div class="cell u-w140 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheck" class="name">林 健</a></div>
+                    <div class="cell u-w140 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheck" class="name">田井中川 一郎</a></div>
+                    <div class="cell u-w140 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheck" class="name">綾小路 康太</a></div>
+                    <div class="cell u-w140 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheck" class="name">斎藤 加奈子</a></div>
+                    <div class="cell u-w140 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheck" class="name">長良川 花梨</a></div>
+                    <div class="cell u-w140 u-tac c-txt__xs"><a data-remodal-target="modal_selfCheck" class="name">金子 真由</a></div>
                   </div>
                 </th>
               </tr>
@@ -63,12 +67,16 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class=" u-w90 sticky_4">
-                      <p class="c-txt__md c-txt__weight--600">4.6</p>
+                    <div class="u-w80 sticky_4 c-border_r2">
+                      <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex">
-                        <p class="c-txt__md c-txt__weight--600">3</p>
+                      <div class="u-flex cell cell--item u-w140">
+                        <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
+  来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+  来月も頑張りましょう!</p>
                       </div>
                       <?php }?>
                     </div>
@@ -84,12 +92,16 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class=" u-w90 sticky_4">
-                      <p class="c-txt__md c-txt__weight--600">4.6</p>
+                    <div class="u-w80 sticky_4 c-border_r2">
+                      <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex">
-                        <p class="c-txt__md c-txt__weight--600">3</p>
+                      <div class="u-flex cell cell--item u-w140">
+                        <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
+  来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+  来月も頑張りましょう!</p>
                       </div>
                       <?php }?>
                     </div>
@@ -105,12 +117,16 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class=" u-w90 sticky_4">
-                      <p class="c-txt__md c-txt__weight--600">4.6</p>
+                    <div class="u-w80 sticky_4 c-border_r2">
+                      <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex">
-                        <p class="c-txt__md c-txt__weight--600">3</p>
+                      <div class="u-flex cell cell--item u-w140">
+                        <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
+  来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+  来月も頑張りましょう!</p>
                       </div>
                       <?php }?>
                     </div>
@@ -126,12 +142,16 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class=" u-w90 sticky_4">
-                      <p class="c-txt__md c-txt__weight--600">4.6</p>
+                    <div class="u-w80 sticky_4 c-border_r2">
+                      <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex">
-                        <p class="c-txt__md c-txt__weight--600">3</p>
+                        <div class="u-flex cell cell--item u-w140">
+                        <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
+  来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+  来月も頑張りましょう!</p>
                       </div>
                       <?php }?>
                     </div>
@@ -148,12 +168,16 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class=" u-w90 sticky_4">
-                      <p class="c-txt__md c-txt__weight--600">4.6</p>
+                    <div class="u-w80 sticky_4 c-border_r2">
+                      <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                       <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex">
-                        <p class="c-txt__md c-txt__weight--600">3</p>
+                      <div class="u-flex cell cell--item u-w140">
+                        <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
+  来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+  来月も頑張りましょう!</p>
                       </div>
                       <?php }?>
                     </div>
@@ -169,17 +193,18 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class=" u-w90 sticky_4">
-                      <p class="c-txt__md c-txt__weight--600">4.6</p>
+                    <div class="u-w80 sticky_4 c-border_r2">
+                      <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
-                    <?php for($p = 0; $p < 9; $p++){ ?>
-                    <div class="u-flex">
-                      <p class="c-txt__md c-txt__weight--600">3</p>
+                    <?php for($p = 0; $p < 10; $p++){ ?>
+                    <div class="u-flex cell cell--item u-w140">
+                      <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                      <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
+来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+来月も頑張りましょう!</p>
                     </div>
                     <?php }?>
-                    <div class="u-flex">
-                      <div class="c-noData">-</div>
-                    </div>
                   </div>
                 </td>
               </tr>
@@ -189,19 +214,7 @@
 
         </div>
       </div>
-      <div class="u-align--end u-pd24">
-        <?php
-            $url = $_SERVER['REQUEST_URI'];
-        ?>
-        @if(strstr($url,'confirm'))
-          <input type="submit" class="c-button--text" value="下書き保存する">
-          <input type="submit" class="c-button c-button--primary" value="承認を依頼する">
-        @elseif(strstr($url,'approval'))
-          <input type="submit" class="c-button--text" value="下書き保存する">
-          <input type="submit" class="c-button c-button--primary" value="この結果を承認する">
-        @else
-        @endif
-      </div>
+      <div class="u-align--end u-pd12"></div>
     </form>
   </div>
 </div>

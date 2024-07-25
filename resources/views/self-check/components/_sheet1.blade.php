@@ -62,7 +62,37 @@
                 <div class="item">
                   <span class="status--1">未評価</span>
                   <span class="status--2">評価中</span>
+                </div>
+              </td>
+              <td>
+                <div class="item">
+                  第8期 | 基本挨拶、身だしなみセルフチェック表
+                </div>
+              </td>
+              <td>
+                <div class="item">
+                  2024/07/08
+                </div>
+              </td>
+              <td>
+                <div class="item">
+                  2024年 四半期 (7月 ~ 9月)
+                </div>
+              </td>
+              <td>
+                <div class="item">
+                  <p>
+                    <span>評価：山田 啓介</span><br />
+                    <span>承認：佐々木 誠一郎</span>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr data-href="{{ route('self-check.answerConfirm') }}">
+              <td>
+                <div class="item">
                   <span class="status--3">確定待ち</span>
+                  <span class="status--4">評価確定</span>
                 </div>
               </td>
               <td>

@@ -6,7 +6,7 @@
       <div class="p-page__head">
         <h1 class="p-page__head--title u-align">
           <a href="javascript:history.back()" class="c-button__back">
-            <svg width="20" height="20"><use xlink:href="#chevron_left" /></svg>
+            <svg width="28" height="28"><use xlink:href="#chevron_left" /></svg>
           </a>
           セルフチェック
         </h1>
@@ -16,6 +16,8 @@
       </div>
     </div>
   </div>
-  @include('self-check.components.modal._selfCheckAnswer')
+  @include('self-check.components.modal._comment')
+  @include('self-check.components.modal._selfCheckResult')
+  @include('self-check.components._script_modal')
 @endsection
     

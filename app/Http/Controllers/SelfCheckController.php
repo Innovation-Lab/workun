@@ -26,7 +26,7 @@ class SelfCheckController extends Controller
      */
     public function answer()
     {
-        return view('self-check.answer');
+        return view('self-check.answer.index');
     }
 
     /**
@@ -35,6 +35,11 @@ class SelfCheckController extends Controller
     public function update(Request $request)
     {
         //
+    }
+
+    public function answerConfirm()
+    {
+        return view('self-check.answer.confirm');
     }
 
     /**
@@ -50,7 +55,15 @@ class SelfCheckController extends Controller
      */
     public function confirm()
     {
-        return view('self-check.confirm');
+        return view('self-check.confirm.index');
+    }
+
+    /**
+     * Display confirm list page view.
+     */
+    public function confirmList()
+    {
+        return view('self-check.confirm.list');
     }
     /**
      * Display approval page view.

@@ -90,7 +90,7 @@
     --button-surface-hover: var(--hover);
   }
 
-  &--delelte{
+  &--delete{
     --normal: var(--alert);
     --hover: var(--white);
 
@@ -100,6 +100,20 @@
     --button-border-hover: var(--normal);
     --button-surface: var(--normal) ;
     --button-surface-hover: var(--hover);
+  }
+
+  &--white{
+    --button-text: var(--main);
+    --button-border: var(--white);
+    --button-surface: var(--white);
+  }
+  &--gray{
+    --normal: #B7BCC5;
+
+    --button-text: var(--main);
+    --button-border: var(--normal);
+    --button-surface: var(--normal);
+    --button-surface-hover: #979daa;
   }
 
   &--cancel{
@@ -123,6 +137,13 @@
     --button-border-hover: var(--main-accent);
     --button-surface: var(--white) ;
     --button-surface-hover: var(--hover);
+  }
+
+  &.disabled{
+    pointer-events: none;
+    --button-text: var(--main);
+    --button-border: var(--navy-400);
+    --button-surface: var(--navy-400) ;
   }
 
   // サイズ

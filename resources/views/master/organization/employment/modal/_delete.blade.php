@@ -13,7 +13,7 @@
         <button data-remodal-action="close" class="c-button c-button--cancel u-w130">キャンセル</button>
         <button
           type="submit"
-          class="c-button c-button--delelte u-w130"
+          class="c-button c-button--delete u-w130"
         >
           削除する
         </button>

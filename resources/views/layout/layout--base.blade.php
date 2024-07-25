@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
   @include('layout._head')
   <body>
+    @include('component._flash')
     <!-- svg -->
     @include('component._svg')
     <div class="wrapper">

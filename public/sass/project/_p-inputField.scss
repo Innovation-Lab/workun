@@ -355,6 +355,100 @@
     }
   }
 
+  // 組織図の編集
+  &--organization{
+    display: flex;
+    width: max-content;
+    &::before{
+      content: "";
+      display: block;
+      width: 25px;
+      height: 33px;
+      border-left:var(--border);
+      border-bottom: var(--border);
+      border-end-start-radius: var(--radius-md );
+    }
+    .item{
+      display: grid;
+      grid-template-columns: 36px 360px;
+      margin-block-start: var(--spacing-2xs);
+      border: 1px solid rgba(101, 147,163,.7);
+      border-radius: 6px;
+      background: #F5F9FB;
+      &--checkbox{
+        display: inline-grid;
+        place-items: center; 
+        border-right: 1px solid rgba(101, 147,163,.2);
+        label:has(input[type=radio]),
+        label:has(input[type=checkbox]){
+          width: 18px;
+          height: 18px;
+          background-size: 18px 18px;
+          background-position: center;
+        }
+      }
+      &--input{
+        display: grid;
+        grid-template-columns: max-content 36px 270px;
+        align-items: center;
+        gap: var(--spacing-3xs);
+        padding: var(--spacing-2xs) 10px;
+        .label{
+          margin: 0;
+        }
+        input{
+          min-height: 30px;
+          font-size: 12px;
+        }
+        input[type=text]{
+          margin-inline-start: 2px;
+          padding: var(--spacing-2xs) 10px;
+        }
+        input[type=number]{
+          padding: var(--spacing-2xs) var(--spacing-3xs);
+          text-align: center;
+        }
+      }
+    }
+
+    &Box{
+      --border: 1px solid #84B8E8;
+      padding-inline-start: var(--spacing-sm);
+      .layer{
+        &--container{
+          margin-inline-start: 60px;
+          &:has(.layer1--item){
+            margin-inline-start: 0;
+          }
+        }
+        &--item{
+          border-left: var(--border);
+          &:last-child {
+            border-left: none;
+          }
+          &:not(:last-child) {
+            > .p-inputField--organization{
+              &::before{
+                border-left: none;
+                border-end-start-radius: 0;
+              }
+            }
+          }
+        }
+      }
+      .layer1--item{
+        &::before{
+          height: 24px;
+          border-left: none;
+          border-end-start-radius: 0;
+        }
+        .item{
+          margin: 0;
+        }
+      }
+    }
+  }
+
   // 横幅いっぱい
   &--full {
     grid-column: 1/3;
