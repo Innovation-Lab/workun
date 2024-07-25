@@ -2,28 +2,26 @@
 
 namespace App\Repositories;
 
-use App\Models\Organization;
 use App\Models\Grade;
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class GradeRepository implements gradeRepositoryInterface
+class GradeRepository implements GradeRepositoryInterface
 {
     /**
      * @param Request $request
-     * @param Organization $organization
      * @return Grade
      * @throws Exception
      */
     public function create(Request $request): Grade
     {
-        $grade = new Grade();
-        $grade->fill($request->all());
-        $grade->seq = Grade::max('seq') + 1;
+        $attributes = $this->makeAttributes($request);
+        $grade = new Grade($attributes);
         if (!$grade->save()) {
             throw new Exception("等級の作成に失敗しました。");
         }
+
         return $grade;
     }
 
@@ -39,6 +37,7 @@ class GradeRepository implements gradeRepositoryInterface
         if (!$grade->update()) {
             throw new Exception("等級情報の更新に失敗しました。");
         }
+
         return $grade;
     }
 
@@ -54,5 +53,22 @@ class GradeRepository implements gradeRepositoryInterface
         }
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     *
+     * TODO: updateと共通化した時、seqの登録方法を再検討する
+     */
+    private function makeAttributes (Request $request): array
+    {
+        $user = Auth::user();
+        $max_seq = Grade::query()
+            ->organization($user->organization_id)
+            ->max('seq');
 
+        $attributes = $request->all();
+        $attributes['seq'] = $max_seq + 1;
+
+        return $attributes;
+    }
 }

@@ -2,28 +2,26 @@
 
 namespace App\Repositories;
 
-use App\Models\Organization;
 use App\Models\Position;
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PositionRepository implements PositionRepositoryInterface
 {
     /**
      * @param Request $request
-     * @param Organization $organization
      * @return Position
      * @throws Exception
      */
     public function create(Request $request): Position
     {
-        $position = new Position();
-        $position->fill($request->all());
-        $position->seq = Position::max('seq') + 1;
+        $attributes = $this->makeAttributes($request);
+        $position = new Position($attributes);
         if (!$position->save()) {
             throw new Exception("役職の作成に失敗しました。");
         }
+
         return $position;
     }
 
@@ -39,6 +37,7 @@ class PositionRepository implements PositionRepositoryInterface
         if (!$position->update()) {
             throw new Exception("役職情報の更新に失敗しました。");
         }
+
         return $position;
     }
 
@@ -54,5 +53,22 @@ class PositionRepository implements PositionRepositoryInterface
         }
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     *
+     * TODO: updateと共通化した時、seqの登録方法を再検討する
+     */
+    private function makeAttributes (Request $request): array
+    {
+        $user = Auth::user();
+        $max_seq = Position::query()
+            ->organization($user->organization_id)
+            ->max('seq');
 
+        $attributes = $request->all();
+        $attributes['seq'] = $max_seq + 1;
+
+        return $attributes;
+    }
 }

@@ -16,9 +16,6 @@ use Illuminate\View\View;
 class BaseController extends Controller
 {
     protected string $directory = "";
-    // 追加した時のリダイレクト先を指定
-    protected string $redirect_after_addition = "";
-    protected string $redirect_after_delete = "";
     protected string $model_name = "";
     protected $model;
     protected $repository;
@@ -113,11 +110,8 @@ class BaseController extends Controller
         }
         DB::commit();
 
-        $route = str_replace("/", ".", $this->directory) . ".edit";
-        // リダイレクト先が指定されている場合
-        if ($this->redirect_after_addition) {
-            $route = str_replace("/", ".", $this->redirect_after_addition);
-        }
+        // リダイレクト先を取得
+        $route = $this->getRedirectRoute('edit', 'redirect_after_add');
 
         return redirect()
             ->route($route, $entity)
@@ -175,8 +169,11 @@ class BaseController extends Controller
         }
         DB::commit();
 
+        // リダイレクト先を取得
+        $route = $this->getRedirectRoute('edit', 'redirect_after_edit');
+
         return redirect()
-            ->back()
+            ->route($route, $entity)
             ->with('success', '更新しました。');
     }
 
@@ -202,11 +199,9 @@ class BaseController extends Controller
         }
         DB::commit();
 
-        $route = str_replace("/", ".", $this->directory) . ".index";
-        // リダイレクト先が指定されている場合
-        if ($this->redirect_after_delete) {
-            $route = str_replace("/", ".", $this->redirect_after_delete);
-        }
+        // リダイレクト先を取得
+        $route = $this->getRedirectRoute('index', 'redirect_after_delete');
+
         return redirect()
             ->route($route)
             ->with('success', '削除しました。');
@@ -220,5 +215,14 @@ class BaseController extends Controller
             abort(403);
         }
         return $entity;
+    }
+
+    private function getRedirectRoute(string $action, string $redirectProperty): string
+    {
+        if (property_exists($this, $redirectProperty) && $this->{$redirectProperty}) {
+            return str_replace("/", ".", $this->{$redirectProperty});
+        }
+
+        return str_replace("/", ".", $this->directory) . ".$action";
     }
 }

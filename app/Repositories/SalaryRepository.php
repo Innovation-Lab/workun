@@ -2,28 +2,26 @@
 
 namespace App\Repositories;
 
-use App\Models\Organization;
 use App\Models\Salary;
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SalaryRepository implements SalaryRepositoryInterface
 {
     /**
      * @param Request $request
-     * @param Organization $organization
      * @return Salary
      * @throws Exception
      */
     public function create(Request $request): Salary
     {
-        $salary = new Salary();
-        $salary->fill($request->all());
-        $salary->seq = Salary::max('seq') + 1;
+        $attributes = $this->makeAttributes($request);
+        $salary = new Salary($attributes);
         if (!$salary->save()) {
             throw new Exception("号俸の作成に失敗しました。");
         }
+
         return $salary;
     }
 
@@ -39,6 +37,7 @@ class SalaryRepository implements SalaryRepositoryInterface
         if (!$salary->update()) {
             throw new Exception("号俸情報の更新に失敗しました。");
         }
+
         return $salary;
     }
 
@@ -54,5 +53,22 @@ class SalaryRepository implements SalaryRepositoryInterface
         }
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     *
+     * TODO: updateと共通化した時、seqの登録方法を再検討する
+     */
+    private function makeAttributes (Request $request): array
+    {
+        $user = Auth::user();
+        $max_seq = Salary::query()
+            ->organization($user->organization_id)
+            ->max('seq');
 
+        $attributes = $request->all();
+        $attributes['seq'] = $max_seq + 1;
+
+        return $attributes;
+    }
 }
