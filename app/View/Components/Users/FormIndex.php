@@ -8,6 +8,7 @@ use App\Models\Grade;
 use App\Models\Employment;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class FormIndex extends Component
@@ -22,10 +23,26 @@ class FormIndex extends Component
      */
     public function __construct()
     {
-        $this->departments = Department::all();
-        $this->positions = Position::all();
-        $this->grades = Grade::all();
-        $this->employments = Employment::all();
+        $user = Auth::user();
+        $this->departments = Department::query()
+        ->organization($user->organization_id)
+        ->orderBy('seq', 'asc')
+        ->get();
+
+        $this->employments = Employment::query()
+            ->organization($user->organization_id)
+            ->orderBy('seq', 'asc')
+            ->get();
+
+        $this->grades = Grade::query()
+            ->organization($user->organization_id)
+            ->orderBy('seq', 'asc')
+            ->get();
+
+        $this->positions = Position::query()
+            ->organization($user->organization_id)
+            ->orderBy('seq', 'asc')
+            ->get();
     }
 
     /**
@@ -34,10 +51,6 @@ class FormIndex extends Component
     public function render(): View|Closure|string
     {
         return view('components.users.form-index', [
-            'departments' => $this->departments,
-            'positions' => $this->positions,
-            'grades' => $this->grades,
-            'employments' => $this->employments,
         ]);
     }
 }

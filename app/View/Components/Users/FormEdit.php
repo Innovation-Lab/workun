@@ -29,11 +29,27 @@ class FormEdit extends Component
         public $user
     ) {
         $this->approvers = $this->getApprovers($user->id);
-        $this->departments = Department::all();
-        $this->employments = Employment::all();
-        $this->grades = Grade::all();
-        $this->positions = Position::all();
         $this->reviewers = $this->getReviewers($user->id);
+
+        $this->departments = Department::query()
+            ->organization($user->organization_id)
+            ->orderBy('seq', 'asc')
+            ->get();
+
+        $this->employments = Employment::query()
+            ->organization($user->organization_id)
+            ->orderBy('seq', 'asc')
+            ->get();
+
+        $this->grades = Grade::query()
+            ->organization($user->organization_id)
+            ->orderBy('seq', 'asc')
+            ->get();
+
+        $this->positions = Position::query()
+            ->organization($user->organization_id)
+            ->orderBy('seq', 'asc')
+            ->get();
     }
 
 
@@ -43,10 +59,6 @@ class FormEdit extends Component
     public function render(): View|Closure|string
     {
         return view('components.users.form-edit', [
-            'departments' => $this->departments,
-            'employments' => $this->employments,
-            'grades' => $this->grades,
-            'positions' => $this->positions,
             'roles' => User::ROLE_LIST,
         ]);
     }
