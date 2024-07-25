@@ -46,7 +46,7 @@
                   <span>選択した項目の</span>
                   <a class="c-button c-button--sm c-button--white" id="add-below">直下に追加</a>
                   <a class="c-button c-button--sm c-button--white" id="add-align">並列に追加</a>
-                  <a class="c-button c-button--sm c-button--delelte" id="delete-item" data-remodal-target="modal_delete">削除</a>
+                  <a class="c-button c-button--sm c-button--delete" id="delete-item" data-remodal-target="modal_delete">削除</a>
                 </div>
                 @include('master.organization.modal._delete')
                 @include('master.organization._script_layer')

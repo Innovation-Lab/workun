@@ -1,3 +1,4 @@
+
 <?php function displayOrganization($organization, $level = 1) { ?>
 
     <?php if(isset($organization['name'])) { ?>
@@ -6,32 +7,33 @@
           <p class="name"><?= $organization['name']; ?></p>
           <div class="button__area">
             <div class="button">
-              <svg width="10" height="10"><use xlink:href="#organizational_user_list" /></svg>
+              <svg width="16" height="16"><use xlink:href="#organizational_user_list" /></svg>
             </div>
           </div>
         </div>
       </div>
-  <?php } ?>
+    <?php } ?>
 
-  <?php if(isset($organization->departments)) { ?>
-    <div class="p-organizationChart__underLayer">
-      <?php foreach ($organization->departments as $department) { ?>
-        <div class="p-organizationChart__layer layer<?= $level + 1 ?>">
-          <?php displayOrganization($department, $level + 1);?>
-        </div>
-      <?php } ?>
-    </div>
-  <?php } ?>
+    <?php if(isset($organization->departments)) { ?>
+      <div class="p-organizationChart__underLayer">
+        <?php foreach ($organization->departments as $department) { ?>
+          <div class="p-organizationChart__layer layer<?= $level + 1 ?>">
+            <?php displayOrganization($department, $level + 1);?>
+          </div>
+        <?php } ?>
+      </div>
+    <?php } ?>
 
-  <?php if(isset($organization->child_departments)) { ?>
-    <div class="p-organizationChart__underLayer">
-      <?php foreach ($organization->child_departments as $child) { ?>
-        <div class="p-organizationChart__layer layer<?= $level + 1 ?>">
-          <?php displayOrganization($child, $level + 1);?>
-        </div>
-      <?php } ?>
-    </div>
-  <?php } ?>
+    <?php if(isset($organization->child_departments)) { ?>
+      <div class="p-organizationChart__underLayer">
+        <?php foreach ($organization->child_departments as $child) { ?>
+          <div c
+            <?php displayOrganization($child, $level + 1);?>
+          </div>
+        <?php } ?>
+      </div>
+    <?php } ?>
+
 <?php } ?>
 
 <div class="p-organizationChart">

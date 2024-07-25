@@ -7,7 +7,7 @@
   <div class="p-modal__body">
     <div class="p-formBlock__action">
       <button data-remodal-action="close" class="c-button c-button--cancel u-w130">キャンセル</button>
-      <button class="c-button c-button--delelte u-w130">削除する</button>
+      <button class="c-button c-button--delete u-w130">削除する</button>
     </div>
   </div>
 </div>
