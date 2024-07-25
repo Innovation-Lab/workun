@@ -258,6 +258,22 @@
         &--input{
           .cell--item{
             grid-template-columns: 1.5fr 2fr;
+            .comment{
+              &.c-empty {
+                align-items: center;
+                text-indent: -9999px;
+                pointer-events: none;
+                opacity: 1;
+                &::before{
+                  content: "-";
+                  color: #666;
+                  font-size: 13px;
+                  width: 100%;
+                  text-indent: 0;
+                  text-align: center;
+                }
+              }
+            }
           }
           .cell--number{
             &:last-child{

@@ -368,7 +368,7 @@
             display:flex;
             align-items:center;
             justify-content:center;
-            background-color: var(--noData);
+            background-color: var(--white);
             width: 100%;
             margin: 0;
             max-height: 100%;
@@ -432,7 +432,7 @@
       }
     }
     &--month{
-      width: calc(100vw - 810px);
+      width: calc(100vw - 812px);
       button{
         background-color: transparent;
         color: var(--white);
@@ -511,6 +511,11 @@
               border-left: none;
             }
           }
+        }
+      }
+      &__approval{
+        .p-table__check--month{
+          width: calc(100vw - 833px);
         }
       }
     }

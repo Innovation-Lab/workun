@@ -15,7 +15,7 @@
       {{-- テーブル一覧 --}}
       <div class="p-table__check c-scroll">
         <div class="t-wrapper">
-          <table class="t-table t-table__narrow t-table__confirm t-table__resultall">
+          <table class="t-table t-table__narrow">
             <thead>
               <tr>
                 <th colspan="3" rowspan="2" class="sticky_1">

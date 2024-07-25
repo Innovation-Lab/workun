@@ -16,6 +16,8 @@
       </div>
     </div>
   </div>
+  @include('self-check.components.modal._comment')
   @include('self-check.components.modal._selfCheckResult')
+  @include('self-check.components._script_modal')
 @endsection
     
