@@ -245,13 +245,25 @@
       &__check{
         max-height:75vh;
         &--month{
-          width: calc(70vw - 368px);
+          width: calc(1170px - 550px);
         }
         .sticky_4 {
           border-right: 0;
           border-bottom: 0;
           .cell--number{
             border-bottom: none;
+          }
+        }
+        .t-table__resultall{
+          .u-w100{
+            min-width: 100px !important;
+            .cell--number {
+              // grid-row: auto;
+              &.targeter{
+                display: grid;
+              }
+            }
+            
           }
         }
       }

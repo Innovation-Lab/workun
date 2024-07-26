@@ -157,7 +157,7 @@
     </g>
     <defs>
     <clipPath id="clip0_1387_9893">
-    <rect width="" height="20" fill="white" transform="matrix(-1 0 0 1 20 0)"/>
+    <rect width="20" height="20" fill="white" transform="matrix(-1 0 0 1 20 0)"/>
     </clipPath>
     </defs>
   </symbol>
