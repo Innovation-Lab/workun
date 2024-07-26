@@ -25,9 +25,10 @@ class FormIndex extends Component
     {
         $user = Auth::user();
         $this->departments = Department::query()
-        ->organization($user->organization_id)
-        ->orderBy('seq', 'asc')
-        ->get();
+            ->organization($user->organization_id)
+            ->orderBy('department_id', 'asc')
+            ->orderBy('seq', 'asc')
+            ->get();
 
         $this->employments = Employment::query()
             ->organization($user->organization_id)
