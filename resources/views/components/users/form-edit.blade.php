@@ -4,14 +4,9 @@
   <div class="p-formBlock__form">
     <div class="p-inputField">
       <label class="label" for="">部署</label>
-      <select name="department_id" id="">
-        @foreach($departments as $department)
-          <option value="{{ $department->id }}" {{ old('department_id', $user->department_id) == $department->id ? 'selected' : '' }}>
-            {{ $department->name }}
-          </option>
-        @endforeach
-      </select>
-      {{--  <p class="alert">部署を選択してください</p>  --}}
+        <div class="">
+          {{ $user->department_label }}
+        </div>
     </div>
     <div class="p-inputField">
       <label class="label" for="">役職</label>

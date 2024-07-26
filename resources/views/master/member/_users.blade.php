@@ -66,7 +66,7 @@
           <div class="item">
             <div class="p-user">
               <div class="p-user__image">
-                <img class="c-image c-image--round" name='img_path' src="{{ $user->img_path }}">
+                <img class="c-image c-image--round" name='img_path' src="{{ $user->avatar_url }}">
               </div>
               <div class="p-uesr__text">
                 <div class="name">

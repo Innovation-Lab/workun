@@ -147,6 +147,11 @@ class User extends Authenticatable
         return "{$this->sei} {$this->mei}";
     }
 
+    protected function getFullNameKanaAttribute()
+    {
+        return "{$this->kana_sei} {$this->kana_mei}";
+    }
+
     protected function getDepartmentLabelAttribute()
     {
         return implode("、", $this->departments->pluck('name')->toArray());
@@ -172,6 +177,30 @@ class User extends Authenticatable
         return data_get($this, 'employment.name');
     }
 
+    protected function getApproversLabelAttribute()
+    {
+        return $this->approvers->map(function ($approver) {
+            return $approver->manager->full_name;
+        })->implode('、');
+    }
+
+    protected function getReviewersLabelAttribute()
+    {
+        return $this->reviewers->map(function ($reviewer) {
+            return $reviewer->manager->full_name;
+        })->implode('、');
+    }
+
+    protected function getDisplayBirthAttribute()
+    {
+        return $this->birth ? date('Y年 m月 d日', strtotime($this->birth)) : null;
+    }
+
+    protected function getDisplayJoinedForEditAttribute()
+    {
+        return $this->joined ? date('Y年 m月 d日', strtotime($this->joined)) : null;
+    }
+
     protected function getDisplayJoinedAttribute()
     {
         return $this->joined ? date('Y.m.d', strtotime($this->joined)) : null;
@@ -180,6 +209,12 @@ class User extends Authenticatable
     protected function getDisplayCreatedAttribute()
     {
         return $this->created_at ? date('Y.m.d', strtotime($this->created_at)) : null;
+    }
+
+    // memo: login_codeが未定義のプロパティとエラーが起きるので別の書き方で対応。
+    protected function getLoginCodeAttribute()
+    {
+        return strstr($this->attributes['login_code'], '#', true) ? strstr($this->attributes['login_code'], '#', true) : $this->attributes['login_code'];
     }
 
     protected function scopeOrganization($query, $organization_id)

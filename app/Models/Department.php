@@ -20,4 +20,10 @@ class Department extends Model
         'name',
         'seq',
     ];
+
+    protected function scopeOrganization ($query, $organization_id)
+    {
+        return $query->where('departments.organization_id', $organization_id);
+    }
+
 }

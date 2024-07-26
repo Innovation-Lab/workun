@@ -24,4 +24,10 @@ class Employment extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    protected function scopeOrganization ($query, $organization_id)
+    {
+        return $query->where('employments.organization_id', $organization_id);
+    }
+
 }
