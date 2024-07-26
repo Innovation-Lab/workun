@@ -6,7 +6,7 @@
     let positionId = $('#approver_position_id').val();
 
     $.ajax({
-      url:'{{ route('master.member._lodeUsers') }}',
+      url:'{{ route('master.member._lodeUsers',  ['type' => 'authorizer']) }}',
       type:'GET',
       data:{
         'department_id': departmentId,
@@ -49,7 +49,6 @@
       `;
     });
 
-    $('#selected-approvers [name="approver_lists"]').remove();
     $('#selected-approvers').prepend(approverHtml);
     $('[data-remodal-id=modal_approver]').remodal().close();
   }
@@ -61,7 +60,7 @@
     let positionId = $('#reviewer_position_id').val();
 
     $.ajax({
-      url:'{{ route('master.member._lodeUsers') }}',
+      url:'{{ route('master.member._lodeUsers',  ['type' => 'rater']) }}',
       type:'GET',
       data:{
         'department_id': departmentId,
@@ -104,7 +103,6 @@
       `;
     });
 
-    $('#selected-reviewers [name="reviewer_lists"]').remove();
     $('#selected-reviewers').prepend(reviewerHtml);
     $('[data-remodal-id=modal_reviewer]').remodal().close();
   }
