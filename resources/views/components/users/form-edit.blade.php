@@ -4,9 +4,11 @@
   <div class="p-formBlock__form">
     <div class="p-inputField">
       <label class="label" for="">部署</label>
-        <div class="">
-          {{ $user->department_label }}
-        </div>
+        @if(!empty($user->department_label))
+          <input type="text" value="{{ $user->department_label }}" disabled class="">
+        @else
+          <input type="text" value="登録されている部署はありません" disabled class="empty">
+        @endif
     </div>
     <div class="p-inputField">
       <label class="label" for="">役職</label>
