@@ -75,42 +75,23 @@ class UserRepository implements UserRepositoryInterface
      */
     public function update(User $user, Request $request): User
     {
-        $approvers = $request->get('approvers');
-        $reviewers = $request->get('reviewers');
-
-        Approver::where('user_id', $user->id)->delete();
         // 承認者を登録
-        if ($approvers) {
-            foreach ($approvers as $manager_user_id) {
-                $approver = new Approver();
-                $approver_attributes = [
-                    'user_id' => $user->id,
-                    'manager_user_id' => $manager_user_id,
-                ];
+        $this->syncEntities(
+            $user,
+            $request->get('approvers', []),
+            'approvers',
+            Approver::class,
+            '承認者'
+        );
 
-                $approver = $approver->fill($approver_attributes);
-                if (!$approver->save()) {
-                    throw new Exception("承認者の登録に失敗しました。");
-                }
-            }
-        }
-
-        Reviewer::where('user_id', $user->id)->delete();
         // 評価者を登録
-        if ($reviewers) {
-            foreach ($reviewers as $manager_user_id) {
-                $reviewer = new Reviewer();
-                $reviewer_attributes = [
-                    'user_id' => $user->id,
-                    'manager_user_id' => $manager_user_id,
-                ];
-
-                $reviewer = $reviewer->fill($reviewer_attributes);
-                if (!$reviewer->save()) {
-                    throw new Exception("評価者の登録に失敗しました。");
-                }
-            }
-        }
+        $this->syncEntities(
+            $user,
+            $request->get('reviewers', []),
+            'reviewers',
+            Reviewer::class,
+            '評価者'
+        );
 
         $attributes = $this->makeAttributes($request);
         $user = $user->fill($attributes);
@@ -158,5 +139,44 @@ class UserRepository implements UserRepositoryInterface
             throw new Exception();
         }
         return $user;
+    }
+
+    private function syncEntities(
+        User $user,
+        array $selectedEntities,
+        string $entity,
+        string $entityClass,
+        string  $model_name
+    ) {
+        $currentEntities = $user->$entity;
+        for (
+            $index = 0;
+            $index < max($currentEntities->count(), count($selectedEntities));
+            $index++
+        ) {
+            $currentEntity = data_get($currentEntities, $index);
+            $selectedEntity = data_get($selectedEntities, $index);
+            if ($currentEntity && $selectedEntity) {
+                // 更新
+                $currentEntity->user_id = $user->id;
+                $currentEntity->manager_user_id = $selectedEntity;
+                if (!$currentEntity->save()) {
+                    throw new Exception("{$model_name}の登録に失敗しました。");
+                }
+            } elseif (!$currentEntity && $selectedEntity) {
+                // 新規
+                $newEntity = new $entityClass();
+                $newEntity->user_id = $user->id;
+                $newEntity->manager_user_id = $selectedEntity;
+                if (!$newEntity->save()) {
+                    throw new Exception("{$model_name}の登録に失敗しました。");
+                }
+            } elseif ($currentEntity && !$selectedEntity) {
+                // 削除
+                if (!$currentEntity->delete()) {
+                    throw new Exception("{$model_name}の登録に失敗しました。");
+                }
+            }
+        }
     }
 }
