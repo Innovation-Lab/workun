@@ -1,7 +1,7 @@
 <div class="item">
   <div class="close">×</div>
   <div class="head u-align between">
-    <p class="title c-txt__md c-txt__weight--600">「{{ $title }}」従業員数</p>
+    <p class="title c-txt__md c-txt__weight--600">「{{ $department->name }}」従業員数</p>
     <a href="{{route('master.organization.edit_link_employee')}}" class="c-button--text">編集</a>
   </div>
   <div class="count">

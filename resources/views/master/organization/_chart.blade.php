@@ -3,14 +3,16 @@
       <div class="p-organizationChart__field">
         <div class="p-organizationChart__item">
           <p class="name"><?= $entity['name']; ?></p>
-          <div class="button__area">
-            <div
-              class="button"
-              data-<?= strtolower(class_basename($entity)) ?>-id="<?= $entity['id']; ?>"
-            >
-              <svg width="16" height="16"><use xlink:href="#organizational_user_list" /></svg>
+          @if ($level !== 1)
+            <div class="button__area">
+              <div
+                class="button"
+                data-department-id="<?= $entity['id']; ?>"
+              >
+                <svg width="16" height="16"><use xlink:href="#organizational_user_list" /></svg>
+              </div>
             </div>
-          </div>
+          @endif
         </div>
       </div>
     <?php } ?>

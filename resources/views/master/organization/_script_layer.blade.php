@@ -147,16 +147,13 @@
     $('.p-organizationChart__item .button').on('click', function() {
       var $button = $(this);
       var $userList = $button.closest('.p-organizationChart').siblings('.p-organizationChart__userList');
-      var organizationId = $button.data('organization-id');
       var departmentId = $button.data('department-id');
-      console.log(organizationId, departmentId);
 
       // ユーザーリストを取得
       $.ajax({
         url: '{{ route('master.organization._lodeMembers') }}',
         type:'GET',
         data: {
-          'organization_id': organizationId,
           'department_id': departmentId
         }
       })
