@@ -13,15 +13,23 @@
   <div class="p-tableBox__body" style="padding:0">
     <form action="">
       {{-- テーブル一覧 --}}
+      @php
+        use Illuminate\Support\Str;
+        $comment = '一定期間休職があったため次回正式に再評価を行います。
+来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
+
+来月も頑張りましょう!';
+        $limitedComment = Str::limit($comment, 100);
+      @endphp
       <div class="p-table__check c-scroll noneBtn">
         <div class="t-wrapper">
           <table class="t-table t-table__narrow  t-table__resultall">
             <thead>
               <tr>
-                <th colspan="3" rowspan="2" class="sticky_1">
-                  <div class="p-table__check--head">セルフチェック項目</div>
+                <th colspan="3" rowspan="2" class="sticky_1 p-table__check--head">
+                  <div class="u-pd16">セルフチェック項目</div>
                 </th>
-                <th colspan="14">{{-- 人物数の2倍の数colspan --}}
+                <th colspan="">{{-- 人物数の2倍の数colspan --}}
                   <div class="cell sticky_4 p-table__check--month c-border_0">
                     <div class="u-align between">
                       <button type="button" class="c-txt__weight--700">
@@ -38,7 +46,7 @@
                     </div>
                   </div>
                   <div class="p-table__cell--input">
-                    <div class="u-tac u-w80 c-txt__sm cell sticky_4 c-border_r2" style="line-height: 2.101; border-right: 0;">平均</div>
+                    <div class="u-tac u-w100 c-txt__sm cell sticky_4 c-border_r2" style="line-height: 2.101; border-right: 0;">平均</div>
                     <div class="cell u-w140 u-tac c-txt__xs">
                       <a data-remodal-target="modal_selfCheck" class="name">山口 太郎</a>
                     </div>
@@ -67,19 +75,16 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4 c-border_r2">
+                    <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
+                      <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
-                      <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex cell cell--item u-w140">
-                        <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
-                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
-  来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
-
-  来月も頑張りましょう!</p>
-                      </div>
-                      <?php }?>
+                    <?php for($p = 0; $p < 10; $p++){ ?>
+                    <div class="u-flex cell cell--item u-w140">
+                      <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                      <p class="comment" data-remodal-target="modal_comment">{{ $limitedComment }}</p>
                     </div>
+                    <?php }?>
                   </div>
                 </td>
               </tr>
@@ -92,19 +97,16 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4 c-border_r2">
+                    <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
+                      <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
-                      <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex cell cell--item u-w140">
-                        <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
-                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
-  来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
-
-  来月も頑張りましょう!</p>
-                      </div>
-                      <?php }?>
+                    <?php for($p = 0; $p < 10; $p++){ ?>
+                    <div class="u-flex cell cell--item u-w140">
+                      <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                      <p class="comment" data-remodal-target="modal_comment">{{ $limitedComment }}</p>
                     </div>
+                    <?php }?>
                   </div>
                 </td>
               </tr>
@@ -117,19 +119,16 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4 c-border_r2">
+                    <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
+                      <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
-                      <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex cell cell--item u-w140">
-                        <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
-                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
-  来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
-
-  来月も頑張りましょう!</p>
-                      </div>
-                      <?php }?>
+                    <?php for($p = 0; $p < 10; $p++){ ?>
+                    <div class="u-flex cell cell--item u-w140">
+                      <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                      <p class="comment" data-remodal-target="modal_comment">{{ $limitedComment }}</p>
                     </div>
+                    <?php }?>
                   </div>
                 </td>
               </tr>
@@ -142,19 +141,16 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4 c-border_r2">
+                    <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
+                      <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
-                      <?php for($p = 0; $p < 10; $p++){ ?>
-                        <div class="u-flex cell cell--item u-w140">
-                        <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
-                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
-  来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
-
-  来月も頑張りましょう!</p>
-                      </div>
-                      <?php }?>
+                    <?php for($p = 0; $p < 10; $p++){ ?>
+                      <div class="u-flex cell cell--item u-w140">
+                      <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                      <p class="comment" data-remodal-target="modal_comment">{{ $limitedComment }}</p>
                     </div>
+                    <?php }?>
                   </div>
                 </td>
               </tr>
@@ -168,19 +164,16 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4 c-border_r2">
+                    <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
+                      <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
-                      <?php for($p = 0; $p < 10; $p++){ ?>
-                      <div class="u-flex cell cell--item u-w140">
-                        <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
-                        <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
-  来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
-
-  来月も頑張りましょう!</p>
-                      </div>
-                      <?php }?>
+                    <?php for($p = 0; $p < 10; $p++){ ?>
+                    <div class="u-flex cell cell--item u-w140">
+                      <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
+                      <p class="comment" data-remodal-target="modal_comment">{{ $limitedComment }}</p>
                     </div>
+                    <?php }?>
                   </div>
                 </td>
               </tr>
@@ -193,16 +186,14 @@
                 </th>
                 <td>
                   <div class="p-table__cell--input">
-                    <div class="u-w80 sticky_4 c-border_r2">
+                    <div class="u-w100 sticky_4 c-border_r2 u-flex cell cell--item">
+                      <p class="cell--number targeter c-txt__md c-txt__weight--600">3.2</p>
                       <p class="cell--number c-txt__md c-txt__weight--600">4.6</p>
                     </div>
                     <?php for($p = 0; $p < 10; $p++){ ?>
                     <div class="u-flex cell cell--item u-w140">
                       <div class="cell--number c-txt__md c-txt__weight--600 full">3</div>
-                      <p class="comment" data-remodal-target="modal_comment">一定期間休職があったため次回正式に再評価を行います。
-来月のチェック記入時には、その点も含めてセルフチェックを行ってください。
-
-来月も頑張りましょう!</p>
+                      <p class="comment" data-remodal-target="modal_comment">{{ $limitedComment }}</p>
                     </div>
                     <?php }?>
                   </div>
