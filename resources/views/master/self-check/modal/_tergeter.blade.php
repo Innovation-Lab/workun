@@ -10,7 +10,7 @@
   </div>
   <div
     id="user_select_form"
-    class="p-modal__middle"
+    class="p-modal__middle p-formBlock__form list"
   >
     <div class="p-inputField">
       <label class="label" for="">部署</label>

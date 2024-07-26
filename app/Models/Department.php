@@ -26,4 +26,8 @@ class Department extends Model
         return $query->where('departments.organization_id', $organization_id);
     }
 
+    public function childDepartments()
+    {
+        return $this->hasMany(Department::class, 'department_id');
+    }
 }

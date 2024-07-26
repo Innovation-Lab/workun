@@ -27,7 +27,7 @@
 
         </div>
         <!-- 組織図の作成 -->
-        <div class=" p-organization chart">
+        <div class="p-organization chart">
           <div class="p-organization__head">
             <p class="title">
               <span class="icon">
@@ -37,10 +37,17 @@
             </p>
           </div>
           <div class="p-organization__body">
-
+            <a href="{{route('master.organization.edit')}}" class="c-button c-button--lineAccent ">
+              <svg width="20" height="20"><use xlink:href="#organizational_chart_edit" /></svg>
+            </a>
+            <div class="c-scroll h-auto" id="scrollContainer">
+              <!-- 組織図 -->
+              <x-organizations.form-index />
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  @include('master.organization._script_layer')
 @endsection

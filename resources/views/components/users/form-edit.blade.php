@@ -10,7 +10,7 @@
     </div>
     <div class="p-inputField">
       <label class="label" for="">役職</label>
-      <select name="position_id" id="" value="{{ request('position_id') }}">
+      <select name="position_id" id="" value="{{ request('position_id') }}" class="primary">
         @foreach($positions as $position)
           <option value="{{ $position->id }}" {{ old('position_id', $user->position_id) == $position->id ? 'selected' : '' }}>
             {{ $position->name }}
@@ -21,7 +21,7 @@
     </div>
     <div class="p-inputField">
       <label class="label" for="">等級</label>
-      <select name="grade_id" id="">
+      <select name="grade_id" id="" class="primary">
         @foreach($grades as $grade)
           <option value="{{ $grade->id }}" {{ old('grade_id', $user->grade_id) == $grade->id ? 'selected' : '' }}>
             {{ $grade->name }}
@@ -32,7 +32,7 @@
     </div>
     <div class="p-inputField">
       <label class="label" for="">雇用形態</label>
-      <select name="employment_id" id="">
+      <select name="employment_id" id="" class="primary">
         @foreach($employments as $employment)
           <option value="{{ $employment->id }}" {{ old('employment_id', $user->employment_id) == $employment->id ? 'selected' : '' }}>
             {{ $employment->name }}
@@ -87,7 +87,7 @@
     </div>
     <div class="p-inputField">
       <label class="label" for="">アカウント権限</label>
-      <select name="role" id="" value="{{ request('role') }}">
+      <select name="role" id="" value="{{ request('role') }}" class="primary">
         @foreach($roles as $key => $role)
           <option value="{{ $key }}" {{ old('role', $user->role) == $key ? 'selected' : '' }}>
             {{ $role }}

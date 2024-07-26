@@ -27,7 +27,7 @@
       </button>
       <button
         onclick="changeHierarchy()"
-        class="c-button c-button--delelte u-w130"
+        class="c-button c-button--delete u-w130"
       >
         変更する
       </button>
