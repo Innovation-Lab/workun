@@ -55,7 +55,7 @@
     <div class="item column">
       <div class="label">メモ</div>
       <div class="data">
-        {{ $user->memo }}
+        {!! nl2br(e($user->memo)) !!}
       </div>
     </div>
   </div>
