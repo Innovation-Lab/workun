@@ -130,13 +130,13 @@
                         <p class="name">
                           評価 :
                           <span>
-                            {{ $user->approvers_label }}
+                            {{ $user->reviewers_label }} 
                           </span>
                         </p>
                         <p class="name">
                           承認 :
                           <span>
-                            {{ $user->reviewers_label }}
+                            {{ $user->approvers_label }}
                           </span>
                         </p>
                       </div></td>
