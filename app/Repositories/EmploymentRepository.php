@@ -2,28 +2,26 @@
 
 namespace App\Repositories;
 
-use App\Models\Organization;
 use App\Models\Employment;
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmploymentRepository implements EmploymentRepositoryInterface
 {
     /**
      * @param Request $request
-     * @param Organization $organization
      * @return Employment
      * @throws Exception
      */
     public function create(Request $request): Employment
     {
-        $employment = new Employment();
-        $employment->fill($request->all());
-        $employment->seq = Employment::max('seq') + 1;
+        $attributes = $this->makeAttributes($request);
+        $employment = new Employment($attributes);
         if (!$employment->save()) {
             throw new Exception("雇用形態の作成に失敗しました。");
         }
+
         return $employment;
     }
 
@@ -39,6 +37,7 @@ class EmploymentRepository implements EmploymentRepositoryInterface
         if (!$employment->update()) {
             throw new Exception("雇用形態情報の更新に失敗しました。");
         }
+
         return $employment;
     }
 
@@ -54,5 +53,22 @@ class EmploymentRepository implements EmploymentRepositoryInterface
         }
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     *
+     * TODO: updateと共通化した時、seqの登録方法を再検討する
+     */
+    private function makeAttributes (Request $request): array
+    {
+        $user = Auth::user();
+        $max_seq = Employment::query()
+            ->organization($user->organization_id)
+            ->max('seq');
 
+        $attributes = $request->all();
+        $attributes['seq'] = $max_seq + 1;
+
+        return $attributes;
+    }
 }

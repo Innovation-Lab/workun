@@ -36,8 +36,7 @@ class GradePolicy
      */
     public function update(User $user, Grade $grade): bool
     {
-        return $this->view($user, $grade) &&
-            $grade->users()->count() === 0;
+        return $this->view($user, $grade);
     }
 
     /**
@@ -45,7 +44,8 @@ class GradePolicy
      */
     public function delete(User $user, Grade $grade): bool
     {
-        return $this->update($user, $grade);
+        return $this->view($user, $grade) &&
+            $grade->users()->count() === 0;
     }
 
     /**
@@ -53,7 +53,7 @@ class GradePolicy
      */
     public function restore(User $user, Grade $grade): bool
     {
-        return $this->update($user, $grade);
+        return $this->delete($user, $grade);
     }
 
     /**
@@ -61,6 +61,6 @@ class GradePolicy
      */
     public function forceDelete(User $user, Grade $grade): bool
     {
-        return $this->update($user, $grade);
+        return $this->delete($user, $grade);
     }
 }

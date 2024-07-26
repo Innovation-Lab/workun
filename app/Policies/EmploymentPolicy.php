@@ -36,8 +36,7 @@ class EmploymentPolicy
      */
     public function update(User $user, Employment $employment): bool
     {
-        return $this->view($user, $employment) &&
-            $employment->users()->count() === 0;
+        return $this->view($user, $employment);
     }
 
     /**
@@ -45,7 +44,8 @@ class EmploymentPolicy
      */
     public function delete(User $user, Employment $employment): bool
     {
-        return $this->update($user, $employment);
+        return $this->view($user, $employment) &&
+            $employment->users()->count() === 0;
     }
 
     /**
@@ -53,7 +53,7 @@ class EmploymentPolicy
      */
     public function restore(User $user, Employment $employment): bool
     {
-        return $this->update($user, $employment);
+        return $this->delete($user, $employment);
     }
 
     /**
@@ -61,6 +61,6 @@ class EmploymentPolicy
      */
     public function forceDelete(User $user, Employment $employment): bool
     {
-        return $this->update($user, $employment);
+        return $this->delete($user, $employment);
     }
 }

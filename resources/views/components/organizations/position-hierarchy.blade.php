@@ -42,9 +42,17 @@
               @foreach($positions as $position)
                 <tr data-href="{{ route('master.organization.position.edit', $position) }}">
                   <!-- 名称 -->
-                  <td><div class="item">{{ $position->name }}</div></td>
+                  <td>
+                    <div class="item">
+                      {{ $position->name }}
+                    </div>
+                  </td>
                   <!-- 人数 -->
-                  <td><div class="item" data-unit="名">{{ $position_counts[$position->id] ?? 0 }}</div></td>
+                  <td>
+                    <div class="item" data-unit="名">
+                      {{ number_format($position->users()->count()) }}
+                    </div>
+                  </td>
               @endforeach
             </tbody>
           </table>
@@ -93,9 +101,17 @@
               @foreach($grades as $grade)
                 <tr data-href="{{ route('master.organization.grade.edit', $grade) }}">
                   <!-- 名称 -->
-                  <td><div class="item">{{ $grade->name }}</div></td>
+                  <td>
+                    <div class="item">
+                      {{ $grade->name }}
+                    </div>
+                  </td>
                   <!-- 人数 -->
-                  <td><div class="item" data-unit="名">{{ $grade_counts[$grade->id] ?? 0 }}</div></td>
+                  <td>
+                    <div class="item" data-unit="名">
+                      {{ number_format($grade->users()->count()) }}
+                    </div>
+                  </td>
               @endforeach
             </tbody>
           </table>
@@ -140,7 +156,11 @@
               @foreach($salaries as $salary)
                 <tr data-href="{{ route('master.organization.salary.edit', $salary) }}">
                   <!-- 名称 -->
-                  <td><div class="item">{{ $salary->name }}</div></td>
+                  <td>
+                    <div class="item">
+                      {{ $salary->name }}
+                    </div>
+                  </td>
               @endforeach
             </tbody>
           </table>
@@ -189,9 +209,17 @@
               @foreach($employments as $employment)
                 <tr data-href="{{ route('master.organization.employment.edit', $employment) }}">
                   <!-- 名称 -->
-                  <td><div class="item">{{ $employment->name }}</div></td>
+                  <td>
+                    <div class="item">
+                      {{ $employment->name }}
+                    </div>
+                  </td>
                   <!-- 人数 -->
-                  <td><div class="item" data-unit="名">{{ $employment_counts[$employment->id] ?? 0 }}</div></td>
+                  <td>
+                    <div class="item" data-unit="名">
+                      {{ number_format($employment->users()->count()) }}
+                    </div>
+                  </td>
               @endforeach
             </tbody>
           </table>

@@ -29,5 +29,4 @@ class Position extends Model
     {
         return $query->where('positions.organization_id', $organization_id);
     }
-
 }

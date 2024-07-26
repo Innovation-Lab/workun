@@ -29,5 +29,4 @@ class Employment extends Model
     {
         return $query->where('employments.organization_id', $organization_id);
     }
-
 }

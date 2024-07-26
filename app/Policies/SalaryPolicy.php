@@ -36,8 +36,7 @@ class SalaryPolicy
      */
     public function update(User $user, Salary $salary): bool
     {
-        return $this->view($user, $salary) &&
-            $salary->users()->count() === 0;
+        return $this->view($user, $salary);
     }
 
     /**
@@ -45,7 +44,8 @@ class SalaryPolicy
      */
     public function delete(User $user, Salary $salary): bool
     {
-        return $this->update($user, $salary);
+        return $this->view($user, $salary) &&
+            $salary->users()->count() === 0;
     }
 
     /**
@@ -53,7 +53,7 @@ class SalaryPolicy
      */
     public function restore(User $user, Salary $salary): bool
     {
-        return $this->update($user, $salary);
+        return $this->delete($user, $salary);
     }
 
     /**
@@ -61,6 +61,6 @@ class SalaryPolicy
      */
     public function forceDelete(User $user, Salary $salary): bool
     {
-        return $this->update($user, $salary);
+        return $this->delete($user, $salary);
     }
 }

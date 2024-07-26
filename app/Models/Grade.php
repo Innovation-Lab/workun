@@ -29,5 +29,4 @@ class Grade extends Model
     {
         return $query->where('grades.organization_id', $organization_id);
     }
-
 }

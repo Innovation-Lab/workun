@@ -36,8 +36,7 @@ class PositionPolicy
      */
     public function update(User $user, Position $position): bool
     {
-        return $this->view($user, $position) &&
-            $position->users()->count() === 0;
+        return $this->view($user, $position);
     }
 
     /**
@@ -45,7 +44,8 @@ class PositionPolicy
      */
     public function delete(User $user, Position $position): bool
     {
-        return $this->update($user, $position);
+        return $this->view($user, $position) &&
+            $position->users()->count() === 0;
     }
 
     /**
@@ -53,7 +53,7 @@ class PositionPolicy
      */
     public function restore(User $user, Position $position): bool
     {
-        return $this->update($user, $position);
+        return $this->delete($user, $position);
     }
 
     /**
@@ -61,6 +61,6 @@ class PositionPolicy
      */
     public function forceDelete(User $user, Position $position): bool
     {
-        return $this->update($user, $position);
+        return $this->delete($user, $position);
     }
 }
