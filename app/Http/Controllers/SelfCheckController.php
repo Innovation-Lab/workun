@@ -2,17 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\SelfCheckSheetRepositoryInterface;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SelfCheckController extends Controller
 {
+    private ?Authenticatable $auth_user;
+
+    public function __construct(
+        public SelfCheckSheetRepositoryInterface $selfCheckSheetRepository
+    )
+    {
+        $this->middleware(function ($request, $next) {
+            $this->auth_user = Auth::user();
+            return $next($request);
+        });
+    }
+
     /**
      * Display index page view.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('self-check.index');
+        $type = $request->get('type', 'answer');
+        $term = $request->get('term', date('Y-m'));
+        switch ($type) {
+            case "answer":
+                $self_check_sheets = $this
+                    ->selfCheckSheetRepository
+                    ->answerSelfCheckSheets($this->auth_user, $term, true);
+                break;
+            case "rating":
+                break;
+            case "confirm":
+                break;
+        }
+        return view('self-check.index', [
+            'auth_user' => $this->auth_user,
+            'type' => $type,
+            'term' => $term,
+            'self_check_sheets' => $self_check_sheets,
+        ]);
     }
+
     /**
      * Display all sheets page view.
      */

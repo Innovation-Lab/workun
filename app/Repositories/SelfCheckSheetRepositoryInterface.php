@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 interface SelfCheckSheetRepositoryInterface
 {
-    public function answerSelfCheckSheets($user, string $term);
+    public function answerSelfCheckSheets($user, string $term, bool $pagenate = false);
     public function ratingSelfCheckSheets($user, string $term);
     public function approvingSelfCheckSheets($user, string $term);
 }

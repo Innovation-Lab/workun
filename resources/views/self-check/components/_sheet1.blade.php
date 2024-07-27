@@ -2,20 +2,25 @@
     <div class="mainText">
       <p class="title">セルフチェックシート一覧</p>
     </div>
-    <form action="" class="c-tab__content--sort">
+    <form
+      id="term_select"
+      class="c-tab__content--sort"
+    >
+      <input type="hidden" name="type" value="{{ $type }}" />
       <label>
         実施月:
-        <select name="">
-          <option value="">2024年8月</option>
-          <option value="">2024年7月</option>
-        </select>
+        <x-form.year-month
+          key="term"
+          :value="$term"
+          id="term_select"
+        />
       </label>
     </form>
   </div>
   <div class="p-tab__content--body">
     {{-- テーブル一覧 --}}
     <div class="p-table c-scroll">
-      <?php 
+      <?php
         $tableHead = [
           [
             'title' => 'ステータス',
@@ -56,87 +61,44 @@
           </tr>
         </thead>
         <tbody>
-          @for($tableBody = 0; $tableBody < 20; $tableBody++)
+          @foreach($self_check_sheets as $self_check_sheet)
             <tr data-href="{{ route('self-check.answer') }}">
               <td>
                 <div class="item">
-                  <span class="status--1">未評価</span>
-                  <span class="status--2">評価中</span>
+                  <x-self-check-sheet.answer-status
+                    :user="$auth_user"
+                    :status="data_get($self_check_sheet, 'self_check_rating.status', \App\Models\SelfCheckRating::STATUS_NOT_ANSWERED)"
+                  />
                 </div>
               </td>
               <td>
                 <div class="item">
-                  第8期 | 基本挨拶、身だしなみセルフチェック表
+                  {{ $self_check_sheet->title }}
                 </div>
               </td>
               <td>
                 <div class="item">
-                  2024/07/08
+                  {{ $self_check_sheet->display_term }}
                 </div>
               </td>
               <td>
                 <div class="item">
-                  2024年 四半期 (7月 ~ 9月)
-                </div>
-              </td>
-              <td>
-                <div class="item">
-                  <p>
-                    <span>評価：山田 啓介</span><br />
-                    <span>承認：佐々木 誠一郎</span>
-                  </p>
-                </div>
-              </td>
-            </tr>
-            <tr data-href="{{ route('self-check.answerConfirm') }}">
-              <td>
-                <div class="item">
-                  <span class="status--3">確定待ち</span>
-                  <span class="status--4">評価確定</span>
-                </div>
-              </td>
-              <td>
-                <div class="item">
-                  第8期 | 基本挨拶、身だしなみセルフチェック表
-                </div>
-              </td>
-              <td>
-                <div class="item">
-                  2024/07/08
-                </div>
-              </td>
-              <td>
-                <div class="item">
-                  2024年 四半期 (7月 ~ 9月)
+                  {{ $self_check_sheet->period_name }}
                 </div>
               </td>
               <td>
                 <div class="item">
                   <p>
-                    <span>評価：山田 啓介</span><br />
-                    <span>承認：佐々木 誠一郎</span>
+                    <span>評価：{{ data_get($self_check_sheet, 'self_check_rating.reviewer.full_name', '未登録') }}</span><br />
+                    <span>承認：{{ data_get($self_check_sheet, 'self_check_rating.approver.full_name', '未登録') }}</span>
                   </p>
                 </div>
               </td>
             </tr>
-          @endfor
+          @endforeach
         </tbody>
       </table>
     </div>
     {{-- ページング --}}
-    <div class="p-pager">
-      <p class="count">全 320 件中 1～20 件目</p>
-      <div class="pageNav">
-        <a href="" class="arrowButton arrowButton--prev disabled">
-          <svg width="28" height="28"><use xlink:href="#pageNav_prev" /></svg>
-        </a>
-        <div class="p-input">
-          <input type="text" placeholder="" value="1" id="">
-          <span class="total">/ 1</span>
-        </div>
-        <a href="" class="arrowButton arrowButton--next">
-          <svg width="28" height="28"><use xlink:href="#pageNav_next" /></svg>
-        </a>
-      </div>
-    </div>
+    <x-pager :pagination="$self_check_sheets->appends(request()->all())"/>
   </div>

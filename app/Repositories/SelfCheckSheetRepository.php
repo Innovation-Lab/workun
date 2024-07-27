@@ -220,36 +220,31 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
     /**
      * @param User $user
      * @param string $term
-     * @return Collection
+     * @param bool $pagenate
+     * @return mixed
      */
-    public function answerSelfCheckSheets($user, string $term): Collection
+    public function answerSelfCheckSheets($user, string $term, bool $pagenate = false): mixed
     {
-        return $user
+        $query = $user
             ->answer_self_check_sheets
-            ->onTerm($term)
-            ->get()
-            ->map(function ($self_check_sheet) use($user, $term) {
-                // 期間表示
-                $start = date('Y-m-d', strtotime("{$term}-01"));
-                $check_days = $self_check_sheet->check_days - 1;
-                $self_check_sheet->display_term = date('Y.m.d', strtotime($start)) . " - " . date('Y.m.d', strtotime("{$start} + {$check_days} days"));
+            ->onTerm($term);
 
-                // ステータス
-                $self_check_rating = $self_check_sheet
-                    ->self_check_ratings()
-                    ->where('self_check_ratings.user_id', $user->id)
-                    ->onTerm($term)
-                    ->first();
-                $self_check_sheet->rating_status = $self_check_rating ? $self_check_rating->status : SelfCheckRating::STATUS_NOT_ANSWERED;
+        if ($pagenate) {
+            $self_check_sheets = $query->paginate();
+            $self_check_sheets
+                ->getCollection()
+                ->transform(function ($self_check_sheet) use($user, $term) {
+                    return $this->setAnswerAttributes($self_check_sheet, $user, $term);
+                });
+        } else {
+            $self_check_sheets = $query
+                ->get()
+                ->transform(function ($self_check_sheet) use($user, $term) {
+                    return $this->setAnswerAttributes($self_check_sheet, $user, $term);
+                });
+        }
 
-                return $this->setTaskAttributes($self_check_sheet, $user, $term);
-            })
-            ->filter(function ($self_check_sheet) {
-                return in_array($self_check_sheet->rating_status, [
-                    SelfCheckRating::STATUS_NOT_ANSWERED,
-                    SelfCheckRating::STATUS_ANSWERING
-                ]);
-            });
+        return $self_check_sheets;
     }
 
     /**
@@ -414,6 +409,23 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
                     SelfCheckRating::STATUS_APPROVING
                 ]);
             });
+    }
+
+    private function setAnswerAttributes(SelfCheckSheet $self_check_sheet, $user, string $term): SelfCheckSheet
+    {
+        // 期間表示
+        $start = date('Y-m-d', strtotime("{$term}-01"));
+        $check_days = $self_check_sheet->check_days - 1;
+        $self_check_sheet->display_term = date('Y/m/d', strtotime("{$start} + {$check_days} days"));
+
+        // 回答
+        $self_check_sheet->self_check_rating = $self_check_sheet
+            ->self_check_ratings()
+            ->where('self_check_ratings.user_id', $user->id)
+            ->onTerm($term)
+            ->first();
+
+        return $self_check_sheet;
     }
 
     private function setTaskAttributes(SelfCheckSheet $self_check_sheet, $user, string $term): SelfCheckSheet

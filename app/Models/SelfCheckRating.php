@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SelfCheckRating extends Model
 {
@@ -18,6 +19,8 @@ class SelfCheckRating extends Model
         'self_check_sheet_id',
         'target',
         'user_id',
+        'reviewer_id',
+        'approver_id',
         'answer',
         'rating',
         'status',
@@ -34,16 +37,26 @@ class SelfCheckRating extends Model
         self::STATUS_ANSWERING => '回答中',
         self::STATUS_RATING => '評価中',
         self::STATUS_APPROVING => '承認中',
-        self::STATUS_APPROVED => '承認済み',
+        self::STATUS_APPROVED => '評価確定',
     ];
 
-    protected function scopeOnTerm($query, $term)
+    public function reviewer(): BelongsTo
     {
-        return $query->where('self_check_ratings.target', $term);
+        return $this->belongsTo(User::class, 'reviewer_id');
+    }
+
+    public function approver(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'approver_id');
     }
 
     protected function getStatusLabelAttribute()
     {
         return data_get(self::STATUS_LIST, $this->status);
+    }
+
+    protected function scopeOnTerm($query, $term)
+    {
+        return $query->where('self_check_ratings.target', $term);
     }
 }
