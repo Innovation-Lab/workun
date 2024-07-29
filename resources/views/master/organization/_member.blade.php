@@ -2,7 +2,7 @@
   <div class="close">×</div>
   <div class="head u-align between">
     <p class="title c-txt__md c-txt__weight--600">「{{ $department->name }}」従業員数</p>
-    <a href="{{route('master.organization.edit_link_employee')}}" class="c-button--text">編集</a>
+    <a href="{{route('master.organization.user_department.add', $department)}}" class="c-button--text">追加</a>
   </div>
   <div class="count">
     <span class="unit">全</span>
