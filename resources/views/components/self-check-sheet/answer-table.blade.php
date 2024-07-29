@@ -90,90 +90,26 @@
             @endif
             <td>
               <div class="p-table__cell--input">
-                @foreach($months as $month)
-                  @if($month === $term)
-                    @if($type === "answer")
-                      <div class="u-flex cell cell--item u-w100">
-                        <x-form.select
-                          id=""
-                          class="p-table__cell--select full"
-                          name="self_check_sheet_item[{{ $third_self_check_sheet_item->id }}]"
-                          empty=""
-                          :selects="array_combine(range(5, 1), range(5, 1))"
-                          :value='old("self_check_sheet_item.{$third_self_check_sheet_item->id}", data_get($selfCheckRating, "details.{$third_self_check_sheet_item->id}.answer", 3))'
-                        />
-                      </div>
-                    @elseif($type === "rating")
-                      <div class="u-flex u-w140 cell cell--item currentMonth">
-                        <div class="cell--number targeter c-txt__md c-txt__weight--600">
-                          {{ data_get($selfCheckRating, "details.{$third_self_check_sheet_item->id}.answer", '-') }}
-                        </div>
-                        <div class="cell--number c-txt__md c-txt__weight--600">
-                          <x-form.select
-                            id=""
-                            class="p-table__cell--select full"
-                            name="self_check_sheet_item[{{ $third_self_check_sheet_item->id }}][rating]"
-                            empty=""
-                            :selects="array_combine(range(5, 1), range(5, 1))"
-                            :value='old(
-                              "self_check_sheet_item.{$third_self_check_sheet_item->id}.rating",
-                              data_get($selfCheckRating, "details.{$third_self_check_sheet_item->id}.rating", 3) !== 0 ?
-                              data_get($selfCheckRating, "details.{$third_self_check_sheet_item->id}.rating", 3) :
-                              3
-                            )'
-                          />
-                        </div>
-                        <p
-                          id="p_self_check_sheet_item_comment_{{ $third_self_check_sheet_item->id }}"
-                          class="
-                            comment
-                            @if(!old("self_check_sheet_item.{$third_self_check_sheet_item->id}.comment", data_get($selfCheckRating, "details.{$third_self_check_sheet_item->id}.comment")))
-                              c-empty
-                            @endif
-                          "
-                          data-remodal-target="modal_commentForm_{{ $third_self_check_sheet_item->id }}"
-                        >{{ old("self_check_sheet_item.{$third_self_check_sheet_item->id}.comment", data_get($selfCheckRating, "details.{$third_self_check_sheet_item->id}.comment", '備考があれば記入')) }}</p>
-                        <input
-                          id="input_self_check_sheet_item_comment_{{ $third_self_check_sheet_item->id }}"
-                          type="hidden"
-                          name="self_check_sheet_item[{{ $third_self_check_sheet_item->id }}][comment]"
-                          value="{{ old("self_check_sheet_item.{$third_self_check_sheet_item->id}.comment", data_get($selfCheckRating, "details.{$third_self_check_sheet_item->id}.comment")) }}"
-                        />
-                        @include('self-check.components.modal._comment_form', [
-                          'self_check_rating' => $selfCheckRating,
-                          'self_check_rating_detail' => data_get($selfCheckRating, "details.{$third_self_check_sheet_item->id}"),
-                        ])
-                      </div>
-                    @endif
-                  @elseif($month !== $term && data_get($selfCheckRatingHistories, $month))
-                    <div class="u-flex u-w140 cell cell--item">
-                      @if($type === "answer")
-                        <div class="cell--number targeter c-txt__md c-txt__weight--600">
-                          {{ data_get($selfCheckRatingHistories, "{$month}.details.{$third_self_check_sheet_item->id}.answer", "-") }}
-                        </div>
-                        <div class="cell--number c-txt__md c-txt__weight--600">
-                          {{ data_get($selfCheckRatingHistories, "{$month}.details.{$third_self_check_sheet_item->id}.rating", "-") }}
-                        </div>
-                      @elseif($type === "rating")
-                        <div class="cell--number full c-txt__md c-txt__weight--600">
-                          {{ data_get($selfCheckRatingHistories, "{$month}.details.{$third_self_check_sheet_item->id}.rating", "-") }}
-                        </div>
-                      @endif
-                      <p
-                        class="comment"
-                        data-remodal-target="modal_comment_{{ data_get($selfCheckRatingHistories, "{$month}.details.{$third_self_check_sheet_item->id}.id") }}"
-                      >{{ data_get($selfCheckRatingHistories, "{$month}.details.{$third_self_check_sheet_item->id}.short_comment") }}</p>
-                      @if(data_get($selfCheckRatingHistories, "{$month}.details.{$third_self_check_sheet_item->id}"))
-                        @include('self-check.components.modal._comment', [
-                          'self_check_rating' => data_get($selfCheckRatingHistories, $month),
-                          'self_check_rating_detail' => data_get($selfCheckRatingHistories, "{$month}.details.{$third_self_check_sheet_item->id}"),
-                        ])
-                      @endif
-                    </div>
-                  @else
-                    <div class="u-flex cell cell--item u-w100"></div>
-                  @endif
-                @endforeach
+                @switch($type)
+                  @case("answer")
+                    <x-self-check-sheet.answer-table-answer
+                      :months="$months"
+                      :term="$term"
+                      :selfCheckSheetItem="$third_self_check_sheet_item"
+                      :selfCheckRating="$selfCheckRating"
+                      :selfCheckRatingHistories="$selfCheckRatingHistories"
+                    />
+                    @break
+                  @case("rating")
+                    <x-self-check-sheet.answer-table-rating
+                      :months="$months"
+                      :term="$term"
+                      :selfCheckSheetItem="$third_self_check_sheet_item"
+                      :selfCheckRating="$selfCheckRating"
+                      :selfCheckRatingHistories="$selfCheckRatingHistories"
+                    />
+                    @break
+                @endswitch
               </div>
             </td>
           </tr>
