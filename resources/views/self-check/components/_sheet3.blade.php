@@ -2,26 +2,27 @@
     <div class="mainText">
       <p class="title">セルフチェックシート一覧</p>
     </div>
-    <form action="" class="c-tab__content--sort">
+    <form
+      id="term_select"
+      class="c-tab__content--sort"
+    >
+      <input type="hidden" name="type" value="{{ $type }}" />
       <label>
         実施月:
-        <select name="">
-          <option value="">2024年8月</option>
-          <option value="">2024年7月</option>
-        </select>
+        <x-form.year-month
+          key="term"
+          :value="$term"
+          id="term_select"
+        />
       </label>
     </form>
   </div>
   <div class="p-tab__content--body">
     {{-- テーブル一覧 --}}
     <div class="p-table c-scroll">
-      <?php 
+      <?php
         $tableHead = [
           [
-            'title' => 'ステータス',
-            'width' => '100',
-            'class' => null,
-          ],[
             'title' => 'タイトル',
             'width' => 'auto',
             'class' => null,
@@ -36,10 +37,6 @@
           ],[
             'title' => '評価期間',
             'width' => '180',
-            'class' => null,
-          ],[
-            'title' => '評価者',
-            'width' => '160',
             'class' => null,
           ]
         ]
@@ -60,60 +57,34 @@
           </tr>
         </thead>
         <tbody>
-          @for($tableBody = 0; $tableBody < 20; $tableBody++)
+          @foreach($self_check_sheets as $self_check_sheet)
             <tr data-href="{{ route('self-check.approval') }}">
               <td>
                 <div class="item">
-                  <span class="status--1">未承認</span>
-                  <span class="status--4">承認済み</span>
+                  {{ $self_check_sheet->display_title }}
                 </div>
               </td>
               <td>
                 <div class="item">
-                  第8期 | 基本挨拶、身だしなみセルフチェック表
-                </div>
-              </td>
-              <td>
-                <div class="item">
-                  2024/07/15
+                  {{ $self_check_sheet->display_term }}
                 </div>
               </td>
               <td>
                 <div class="item u-tar">
-                  37 / 38
+                  {{ number_format($self_check_sheet->approved_target_count) }} /
+                  {{ number_format($self_check_sheet->all_target_count) }}
                 </div>
               </td>
               <td>
                 <div class="item">
-                  2024年 四半期 (7月 ~ 9月)
-                </div>
-              </td>
-              <td>
-                <div class="item">
-                  <p>
-                    <span>評価：山田 啓介</span>
-                  </p>
+                  {{ $self_check_sheet->display_period }}
                 </div>
               </td>
             </tr>
-          @endfor
+          @endforeach
         </tbody>
       </table>
     </div>
     {{-- ページング --}}
-    <div class="p-pager">
-      <p class="count">全 320 件中 1～20 件目</p>
-      <div class="pageNav">
-        <a href="" class="arrowButton arrowButton--prev disabled">
-          <svg width="28" height="28"><use xlink:href="#pageNav_prev" /></svg>
-        </a>
-        <div class="p-input">
-          <input type="text" placeholder="" value="1" id="">
-          <span class="total">/ 1</span>
-        </div>
-        <a href="" class="arrowButton arrowButton--next">
-          <svg width="28" height="28"><use xlink:href="#pageNav_next" /></svg>
-        </a>
-      </div>
-    </div>
+    <x-pager :pagination="$self_check_sheets->appends(request()->all())"/>
   </div>

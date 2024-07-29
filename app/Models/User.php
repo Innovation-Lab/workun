@@ -134,6 +134,17 @@ class User extends Authenticatable
             ->groupBy('self_check_sheets.id');
     }
 
+    protected function getApprovingSelfCheckSheetsAttribute()
+    {
+        return SelfCheckSheet::query()
+            ->select('self_check_sheets.*')
+            ->leftJoin('periods', 'periods.id', 'self_check_sheets.period_id')
+            ->leftJoin('self_check_sheet_targets', 'self_check_sheet_targets.self_check_sheet_id', 'self_check_sheets.id')
+            ->leftJoin('approvers', 'self_check_sheet_targets.user_id', 'approvers.user_id')
+            ->where('approvers.manager_user_id', $this->id)
+            ->groupBy('self_check_sheets.id');
+    }
+
     protected function getAvatarUrlAttribute()
     {
         if (!$this->img_path) {

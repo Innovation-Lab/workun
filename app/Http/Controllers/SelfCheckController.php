@@ -46,6 +46,9 @@ class SelfCheckController extends Controller
                     ->ratingSelfCheckSheets($this->auth_user, $term, true);
                 break;
             case "confirm":
+                $self_check_sheets = $this
+                    ->selfCheckSheetRepository
+                    ->approvingSelfCheckSheets($this->auth_user, $term, true);
                 break;
         }
         return view('self-check.index', [

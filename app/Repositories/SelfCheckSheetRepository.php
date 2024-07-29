@@ -286,79 +286,26 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
      */
     public function approvingSelfCheckSheets($user, string $term, bool $pagenate = false): mixed
     {
-        return $user
-            ->rating_self_check_sheets
-            ->onTerm($term)
-            ->get()
-            ->map(function ($self_check_sheet) use($user, $term) {
-                // 期間表示
-                $check_days = $self_check_sheet->check_days - 1;
-                $rating_days = $self_check_sheet->rating_days - 1;
-                $start = date('Y-m-d', strtotime("{$term}-01 + " .($check_days + $rating_days + 2). " days"));
-                $approval_days = $self_check_sheet->approval_days - 1;
-                $self_check_sheet->display_term = date('Y.m.d', strtotime($start)) . " - " . date('Y.m.d', strtotime("{$start} + {$approval_days} days"));
+        $query = $user
+            ->approving_self_check_sheets
+            ->onTerm($term);
 
-                // ステータス（評価対象の回答状況で算出）todo:承認者の条件
-                {
-                    // 対象数
-                    $all_target_count = $self_check_sheet
-                        ->self_check_sheet_targets()
-                        ->count();
+        if ($pagenate) {
+            $self_check_sheets = $query->paginate();
+            $self_check_sheets
+                ->getCollection()
+                ->transform(function ($self_check_sheet) use($user, $term) {
+                    return $this->setApprovingAttributes($self_check_sheet, $user, $term);
+                });
+        } else {
+            $self_check_sheets = $query
+                ->get()
+                ->transform(function ($self_check_sheet) use($user, $term) {
+                    return $this->setApprovingAttributes($self_check_sheet, $user, $term);
+                });
+        }
 
-                    // 回答済み数
-                    $answered_target_count = $self_check_sheet
-                        ->self_check_ratings()
-                        ->onTerm('self_check_ratings', $term)
-                        ->whereIn('self_check_ratings.status', [
-                            SelfCheckRating::STATUS_RATING,
-                            SelfCheckRating::STATUS_APPROVING,
-                            SelfCheckRating::STATUS_APPROVED,
-                        ])
-                        ->count();
-
-                    // 評価済み数
-                    $rated_target_count = $self_check_sheet
-                        ->self_check_ratings()
-                        ->onTerm($term)
-                        ->whereIn('self_check_ratings.status', [
-                            SelfCheckRating::STATUS_APPROVING,
-                            SelfCheckRating::STATUS_APPROVED,
-                        ])
-                        ->count();
-
-                    // 承認済み数
-                    $approved_target_count = $self_check_sheet
-                        ->self_check_ratings()
-                        ->onTerm($term)
-                        ->whereIn('self_check_ratings.status', [
-                            SelfCheckRating::STATUS_APPROVED,
-                        ])
-                        ->count();
-
-                    if (date('Y-m-d') < date('Y-m-d', strtotime("{$term}-01 + " .($check_days + 1). " days"))) {
-                        // 評価期間より前は回答中
-                        $rating_status = SelfCheckRating::STATUS_ANSWERING;
-                    } else if (date('Y-m-d') < $start) {
-                        // 承認期間開始前までは評価中
-                        $rating_status = SelfCheckRating::STATUS_RATING;
-                    } else {
-                        // 承認期間開始後は評価中
-                        $rating_status = SelfCheckRating::STATUS_APPROVING;
-                        if ($all_target_count <= $approved_target_count) {
-                            // 対象者数全員が承認済み数になった場合
-                            $rating_status = SelfCheckRating::STATUS_APPROVED;
-                        }
-                    }
-                    $self_check_sheet->rating_status = $rating_status;
-                }
-
-                return $this->setTaskAttributes($self_check_sheet, $user, $term);
-            })
-            ->filter(function ($self_check_sheet) {
-                return in_array($self_check_sheet->rating_status, [
-                    SelfCheckRating::STATUS_APPROVING
-                ]);
-            });
+        return $self_check_sheets;
     }
 
     public function setAnswerAttributes(
@@ -415,26 +362,57 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
         $rating_days = $self_check_sheet->rating_days - 1;
         $self_check_sheet->display_term = date('Y/m/d', strtotime("{$start} + {$rating_days} days"));
 
-        // ステータス（評価対象の回答状況で算出）
-        {
-            // 対象数
-            $self_check_sheet->all_target_count = $self_check_sheet
-                ->self_check_ratings()
-                ->onTerm($term)
-                ->where('self_check_ratings.reviewer_id', $user->id)
-                ->count();
+        // 対象数
+        $self_check_sheet->all_target_count = $self_check_sheet
+            ->self_check_ratings()
+            ->onTerm($term)
+            ->where('self_check_ratings.reviewer_id', $user->id)
+            ->count();
 
-            // 評価済み数
-            $self_check_sheet->rated_target_count = $self_check_sheet
-                ->self_check_ratings()
-                ->onTerm($term)
-                ->where('self_check_ratings.reviewer_id', $user->id)
-                ->whereIn('self_check_ratings.status', [
-                    SelfCheckRating::STATUS_APPROVING,
-                    SelfCheckRating::STATUS_APPROVED,
-                ])
-                ->count();
-        }
+        // 評価済み数
+        $self_check_sheet->rated_target_count = $self_check_sheet
+            ->self_check_ratings()
+            ->onTerm($term)
+            ->where('self_check_ratings.reviewer_id', $user->id)
+            ->whereIn('self_check_ratings.status', [
+                SelfCheckRating::STATUS_APPROVING,
+                SelfCheckRating::STATUS_APPROVED,
+            ])
+            ->count();
+
+        return $self_check_sheet;
+    }
+
+    public function setApprovingAttributes(
+        SelfCheckSheet $self_check_sheet,
+        $user,
+        string $term,
+        bool $with_histories = false
+    ): SelfCheckSheet
+    {
+        // 期間表示
+        $check_days = $self_check_sheet->check_days - 1;
+        $rating_days = $self_check_sheet->rating_days - 1;
+        $start = date('Y-m-d', strtotime("{$term}-01 + " .($check_days + $rating_days + 2). " days"));
+        $approval_days = $self_check_sheet->approval_days - 1;
+        $self_check_sheet->display_term = date('Y.m.d', strtotime("{$start} + {$approval_days} days"));
+
+        // 対象数
+        $self_check_sheet->all_target_count = $self_check_sheet
+            ->self_check_ratings()
+            ->onTerm($term)
+            ->where('self_check_ratings.approver_id', $user->id)
+            ->count();
+
+        // 承認済み数
+        $self_check_sheet->approved_target_count = $self_check_sheet
+            ->self_check_ratings()
+            ->onTerm($term)
+            ->where('self_check_ratings.approver_id', $user->id)
+            ->whereIn('self_check_ratings.status', [
+                SelfCheckRating::STATUS_APPROVED,
+            ])
+            ->count();
 
         return $self_check_sheet;
     }
