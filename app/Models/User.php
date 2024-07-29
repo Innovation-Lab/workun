@@ -125,12 +125,13 @@ class User extends Authenticatable
 
     protected function getRatingSelfCheckSheetsAttribute()
     {
-        // todo:条件未作成
         return SelfCheckSheet::query()
             ->select('self_check_sheets.*')
             ->leftJoin('periods', 'periods.id', 'self_check_sheets.period_id')
             ->leftJoin('self_check_sheet_targets', 'self_check_sheet_targets.self_check_sheet_id', 'self_check_sheets.id')
-            ->where('self_check_sheet_targets.user_id', $this->id);
+            ->leftJoin('reviewers', 'self_check_sheet_targets.user_id', 'reviewers.user_id')
+            ->where('reviewers.manager_user_id', $this->id)
+            ->groupBy('self_check_sheets.id');
     }
 
     protected function getAvatarUrlAttribute()

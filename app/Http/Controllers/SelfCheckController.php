@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class SelfCheckController extends Controller
 {
@@ -25,9 +26,11 @@ class SelfCheckController extends Controller
     }
 
     /**
-     * Display index page view.
+     * セルフチェック一覧
+     * @param Request $request
+     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         $type = $request->get('type', 'answer');
         $term = $request->get('term', date('Y-m'));
@@ -38,6 +41,9 @@ class SelfCheckController extends Controller
                     ->answerSelfCheckSheets($this->auth_user, $term, true);
                 break;
             case "rating":
+                $self_check_sheets = $this
+                    ->selfCheckSheetRepository
+                    ->ratingSelfCheckSheets($this->auth_user, $term, true);
                 break;
             case "confirm":
                 break;
@@ -60,11 +66,14 @@ class SelfCheckController extends Controller
 
     /**
      * 回答画面
+     * @param SelfCheckSheet $selfCheckSheet
+     * @param string $term
+     * @return View
      */
     public function answer(
         SelfCheckSheet $selfCheckSheet,
         string $term
-    )
+    ): View
     {
         return view('self-check.answer.index', [
             'selfCheckSheet' => $this
@@ -77,13 +86,14 @@ class SelfCheckController extends Controller
     /**
      * @param SelfCheckSheet $selfCheckSheet
      * @param string $term
+     * @param Request $request
      * @return RedirectResponse
      */
     public function answerUpdate(
         SelfCheckSheet $selfCheckSheet,
         string $term,
         Request $request
-    )
+    ): RedirectResponse
     {
         # 更新処理
         DB::beginTransaction();
@@ -111,6 +121,28 @@ class SelfCheckController extends Controller
             ->with('success', 'セルフチェックの記入を完了しました。');
     }
 
+    /**
+     * 回答一覧
+     * @param SelfCheckSheet $selfCheckSheet
+     * @param string $term
+     * @return View
+     */
+    public function answers(
+        SelfCheckSheet $selfCheckSheet,
+        string $term
+    ): View
+    {
+        return view('self-check.answers', [
+            'term' => $term,
+            'selfCheckSheet' => $selfCheckSheet,
+            'self_check_ratings' => $selfCheckSheet
+                ->self_check_ratings()
+                ->onTerm($term)
+                ->where('self_check_ratings.reviewer_id', $this->auth_user->id)
+                ->paginate()
+        ]);
+    }
+
     public function answerConfirm()
     {
         return view('self-check.answer.confirm');
@@ -132,13 +164,6 @@ class SelfCheckController extends Controller
         return view('self-check.confirm.index');
     }
 
-    /**
-     * Display confirm list page view.
-     */
-    public function confirmList()
-    {
-        return view('self-check.confirm.list');
-    }
     /**
      * Display approval page view.
      */

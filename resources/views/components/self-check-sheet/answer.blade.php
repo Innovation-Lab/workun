@@ -2,7 +2,6 @@
   <div class="p-tableBox__head">
     <div class="mainText">
       <x-self-check-sheet.answer-status
-        :user="$auth_user"
         :status="data_get($selfCheckSheet, 'self_check_rating.status', \App\Models\SelfCheckRating::STATUS_NOT_ANSWERED)"
       />
       <p class="title">

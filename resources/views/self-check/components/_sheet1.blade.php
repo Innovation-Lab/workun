@@ -69,14 +69,13 @@
               <td>
                 <div class="item">
                   <x-self-check-sheet.answer-status
-                    :user="$auth_user"
                     :status="data_get($self_check_sheet, 'self_check_rating.status', \App\Models\SelfCheckRating::STATUS_NOT_ANSWERED)"
                   />
                 </div>
               </td>
               <td>
                 <div class="item">
-                  {{ $self_check_sheet->title }}
+                  {{ $self_check_sheet->display_title }}
                 </div>
               </td>
               <td>
@@ -86,7 +85,7 @@
               </td>
               <td>
                 <div class="item">
-                  {{ $self_check_sheet->period_name }}
+                  {{ $self_check_sheet->display_period }}
                 </div>
               </td>
               <td>
