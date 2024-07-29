@@ -9,7 +9,7 @@
         class="arrowButton arrowButton--prev disabled"
       @else
         href="{{ $pagination->previousPageUrl() }}"
-        class="arrowButton arrowButton--prev disabled"
+        class="arrowButton arrowButton--prev"
       @endif
     >
       <svg width="28" height="28"><use xlink:href="#pageNav_prev" /></svg>
