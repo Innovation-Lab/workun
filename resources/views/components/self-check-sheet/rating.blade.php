@@ -42,6 +42,25 @@
 @include('self-check.components.modal._remand')
 @include('self-check.components.modal._request')
 <script>
+  function selectApprover(event, self)
+  {
+    let image = $(self).data('image')
+    let name = $(self).data('name')
+    let html = `
+<div class="u-align u-gap8 p-user">
+  <div
+    class="p-user__image"
+    style='background-image:url(${image})'
+  ></div>
+  <div class="p-user__text">
+    <span class="label">承認者</span>
+    <p>${name}</p>
+  </div>
+</div>`
+    $("#selected_approver").html(html)
+    $('.p-check__select').removeClass('is-open')
+    event.stopPropagation()
+  }
   function setComment(self)
   {
     let id = $(self).data('id')
@@ -64,6 +83,7 @@
       alert('差戻し理由を入力してください。')
     } else {
       $(self).prop('disabled', true)
+      $("#rating_form [name=draft]").val("")
       $("#rating_form [name=remand]").val(1)
       $("#rating_form").submit()
     }
@@ -72,6 +92,19 @@
   {
     $(self).prop('disabled', true)
     $("#rating_form [name=draft]").val(1)
+    $("#rating_form [name=remand]").val("")
     $("#rating_form").submit()
+  }
+  function saveAnswer(self)
+  {
+    let approver_id = $("#rating_form [name=approver_id]:checked").val()
+    if (!approver_id) {
+      alert("承認者を選択してください。")
+    } else {
+      $(self).prop('disabled', true)
+      $("#rating_form [name=draft]").val("")
+      $("#rating_form [name=remand]").val("")
+      $("#rating_form").submit()
+    }
   }
 </script>

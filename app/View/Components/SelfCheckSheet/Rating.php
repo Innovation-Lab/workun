@@ -9,6 +9,8 @@ use Illuminate\View\Component;
 
 class Rating extends Component
 {
+    public $user;
+
     /**
      * Create a new component instance.
      */
@@ -17,7 +19,7 @@ class Rating extends Component
         public $selfCheckRating
     )
     {
-        //
+        $this->user = $selfCheckRating->user;
     }
 
     /**
