@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SelfCheckSheet;
 use App\Repositories\SelfCheckSheetRepositoryInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SelfCheckController extends Controller
 {
@@ -56,19 +59,56 @@ class SelfCheckController extends Controller
     }
 
     /**
-     * Display answer page view.
+     * 回答画面
      */
-    public function answer()
+    public function answer(
+        SelfCheckSheet $selfCheckSheet,
+        string $term
+    )
     {
-        return view('self-check.answer.index');
+        return view('self-check.answer.index', [
+            'selfCheckSheet' => $this
+                ->selfCheckSheetRepository
+                ->setAnswerAttributes($selfCheckSheet, $this->auth_user, $term, true),
+            'term' => $term,
+        ]);
     }
 
     /**
-     * @param Request $request
+     * @param SelfCheckSheet $selfCheckSheet
+     * @param string $term
+     * @return RedirectResponse
      */
-    public function update(Request $request)
+    public function answerUpdate(
+        SelfCheckSheet $selfCheckSheet,
+        string $term,
+        Request $request
+    )
     {
-        //
+        # 更新処理
+        DB::beginTransaction();
+        try {
+            $this
+                ->selfCheckSheetRepository
+                ->answer($selfCheckSheet, $this->auth_user, $term, $request);
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(['alert' => $exception->getMessage()]);
+        }
+        DB::commit();
+
+        if ($request->get('draft')) {
+            return redirect()
+                ->back()
+                ->with('success', '下書き保存しました。');
+        }
+
+        return redirect()
+            ->to(route('self-check.index'))
+            ->with('success', 'セルフチェックの記入を完了しました。');
     }
 
     public function answerConfirm()

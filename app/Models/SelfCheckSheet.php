@@ -125,6 +125,13 @@ class SelfCheckSheet extends Model
         return data_get($this, 'user.full_name');
     }
 
+    protected function getDisplayPeriodAttribute()
+    {
+        $start = data_get($this, 'period.start');
+        $end = data_get($this, 'period.end');
+        return date('Y.m', strtotime("{$start}-01")) . " ~ " . date('Y.m', strtotime("{$end}-01"));
+    }
+
     protected function scopeOrganization ($query, $organization_id)
     {
         return $query->where('self_check_sheets.organization_id', $organization_id);

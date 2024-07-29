@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\SelfCheckRatingDetail;
 use App\Models\SelfCheckSheet;
 use App\Models\SelfCheckRating;
 use App\Models\SelfCheckSheetItem;
@@ -411,7 +412,12 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
             });
     }
 
-    private function setAnswerAttributes(SelfCheckSheet $self_check_sheet, $user, string $term): SelfCheckSheet
+    public function setAnswerAttributes(
+        SelfCheckSheet $self_check_sheet,
+        $user,
+        string $term,
+        bool $with_histories = false
+    ): SelfCheckSheet
     {
         // 期間表示
         $start = date('Y-m-d', strtotime("{$term}-01"));
@@ -424,6 +430,25 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
             ->where('self_check_ratings.user_id', $user->id)
             ->onTerm($term)
             ->first();
+
+        if ($with_histories) {
+            // 回答月
+            $self_check_sheet->months = $self_check_sheet->period->monthly_list;
+
+            // 回答結果
+            $self_check_sheet->self_check_rating_histories = $self_check_sheet
+                ->self_check_ratings()
+                ->where('self_check_ratings.user_id', $user->id)
+                ->get()
+                ->mapWithKeys(function ($self_check_rating) {
+                    $self_check_rating->details = $self_check_rating
+                        ->self_check_rating_details
+                        ->mapWithKeys(function ($self_check_rating_detail) {
+                            return [$self_check_rating_detail->self_check_sheet_item_id => $self_check_rating_detail];
+                        });
+                    return [$self_check_rating->target => $self_check_rating];
+                });
+        }
 
         return $self_check_sheet;
     }
@@ -451,5 +476,69 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
         $self_check_sheet->status_class = $status_class;
 
         return $self_check_sheet;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function answer(
+        SelfCheckSheet $self_check_sheet,
+        $user,
+        string $term,
+        Request $request
+    ): void
+    {
+        # self_check_rating の更新
+        $self_check_rating = $self_check_sheet
+            ->self_check_ratings()
+            ->where('self_check_ratings.user_id', $user->id)
+            ->onTerm($term)
+            ->first();
+        if (!$self_check_rating) {
+            $self_check_rating = new SelfCheckRating();
+            $self_check_rating->status = SelfCheckRating::STATUS_ANSWERING;
+            $self_check_rating->self_check_sheet_id = $self_check_sheet->id;
+            $self_check_rating->target = $term;
+            $self_check_rating->user_id = $user->id;
+        }
+        if ($request->get('draft')) {
+            $self_check_rating->status = SelfCheckRating::STATUS_ANSWERING;
+        } else {
+            $self_check_rating->status = SelfCheckRating::STATUS_RATING;
+            if ($request->get('reviewer_id')) {
+                // 評価者の設定
+                $reviewer = $user->organization
+                    ->users()
+                    ->find($request->get('reviewer_id'));
+                $self_check_rating->reviewer_id = $reviewer ? $reviewer->id : null;
+            }
+        }
+        if (!$self_check_rating->save()) {
+            throw new Exception();
+        }
+
+        # self_check_rating_details の更新
+        foreach ($request->get('self_check_sheet_item', []) as $self_check_sheet_item_id => $self_check_sheet_item_answer) {
+            // $self_check_sheet_item のバリデーション
+            $self_check_sheet_item = $self_check_sheet
+                ->self_check_sheet_items
+                ->find($self_check_sheet_item_id);
+            if (!$self_check_sheet_item) {
+                throw new Exception();
+            }
+            $self_check_rating_detail = $self_check_rating
+                ->self_check_rating_details()
+                ->where('self_check_rating_details.self_check_sheet_item_id', $self_check_sheet_item_id)
+                ->first();
+            if (!$self_check_rating_detail) {
+                $self_check_rating_detail = new SelfCheckRatingDetail();
+                $self_check_rating_detail->self_check_rating_id = $self_check_rating->id;
+                $self_check_rating_detail->self_check_sheet_item_id = $self_check_sheet_item->id;
+            }
+            $self_check_rating_detail->answer = $self_check_sheet_item_answer;
+            if (!$self_check_rating_detail->save()) {
+                throw new Exception();
+            }
+        }
     }
 }

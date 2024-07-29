@@ -28,7 +28,7 @@
         @if($key == 0)
         <!-- 下書き中 / 未登録アラート -->
         <li class="p-todo__item p-todo__item--alert">
-          <a href="{{ route('self-check.answer') }}"></a>
+          <a href=""></a>
           <span class="date">2024.12.01 - 2024.12.08</span>
           <div class="mainInfo">
             <span class="c-status c-status--paused">下書き</span>
@@ -38,7 +38,7 @@
         </li>
         <!-- 通常 -->
         <li class="p-todo__item">
-          <a href="{{ route('self-check.answer') }}"></a>
+          <a href=""></a>
           <span class="date">2024.12.01 - 2024.12.08</span>
           <div class="mainInfo">
             <span class="c-status c-status--waiting">未登録</span>

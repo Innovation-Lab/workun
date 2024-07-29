@@ -62,7 +62,10 @@
         </thead>
         <tbody>
           @foreach($self_check_sheets as $self_check_sheet)
-            <tr data-href="{{ route('self-check.answer') }}">
+            <tr data-href="{{ route('self-check.answer', [
+              'selfCheckSheet' => $self_check_sheet,
+              'term' => $term,
+            ]) }}">
               <td>
                 <div class="item">
                   <x-self-check-sheet.answer-status

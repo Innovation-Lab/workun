@@ -18,7 +18,6 @@
   </div>
   @include('self-check.components.modal._selfCheck')
   @include('self-check.components.modal._approval')
-  @include('self-check.components.modal._comment')
   @include('self-check.components.modal._remand')
   @include('self-check.components._script_modal')
   @include('self-check.components._script_tableWidth')

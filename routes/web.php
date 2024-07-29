@@ -20,8 +20,8 @@ Route::middleware('auth:web')->group(function ()
     ], function () {
         Route::get('/', [SelfCheckController::class, 'index'])->name('index');
         Route::get('/all', [SelfCheckController::class, 'all'])->name('all');
-        Route::get('/answer', [SelfCheckController::class, 'answer'])->name('answer');
-        Route::post('/answer', [SelfCheckController::class, 'update']);
+        Route::get('/answer/{selfCheckSheet}/{term}', [SelfCheckController::class, 'answer'])->name('answer');
+        Route::post('/answer/{selfCheckSheet}/{term}', [SelfCheckController::class, 'answerUpdate']);
         Route::get('/answer/confirm', [SelfCheckController::class, 'answerConfirm'])->name('answerConfirm');
         Route::get('/rating', [SelfCheckController::class, 'rating'])->name('rating');
         Route::get('/confirm', [SelfCheckController::class, 'confirm'])->name('confirm');

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 
 class Period extends Model
 {
@@ -35,6 +35,23 @@ class Period extends Model
     protected function getDisplayEndAttribute ()
     {
         return date('Y年m月', strtotime("{$this->end}-01"));
+    }
+
+    protected function getMonthlyListAttribute() {
+
+        // 開始月と終了月のCarbonインスタンスを作成
+        $start = Carbon::createFromFormat('Y-m', $this->start)->startOfMonth();
+        $end = Carbon::createFromFormat('Y-m', $this->end)->startOfMonth();
+
+        $months = [];
+
+        // 開始月が終了月以前の間、ループで月を追加
+        while ($start->lte($end)) {
+            $months[] = $start->format('Y-m');
+            $start->addMonth();
+        }
+
+        return $months;
     }
 
     protected function scopeKeyword ($query, $keyword = null)

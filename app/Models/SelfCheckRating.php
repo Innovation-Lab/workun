@@ -24,6 +24,8 @@ class SelfCheckRating extends Model
         'answer',
         'rating',
         'status',
+        'reviewed_at',
+        'confirmed_at'
     ];
 
     /** ステータス */
@@ -50,9 +52,19 @@ class SelfCheckRating extends Model
         return $this->belongsTo(User::class, 'approver_id');
     }
 
+    public function self_check_rating_details()
+    {
+        return $this->hasMany(SelfCheckRatingDetail::class);
+    }
+
     protected function getStatusLabelAttribute()
     {
         return data_get(self::STATUS_LIST, $this->status);
+    }
+
+    protected function getDisplayReviewedAttribute()
+    {
+        return $this->reviewed_at ? date('Y/m/d', strtotime($this->reviewed_at)) : null;
     }
 
     protected function scopeOnTerm($query, $term)
