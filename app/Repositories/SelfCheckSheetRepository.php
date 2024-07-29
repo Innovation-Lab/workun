@@ -235,12 +235,14 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
             $self_check_sheets
                 ->getCollection()
                 ->transform(function ($self_check_sheet) use($user, $term) {
+                    $self_check_sheet->rating = $self_check_sheet->self_check_rating($user, $term);
                     return $this->setAnswerAttributes($self_check_sheet, $user, $term);
                 });
         } else {
             $self_check_sheets = $query
                 ->get()
                 ->transform(function ($self_check_sheet) use($user, $term) {
+                    $self_check_sheet->rating = $self_check_sheet->self_check_rating($user, $term);
                     return $this->setAnswerAttributes($self_check_sheet, $user, $term);
                 });
         }
@@ -311,41 +313,13 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
     public function setAnswerAttributes(
         SelfCheckSheet $self_check_sheet,
         $user,
-        string $term,
-        bool $with_histories = false
+        string $term
     ): SelfCheckSheet
     {
         // 期間表示
         $start = date('Y-m-d', strtotime("{$term}-01"));
         $check_days = $self_check_sheet->check_days - 1;
         $self_check_sheet->display_term = date('Y/m/d', strtotime("{$start} + {$check_days} days"));
-
-        // 回答
-        $self_check_sheet->self_check_rating = $self_check_sheet
-            ->self_check_ratings()
-            ->where('self_check_ratings.user_id', $user->id)
-            ->onTerm($term)
-            ->first();
-
-        if ($with_histories) {
-            // 回答月
-            $self_check_sheet->months = $self_check_sheet->period->monthly_list;
-
-            // 回答結果
-            $self_check_sheet->self_check_rating_histories = $self_check_sheet
-                ->self_check_ratings()
-                ->where('self_check_ratings.user_id', $user->id)
-                ->get()
-                ->mapWithKeys(function ($self_check_rating) {
-                    $self_check_rating->details = $self_check_rating
-                        ->self_check_rating_details
-                        ->mapWithKeys(function ($self_check_rating_detail) {
-                            return [$self_check_rating_detail->self_check_sheet_item_id => $self_check_rating_detail];
-                        });
-                    return [$self_check_rating->target => $self_check_rating];
-                });
-        }
-
         return $self_check_sheet;
     }
 
@@ -501,6 +475,66 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
                 $self_check_rating_detail->self_check_sheet_item_id = $self_check_sheet_item->id;
             }
             $self_check_rating_detail->answer = $self_check_sheet_item_answer;
+            if (!$self_check_rating_detail->save()) {
+                throw new Exception();
+            }
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function rating(
+        SelfCheckRating $self_check_rating,
+        $user,
+        Request $request
+    ): void
+    {
+        $self_check_sheet = $self_check_rating->self_check_sheet;
+
+        # self_check_rating の更新
+        if ($request->get('draft')) {
+            $self_check_rating->status = SelfCheckRating::STATUS_RATING;
+        } elseif ($request->get('remand')) {
+            $self_check_rating->status = SelfCheckRating::STATUS_ANSWERING;
+            $self_check_rating->remand_flag = 1;
+            $self_check_rating->remand_reason = $request->get('remand_reason');
+        } else {
+            $self_check_rating->status = SelfCheckRating::STATUS_APPROVING;
+            $self_check_rating->remand_flag = null;
+            $self_check_rating->reviewed_at = date('Y-m-d H:i:s');
+            if ($request->get('approver_id')) {
+                // 評価者の設定
+                $approver = $user->organization
+                    ->users()
+                    ->find($request->get('approver_id'));
+                $self_check_rating->approver_id = $approver ? $approver->id : null;
+            }
+        }
+        if (!$self_check_rating->save()) {
+            throw new Exception();
+        }
+
+        # self_check_rating_details の更新
+        foreach ($request->get('self_check_sheet_item', []) as $self_check_sheet_item_id => $self_check_sheet_item_inputs) {
+            // $self_check_sheet_item のバリデーション
+            $self_check_sheet_item = $self_check_sheet
+                ->self_check_sheet_items
+                ->find($self_check_sheet_item_id);
+            if (!$self_check_sheet_item) {
+                throw new Exception();
+            }
+            $self_check_rating_detail = $self_check_rating
+                ->self_check_rating_details()
+                ->where('self_check_rating_details.self_check_sheet_item_id', $self_check_sheet_item_id)
+                ->first();
+            if (!$self_check_rating_detail) {
+                $self_check_rating_detail = new SelfCheckRatingDetail();
+                $self_check_rating_detail->self_check_rating_id = $self_check_rating->id;
+                $self_check_rating_detail->self_check_sheet_item_id = $self_check_sheet_item->id;
+            }
+            $self_check_rating_detail->rating = data_get($self_check_sheet_item_inputs, 'rating');
+            $self_check_rating_detail->comment = data_get($self_check_sheet_item_inputs, 'comment');
             if (!$self_check_rating_detail->save()) {
                 throw new Exception();
             }

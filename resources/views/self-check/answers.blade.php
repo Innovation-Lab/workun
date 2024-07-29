@@ -82,7 +82,7 @@
                 </thead>
                 <tbody>
                   @foreach($self_check_ratings as $self_check_rating)
-                    <tr data-href="{{ route('self-check.confirm') }}">
+                    <tr data-href="{{ route('self-check.rating', $self_check_rating) }}">
                       <!-- 部署 -->
                       <td class="u-tac">
                         <div class="item">{{ $self_check_rating->display_answered }}</div>

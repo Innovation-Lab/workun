@@ -69,7 +69,7 @@
               <td>
                 <div class="item">
                   <x-self-check-sheet.answer-status
-                    :status="data_get($self_check_sheet, 'self_check_rating.status', \App\Models\SelfCheckRating::STATUS_NOT_ANSWERED)"
+                    :status="data_get($self_check_sheet, 'rating.status', \App\Models\SelfCheckRating::STATUS_NOT_ANSWERED)"
                   />
                 </div>
               </td>
@@ -91,8 +91,8 @@
               <td>
                 <div class="item">
                   <p>
-                    <span>評価：{{ data_get($self_check_sheet, 'self_check_rating.reviewer.full_name', '未登録') }}</span><br />
-                    <span>承認：{{ data_get($self_check_sheet, 'self_check_rating.approver.full_name', '未登録') }}</span>
+                    <span>評価：{{ data_get($self_check_sheet, 'rating.reviewer.full_name', '未登録') }}</span><br />
+                    <span>承認：{{ data_get($self_check_sheet, 'rating.approver.full_name', '未登録') }}</span>
                   </p>
                 </div>
               </td>

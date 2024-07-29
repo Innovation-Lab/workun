@@ -24,6 +24,8 @@ class SelfCheckRating extends Model
         'answer',
         'rating',
         'status',
+        'remand_reason',
+        'remand_flag',
         'answered_at',
         'reviewed_at',
         'confirmed_at'
@@ -56,6 +58,11 @@ class SelfCheckRating extends Model
     public function approver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'approver_id');
+    }
+
+    public function self_check_sheet(): BelongsTo
+    {
+        return $this->belongsTo(SelfCheckSheet::class);
     }
 
     public function self_check_rating_details()

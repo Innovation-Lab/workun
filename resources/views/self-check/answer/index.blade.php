@@ -15,6 +15,7 @@
         <x-self-check-sheet.answer
           :selfCheckSheet="$selfCheckSheet"
           :term="$term"
+          :user="$auth_user"
         />
       </div>
     </div>

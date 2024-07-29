@@ -13,7 +13,7 @@
     <div
       class="
         between p-check
-        @if($auth_user->reviewers()->count() < 2)
+        @if($user->reviewers()->count() < 2)
           p-check--noSelect
         @endif
       "
@@ -21,10 +21,10 @@
       <div class="p-check__account u-align u-gap8">
         <div
           class="p-user__image"
-          style='background-image:url("{{ data_get($auth_user, 'avatar_url') }}")'
+          style='background-image:url("{{ data_get($user, 'avatar_url') }}")'
         ></div>
         <div class="p-user__text">
-          <p>{{ $auth_user->full_name }}</p>
+          <p>{{ $user->full_name }}</p>
         </div>
       </div>
       <div class="u-align p-check__arrow">
@@ -32,34 +32,34 @@
       </div>
       <div class="p-check__select--wrap">
 
-        @if($auth_user->reviewers()->count() === 0)
+        @if($user->reviewers()->count() === 0)
           <div class="p-check__select u-align">
             <span class="p-check__select--text">評価者を選択</span>
           </div>
-        @elseif($auth_user->reviewers()->count() === 1)
+        @elseif($user->reviewers()->count() === 1)
           <div class="p-check__select u-align p-check__select--user">
             <div class="u-align u-gap8 p-user">
               <div
                 class="p-user__image"
                 style='background-image:url("{{ data_get(
-                  $selfCheckSheet->self_check_rating_histories,
-                  "{$term}.reviewer.avatar_url",
-                  data_get($auth_user->reviewers->first(), 'manager.avatar_url')
+                  $selfCheckRating,
+                  "reviewer.avatar_url",
+                  data_get($user->reviewers->first(), 'manager.avatar_url')
                 ) }}")'
               ></div>
               <div class="p-user__text">
                 <span class="label">評価者</span>
                 <p>{{ data_get(
-                  $selfCheckSheet->self_check_rating_histories,
-                  "{$term}.reviewer.full_name",
-                  data_get($auth_user->reviewers->first(), 'manager.full_name')
+                  $selfCheckRating,
+                  "reviewer.full_name",
+                  data_get($user->reviewers->first(), 'manager.full_name')
                 ) }}</p>
               </div>
             </div>
             <input
               type="radio"
               name="reviewer_id"
-              value="{{ data_get($auth_user->reviewers->first(), 'manager_user_id') }}"
+              value="{{ data_get($user->reviewers->first(), 'manager_user_id') }}"
               checked
               style="display:none;"
             />
@@ -68,30 +68,30 @@
           <div
             class="
               p-check__select u-align
-              @if(data_get($selfCheckSheet->self_check_rating_histories, "{$term}.reviewer_id"))
+              @if(data_get($selfCheckRating, "reviewer_id"))
                 p-check__select--user
               @endif
             "
           >
             <div id="selected_reviewer">
-              @if(!data_get($selfCheckSheet->self_check_rating_histories, "{$term}.reviewer_id"))
+              @if(!data_get($selfCheckRating, "reviewer_id"))
                 <span class="p-check__select--text">評価者を選択</span>
               @else
                 <div class="u-align u-gap8 p-user">
                   <div
                     class="p-user__image"
-                    style='background-image:url("{{ data_get($selfCheckSheet->self_check_rating_histories, "{$term}.reviewer.avatar_url") }}")'
+                    style='background-image:url("{{ data_get($selfCheckRating, "reviewer.avatar_url") }}")'
                   ></div>
                   <div class="p-user__text">
                     <span class="label">評価者</span>
-                    <p>{{ data_get($selfCheckSheet->self_check_rating_histories, "{$term}.reviewer.full_name") }}</p>
+                    <p>{{ data_get($selfCheckRating, "reviewer.full_name") }}</p>
                   </div>
                 </div>
               @endif
             </div>
             <div class="p-check__select--list">
               <ul>
-                @foreach($auth_user->reviewers as $reviewer)
+                @foreach($user->reviewers as $reviewer)
                   <li>
                     <label
                       class="p-check__checkbox p-check__account"
@@ -100,7 +100,7 @@
                         type="radio"
                         name="reviewer_id"
                         value="{{ $reviewer->manager_user_id }}"
-                        @if(data_get($selfCheckSheet->self_check_rating_histories, "{$term}.reviewer_id") === $reviewer->manager_user_id)
+                        @if(data_get($selfCheckRating, "reviewer_id") === $reviewer->manager_user_id)
                           checked
                         @endif
                         data-image="{{ data_get($reviewer, 'manager.avatar_url') }}"

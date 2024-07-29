@@ -95,22 +95,6 @@ class SelfCheckSheet extends Model
         return data_get(self::HIERARCHY_LIST, $this->hierarchy);
     }
 
-    protected function scopeKeyword ($query, $keyword = null)
-    {
-        if ($keyword) {
-            // 全角スペースを半角に変換
-            $spaceConversion = mb_convert_kana($keyword, 's');
-            // 単語を半角スペースで区切り、配列にする
-            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
-            $query->where(function ($q) use ($wordArraySearched) {
-                foreach ($wordArraySearched as $word) {
-                    $q->where('self_check_sheets.title', 'LIKE', "%{$word}%");
-                }
-            });
-        }
-        return $query;
-    }
-
     public function getFirstSelfCheckSheetItemsAttribute()
     {
         return $this
@@ -132,9 +116,34 @@ class SelfCheckSheet extends Model
         return date('Y.m', strtotime("{$start}-01")) . " ~ " . date('Y.m', strtotime("{$end}-01"));
     }
 
+    public function self_check_rating($user, $term)
+    {
+        return $this
+            ->self_check_ratings()
+            ->where('self_check_ratings.user_id', $user->id)
+            ->onTerm($term)
+            ->first();
+    }
+
     protected function scopeOrganization ($query, $organization_id)
     {
         return $query->where('self_check_sheets.organization_id', $organization_id);
+    }
+
+    protected function scopeKeyword ($query, $keyword = null)
+    {
+        if ($keyword) {
+            // 全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($keyword, 's');
+            // 単語を半角スペースで区切り、配列にする
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+            $query->where(function ($q) use ($wordArraySearched) {
+                foreach ($wordArraySearched as $word) {
+                    $q->where('self_check_sheets.title', 'LIKE', "%{$word}%");
+                }
+            });
+        }
+        return $query;
     }
 
     protected function scopeOnTerm($query, $term)

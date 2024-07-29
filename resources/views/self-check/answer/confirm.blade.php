@@ -16,6 +16,5 @@
       </div>
     </div>
   </div>
-  @include('self-check.components.modal._submission')
   @include('self-check.components._script_tableWidth')
 @endsection

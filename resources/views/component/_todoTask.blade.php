@@ -50,7 +50,7 @@
         <!-- 評価入力 -->
         @if($key == 1)
         <li class="p-todo__item p-todo__item--assessment">
-          <a href="{{ route('self-check.confirm') }}"></a>
+          <a href=""></a>
           <span class="date">2024.12.01 - 2024.12.08</span>
           <div class="mainInfo">
             <span class="c-status c-status--assessment">評価待ち</span>

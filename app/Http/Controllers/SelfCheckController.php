@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SelfCheckRating;
 use App\Models\SelfCheckSheet;
 use App\Repositories\SelfCheckSheetRepositoryInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -79,9 +80,10 @@ class SelfCheckController extends Controller
     ): View
     {
         return view('self-check.answer.index', [
+            'auth_user' => $this->auth_user,
             'selfCheckSheet' => $this
                 ->selfCheckSheetRepository
-                ->setAnswerAttributes($selfCheckSheet, $this->auth_user, $term, true),
+                ->setAnswerAttributes($selfCheckSheet, $this->auth_user, $term),
             'term' => $term,
         ]);
     }
@@ -146,25 +148,73 @@ class SelfCheckController extends Controller
         ]);
     }
 
+    /**
+     * 評価画面
+     * @param SelfCheckRating $selfCheckRating
+     * @return View
+     */
+    public function rating(
+        SelfCheckRating $selfCheckRating
+    ): View
+    {
+        return view('self-check.rating', [
+            'selfCheckSheet' => $selfCheckRating->self_check_sheet,
+            'selfCheckRating' => $selfCheckRating,
+            'term' => $selfCheckRating->target,
+        ]);
+    }
+
+    /**
+     * @param SelfCheckRating $selfCheckRating
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function ratingUpdate(
+        SelfCheckRating $selfCheckRating,
+        Request $request
+    ): RedirectResponse
+    {
+        # 更新処理
+        DB::beginTransaction();
+        try {
+            $this
+                ->selfCheckSheetRepository
+                ->rating($selfCheckRating, $this->auth_user, $request);
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(['alert' => $exception->getMessage()]);
+        }
+        DB::commit();
+
+        if ($request->get('draft')) {
+            return redirect()
+                ->back()
+                ->with('success', '下書き保存しました。');
+        }
+
+        if ($request->get('remand')) {
+            return redirect()
+                ->to(route('self-check.answers', [
+                    'selfCheckSheet' => $selfCheckRating->self_check_sheet,
+                    'term' => $selfCheckRating->target,
+                ]))
+                ->with('success', '差し戻しました。');
+        }
+
+        return redirect()
+            ->to(route('self-check.answers', [
+                'selfCheckSheet' => $selfCheckRating->self_check_sheet,
+                'term' => $selfCheckRating->target,
+            ]))
+            ->with('success', '承認依頼を完了しました。');
+    }
+
     public function answerConfirm()
     {
         return view('self-check.answer.confirm');
-    }
-
-    /**
-     * Display rating page view.
-     */
-    public function rating()
-    {
-        return view('self-check.rating');
-    }
-
-    /**
-     * Display confirm page view.
-     */
-    public function confirm()
-    {
-        return view('self-check.confirm.index');
     }
 
     /**
