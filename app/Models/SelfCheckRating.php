@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SelfCheckRating extends Model
 {
@@ -18,9 +19,18 @@ class SelfCheckRating extends Model
         'self_check_sheet_id',
         'target',
         'user_id',
+        'reviewer_id',
+        'approver_id',
         'answer',
         'rating',
         'status',
+        'remand_reason',
+        'remand_flag',
+        'rating_remand_reason',
+        'rating_remand_flag',
+        'answered_at',
+        'reviewed_at',
+        'approved_at'
     ];
 
     /** ステータス */
@@ -34,16 +44,66 @@ class SelfCheckRating extends Model
         self::STATUS_ANSWERING => '回答中',
         self::STATUS_RATING => '評価中',
         self::STATUS_APPROVING => '承認中',
-        self::STATUS_APPROVED => '承認済み',
+        self::STATUS_APPROVED => '評価確定',
     ];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function reviewer(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'reviewer_id');
+    }
+
+    public function approver(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'approver_id');
+    }
+
+    public function self_check_sheet(): BelongsTo
+    {
+        return $this->belongsTo(SelfCheckSheet::class);
+    }
+
+    public function self_check_rating_details()
+    {
+        return $this->hasMany(SelfCheckRatingDetail::class);
+    }
+
+    protected function getStatusLabelAttribute()
+    {
+        return data_get(self::STATUS_LIST, $this->status);
+    }
+
+    protected function getDisplayAnsweredAttribute()
+    {
+        return $this->answered_at ? date('Y/m/d', strtotime($this->answered_at)) : null;
+    }
+
+    protected function getDisplayReviewedAttribute()
+    {
+        return $this->reviewed_at ? date('Y/m/d', strtotime($this->reviewed_at)) : null;
+    }
+
+    protected function getDisplayApprovedAttribute()
+    {
+        return $this->approved_at ? date('Y/m/d', strtotime($this->approved_at)) : null;
+    }
 
     protected function scopeOnTerm($query, $term)
     {
         return $query->where('self_check_ratings.target', $term);
     }
 
-    protected function getStatusLabelAttribute()
+    protected function scopeReviewer($query, $user_id)
     {
-        return data_get(self::STATUS_LIST, $this->status);
+        return $query->where('self_check_ratings.reviewer_id', $user_id);
+    }
+
+    protected function scopeApprover($query, $user_id)
+    {
+        return $query->where('self_check_ratings.approver_id', $user_id);
     }
 }

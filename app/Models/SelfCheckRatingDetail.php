@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class SelfCheckRatingDetail extends Model
 {
@@ -19,5 +20,11 @@ class SelfCheckRatingDetail extends Model
         'self_check_sheet_item_id',
         'answer',
         'rating',
+        'comment'
     ];
+
+    protected function getShortCommentAttribute()
+    {
+        return Str::limit($this->comment, 100);
+    }
 }

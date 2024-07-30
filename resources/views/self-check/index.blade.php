@@ -14,34 +14,65 @@
       <div class="p-page__body">
         <div class="c-tab p-tableBox">
           <div class="c-tab__head">
-            <div class="c-tab__btn is-active c-tab--01">
+            <a
+              class="
+                c-tab__btn c-tab--01
+                @if($type === "answer")
+                  is-active
+                @endif
+              "
+              href="{{ route('self-check.index') }}"
+            >
               <svg width="20" height="20"><use xlink:href="#user" /></svg>
               実施対象
-            </div>
-            <div class="c-tab__btn c-tab--02">
+            </a>
+            <a
+              class="
+                c-tab__btn c-tab--02
+                @if($type === "rating")
+                  is-active
+                @endif
+              "
+              href="{{ route('self-check.index', ['type' => 'rating']) }}"
+            >
               <svg width="20" height="20"><use xlink:href="#check" /></svg>
               評価入力
-            </div>
-            <div class="c-tab__btn c-tab--03">
+            </a>
+            <a
+              class="
+                c-tab__btn c-tab--03
+                @if($type === "confirm")
+                  is-active
+                @endif
+              "
+              href="{{ route('self-check.index', ['type' => 'confirm']) }}"
+            >
               <svg width="20" height="20"><use xlink:href="#eye-open" /></svg>
               評価承認
-            </div>
+            </a>
           </div>
           <div class="c-tab__body">
-            <div class="c-tab__content is-display c-tab--01">
-              @include('self-check.components._sheet1')
-            </div>
-            <div class="c-tab__content c-tab--02">
-              @include('self-check.components._sheet2')
-            </div>
-            <div class="c-tab__content c-tab--03">
-              @include('self-check.components._sheet3')
-            </div>
+            @switch($type)
+              @case("answer")
+                <div class="c-tab__content is-display">
+                  @include('self-check.components._sheet1')
+                </div>
+              @break
+              @case("rating")
+                <div class="c-tab__content is-display">
+                  @include('self-check.components._sheet2')
+                </div>
+              @break
+              @case("confirm")
+                <div class="c-tab__content is-display">
+                  @include('self-check.components._sheet3')
+                </div>
+              @break
+            @endswitch
           </div>
         </div>
       </div>
     </div>
   </div>
-  @include('self-check.components._script_tab')
+  @include('self-check._script')
 @endsection
-    

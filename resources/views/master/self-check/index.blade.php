@@ -82,7 +82,7 @@
                   @foreach($selfCheckSheets as $selfCheckSheet)
                     <tr>
                       <!-- タイトル -->
-                      <td><div class="item title">{{ $selfCheckSheet->title }}</div></td>
+                      <td><div class="item title">{{ $selfCheckSheet->display_title }}</div></td>
                       <!-- 評価方法 -->
                       <td class="u-tac"><div class="item c-txt__gray">{{ $selfCheckSheet->method_label }}</div></td>
                       <!-- 対象人数 -->

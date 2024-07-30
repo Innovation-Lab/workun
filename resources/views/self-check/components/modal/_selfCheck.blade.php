@@ -12,6 +12,6 @@
     <button data-remodal-action="close" class="remodal-close p-modal__close">閉じる</button>
   </div>
   <div class="p-modal__body">
-      @include('self-check.components._confirm')
+    @include('self-check.components._confirm')
   </div>
 </div>

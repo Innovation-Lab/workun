@@ -37,7 +37,7 @@ class SelfCheckSheetItem extends Model
         return $this->hasMany(SelfCheckSheetItem::class, 'parent_self_check_sheet_item_id', 'id');
     }
 
-    public function getSecondSelfCheckSheetItemsAttribute()
+    protected function getSecondSelfCheckSheetItemsAttribute()
     {
         return $this
             ->self_check_sheet_items()
@@ -46,13 +46,38 @@ class SelfCheckSheetItem extends Model
             ->get();
     }
 
-    public function getThirdSelfCheckSheetItemsAttribute()
+    protected function getThirdSelfCheckSheetItemsAttribute()
     {
         return $this
             ->self_check_sheet_items()
             ->thirdHierarchy()
             ->orderBy('self_check_sheet_items.id')
             ->get();
+    }
+
+    protected function getRowspanAttribute()
+    {
+        $rowspan = 0;
+        switch ($this->hierarchy) {
+            case self::HIERARCHY_FIRST:
+                $rowspan = $this
+                    ->second_self_check_sheet_items
+                    ->sum(function ($second_self_check_sheet_item) {
+                        return $second_self_check_sheet_item
+                            ->third_self_check_sheet_items
+                            ->count();
+                    });
+                break;
+            case self::HIERARCHY_SECOND:
+                $rowspan = $this
+                    ->third_self_check_sheet_items
+                    ->count();
+                break;
+            case self::HIERARCHY_THIRD:
+                $rowspan = 1;
+                break;
+        }
+        return $rowspan;
     }
 
     protected function scopeFirstHierarchy($query)
