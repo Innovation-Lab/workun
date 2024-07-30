@@ -27,13 +27,6 @@ class UserDepartmentRequest extends FormRequest
                 'required',
                 'array',
             ],
-            'user_id.*' => [
-                'required',
-                'integer',
-                Rule::unique('user_departments', 'user_id')->where(function ($query) {
-                    return $query->where('department_id', $this->department);
-                }),
-            ],
         ];
     }
 
@@ -46,7 +39,6 @@ class UserDepartmentRequest extends FormRequest
     {
         return [
             'user_id.required' => 'ユーザーを選択してください。',
-            'user_id.*.unique' => '選択されたユーザーは既にこの部署に登録されています。',
         ];
     }
 }

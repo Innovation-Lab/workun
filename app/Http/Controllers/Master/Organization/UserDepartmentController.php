@@ -84,4 +84,53 @@ class UserDepartmentController extends Controller
             ->route('master.organization.index')
             ->with('success', '従業員を登録しました。');
     }
+
+    /**
+     * 編集ページ
+     * @param Department $department
+     * @param Request $request
+     * @return View
+     */
+    public function edit(Department $department, Request $request): View
+    {
+        // 既に部署に登録されているユーザーを取得
+        $existingUserIds = UserDepartment::where('department_id', $department->id)
+            ->pluck('user_id')
+            ->toArray();
+
+        return view("master.organization.user-department.edit", [
+            'department' => $department,
+            'request' => $request,
+            'users' => $this->user_repository
+                ->search($request)
+                ->organization($this->auth_user->organization_id)
+                ->whereIn('id', $existingUserIds) // 既に登録されているユーザーを表示
+                ->paginate(),
+        ]);
+    }
+
+    /**
+     * 削除処理
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function destroy(UserDepartmentRequest $request): RedirectResponse
+    {
+        # 削除処理
+        DB::beginTransaction();
+        try {
+            $this->user_department_repository->delete($request);
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(['alert' => $exception->getMessage()]);
+        }
+        DB::commit();
+
+        return redirect()
+            ->route('master.organization.index')
+            ->with('success', '従業員を削除しました。');
+    }
 }

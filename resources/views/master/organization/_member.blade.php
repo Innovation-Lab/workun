@@ -3,6 +3,9 @@
   <div class="head u-align between">
     <p class="title c-txt__md c-txt__weight--600">「{{ $department->name }}」従業員数</p>
     <a href="{{route('master.organization.user_department.add', $department)}}" class="c-button--text">追加</a>
+    @if ($members->count() > 0)
+      <a href="{{route('master.organization.user_department.edit', $department)}}" class="c-button--text">削除</a>
+    @endif
   </div>
   <div class="count">
     <span class="unit">全</span>

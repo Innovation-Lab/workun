@@ -48,9 +48,22 @@ class UserDepartmentRepository implements UserDepartmentRepositoryInterface
      * @return void
      * @throws Exception
      */
-    public function delete(): void
+    public function delete(Request $request): void
     {
-        //
+        $user_ids = $request->get('user_id');
+        foreach ($user_ids as $user_id) {
+            $user_department = UserDepartment::where([
+                'user_id' => $user_id,
+                'department_id' => $request->get('department_id')
+            ])
+            ->first();
+
+            if ($user_department) {
+                if (!$user_department->delete()) {
+                    throw new Exception();
+                }
+            }
+        }
     }
 
     /**
