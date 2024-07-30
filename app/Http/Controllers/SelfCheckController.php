@@ -220,7 +220,7 @@ class SelfCheckController extends Controller
     }
 
     /**
-     * 承認画面
+     * 承認一覧画面
      * @param SelfCheckSheet $selfCheckSheet
      * @param string $term
      * @return View
@@ -239,6 +239,70 @@ class SelfCheckController extends Controller
                 ->get(),
             'term' => $term,
         ]);
+    }
+
+    /**
+     * 評価画面
+     * @param SelfCheckRating $selfCheckRating
+     * @return View
+     */
+    public function approval(
+        SelfCheckRating $selfCheckRating
+    ): View
+    {
+        return view('self-check.approval', [
+            'selfCheckSheet' => $selfCheckRating->self_check_sheet,
+            'selfCheckRating' => $selfCheckRating,
+            'term' => $selfCheckRating->target,
+        ]);
+    }
+
+    /**
+     * @param SelfCheckRating $selfCheckRating
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function approvalUpdate(
+        SelfCheckRating $selfCheckRating,
+        Request $request
+    ): RedirectResponse
+    {
+        # 更新処理
+        DB::beginTransaction();
+        try {
+            $this
+                ->selfCheckSheetRepository
+                ->approval($selfCheckRating, $this->auth_user, $request);
+        } catch (Exception $exception) {
+            DB::rollBack();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with(['alert' => $exception->getMessage()]);
+        }
+        DB::commit();
+
+        if ($request->get('draft')) {
+            return redirect()
+                ->back()
+                ->with('success', '下書き保存しました。');
+        }
+
+        if ($request->get('remand')) {
+            return redirect()
+                ->to(route('self-check.approvals', [
+                    'selfCheckSheet' => $selfCheckRating->self_check_sheet,
+                    'term' => $selfCheckRating->target,
+                ]))
+                ->with('success', '差し戻しました。');
+        }
+
+        return redirect()
+            ->to(route('self-check.approvals', [
+                'selfCheckSheet' => $selfCheckRating->self_check_sheet,
+                'term' => $selfCheckRating->target,
+            ]))
+            ->with('success', '承認を完了しました。');
     }
 
     /**

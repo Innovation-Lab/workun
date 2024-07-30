@@ -20,7 +20,7 @@
       <div class="p-table__check c-scroll">
         <div class="t-wrapper">
           <x-self-check-sheet.answer-table
-            type="rating"
+            type="approval"
             :selfCheckSheet="$selfCheckSheet"
             :term="$selfCheckRating->target"
             :user="$selfCheckRating->user"

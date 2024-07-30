@@ -27,6 +27,8 @@ Route::middleware('auth:web')->group(function ()
         Route::get('/rating/{selfCheckRating}', [SelfCheckController::class, 'rating'])->name('rating');
         Route::post('/rating/{selfCheckRating}', [SelfCheckController::class, 'ratingUpdate']);
         Route::get('/approvals/{selfCheckSheet}/{term}', [SelfCheckController::class, 'approvals'])->name('approvals');
+        Route::get('/approval/{selfCheckRating}', [SelfCheckController::class, 'approval'])->name('approval');
+        Route::post('/approval/{selfCheckRating}', [SelfCheckController::class, 'approvalUpdate']);
         Route::get('/result', [SelfCheckController::class, 'result'])->name('result');
         Route::get('/result/all', [SelfCheckController::class, 'resultall'])->name('resultall');
     });

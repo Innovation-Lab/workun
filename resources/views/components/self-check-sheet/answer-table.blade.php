@@ -14,7 +14,6 @@
       @endif
       @switch($type)
         @case("answer")
-        @case("rating")
           <th>
             <div class="cell sticky_5 p-table__check--month c-border_0 u-tac">
               期間 : {{ $selfCheckSheet->display_period }}
@@ -26,16 +25,47 @@
                     id="current_term"
                   @endif
                   class="
-                u-tac c-txt__xs cell
-                @if(
-                  $month === $term ||
-                  ($month !== $term && !data_get($selfCheckRatingHistories, $month))
-                )
-                  u-w100
-                @else
-                  u-w140
-                @endif
-              "
+                    u-tac c-txt__xs cell
+                    @if(
+                      $month === $term ||
+                      ($month !== $term && !data_get($selfCheckRatingHistories, $month))
+                    )
+                      u-w100
+                    @else
+                      u-w140
+                    @endif
+                  "
+                >
+                  <strong class="c-txt__lg c-txt__weight--700">
+                    {{ date('n', strtotime("{$month}-01")) }}
+                  </strong>月
+                </div>
+              @endforeach
+            </div>
+          </th>
+          @break
+        @case("rating")
+        @case("approval")
+          <th>
+            <div class="cell sticky_5 p-table__check--month c-border_0 u-tac">
+              期間 : {{ $selfCheckSheet->display_period }}
+            </div>
+            <div class="p-table__cell--input">
+              @foreach($months as $month)
+                <div
+                  @if($month === $term)
+                    id="current_term"
+                  @endif
+                  class="
+                    u-tac c-txt__xs cell
+                    @if(
+                      ($month !== $term && !data_get($selfCheckRatingHistories, $month))
+                    )
+                      u-w100
+                    @else
+                      u-w140
+                    @endif
+                  "
                 >
                   <strong class="c-txt__lg c-txt__weight--700">
                     {{ date('n', strtotime("{$month}-01")) }}
@@ -84,7 +114,7 @@
               @foreach($selfCheckRatings as $selfCheckRating)
                 <div class="cell u-w140 u-tac c-txt__xs">
                   <a
-                    data-remodal-target="modal_selfCheck"
+                    href="{{ route('self-check.approval', $selfCheckRating) }}"
                     class="name"
                   >
                     {{ data_get($selfCheckRating, 'user.full_name') }}
@@ -167,6 +197,15 @@
                     <x-self-check-sheet.answer-table-approvals
                       :selfCheckSheetItem="$third_self_check_sheet_item"
                       :selfCheckRatings="$selfCheckRatings"
+                    />
+                    @break
+                  @case("approval")
+                    <x-self-check-sheet.answer-table-approval
+                      :months="$months"
+                      :term="$term"
+                      :selfCheckSheetItem="$third_self_check_sheet_item"
+                      :selfCheckRating="$selfCheckRating"
+                      :selfCheckRatingHistories="$selfCheckRatingHistories"
                     />
                     @break
                 @endswitch

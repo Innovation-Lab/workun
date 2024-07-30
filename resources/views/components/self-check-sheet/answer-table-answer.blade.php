@@ -19,9 +19,14 @@
         {{ data_get($selfCheckRatingHistories, "{$month}.details.{$selfCheckSheetItem->id}.rating", "-") }}
       </div>
       <p
-        class="comment"
+        class="
+          comment
+          @if(!data_get($selfCheckRatingHistories, "{$month}.details.{$selfCheckSheetItem->id}.short_comment"))
+            c-noData
+          @endif
+        "
         data-remodal-target="modal_comment_{{ data_get($selfCheckRatingHistories, "{$month}.details.{$selfCheckSheetItem->id}.id") }}"
-      >{{ data_get($selfCheckRatingHistories, "{$month}.details.{$selfCheckSheetItem->id}.short_comment") }}</p>
+      >{{ data_get($selfCheckRatingHistories, "{$month}.details.{$selfCheckSheetItem->id}.short_comment", "-") }}</p>
       @if(data_get($selfCheckRatingHistories, "{$month}.details.{$selfCheckSheetItem->id}"))
         @include('self-check.components.modal._comment', [
           'self_check_rating' => data_get($selfCheckRatingHistories, $month),

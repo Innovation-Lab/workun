@@ -5,38 +5,19 @@
         {{ data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.answer", '-') }}
       </div>
       <div class="cell--number c-txt__md c-txt__weight--600">
-        <x-form.select
-          id=""
-          class="p-table__cell--select full"
-          name="self_check_sheet_item[{{ $selfCheckSheetItem->id }}][rating]"
-          empty=""
-          :selects="array_combine(range(5, 1), range(5, 1))"
-          :value='old(
-            "self_check_sheet_item.{$selfCheckSheetItem->id}.rating",
-            data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.rating", 3) !== 0 ?
-            data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.rating", 3) :
-            3
-          )'
-        />
+        {{ data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.rating", '-') }}
       </div>
       <p
         id="p_self_check_sheet_item_comment_{{ $selfCheckSheetItem->id }}"
         class="
           comment
-          @if(!old("self_check_sheet_item.{$selfCheckSheetItem->id}.comment", data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.comment")))
-            c-empty
+          @if(!data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.comment"))
+            c-noData
           @endif
         "
-        data-remodal-target="modal_commentForm_{{ $selfCheckSheetItem->id }}"
-      >{{ old("self_check_sheet_item.{$selfCheckSheetItem->id}.comment", data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.comment", '備考があれば記入')) }}</p>
-      <input
-        id="input_self_check_sheet_item_comment_{{ $selfCheckSheetItem->id }}"
-        type="hidden"
-        name="self_check_sheet_item[{{ $selfCheckSheetItem->id }}][comment]"
-        value="{{ old("self_check_sheet_item.{$selfCheckSheetItem->id}.comment", data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.comment")) }}"
-      />
-      @include('self-check.components.modal._comment_form', [
-        'self_check_sheet_item' => $selfCheckSheetItem,
+        data-remodal-target="modal_comment_{{ data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.id") }}"
+      >{{ old("self_check_sheet_item.{$selfCheckSheetItem->id}.comment", data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.comment", "-")) }}</p>
+      @include('self-check.components.modal._comment', [
         'self_check_rating' => $selfCheckRating,
         'self_check_rating_detail' => data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}"),
       ])
