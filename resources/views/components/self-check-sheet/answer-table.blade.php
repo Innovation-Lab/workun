@@ -12,17 +12,20 @@
           <div class="u-pd16">確認動画</div>
         </th>
       @endif
-      <th>
-        <div class="cell sticky_5 p-table__check--month c-border_0 u-tac">
-          期間 : {{ $selfCheckSheet->display_period }}
-        </div>
-        <div class="p-table__cell--input">
-          @foreach($months as $month)
-            <div
-              @if($month === $term)
-                id="current_term"
-              @endif
-              class="
+      @switch($type)
+        @case("answer")
+        @case("rating")
+          <th>
+            <div class="cell sticky_5 p-table__check--month c-border_0 u-tac">
+              期間 : {{ $selfCheckSheet->display_period }}
+            </div>
+            <div class="p-table__cell--input">
+              @foreach($months as $month)
+                <div
+                  @if($month === $term)
+                    id="current_term"
+                  @endif
+                  class="
                 u-tac c-txt__xs cell
                 @if(
                   $month === $term ||
@@ -33,14 +36,65 @@
                   u-w140
                 @endif
               "
-            >
-              <strong class="c-txt__lg c-txt__weight--700">
-                {{ date('n', strtotime("{$month}-01")) }}
-              </strong>月
+                >
+                  <strong class="c-txt__lg c-txt__weight--700">
+                    {{ date('n', strtotime("{$month}-01")) }}
+                  </strong>月
+                </div>
+              @endforeach
             </div>
-          @endforeach
-        </div>
-      </th>
+          </th>
+          @break
+        @case("approvals")
+          <th>
+            <div class="cell sticky_4 p-table__check--month c-border_0">
+              <div class="u-align between">
+                <button
+                  type="button"
+                  class="c-txt__weight--700"
+                  onclick="window.location.href = '{{ route('self-check.approvals', [
+                    'selfCheckSheet' => $selfCheckSheet,
+                    'term' => date('Y-m', strtotime("{$term}-01 -1 month")),
+                  ]) }}'"
+                >
+                  <svg width="20" height="20"><use xlink:href="#chevron_left" /></svg>
+                  {{ date('n', strtotime("{$term}-01 -1 month")) }}
+                  <small class="c-txt__min">月</small>
+                </button>
+                <p class="u-tac c-txt__xs">
+                  <strong class="c-txt__lg c-txt__weight--700">
+                    {{ date('n', strtotime("{$term}-01")) }}
+                  </strong>月
+                </p>
+                <button
+                  type="button"
+                  class="c-txt__weight--700"
+                  onclick="window.location.href = '{{ route('self-check.approvals', [
+                    'selfCheckSheet' => $selfCheckSheet,
+                    'term' => date('Y-m', strtotime("{$term}-01 +1 month")),
+                  ]) }}'"
+                >
+                  {{ date('n', strtotime("{$term}-01 +1 month")) }}
+                  <small class="c-txt__min">月</small>
+                  <svg width="20" height="20"><use xlink:href="#chevron_right" /></svg>
+                </button>
+              </div>
+            </div>
+            <div class="p-table__cell--input">
+              @foreach($selfCheckRatings as $selfCheckRating)
+                <div class="cell u-w140 u-tac c-txt__xs">
+                  <a
+                    data-remodal-target="modal_selfCheck"
+                    class="name"
+                  >
+                    {{ data_get($selfCheckRating, 'user.full_name') }}
+                  </a>
+                </div>
+              @endforeach
+            </div>
+          </th>
+          @break
+      @endswitch
     </tr>
   </thead>
   <tbody>
@@ -107,6 +161,12 @@
                       :selfCheckSheetItem="$third_self_check_sheet_item"
                       :selfCheckRating="$selfCheckRating"
                       :selfCheckRatingHistories="$selfCheckRatingHistories"
+                    />
+                    @break
+                  @case("approvals")
+                    <x-self-check-sheet.answer-table-approvals
+                      :selfCheckSheetItem="$third_self_check_sheet_item"
+                      :selfCheckRatings="$selfCheckRatings"
                     />
                     @break
                 @endswitch

@@ -94,4 +94,14 @@ class SelfCheckRating extends Model
     {
         return $query->where('self_check_ratings.target', $term);
     }
+
+    protected function scopeReviewer($query, $user_id)
+    {
+        return $query->where('self_check_ratings.reviewer_id', $user_id);
+    }
+
+    protected function scopeApprover($query, $user_id)
+    {
+        return $query->where('self_check_ratings.approver_id', $user_id);
+    }
 }

@@ -22,11 +22,11 @@ Route::middleware('auth:web')->group(function ()
         Route::get('/all', [SelfCheckController::class, 'all'])->name('all');
         Route::get('/answer/{selfCheckSheet}/{term}', [SelfCheckController::class, 'answer'])->name('answer');
         Route::post('/answer/{selfCheckSheet}/{term}', [SelfCheckController::class, 'answerUpdate']);
+        Route::get('/answer/confirm', [SelfCheckController::class, 'answerConfirm'])->name('answerConfirm');
         Route::get('/answers/{selfCheckSheet}/{term}', [SelfCheckController::class, 'answers'])->name('answers');
         Route::get('/rating/{selfCheckRating}', [SelfCheckController::class, 'rating'])->name('rating');
         Route::post('/rating/{selfCheckRating}', [SelfCheckController::class, 'ratingUpdate']);
-        Route::get('/answer/confirm', [SelfCheckController::class, 'answerConfirm'])->name('answerConfirm');
-        Route::get('/approval', [SelfCheckController::class, 'approval'])->name('approval');
+        Route::get('/approvals/{selfCheckSheet}/{term}', [SelfCheckController::class, 'approvals'])->name('approvals');
         Route::get('/result', [SelfCheckController::class, 'result'])->name('result');
         Route::get('/result/all', [SelfCheckController::class, 'resultall'])->name('resultall');
     });

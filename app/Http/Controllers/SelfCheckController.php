@@ -6,6 +6,8 @@ use App\Models\SelfCheckRating;
 use App\Models\SelfCheckSheet;
 use App\Repositories\SelfCheckSheetRepositoryInterface;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -143,7 +145,7 @@ class SelfCheckController extends Controller
             'self_check_ratings' => $selfCheckSheet
                 ->self_check_ratings()
                 ->onTerm($term)
-                ->where('self_check_ratings.reviewer_id', $this->auth_user->id)
+                ->reviewer($this->auth_user->id)
                 ->paginate()
         ]);
     }
@@ -218,11 +220,25 @@ class SelfCheckController extends Controller
     }
 
     /**
-     * Display approval page view.
+     * 承認画面
+     * @param SelfCheckSheet $selfCheckSheet
+     * @param string $term
+     * @return View
      */
-    public function approval()
+    public function approvals(
+        SelfCheckSheet $selfCheckSheet,
+        string $term
+    ): View
     {
-        return view('self-check.approval');
+        return view('self-check.approvals', [
+            'selfCheckSheet' => $selfCheckSheet,
+            'self_check_ratings' => $selfCheckSheet
+                ->self_check_ratings()
+                ->onTerm($term)
+                ->approver($this->auth_user->id)
+                ->get(),
+            'term' => $term,
+        ]);
     }
 
     /**
