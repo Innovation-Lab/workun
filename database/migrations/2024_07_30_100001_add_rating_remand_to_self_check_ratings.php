@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('self_check_ratings', function (Blueprint $table) {
-            $table->timestamp('answered_at')->comment('回答日時')->nullable()->default(null)->after('status');
-            $table->timestamp('reviewed_at')->comment('評価日時')->nullable()->default(null)->after('answered_at');
-            $table->timestamp('approved_at')->comment('承認日時')->nullable()->default(null)->after('reviewed_at');
+            $table->text('rating_remand_reason')->comment('評価差し戻し理由')->nullable()->default(null)->after('remand_flag');
+            $table->tinyInteger('rating_remand_flag')->unsigned()->comment('評価差し戻しフラグ')->nullable()->default(null)->after('rating_remand_reason');
         });
     }
 
@@ -24,9 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('self_check_ratings', function (Blueprint $table) {
-            $table->dropColumn('answered_at');
-            $table->dropColumn('reviewed_at');
-            $table->dropColumn('approved_at');
+            $table->dropColumn('rating_remand_reason');
+            $table->dropColumn('rating_remand_flag');
         });
     }
 };

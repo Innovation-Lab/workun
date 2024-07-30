@@ -26,9 +26,11 @@ class SelfCheckRating extends Model
         'status',
         'remand_reason',
         'remand_flag',
+        'rating_remand_reason',
+        'rating_remand_flag',
         'answered_at',
         'reviewed_at',
-        'confirmed_at'
+        'approved_at'
     ];
 
     /** ステータス */
@@ -85,9 +87,9 @@ class SelfCheckRating extends Model
         return $this->reviewed_at ? date('Y/m/d', strtotime($this->reviewed_at)) : null;
     }
 
-    protected function getDisplayConfirmedAttribute()
+    protected function getDisplayApprovedAttribute()
     {
-        return $this->confirmed_at ? date('Y/m/d', strtotime($this->confirmed_at)) : null;
+        return $this->approved_at ? date('Y/m/d', strtotime($this->approved_at)) : null;
     }
 
     protected function scopeOnTerm($query, $term)

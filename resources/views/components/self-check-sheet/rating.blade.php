@@ -11,6 +11,12 @@
         </p>
       </div>
     </div>
+    @if($selfCheckRating->rating_remand_flag)
+      <div class="comment">
+        <svg width="20" height="20"><use xlink:href="#remand_comment" /></svg>
+        <p>{{ $selfCheckRating->rating_remand_reason }}</p>
+      </div>
+    @endif
   </div>
 
   <div class="p-tableBox__body" style="padding:0">

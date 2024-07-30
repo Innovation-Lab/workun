@@ -540,4 +540,28 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
             }
         }
     }
+
+    /**
+     * @throws Exception
+     */
+    public function approval(
+        SelfCheckRating $self_check_rating,
+        $user,
+        Request $request
+    ): void
+    {
+        # self_check_rating の更新
+        if ($request->get('remand')) {
+            $self_check_rating->status = SelfCheckRating::STATUS_RATING;
+            $self_check_rating->rating_remand_flag = 1;
+            $self_check_rating->rating_remand_reason = $request->get('remand_reason');
+        } else {
+            $self_check_rating->status = SelfCheckRating::STATUS_APPROVED;
+            $self_check_rating->rating_remand_flag = null;
+            $self_check_rating->approved_at = date('Y-m-d H:i:s');
+        }
+        if (!$self_check_rating->save()) {
+            throw new Exception();
+        }
+    }
 }

@@ -16,4 +16,5 @@ interface SelfCheckSheetRepositoryInterface
     public function setApprovingAttributes(SelfCheckSheet $self_check_sheet, $user, string $term, bool $with_histories = false);
     public function answer(SelfCheckSheet $self_check_sheet, $user, string $term, Request $request);
     public function rating(SelfCheckRating $self_check_rating, $user, Request $request);
+    public function approval(SelfCheckRating $self_check_rating, $user, Request $request);
 }
