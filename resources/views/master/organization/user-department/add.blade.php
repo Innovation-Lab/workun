@@ -17,8 +17,12 @@
         {{--  検索機能  --}}
         @include('master.organization.user-department._user_search')
 
-        <form>
+        <form
+          method="POST"
+          action="{{ route('master.organization.user_department.add', $department) }}"
+        >
           @csrf
+          <input type="hidden" name="department_id" value="{{ $department->id }}">
           {{--  従業員一覧を表示 --}}
           @include('master.organization.user-department._user_form')
 
@@ -28,8 +32,6 @@
           </div>
         </form>
       </div>
-
-
     </div>
   </div>
 @endsection
