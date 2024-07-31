@@ -71,7 +71,7 @@ class UserDepartmentController extends Controller
         # 更新処理
         DB::beginTransaction();
         try {
-            $this->user_department_repository->create($request);
+            $this->user_department_repository->create($department, $request);
         } catch (Exception $exception) {
             DB::rollBack();
             return redirect()
@@ -120,7 +120,7 @@ class UserDepartmentController extends Controller
         # 削除処理
         DB::beginTransaction();
         try {
-            $this->user_department_repository->delete($request);
+            $this->user_department_repository->delete($department, $request);
         } catch (Exception $exception) {
             DB::rollBack();
             return redirect()
