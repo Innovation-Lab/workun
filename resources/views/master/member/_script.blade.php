@@ -36,7 +36,7 @@
       approverHtml += `
         <div class="p-user" name="approver_lists">
           <input type="hidden" name="approvers[]" value="${approver.id}">
-          <div class="p-user__image">
+          <div class="p-user__image c-noImage">
             <img class="c-image c-image--round" src="${approver.img_path}">
           </div>
           <div class="p-user__text">
@@ -90,7 +90,7 @@
       reviewerHtml += `
         <div class="p-user" name="reviewer_lists">
           <input type="hidden" name="reviewers[]" value="${reviewer.id}">
-          <div class="p-user__image">
+          <div class="p-user__image c-noImage">
             <img class="c-image c-image--round" src="${reviewer.img_path}">
           </div>
           <div class="p-user__text">
