@@ -2,11 +2,13 @@
 <form method="POST" action="{{ route('master.member.edit', $user) }}">
   @csrf
   <div class="p-formBlock__form">
-    <div class="p-inputField">
+    <div class="p-inputField p-inputField--textarea">
       <label class="label" for="">部署</label>
-        <div class="">
-          {{ $user->department_label }}
-        </div>
+        @if(!empty($user->department_label))
+          <input type="text" value="{{ $user->department_label }}" disabled class="">
+        @else
+          <input type="text" value="登録されている部署はありません" disabled class="empty">
+        @endif
     </div>
     <div class="p-inputField">
       <label class="label" for="">役職</label>
@@ -29,6 +31,16 @@
         @endforeach
       </select>
       {{--  <p class="alert">等級を選択してください</p>  --}}
+    </div>
+    <div class="p-inputField">
+      <label class="label" for="">号俸</label>
+      <select name="salary_id" id="" class="primary">
+        @foreach($salaries as $salary)
+          <option value="{{ $salary->id }}" {{ old('grade_id', $user->salary_id) == $salary->id ? 'selected' : '' }}>
+            {{ $salary->name }}
+          </option>
+        @endforeach
+      </select>
     </div>
     <div class="p-inputField">
       <label class="label" for="">雇用形態</label>

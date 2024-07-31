@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Employment;
 use App\Models\Grade;
 use App\Models\Position;
+use App\Models\Salary;
 use App\Models\Reviewer;
 use App\Models\User;
 use Closure;
@@ -21,6 +22,7 @@ class FormEdit extends Component
     public $grades;
     public $employments;
     public $reviewers;
+    public $salaries;
 
     /**
      * Create a new component instance.
@@ -47,6 +49,11 @@ class FormEdit extends Component
             ->get();
 
         $this->positions = Position::query()
+            ->organization($user->organization_id)
+            ->orderBy('seq', 'asc')
+            ->get();
+
+        $this->salaries = Salary::query()
             ->organization($user->organization_id)
             ->orderBy('seq', 'asc')
             ->get();

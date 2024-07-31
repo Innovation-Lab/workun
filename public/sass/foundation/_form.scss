@@ -67,8 +67,12 @@ input[readonly] {
   background-color: var(--form-readonly);
 }
 input[disabled] {
-  color: var(--form-placeholder);
+  color: #666;
   border-color: transparent;
+  background-color: var(--navy-50);
+  &.empty{
+    color: rgba(21,41,75,.4);
+  }
 }
 
 // スピナー打ち消し

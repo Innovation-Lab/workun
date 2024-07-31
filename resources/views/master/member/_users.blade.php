@@ -45,16 +45,16 @@
       @endforeach
     </tr>
   </thead>
-  <tbody id="authorizer-list">
+  <tbody id="{{ $type }}-list">
     @foreach($users as $user)
       <tr>
         <!-- チェックボックス -->
         <td>
           <div class="item">
-            <label for="check_authorizer{{ $user->id }}">
+            <label for="check_{{ $type }}{{ $user->id }}">
               <input
                 type="checkbox"
-                id="check_authorizer{{ $user->id }}"
+                id="check_{{ $type }}{{ $user->id }}"
                 name="check[]"
                 class="check"
                 value="{{ $user->id }}"

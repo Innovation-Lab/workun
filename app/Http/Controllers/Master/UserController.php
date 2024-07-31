@@ -13,6 +13,7 @@ class UserController extends BaseController
     public function _lodeUsers(Request $request)
     {
         return view('master.member._users', [
+            'type' => $request->query('type'),
             'users' => $this->repository
                 ->search($request)
                 ->organization($this->auth_user->organization_id)

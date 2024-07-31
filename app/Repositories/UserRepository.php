@@ -78,7 +78,7 @@ class UserRepository implements UserRepositoryInterface
         // 承認者を登録
         $this->syncEntities(
             $user,
-            $request->get('approvers', []),
+            array_values(array_unique($request->get('approvers', []))),
             'approvers',
             Approver::class,
             '承認者'
@@ -87,7 +87,7 @@ class UserRepository implements UserRepositoryInterface
         // 評価者を登録
         $this->syncEntities(
             $user,
-            $request->get('reviewers', []),
+            array_values(array_unique($request->get('reviewers', []))),
             'reviewers',
             Reviewer::class,
             '評価者'
