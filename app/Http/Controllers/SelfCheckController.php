@@ -65,9 +65,16 @@ class SelfCheckController extends Controller
     /**
      * Display all sheets page view.
      */
-    public function all()
+    public function all(Request $request): View
     {
-        return view('self-check.all');
+        return view('self-check.all', [
+            'request' => $request,
+            'self_check_sheets' => $this
+                ->selfCheckSheetRepository
+                ->search($request)
+                ->organization($this->auth_user->organization_id)
+                ->paginate(),
+        ]);
     }
 
     /**

@@ -19,29 +19,8 @@
               <p class="title">シート一覧</p>
             </div>
           </div>
-          <div class="p-tableBox__middle">
-            <div class="p-search">
-              <div class="p-search__wrap">
-                <div class="p-search__keyword">
-                  <div class="p-input">
-                    <input type="search" placeholder="キーワード検索" value="">
-                  </div>
-                </div>
-                <div class="p-search__action">
-                  <div class="p-search__detail">
-                    <div class="p-search__setData">
-                      <p class="title">詳細条件 : 営業部 / リーダー / M3</p>
-                      <button class="close">
-                        <svg width="12" height="12"><use xlink:href="#close" /></svg>
-                      </button>
-                    </div>
-                    <a class="c-button" data-remodal-target="modal_search">詳細検索</a>
-                  </div>
-                  <button type="submit" class="c-button c-button--brandPrimary p-search__button">絞り込む</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          {{--  検索機能  --}}
+          <x-self-check-sheet.form-index action-type="self-check.all"/>
           <div class="p-tableBox__body">
             {{-- テーブル一覧 --}}
             <div class="p-table c-scroll">
@@ -80,51 +59,36 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @for($tableBody = 0; $tableBody < 20; $tableBody++)
+                  @foreach($self_check_sheets as $self_check_sheet)
                     <tr data-href="{{ route('self-check.resultall') }}">
                       <td>
                         <div class="item">
-                          第8期 | 基本挨拶、身だしなみセルフチェック表
+                          {{ $self_check_sheet->display_title }}
                         </div>
                       </td>
                       <td>
                         <div class="item">
-                          2024年 四半期 (7月 ~ 9月)
+                          {{ $self_check_sheet->period_name }}
                         </div>
                       </td>
                       <td>
                         <div class="item">
                           <p>
-                            <span>評価：山田 啓介</span>
+                            <span>評価：{{ data_get($self_check_sheet, 'rating.reviewer.full_name', '未登録') }}</span><br />
+                            <span>承認：{{ data_get($self_check_sheet, 'rating.approver.full_name', '未登録') }}</span>
                           </p>
                         </div>
                       </td>
                     </tr>
-                  @endfor
+                  @endforeach
                 </tbody>
               </table>
             </div>
             {{-- ページング --}}
-            <div class="p-pager">
-              <p class="count">全 320 件中 1～20 件目</p>
-              <div class="pageNav">
-                <a href="" class="arrowButton arrowButton--prev disabled">
-                  <svg width="28" height="28"><use xlink:href="#pageNav_prev" /></svg>
-                </a>
-                <div class="p-input">
-                  <input type="text" placeholder="" value="1" id="">
-                  <span class="total">/ 1</span>
-                </div>
-                <a href="" class="arrowButton arrowButton--next">
-                  <svg width="28" height="28"><use xlink:href="#pageNav_next" /></svg>
-                </a>
-              </div>
-            </div>
+            <x-pager :pagination="$self_check_sheets->appends($request->all())"/>
           </div>
         </div>
       </div>
     </div>
   </div>
-  @include('self-check.components.modal._search')
 @endsection
-    
