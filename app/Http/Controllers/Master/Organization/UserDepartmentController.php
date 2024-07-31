@@ -134,4 +134,31 @@ class UserDepartmentController extends Controller
             ->route('master.organization.index')
             ->with('success', '従業員を削除しました。');
     }
+
+    /**
+     * 全ユーザーのIDを取得
+     * @param Department $department
+     * @param Request $request
+     * @return array
+     */
+    public function _getAllUserIds(Department $department, Request $request)
+    {
+        // 既に部署に登録されているユーザーを取得
+        $existingUserIds = UserDepartment::where('department_id', $department->id)
+            ->pluck('user_id')
+            ->toArray();
+
+        $query = $this->user_repository
+            ->search($request)
+            ->organization($this->auth_user->organization_id);
+
+        $action_type = $request->get('actionType');
+        if ($action_type == 'register') {
+            $query->whereNotIn('id', $existingUserIds);
+        } elseif ($action_type == 'delete') {
+            $query->whereIn('id', $existingUserIds);
+        }
+
+        return $query->pluck('id')->toArray();
+    }
 }
