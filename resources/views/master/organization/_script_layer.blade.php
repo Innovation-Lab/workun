@@ -143,28 +143,42 @@
       centerScrollContainer();
     });
 
-
     // 組織図に紐づいている従業員リストの表示
     $('.p-organizationChart__item .button').on('click', function() {
       var $button = $(this);
       var $userList = $button.closest('.p-organizationChart').siblings('.p-organizationChart__userList');
-      $button.addClass('is-open');
-      $userList.addClass('is-open');
+      var departmentId = $button.data('department-id');
+
+      // ユーザーリストを取得
+      $.ajax({
+        url: '{{ route('master.organization._lodeMembers') }}',
+        type:'GET',
+        data: {
+          'department_id': departmentId
+        }
+      })
+      .done(function ($data) {
+        $userList.html($data);
+        $button.addClass('is-open');
+        $userList.addClass('is-open');
+      })
+      .fail(function () {
+        alert('従業員情報を取得できませんでした。')
+      })
     });
-    $('.p-organizationChart__userList .item .close').on('click', function() {
+
+    $(document).on('click', '.p-organizationChart__userList .item .close', function() {
       $('.p-organizationChart__item .button').removeClass('is-open');
       $('.p-organizationChart__userList').removeClass('is-open');
     });
     $('.p-organizationChart__item .button').hover(
       function() {
         $(this).closest('.button__area').addClass('hover');
-      }, 
+      },
       function() {
         $(this).closest('.button__area').removeClass('hover');
       }
     );
-
-
 
     // モーダルが開いた後にスクロール位置を設定する
     $(document).on('opening.remodal', function(e) {

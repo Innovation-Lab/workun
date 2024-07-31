@@ -42,6 +42,25 @@ class UserRepository implements UserRepositoryInterface
             $query->where('users.login_code', $request->get('login_code'));
         }
 
+        if ($request->get('name')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('users.sei', $request->get('name'))
+                    ->orWhere('users.mei', $request->get('name'));
+            });
+        }
+
+        if ($request->get('email')) {
+            $query->where('users.email', $request->get('email'));
+        }
+
+        if ($request->get('number')) {
+            $query->where('users.number', $request->get('number'));
+        }
+
+        if ($request->get('organization_id')) {
+            $query->where('users.organization_id', $request->get('organization_id'));
+        }
+
         if ($request->get('department_id')) {
             $query->join('user_departments', 'users.id', '=', 'user_departments.user_id')
                 ->where('user_departments.department_id', $request->get('department_id'));
