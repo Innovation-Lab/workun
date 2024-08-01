@@ -119,8 +119,35 @@
     }
   }
   &__middle {
+    display: flex;
+    gap: var(--spacing-sm);
     padding: 20px 0 var(--spacing-sm) !important;
+    .p-inputField{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      .label {
+        color: var(--main);
+        font-size: 13px;
+        font-weight: 500;;
+        min-width: max-content;
+        margin-block-end: 0;
+      }
+      input[type=text],
+      input[type=search],
+      input[type=date],
+      input[type=tel],
+      input[type=email],
+      input[type=number],
+      input[type=password],
+      select,
+      textarea {
+        padding: var(--spacing-2xs) var(--spacing-xs);
+        min-height: 32px;
+      }
+    }
   }
+
   &__body{
     .c-scroll{
       max-height: 325px;
