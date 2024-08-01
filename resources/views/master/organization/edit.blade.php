@@ -12,7 +12,12 @@
           <p class="title">組織図の編集</p>
           <div class="action">
             <button class="c-button u-w180" data-remodal-target="modal_preview">プレビューを表示</button>
-            <button class="c-button c-button--primary u-w180">組織図を保存</button>
+            <button
+              class="c-button c-button--primary u-w180"
+              onclick='$("#departments-form").submit()'
+            >
+              組織図を保存
+            </button>
           </div>
         </div>
       </div>
@@ -20,25 +25,34 @@
         <div class="p-formBlock">
           <div class="p-formBlock__body">
             <div class="c-scroll h-auto">
-              <form>
+              <form id="departments-form" method="post">
+                @csrf
                 <div class="p-inputField--organizationBox">
                   <div class="layer--container">
                     <div class="layer--item">
                       <div class="p-inputField p-inputField--organization layer1--item">
                         <div class="item">
                           <div class="item--checkbox">
-                            <label for="organization1" class="round">
-                              <input type="checkbox" id="organization1" name="organization" value="">
+                            <label class="round">
+                              <input type="radio" name="organization" data-name="departments[0]" data-parent="" onclick="toggleButtonsBasedOnCheckbox()" checked />
                             </label>
-                          </div>            
+                          </div>
                           <div class="item--input">
                             <span class="label">順序</span>
-                            <input type="number" value="1"  class="gray" placeholder="1"> 
-                            <input type="text" value="クラスコ" class="gray" placeholder="名称を記入"> 
+                            <input type="number" name="departments[0][seq]" value="1" step="1" min="1" class="gray" placeholder="1" disabled />
+                            <input type="text" value="{{ $organization->name }}" name="departments[0][name]" class="gray" placeholder="名称を記入" disabled />
                           </div>
                         </div>
                       </div>
-                      <div class="layer--container"></div>
+                      <div class="layer--container">
+                        @foreach($organization->first_departments as $department)
+                          @include('master.organization._layer_item', [
+                            'parent' => 'departments[0]',
+                            'index' => $loop->index,
+                            'department' => $department
+                          ])
+                        @endforeach
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -54,8 +54,18 @@ class Organization extends Authenticatable
         return $this->users()->valid()->get();
     }
 
+    protected function getFirstDepartmentsAttribute()
+    {
+        return $this->departments()
+            ->whereNull('departments.department_id')
+            ->orderByRaw('departments.seq is null asc')
+            ->orderBy('departments.id')
+            ->get();
+    }
+
     protected function scopeOrganization($query, $organization_id)
     {
         return $query->where('id', $organization_id);
     }
+
 }

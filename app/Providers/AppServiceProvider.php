@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\DepartmentRepository;
+use App\Repositories\DepartmentRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\UrlGenerator;
 use App\Repositories\EmploymentRepositoryInterface;
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(EmploymentRepositoryInterface::class, EmploymentRepository::class);
         $this->app->bind(GradeRepositoryInterface::class, GradeRepository::class);
+        $this->app->bind(DepartmentRepositoryInterface::class, DepartmentRepository::class);
         $this->app->bind(OrganizationRepositoryInterface::class, OrganizationRepository::class);
         $this->app->bind(PeriodRepositoryInterface::class, PeriodRepository::class);
         $this->app->bind(PositionRepositoryInterface::class, PositionRepository::class);

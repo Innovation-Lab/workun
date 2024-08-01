@@ -33,7 +33,8 @@ Route::group([
     'as' => 'organization.',
 ], function () {
     Route::get('/', [OrganizationController::class, 'index'])->name('index');
-    Route::view('/edit', 'master.organization.edit')->name('edit');
+    Route::get('/edit', [OrganizationController::class, 'edit'])->name('edit');
+    Route::post('/edit', [OrganizationController::class, 'update']);
     // Route::get('/edit/{organization}', [OrganizationController::class, 'edit'])->name('edit');
     // Route::post('/edit/{organization}', [OrganizationController::class, 'update']);
     Route::get('/_lodeMembers', [OrganizationController::class, '_lodeMembers'])->name('_lodeMembers');
