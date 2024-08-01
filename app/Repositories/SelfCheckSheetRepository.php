@@ -320,6 +320,7 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
         $start = date('Y-m-d', strtotime("{$term}-01"));
         $check_days = $self_check_sheet->check_days - 1;
         $self_check_sheet->display_term = date('Y/m/d', strtotime("{$start} + {$check_days} days"));
+        $self_check_sheet->action_type = 'answer';
         return $self_check_sheet;
     }
 
@@ -335,6 +336,7 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
         $start = date('Y-m-d', strtotime("{$term}-01 + " .($check_days + 1). " days"));
         $rating_days = $self_check_sheet->rating_days - 1;
         $self_check_sheet->display_term = date('Y/m/d', strtotime("{$start} + {$rating_days} days"));
+        $self_check_sheet->action_type = 'answers';
 
         // 対象数
         $self_check_sheet->all_target_count = $self_check_sheet
@@ -369,7 +371,8 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
         $rating_days = $self_check_sheet->rating_days - 1;
         $start = date('Y-m-d', strtotime("{$term}-01 + " .($check_days + $rating_days + 2). " days"));
         $approval_days = $self_check_sheet->approval_days - 1;
-        $self_check_sheet->display_term = date('Y.m.d', strtotime("{$start} + {$approval_days} days"));
+        $self_check_sheet->display_term = date('Y/m/d', strtotime("{$start} + {$approval_days} days"));
+        $self_check_sheet->action_type = 'approvals';
 
         // 対象数
         $self_check_sheet->all_target_count = $self_check_sheet

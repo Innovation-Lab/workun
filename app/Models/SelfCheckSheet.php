@@ -116,6 +116,18 @@ class SelfCheckSheet extends Model
         return date('Y.m', strtotime("{$start}-01")) . " ~ " . date('Y.m', strtotime("{$end}-01"));
     }
 
+    protected function getDisplayPeriodForTodoTaskAttribute()
+    {
+        $start = data_get($this, 'period.start');
+        $end = data_get($this, 'period.end');
+        return date('Y.m.d', strtotime("{$start}-01")) . " - " . date('Y.m.d', strtotime("{$end}-01"));
+    }
+
+    protected function getDisplayTermForTodoTaskAttribute()
+    {
+        return date('Y年m月', strtotime($this->display_term));
+    }
+
     public function self_check_rating($user, $term)
     {
         return $this

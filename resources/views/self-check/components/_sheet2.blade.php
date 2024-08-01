@@ -57,30 +57,30 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($self_check_sheets as $self_check_sheet)
+          @foreach($rating_self_check_sheets as $rating_self_check_sheet)
             <tr data-href="{{ route('self-check.answers', [
-              'selfCheckSheet' => $self_check_sheet,
+              'selfCheckSheet' => $rating_self_check_sheet,
               'term' => $term,
             ]) }}">
               <td>
                 <div class="item">
-                  {{ $self_check_sheet->display_title }}
+                  {{ $rating_self_check_sheet->display_title }}
                 </div>
               </td>
               <td>
                 <div class="item">
-                  {{ $self_check_sheet->display_term }}
+                  {{ $rating_self_check_sheet->display_term }}
                 </div>
               </td>
               <td>
                 <div class="item u-tar">
-                  {{ number_format($self_check_sheet->rated_target_count) }} /
-                  {{ number_format($self_check_sheet->all_target_count) }}
+                  {{ number_format($rating_self_check_sheet->rated_target_count) }} /
+                  {{ number_format($rating_self_check_sheet->all_target_count) }}
                 </div>
               </td>
               <td>
                 <div class="item">
-                  {{ $self_check_sheet->display_period }}
+                  {{ $rating_self_check_sheet->display_period }}
                 </div>
               </td>
             </tr>
@@ -89,5 +89,5 @@
       </table>
     </div>
     {{-- ページング --}}
-    <x-pager :pagination="$self_check_sheets->appends(request()->all())"/>
+    <x-pager :pagination="$rating_self_check_sheets->appends(request()->all())"/>
   </div>
