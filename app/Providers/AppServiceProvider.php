@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\DepartmentRepository;
+use App\Repositories\DepartmentRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\UrlGenerator;
 use App\Repositories\EmploymentRepositoryInterface;
@@ -18,6 +20,8 @@ use App\Repositories\SalaryRepositoryInterface;
 use App\Repositories\SalaryRepository;
 use App\Repositories\SelfCheckSheetRepositoryInterface;
 use App\Repositories\SelfCheckSheetRepository;
+use App\Repositories\UserDepartmentRepositoryInterface;
+use App\Repositories\UserDepartmentRepository;
 use App\Repositories\UserRepositoryInterface;
 use App\Repositories\UserRepository;
 
@@ -30,11 +34,13 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(EmploymentRepositoryInterface::class, EmploymentRepository::class);
         $this->app->bind(GradeRepositoryInterface::class, GradeRepository::class);
+        $this->app->bind(DepartmentRepositoryInterface::class, DepartmentRepository::class);
         $this->app->bind(OrganizationRepositoryInterface::class, OrganizationRepository::class);
         $this->app->bind(PeriodRepositoryInterface::class, PeriodRepository::class);
         $this->app->bind(PositionRepositoryInterface::class, PositionRepository::class);
         $this->app->bind(SalaryRepositoryInterface::class, SalaryRepository::class);
         $this->app->bind(SelfCheckSheetRepositoryInterface::class, SelfCheckSheetRepository::class);
+        $this->app->bind(UserDepartmentRepositoryInterface::class, UserDepartmentRepository::class);
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
     }
 

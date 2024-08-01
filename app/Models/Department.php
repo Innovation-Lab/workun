@@ -28,6 +28,7 @@ class Department extends Model
 
     public function childDepartments()
     {
-        return $this->hasMany(Department::class, 'department_id');
+        return $this->hasMany(Department::class, 'department_id')
+            ->orderByRaw('departments.seq is null asc');
     }
 }

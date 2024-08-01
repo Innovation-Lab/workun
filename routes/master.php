@@ -33,10 +33,11 @@ Route::group([
     'as' => 'organization.',
 ], function () {
     Route::get('/', [OrganizationController::class, 'index'])->name('index');
-    Route::view('/edit', 'master.organization.edit')->name('edit');
-    Route::view('/edit/link_employee', 'master.organization.edit_link_employee')->name('edit_link_employee');
+    Route::get('/edit', [OrganizationController::class, 'edit'])->name('edit');
+    Route::post('/edit', [OrganizationController::class, 'update']);
     // Route::get('/edit/{organization}', [OrganizationController::class, 'edit'])->name('edit');
     // Route::post('/edit/{organization}', [OrganizationController::class, 'update']);
+    Route::get('/_lodeMembers', [OrganizationController::class, '_lodeMembers'])->name('_lodeMembers');
 
     // 組織項目
     require base_path('routes/organization.php');

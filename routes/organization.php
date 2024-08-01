@@ -7,6 +7,7 @@ use App\Http\Controllers\Master\Organization\EmploymentController;
 use App\Http\Controllers\Master\Organization\GradeController;
 use App\Http\Controllers\Master\Organization\PositionController;
 use App\Http\Controllers\Master\Organization\SalaryController;
+use App\Http\Controllers\Master\Organization\UserDepartmentController;
 
 // 部署・部門
 Route::group([
@@ -17,6 +18,19 @@ Route::group([
     Route::post('/create', [DepartmentController::class, 'store']);
     Route::get('/edit', [DepartmentController::class, 'edit'])->name('edit');
     Route::post('/edit', [DepartmentController::class, 'update']);
+});
+
+// 部署と従業員情報
+Route::group([
+    'prefix' => 'user_department',
+    'as' => 'user_department.',
+    'middleware' => ['can:update,department']
+], function () {
+    Route::get('/add/{department}', [UserDepartmentController::class, 'add'])->name('add');
+    Route::post('/add/{department}', [UserDepartmentController::class, 'store']);
+    Route::get('/edit/{department}', [UserDepartmentController::class, 'edit'])->name('edit');
+    Route::post('/edit/{department}', [UserDepartmentController::class, 'update']);
+    Route::delete('/edit/{department}', [UserDepartmentController::class, 'destroy']);
 });
 
 // 役職
