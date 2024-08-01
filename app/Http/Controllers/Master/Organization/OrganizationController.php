@@ -34,7 +34,9 @@ class OrganizationController extends Controller
                 ->search($request)
                 ->organization($this->auth_user->organization_id)
                 ->get(),
-            'department' => Department::where('id', $request->get('department_id'))->first(),
+            'department' => Department::where('id', $request->get('department_id'))
+                ->organization($this->auth_user->organization_id)
+                ->first(),
         ]);
     }
 

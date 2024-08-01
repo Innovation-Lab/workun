@@ -22,5 +22,3 @@
   {{-- ページング --}}
   <x-pager :pagination="$users->appends($request->all())" />
 </div>
-
-@include('master.organization.user-department._script')

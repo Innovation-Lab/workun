@@ -20,16 +20,28 @@
         >
           @csrf
           @method('delete')
-          <input type="hidden" name="department_id" value="{{ $department->id }}">
           {{--  従業員一覧を表示 --}}
           @include('master.organization.user-department._user_form')
 
           <div class="p-formBlock__action fixed sticky">
             <a href="{{route('master.organization.index')}}" class="c-button c-button--gray c-button--sm u-w120">戻る</a>
-            <button class="c-button c-button--white c-button--sm u-w220">削除する</button>
+            <button
+              class="c-button c-button--white c-button--sm u-w220"
+              name="delete_selected"
+              style="display: none;"
+            >
+              選択した従業員を削除する
+            </button>
+            <button
+              class="c-button c-button--white c-button--sm u-w220"
+              name="delete_all"
+            >
+              全ての従業員を削除する
+            </button>
           </div>
         </form>
       </div>
+      @include('master.organization.user-department._script')
     </div>
   </div>
 @endsection

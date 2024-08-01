@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Exception;
+use App\Models\Department;
 use App\Models\UserDepartment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,16 +11,19 @@ use Illuminate\Support\Facades\Auth;
 class UserDepartmentRepository implements UserDepartmentRepositoryInterface
 {
     /**
+     * @param Department $department
      * @param Request $request
-     * @return UserDepartment
+     * @return array
      * @throws Exception
      */
-    public function create(Request $request)
+    public function create(Department $department, Request $request): array
     {
+        dd($request->get('user_id'));
         $user_ids = $request->get('user_id');
         $user_departments = [];
         foreach ($user_ids as $user_id) {
             $attributes = $this->makeAttributes($request);
+            $attributes['department_id'] = $department->id;
             $attributes['user_id'] = $user_id;
             $user_department = new UserDepartment($attributes);
 
@@ -44,17 +48,18 @@ class UserDepartmentRepository implements UserDepartmentRepositoryInterface
     }
 
     /**
-     * @param UserDepartment $period
+     * @param Department $department
+     * @param Request $request
      * @return void
      * @throws Exception
      */
-    public function delete(Request $request): void
+    public function delete(Department $department, Request $request): void
     {
         $user_ids = $request->get('user_id');
         foreach ($user_ids as $user_id) {
             $user_department = UserDepartment::where([
                 'user_id' => $user_id,
-                'department_id' => $request->get('department_id')
+                'department_id' => $department->id
             ])
             ->first();
 

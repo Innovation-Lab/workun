@@ -31,6 +31,7 @@ Route::group([
     Route::get('/edit/{department}', [UserDepartmentController::class, 'edit'])->name('edit');
     Route::post('/edit/{department}', [UserDepartmentController::class, 'update']);
     Route::delete('/edit/{department}', [UserDepartmentController::class, 'destroy']);
+    Route::get('/_getAllUserIds/{department}', [UserDepartmentController::class, '_getAllUserIds'])->name('_getAllUserIds');
 });
 
 // 役職
