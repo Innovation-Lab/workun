@@ -31,22 +31,19 @@ class FormIndex extends Component
     {
         $user = Auth::user();
         $organization = $user->organization;
-        $organization->departments = $this->buildDepartmentHierarchy($organization->departments()->get());
-
+        $organization->departments = $this->buildDepartmentHierarchy($organization->first_departments);
         return $organization;
     }
 
-    private function buildDepartmentHierarchy($departments, $parentId = null)
+    private function buildDepartmentHierarchy($departments)
     {
         $result = [];
         foreach ($departments as $department) {
-            if ($department->department_id == $parentId) {
-                $children = $this->buildDepartmentHierarchy($departments, $department->id);
-                if ($children) {
-                    $department->child_departments = $children;
-                }
-                $result[] = $department;
+            $children = $department->childDepartments()->get();
+            if ($children) {
+                $department->child_departments = $this->buildDepartmentHierarchy($children);
             }
+            $result[] = $department;
         }
 
         return $result;

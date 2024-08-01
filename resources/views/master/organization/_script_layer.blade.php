@@ -9,6 +9,36 @@
     }
   }
 
+  // 部署削除
+  function deleteDepartment () {
+    let $checkedItem = $('.p-inputField--organizationBox .layer--item input[type="radio"]:checked').closest('.layer--item')
+    $checkedItem.children(".p-inputField").find(".delete").val(1)
+    $checkedItem.hide()
+    $('[data-name="departments[0]"]').prop('checked', true)
+    toggleButtonsBasedOnCheckbox()
+  }
+
+  // プレビュー
+  function preview () {
+    let formData = $("#departments-form").serialize()
+    $.ajax({
+      type: 'POST',
+      url: '{{ route('master.organization._preview') }}', // フォームデータを送信するURL
+      data: formData,
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), // これが必要
+      },
+      success: function(response) {
+        // 成功時の処理
+        $("#preview").html(response)
+      },
+      error: function(xhr, status, error) {
+        // エラー時の処理
+        alert('エラーが発生しました。');
+      }
+    })
+  }
+
   $(document).ready(function() {
 
     // 初期のボタン有効/無効設定
@@ -25,23 +55,44 @@
 
       // 新しい .layer--item を作成
       let newLayerItem = `
-        <div class="layer--item">
-          <div class="p-inputField p-inputField--organization">
-            <div class="item js-clearableRadio">
-              <div class="item--checkbox">
-                <label class="round">
-                  <input type="radio" name="organization" data-name="${parent_name}[departments][${item_index}]" data-parent="${parent_name}" onclick="toggleButtonsBasedOnCheckbox()">
-                </label>
-              </div>
-              <div class="item--input">
-                <span class="label">順序</span>
-                <input type="number" name="${parent_name}[departments][${item_index}][seq]" step="1" min="1" class="gray" placeholder="1">
-                <input type="text" name="${parent_name}[departments][${item_index}][name]" class="gray" placeholder="名称を記入">
-              </div>
-            </div>
-          </div>
-          <div class="layer--container"></div>
-        </div>
+<div class="layer--item">
+  <div class="p-inputField p-inputField--organization">
+    <div class="item js-clearableRadio">
+      <div class="item--checkbox">
+        <label class="round">
+          <input
+            type="radio"
+            name="organization"
+            data-name="${parent_name}[departments][${item_index}]"
+            data-parent="${parent_name}"
+            onclick="toggleButtonsBasedOnCheckbox()"
+          />
+        </label>
+      </div>
+      <div class="item--input">
+        <span class="label">順序</span>
+        <input
+          type="number"
+          name="${parent_name}[departments][${item_index}][seq]"
+          step="1" min="1" class="gray" placeholder="1"
+        />
+        <input
+          type="text"
+          name="${parent_name}[departments][${item_index}][name]"
+          class="gray"
+          placeholder="名称を記入"
+        />
+        <input
+          type="hidden"
+          name="${parent_name}[departments][${item_index}][delete]"
+          class="delete"
+          value=""
+        />
+      </div>
+    </div>
+  </div>
+  <div class="layer--container"></div>
+</div>
       `;
 
         // .layer--container 内に新しい .layer--item を追加
@@ -51,7 +102,7 @@
     // 並列に追加
     $('#add-align').on('click', function() {
       // チェックされているラジオボタンを含む .layer--item を取得
-      var $checkedItem = $('.p-inputField--organizationBox .layer--item input[type="radio"]:checked').closest('.layer--item');
+      let $checkedItem = $('.p-inputField--organizationBox .layer--item input[type="radio"]:checked').closest('.layer--item');
 
       let parent_name = $('.layer--item input[type="radio"]:checked').data('parent')
 
@@ -59,28 +110,58 @@
 
       // 新しい .layer--item を作成
       var newLayerItem = `
-        <div class="layer--item">
-          <div class="p-inputField p-inputField--organization">
-            <div class="item">
-              <div class="item--checkbox">
-                <label class="round">
-                  <input type="radio" name="organization" data-name="${parent_name}[departments][${item_index}]" data-parent="${parent_name}" onclick="toggleButtonsBasedOnCheckbox()">
-                </label>
-              </div>
-              <div class="item--input">
-                <span class="label">順序</span>
-                <input type="number" name="${parent_name}[departments][${item_index}][seq]" step="1" min="1" class="gray" placeholder="1">
-                <input type="text" name="${parent_name}[departments][${item_index}][name]" class="gray" placeholder="名称を記入">
-              </div>
-            </div>
-          </div>
-          <div class="layer--container"></div>
-        </div>
+<div class="layer--item">
+  <div class="p-inputField p-inputField--organization">
+    <div class="item">
+      <div class="item--checkbox">
+        <label class="round">
+          <input
+            type="radio"
+            name="organization"
+            data-name="${parent_name}[departments][${item_index}]"
+            data-parent="${parent_name}"
+            onclick="toggleButtonsBasedOnCheckbox()"
+          />
+        </label>
+      </div>
+      <div class="item--input">
+        <span class="label">順序</span>
+        <input
+          type="number"
+          name="${parent_name}[departments][${item_index}][seq]"
+          step="1" min="1" class="gray" placeholder="1"
+        />
+        <input
+          type="text"
+          name="${parent_name}[departments][${item_index}][name]"
+          class="gray"
+          placeholder="名称を記入"
+        />
+        <input
+          type="hidden"
+          name="${parent_name}[departments][${item_index}][delete]"
+          class="delete"
+          value=""
+        />
+      </div>
+    </div>
+  </div>
+  <div class="layer--container"></div>
+</div>
       `;
 
       // チェックされているラジオボタンを含む .layer--item の兄弟要素として追加
       $checkedItem.after(newLayerItem);
     });
+
+    // 削除
+    $('#delete-item').on('click', function() {
+      let $checkedItem = $('.p-inputField--organizationBox .layer--item input[type="radio"]:checked').closest('.layer--item')
+      let name = $checkedItem.children(".p-inputField").find("[type=text]").val()
+      let modal = $('[ data-remodal-id="modal_delete"]')
+      modal.find('.title').text(`組織図の項目「${name}」の削除`)
+      modal.find('.name').text(name)
+    })
 
   });
 </script>

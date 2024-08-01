@@ -11,7 +11,14 @@
           </a>
           <p class="title">組織図の編集</p>
           <div class="action">
-            <button class="c-button u-w180" data-remodal-target="modal_preview">プレビューを表示</button>
+            <button
+              class="c-button u-w180"
+              data-remodal-target="modal_preview"
+              onclick="preview()"
+
+            >
+              プレビューを表示
+            </button>
             <button
               class="c-button c-button--primary u-w180"
               onclick='$("#departments-form").submit()'

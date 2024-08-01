@@ -72,4 +72,32 @@ class OrganizationController extends Controller
             ->route('master.organization.index')
             ->with('success', '更新しました。');
     }
+
+    public function _preview(Request $request)
+    {
+        $organization = $this->auth_user->organization;
+        $departments = collect(data_get($request->get('departments'), "0.departments", []));
+        $organization->departments = $this->buildDepartmentHierarchy($departments);
+        $organization_chart = $organization;
+        return view('master.organization._chart', [
+            'organization_chart' => $organization_chart
+        ]);
+    }
+
+    private function buildDepartmentHierarchy ($departments)
+    {
+        $result = [];
+        foreach ($departments as $department) {
+            $delete = data_get($department, 'delete');
+            if ($delete) continue;
+            $children = data_get($department, 'departments');
+            if ($children) {
+                $department['departments'] = null;
+                $department['child_departments'] = $this->buildDepartmentHierarchy($children);
+            }
+            data_set($department, 'id', null);
+            $result[] = $department;
+        }
+        return $result;
+    }
 }

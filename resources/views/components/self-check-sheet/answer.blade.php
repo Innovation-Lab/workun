@@ -8,7 +8,7 @@
         {{ $selfCheckSheet->display_title }}
       </p>
     </div>
-    @if($selfCheckRating->remand_flag)
+    @if(data_get($selfCheckRating, 'remand_flag'))
       <div class="comment">
         <svg width="20" height="20"><use xlink:href="#remand_comment" /></svg>
         <p>{{ $selfCheckRating->remand_reason }}</p>

@@ -7,8 +7,9 @@
   <div class="p-modal__head">
     <p class="title">組織図プレビュー</p>
   </div>
-  <div class="p-modal__body c-scroll h-auto" id="scrollContainer">
-    <!-- 組織図 -->
-{{--    @include('master.organization._chart')--}}
-  </div>
+  <div
+    id="preview"
+    class="p-modal__body c-scroll h-auto"
+{{--    id="scrollContainer"--}}
+  ></div>
 </div>

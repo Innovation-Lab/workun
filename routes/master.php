@@ -35,8 +35,7 @@ Route::group([
     Route::get('/', [OrganizationController::class, 'index'])->name('index');
     Route::get('/edit', [OrganizationController::class, 'edit'])->name('edit');
     Route::post('/edit', [OrganizationController::class, 'update']);
-    // Route::get('/edit/{organization}', [OrganizationController::class, 'edit'])->name('edit');
-    // Route::post('/edit/{organization}', [OrganizationController::class, 'update']);
+    Route::post('/_preview', [OrganizationController::class, '_preview'])->name('_preview');
     Route::get('/_lodeMembers', [OrganizationController::class, '_lodeMembers'])->name('_lodeMembers');
 
     // 組織項目

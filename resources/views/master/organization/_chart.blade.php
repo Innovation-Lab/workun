@@ -3,7 +3,7 @@
       <div class="p-organizationChart__field">
         <div class="p-organizationChart__item">
           <p class="name"><?= $entity['name']; ?></p>
-          @if ($level !== 1)
+          @if ($level !== 1 && data_get($entity, 'id'))
             <div class="button__area">
               <div
                 class="button"
@@ -17,9 +17,9 @@
       </div>
     <?php } ?>
 
-    <?php if(isset($entity->departments)) { ?>
+    <?php if(data_get($entity, 'departments')) { ?>
       <div class="p-organizationChart__underLayer">
-        <?php foreach ($entity->departments as $department) { ?>
+        <?php foreach (data_get($entity, 'departments') as $department) { ?>
           <div class="p-organizationChart__layer layer<?= $level + 1 ?>">
             <?php displayOrganization($department, $level + 1);?>
           </div>
@@ -27,9 +27,9 @@
       </div>
     <?php } ?>
 
-    <?php if(isset($entity->child_departments)) { ?>
+    <?php if(data_get($entity, 'child_departments')) { ?>
       <div class="p-organizationChart__underLayer">
-        <?php foreach ($entity->child_departments as $child) { ?>
+        <?php foreach (data_get($entity, 'child_departments') as $child) { ?>
           <div class="p-organizationChart__layer layer<?= $level + 1 ?>">
             <?php displayOrganization($child, $level + 1);?>
           </div>
