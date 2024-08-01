@@ -23,6 +23,7 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
     {
         return SelfCheckSheet::query()
             ->keyword($request->get('keyword'))
+            ->period($request->get('period_id'))
             ->orderBy('self_check_sheets.id', 'desc');
     }
 
