@@ -32,6 +32,12 @@
           name="{{ $parent }}[departments][{{ $index }}][id]"
           value="{{ $department->id }}"
         />
+        <input
+          type="hidden"
+          class="delete"
+          name="{{ $parent }}[departments][{{ $index }}][delete]"
+          value=""
+        />
       </div>
     </div>
   </div>

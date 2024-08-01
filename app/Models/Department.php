@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Department extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +30,7 @@ class Department extends Model
     public function childDepartments()
     {
         return $this->hasMany(Department::class, 'department_id')
-            ->orderByRaw('departments.seq is null asc');
+            ->orderByRaw('departments.seq is null asc')
+            ->orderBy('departments.seq');
     }
 }

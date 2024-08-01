@@ -59,6 +59,7 @@ class Organization extends Authenticatable
         return $this->departments()
             ->whereNull('departments.department_id')
             ->orderByRaw('departments.seq is null asc')
+            ->orderBy('departments.seq')
             ->orderBy('departments.id')
             ->get();
     }
