@@ -65,7 +65,7 @@
         <td>
           <div class="item">
             <div class="p-user">
-              <div class="p-user__image">
+              <div class="p-user__image c-noImage">
                 <img class="c-image c-image--round" name='img_path' src="{{ $user->avatar_url }}">
               </div>
               <div class="p-uesr__text">

@@ -3,7 +3,7 @@
     type="hidden"
     name="reviewers[]"
     value="{{ $user->id }}">
-  <div class="p-user__image">
+  <div class="p-user__image c-noImage">
     <img class="c-image c-image--round" src="{{ $user->avatar_url }}">
   </div>
   <div class="p-user__text">

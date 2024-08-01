@@ -33,20 +33,22 @@
 
     var approverHtml = '';
     selectedApprovers.forEach(function(approver) {
-      approverHtml += `
-        <div class="p-user" name="approver_lists">
-          <input type="hidden" name="approvers[]" value="${approver.id}">
-          <div class="p-user__image">
-            <img class="c-image c-image--round" src="${approver.img_path}">
+      if ($(`input[name="approvers[]"][value="${approver.id}"]`).length === 0) {
+        approverHtml += `
+          <div class="p-user" name="approver_lists">
+            <input type="hidden" name="approvers[]" value="${approver.id}">
+            <div class="p-user__image c-noImage">
+              <img class="c-image c-image--round" src="${approver.img_path}">
+            </div>
+            <div class="p-user__text">
+              <div class="name">${approver.name}</div>
+            </div>
+            <span class="p-user__delete">
+              <svg width="14" height="14"><use xlink:href="#close" /></svg>
+            </span>
           </div>
-          <div class="p-user__text">
-            <div class="name">${approver.name}</div>
-          </div>
-          <span class="p-user__delete">
-            <svg width="14" height="14"><use xlink:href="#close" /></svg>
-          </span>
-        </div>
-      `;
+        `;
+      };
     });
 
     $('#selected-approvers').prepend(approverHtml);
@@ -87,20 +89,22 @@
 
     var reviewerHtml = '';
     selectedReviewers.forEach(function(reviewer) {
-      reviewerHtml += `
-        <div class="p-user" name="reviewer_lists">
-          <input type="hidden" name="reviewers[]" value="${reviewer.id}">
-          <div class="p-user__image">
-            <img class="c-image c-image--round" src="${reviewer.img_path}">
+      if ($(`input[name="reviewers[]"][value="${reviewer.id}"]`).length === 0) {
+        reviewerHtml += `
+          <div class="p-user" name="reviewer_lists">
+            <input type="hidden" name="reviewers[]" value="${reviewer.id}">
+            <div class="p-user__image c-noImage">
+              <img class="c-image c-image--round" src="${reviewer.img_path}">
+            </div>
+            <div class="p-user__text">
+              <div class="name">${reviewer.name}</div>
+            </div>
+            <span class="p-user__delete">
+              <svg width="14" height="14"><use xlink:href="#close" /></svg>
+            </span>
           </div>
-          <div class="p-user__text">
-            <div class="name">${reviewer.name}</div>
-          </div>
-          <span class="p-user__delete">
-            <svg width="14" height="14"><use xlink:href="#close" /></svg>
-          </span>
-        </div>
-      `;
+        `;
+      };
     });
 
     $('#selected-reviewers').prepend(reviewerHtml);
