@@ -99,7 +99,10 @@ class BaseController extends Controller
         # 更新処理
         DB::beginTransaction();
         try {
-            $request->merge(['organization_id' => $this->auth_user->organization_id]);
+            $request->merge([
+                'user_id' => $this->auth_user->id,
+                'organization_id' => $this->auth_user->organization_id,
+            ]);
             $entity = $this->repository->create($request);
         } catch (Exception $exception) {
             DB::rollBack();

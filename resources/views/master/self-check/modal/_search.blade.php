@@ -47,7 +47,7 @@
     </div>
     <div class="p-formBlock__action">
       <a
-        href="{{ route('master.self-check.index') }}"
+        href="{{ $back_action }}"
         class="c-button--text"
       >
         条件をリセット

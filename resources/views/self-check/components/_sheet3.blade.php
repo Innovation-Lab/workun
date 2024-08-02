@@ -57,32 +57,32 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($self_check_sheets as $self_check_sheet)
+          @foreach($approving_self_check_sheets as $approving_self_check_sheet)
             <tr
               data-href="{{ route('self-check.approvals', [
-                'selfCheckSheet' => $self_check_sheet,
+                'selfCheckSheet' => $approving_self_check_sheet,
                 'term' => $term,
               ]) }}"
             >
               <td>
                 <div class="item">
-                  {{ $self_check_sheet->display_title }}
+                  {{ $approving_self_check_sheet->display_title }}
                 </div>
               </td>
               <td>
                 <div class="item">
-                  {{ $self_check_sheet->display_term }}
+                  {{ $approving_self_check_sheet->display_term }}
                 </div>
               </td>
               <td>
                 <div class="item u-tar">
-                  {{ number_format($self_check_sheet->approved_target_count) }} /
-                  {{ number_format($self_check_sheet->all_target_count) }}
+                  {{ number_format($approving_self_check_sheet->approved_target_count) }} /
+                  {{ number_format($approving_self_check_sheet->all_target_count) }}
                 </div>
               </td>
               <td>
                 <div class="item">
-                  {{ $self_check_sheet->display_period }}
+                  {{ $approving_self_check_sheet->display_period }}
                 </div>
               </td>
             </tr>
@@ -91,5 +91,5 @@
       </table>
     </div>
     {{-- ページング --}}
-    <x-pager :pagination="$self_check_sheets->appends(request()->all())"/>
+    <x-pager :pagination="$approving_self_check_sheets->appends(request()->all())"/>
   </div>

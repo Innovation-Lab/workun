@@ -23,7 +23,7 @@
             <div class="action"></div>
           </div>
           {{--  検索機能  --}}
-          <x-self-check-sheet.form-index />
+          <x-self-check-sheet.form-index action-type="master.self-check.index"/>
           <div class="p-tableBox__body">
             {{-- ページング(件数のみ) --}}
             <div class="p-pager">

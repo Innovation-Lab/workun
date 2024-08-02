@@ -35,39 +35,74 @@ class SelfCheckController extends Controller
      */
     public function index(Request $request): View
     {
-        $type = $request->get('type', 'answer');
         $term = $request->get('term', date('Y-m'));
-        switch ($type) {
-            case "answer":
-                $self_check_sheets = $this
-                    ->selfCheckSheetRepository
-                    ->answerSelfCheckSheets($this->auth_user, $term, true);
-                break;
-            case "rating":
-                $self_check_sheets = $this
-                    ->selfCheckSheetRepository
-                    ->ratingSelfCheckSheets($this->auth_user, $term, true);
-                break;
-            case "confirm":
-                $self_check_sheets = $this
-                    ->selfCheckSheetRepository
-                    ->approvingSelfCheckSheets($this->auth_user, $term, true);
-                break;
+        $answer_self_check_sheets = $this
+            ->selfCheckSheetRepository
+            ->answerSelfCheckSheets($this->auth_user, $term, true);
+        $rating_self_check_sheets = $this
+            ->selfCheckSheetRepository
+            ->ratingSelfCheckSheets($this->auth_user, $term, true);
+        $approving_self_check_sheets = $this
+            ->selfCheckSheetRepository
+            ->approvingSelfCheckSheets($this->auth_user, $term, true);
+
+        // 評価者または承認者のどちらも当てはまらない場合
+        $show_only_answer = false;
+        if (
+            $rating_self_check_sheets->isEmpty() &&
+            $approving_self_check_sheets->isEmpty()
+        ) {
+            $show_only_answer = true;
         }
+
         return view('self-check.index', [
             'auth_user' => $this->auth_user,
-            'type' => $type,
+            'type' => $request->get('type', 'answer'),
             'term' => $term,
-            'self_check_sheets' => $self_check_sheets,
+            'answer_self_check_sheets' => $answer_self_check_sheets,
+            'rating_self_check_sheets' => $rating_self_check_sheets,
+            'approving_self_check_sheets' => $approving_self_check_sheets,
+            'show_only_answer' => $show_only_answer,
         ]);
     }
 
     /**
      * Display all sheets page view.
      */
-    public function all()
+    public function all(Request $request): View
     {
-        return view('self-check.all');
+        $term = $request->get('term', date('Y-m'));
+        $answer_self_check_sheets = $this
+            ->selfCheckSheetRepository
+            ->answerSelfCheckSheets($this->auth_user, $term, true);
+        $rating_self_check_sheets = $this
+            ->selfCheckSheetRepository
+            ->ratingSelfCheckSheets($this->auth_user, $term, true);
+        $approving_self_check_sheets = $this
+            ->selfCheckSheetRepository
+            ->approvingSelfCheckSheets($this->auth_user, $term, true);
+
+        // 評価者または承認者のどちらも当てはまらない場合
+        $show_only_answer = false;
+        if (
+            $rating_self_check_sheets->isEmpty() &&
+            $approving_self_check_sheets->isEmpty()
+        ) {
+            $show_only_answer = true;
+        }
+        return view('self-check.all', [
+            'request' => $request,
+            'self_check_sheets' => $this
+                ->selfCheckSheetRepository
+                ->search($request)
+                ->organization($this->auth_user->organization_id)
+                ->paginate(),
+            'term' => $term,
+            'answer_self_check_sheets' => $answer_self_check_sheets,
+            'rating_self_check_sheets' => $rating_self_check_sheets,
+            'approving_self_check_sheets' => $approving_self_check_sheets,
+            'show_only_answer' => $show_only_answer,
+        ]);
     }
 
     /**

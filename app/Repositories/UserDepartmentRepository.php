@@ -18,7 +18,6 @@ class UserDepartmentRepository implements UserDepartmentRepositoryInterface
      */
     public function create(Department $department, Request $request): array
     {
-        dd($request->get('user_id'));
         $user_ids = $request->get('user_id');
         $user_departments = [];
         foreach ($user_ids as $user_id) {

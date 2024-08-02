@@ -15,7 +15,7 @@
                   詳細条件 : {{ $condition }}
                 </p>
                 <a
-                  href="{{ route('master.self-check.index') }}"
+                  href="{{ $back_action }}"
                   class="close"
                 >
                   <svg width="12" height="12"><use xlink:href="#close" /></svg>
@@ -29,5 +29,7 @@
       </div>
     </div>
   </div>
+  {{--  TODO: 一旦モーダルはmasterの方で共通化。後で別々にする可能性あり。  --}}
   @include('master.self-check.modal._search')
+  {{--  @include('self-check.components.modal._search')  --}}
 </form>

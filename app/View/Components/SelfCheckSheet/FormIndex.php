@@ -11,11 +11,14 @@ class FormIndex extends Component
 {
     public $period_list;
     public $condition;
+    public $back_action;
 
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(
+        public string $actionType
+    )
     {
         $user = Auth::user();
 
@@ -31,6 +34,8 @@ class FormIndex extends Component
         if ($conditions) {
             $this->condition = implode('、', $conditions);
         }
+
+        $this->back_action = route($actionType);
     }
 
     /**
