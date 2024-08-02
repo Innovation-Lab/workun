@@ -21,10 +21,15 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
      */
     public function search(Request $request): Builder
     {
-        return SelfCheckSheet::query()
+        $query = SelfCheckSheet::query()
             ->keyword($request->get('keyword'))
-            ->period($request->get('period_id'))
             ->orderBy('self_check_sheets.id', 'desc');
+
+        if ($request->get('period_id')) {
+            $query->where('self_check_sheets.period_id', $request->get('period_id'));
+        };
+
+        return $query;
     }
 
     /**
