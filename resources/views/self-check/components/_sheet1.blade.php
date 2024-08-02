@@ -61,38 +61,38 @@
           </tr>
         </thead>
         <tbody>
-          @foreach($answer_self_check_sheets as $answer_self_check_sheet)
+          @foreach($self_check_sheets as $self_check_sheet)
             <tr data-href="{{ route('self-check.answer', [
-              'selfCheckSheet' => $answer_self_check_sheet,
+              'selfCheckSheet' => $self_check_sheet,
               'term' => $term,
             ]) }}">
               <td>
                 <div class="item">
                   <x-self-check-sheet.answer-status
-                    :status="data_get($answer_self_check_sheet, 'rating.status', \App\Models\SelfCheckRating::STATUS_NOT_ANSWERED)"
+                    :status="data_get($self_check_sheet, 'rating.status', \App\Models\SelfCheckRating::STATUS_NOT_ANSWERED)"
                   />
                 </div>
               </td>
               <td>
                 <div class="item">
-                  {{ $answer_self_check_sheet->display_title }}
+                  {{ $self_check_sheet->display_title }}
                 </div>
               </td>
               <td>
                 <div class="item">
-                  {{ $answer_self_check_sheet->display_term }}
+                  {{ $self_check_sheet->display_term }}
                 </div>
               </td>
               <td>
                 <div class="item">
-                  {{ $answer_self_check_sheet->display_period }}
+                  {{ $self_check_sheet->display_period }}
                 </div>
               </td>
               <td>
                 <div class="item">
                   <p>
-                    <span>評価：{{ data_get($answer_self_check_sheet, 'rating.reviewer.full_name', '未登録') }}</span><br />
-                    <span>承認：{{ data_get($answer_self_check_sheet, 'rating.approver.full_name', '未登録') }}</span>
+                    <span>評価：{{ data_get($self_check_sheet, 'rating.reviewer.full_name', '未登録') }}</span><br />
+                    <span>承認：{{ data_get($self_check_sheet, 'rating.approver.full_name', '未登録') }}</span>
                   </p>
                 </div>
               </td>
@@ -102,5 +102,5 @@
       </table>
     </div>
     {{-- ページング --}}
-    <x-pager :pagination="$answer_self_check_sheets->appends(request()->all())"/>
+    <x-pager :pagination="$self_check_sheets->appends(request()->all())"/>
   </div>

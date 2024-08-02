@@ -28,19 +28,31 @@ class HomeController extends Controller
     public function index()
     {
         $term = date('Y-m');
+        $answer_self_check_sheets = $this
+            ->selfCheckSheetRepository
+            ->answerSelfCheckSheets($this->auth_user, $term, true);
+        $rating_self_check_sheets = $this
+            ->selfCheckSheetRepository
+            ->ratingSelfCheckSheets($this->auth_user, $term, true);
+        $approving_self_check_sheets = $this
+            ->selfCheckSheetRepository
+            ->approvingSelfCheckSheets($this->auth_user, $term, true);
+
+        // 評価者または承認者のどちらも当てはまらない場合
+        $show_only_answer = false;
+        if (
+            $rating_self_check_sheets->isEmpty() &&
+            $approving_self_check_sheets->isEmpty()
+        ) {
+            $show_only_answer = true;
+        }
+
         return view('home.index', [
-            // 実施対象
-            'answer_self_check_sheets' => $this
-                ->selfCheckSheetRepository
-                ->answerSelfCheckSheets($this->auth_user, $term),
-            // 評価入力
-            'rating_self_check_sheets' => $this
-                ->selfCheckSheetRepository
-                ->ratingSelfCheckSheets($this->auth_user, $term),
-            // 評価承認
-            'approving_self_check_sheets' => $this
-                ->selfCheckSheetRepository
-                ->approvingSelfCheckSheets($this->auth_user, $term),
+            'term' => $term,
+            'answer_self_check_sheets' => $answer_self_check_sheets,
+            'rating_self_check_sheets' => $rating_self_check_sheets,
+            'approving_self_check_sheets' => $approving_self_check_sheets,
+            'show_only_answer' => $show_only_answer,
         ]);
     }
 }
