@@ -146,11 +146,6 @@ class SelfCheckSheet extends Model
         return $query;
     }
 
-    protected function scopePeriod($query, $period)
-    {
-        return $query->where('self_check_sheets.period_id', $period);
-    }
-
     protected function scopeOnTerm($query, $term)
     {
         return $query
