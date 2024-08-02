@@ -18,7 +18,7 @@ class UserDepartmentRepository implements UserDepartmentRepositoryInterface
      */
     public function create(Department $department, Request $request): array
     {
-        $user_ids = $request->get('user_id');
+        $user_ids = $request->get('user_ids');
         $user_departments = [];
         foreach ($user_ids as $user_id) {
             $attributes = $this->makeAttributes($request);
@@ -54,7 +54,7 @@ class UserDepartmentRepository implements UserDepartmentRepositoryInterface
      */
     public function delete(Department $department, Request $request): void
     {
-        $user_ids = $request->get('user_id');
+        $user_ids = $request->get('user_ids');
         foreach ($user_ids as $user_id) {
             $user_department = UserDepartment::where([
                 'user_id' => $user_id,

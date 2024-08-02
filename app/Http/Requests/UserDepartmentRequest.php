@@ -23,10 +23,10 @@ class UserDepartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => [
-                'required',
-                'array',
-            ],
+            // 'user_id' => [
+            //     'required',
+            //     'array',
+            // ],
         ];
     }
 
@@ -38,7 +38,7 @@ class UserDepartmentRequest extends FormRequest
     public function messages()
     {
         return [
-            'user_id.required' => 'ユーザーを選択してください。',
+            // 'user_id.required' => 'ユーザーを選択してください。',
         ];
     }
 }

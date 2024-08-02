@@ -71,6 +71,9 @@ class UserDepartmentController extends Controller
         # 更新処理
         DB::beginTransaction();
         try {
+            if ($request->get('actionType') == 'register') {
+                $request->merge(['user_ids' => $this->_getAllUserIds($department, $request)]);
+            }
             $this->user_department_repository->create($department, $request);
         } catch (Exception $exception) {
             DB::rollBack();
@@ -120,6 +123,9 @@ class UserDepartmentController extends Controller
         # 削除処理
         DB::beginTransaction();
         try {
+            if($request->get('actionType') == 'delete') {
+                $request->merge(['user_ids' => $this->_getAllUserIds($department, $request)]);
+            }
             $this->user_department_repository->delete($department, $request);
         } catch (Exception $exception) {
             DB::rollBack();
