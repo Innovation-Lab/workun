@@ -3,8 +3,7 @@
 namespace App\View\Components;
 
 use Closure;
-use Carbon\Carbon;
-use App\Repositories\SelfCheckSheetRepositoryInterface;
+use App\Services\SelfCheckSheet\SelfCheckSheetService;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
@@ -20,30 +19,18 @@ class TodoTask extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public SelfCheckSheetRepositoryInterface $selfCheckSheetRepository,
+        public SelfCheckSheetService $self_check_sheet_service
     )
     {
-        $user = auth()->user();
-        $this->term = Carbon::now()->format('Y-m');
-
-        // それぞれの今月のタスクを取得
-        $this->answer_self_check_sheets = $this
-            ->selfCheckSheetRepository
-            ->answerSelfCheckSheets($user, $this->term);
-        $this->rating_self_check_sheets = $this
-            ->selfCheckSheetRepository
-            ->ratingSelfCheckSheets($user, $this->term);
-        $this->approving_self_check_sheets = $this
-            ->selfCheckSheetRepository
-            ->approvingSelfCheckSheets($user, $this->term);
-
-        $this->show_only_answer = false;
-        if (
-            $this->rating_self_check_sheets->isEmpty() &&
-            $this->approving_self_check_sheets->isEmpty()
-        ) {
-            $this->show_only_answer = true;
-        }
+        // 今月のタスクを取得
+        $sheets = $this
+            ->self_check_sheet_service
+            ->fetchSelfCheckSheetsForTodoTask(auth()->user());
+        $this->answer_self_check_sheets = $sheets['answer_self_check_sheets'];
+        $this->approving_self_check_sheets = $sheets['approving_self_check_sheets'];
+        $this->rating_self_check_sheets = $sheets['rating_self_check_sheets'];
+        $this->show_only_answer = $sheets['show_only_answer'];
+        $this->term = $sheets['term'];
     }
 
     /**
