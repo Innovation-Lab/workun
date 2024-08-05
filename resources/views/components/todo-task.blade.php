@@ -5,7 +5,8 @@
       <p class="title">TODO</p>
       <p class="desc">以下のタスクを完了させましょう</p>
     </div>
-    <?php
+    {{-- TODO: セルフチェックシート以外のページで使用するかわからない為一旦コメントアウト --}}
+    {{--  <?php
       $url = $_SERVER['REQUEST_URI'];
     ?>
     @if(!strstr($url,'self-check'))
@@ -17,7 +18,7 @@
           全ての人事務を評価
         </a>
       </div>
-    @endif
+    @endif  --}}
   </div>
   <div class="p-todo__body">
     @foreach ([

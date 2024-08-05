@@ -26,6 +26,16 @@
                   'path' => route('self-check.index'),
                   'phase' => '',
                 ],
+                [
+                  'label' => '定期評価',
+                  'path' => route('personal-assessment.index'),
+                  'phase' => '',
+                ],
+                [
+                  'label' => '1 on 1',
+                  'path' => route('performance-review.index'),
+                  'phase' => '',
+                ],
               ],
             ]
           ],
@@ -42,6 +52,16 @@
                   'phase' => '',
                 ],
                 [
+                  'label' => '定期評価',
+                  'path' => route('master.personal-assessment.index'),
+                  'phase' => '',
+                ],
+                [
+                  'label' => '1 on 1',
+                  'path' => route('master.performance-review.index'),
+                  'phase' => '',
+                ],
+                [
                   'label' => '組織作成',
                   'path' => route('master.organization.index'),
                   'phase' => '',
@@ -54,6 +74,11 @@
                 [
                   'label' => '評価期間設定',
                   'path' => route('master.term.index'),
+                  'phase' => '',
+                ],
+                [
+                  'label' => '評価点設定',
+                  'path' => route('master.assessment-point.index'),
                   'phase' => '',
                 ],
               ],

@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Master\AssessmentPointController;
 use App\Http\Controllers\Master\Organization\OrganizationController;
+use App\Http\Controllers\Master\OrganizationAssessmentController;
+use App\Http\Controllers\Master\PerformanceReviewController;
+use App\Http\Controllers\Master\PersonalAssessmentController;
 use App\Http\Controllers\Master\SelfCheckController;
 use App\Http\Controllers\Master\TermController;
 use App\Http\Controllers\Master\UserController;
@@ -25,6 +29,48 @@ Route::group([
     Route::get('/_loadSecond', [SelfCheckController::class, '_loadSecond'])->name('_loadSecond');
     Route::get('/_loadThird', [SelfCheckController::class, '_loadThird'])->name('_loadThird');
     Route::get('/_loadUsers', [SelfCheckController::class, '_loadUsers'])->name('_loadUsers');
+});
+
+// 定期評価(個人)
+Route::group([
+    'prefix' => 'personal-assessment',
+    'as' => 'personal-assessment.',
+], function () {
+    Route::get('/', [PersonalAssessmentController::class, 'index'])->name('index');
+    Route::get('/check', [PersonalAssessmentController::class, 'check'])->name('check');
+    Route::get('/add', [PersonalAssessmentController::class, 'add'])->name('add');
+    Route::post('/add', [PersonalAssessmentController::class, 'store']);
+    Route::get('/edit', [PersonalAssessmentController::class, 'edit'])->name('edit');
+    Route::post('/edit', [PersonalAssessmentController::class, 'update']);
+    Route::delete('/edit', [PersonalAssessmentController::class, 'destroy']);
+    Route::get('/copy', [PersonalAssessmentController::class, 'copy'])->name('copy');
+});
+// 定期評価(組織)
+Route::group([
+    'prefix' => 'organization-assessment',
+    'as' => 'organization-assessment.',
+], function () {
+    Route::get('/', [OrganizationAssessmentController::class, 'index'])->name('index');
+    Route::get('/add', [OrganizationAssessmentController::class, 'add'])->name('add');
+    Route::post('/add', [OrganizationAssessmentController::class, 'store']);
+    Route::get('/edit', [OrganizationAssessmentController::class, 'edit'])->name('edit');
+    Route::post('/edit', [OrganizationAssessmentController::class, 'update']);
+    Route::delete('/edit', [OrganizationAssessmentController::class, 'destroy']);
+    Route::get('/copy', [OrganizationAssessmentController::class, 'copy'])->name('copy');
+});
+
+// 1 on 1
+Route::group([
+    'prefix' => 'performance-review',
+    'as' => 'performance-review.',
+], function () {
+    Route::get('/', [PerformanceReviewController::class, 'index'])->name('index');
+    Route::get('/add', [PerformanceReviewController::class, 'add'])->name('add');
+    Route::post('/add', [PerformanceReviewController::class, 'store']);
+    Route::get('/edit', [PerformanceReviewController::class, 'edit'])->name('edit');
+    Route::post('/edit', [PerformanceReviewController::class, 'update']);
+    Route::delete('/edit', [PerformanceReviewController::class, 'destroy']);
+    Route::get('/copy', [PerformanceReviewController::class, 'copy'])->name('copy');
 });
 
 // 組織
@@ -53,6 +99,19 @@ Route::group([
     Route::get('/edit/{period}', [TermController::class, 'edit'])->name('edit');
     Route::post('/edit/{period}', [TermController::class, 'update']);
     Route::delete('/edit/{period}', [TermController::class, 'destroy']);
+});
+
+// 評価点
+Route::group([
+    'prefix' => 'assessment-point',
+    'as' => 'assessment-point.',
+], function () {
+    Route::get('/', [AssessmentPointController::class, 'index'])->name('index');
+    Route::get('/add', [AssessmentPointController::class, 'add'])->name('add');
+    Route::post('/add', [AssessmentPointController::class, 'store']);
+    Route::get('/edit', [AssessmentPointController::class, 'edit'])->name('edit');
+    Route::post('/edit', [AssessmentPointController::class, 'update']);
+    Route::delete('/edit', [AssessmentPointController::class, 'destroy']);
 });
 
 // 顧客

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PerformanceReviewController;
+use App\Http\Controllers\PersonalAssessmentController;
 use App\Http\Controllers\SelfCheckController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,31 @@ Route::middleware('auth:web')->group(function ()
         Route::get('/result', [SelfCheckController::class, 'result'])->name('result');
         Route::get('/result/all', [SelfCheckController::class, 'resultall'])->name('resultall');
     });
+
+    // 定期評価
+    Route::group([
+        'prefix' => 'personal-assessment',
+        'as' => 'personal-assessment.',
+    ], function () {
+        Route::get('/', [PersonalAssessmentController::class, 'index'])->name('index');
+        Route::get('/check', [PersonalAssessmentController::class, 'check'])->name('check');
+        Route::get('/answer', [PersonalAssessmentController::class, 'answer'])->name('answer');
+        Route::get('/answers', [PersonalAssessmentController::class, 'answers'])->name('answers');
+        Route::get('/approvals', [PersonalAssessmentController::class, 'approvals'])->name('approvals');
+    });
+
+    // 1 on 1
+    Route::group([
+        'prefix' => 'performance-review',
+        'as' => 'performance-review.',
+    ], function () {
+        Route::get('/', [PerformanceReviewController::class, 'index'])->name('index');
+        Route::get('/all', [PerformanceReviewController::class, 'all'])->name('all');
+        Route::get('/answer', [PerformanceReviewController::class, 'answer'])->name('answer');
+        Route::get('/answers', [PerformanceReviewController::class, 'answers'])->name('answers');
+        Route::get('/result/all', [PerformanceReviewController::class, 'resultAll'])->name('resultAll');
+    });
+
 
     // マスター画面
     Route::group([
