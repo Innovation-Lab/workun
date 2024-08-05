@@ -25,7 +25,7 @@
           </div>
 
           {{--  検索機能  --}}
-          <x-users.form-index/>
+          <x-users.form-index action-type="master.member.index"/>
 
           <div class="p-tableBox__body">
             {{-- ページング(件数のみ) --}}
@@ -104,44 +104,83 @@
                       <td><div class="item">
                           <div class="p-user">
                             <div class="p-user__image c-noImage">
-                              <img class="c-image c-image--round" src="{{ $user->avatar_url }}" />
+                              <img
+                                class="c-image c-image--round"
+                                src="{{ $user->avatar_url }}"
+                              />
                             </div>
                             <div class="p-user__text">
-                              <div class="name">{{ $user->full_name }}</div>
+                              <div class="name">
+                                {{ $user->full_name }}
+                              </div>
                             </div>
                           </div>
                         </div></td>
                       <!-- 部署 -->
-                      <td><div class="item">{{ $user->department_label }}</div></td>
+                      <td>
+                        <div class="item">
+                          {{ $user->department_label }}
+                        </div>
+                      </td>
                       <!-- 役職 -->
-                      <td><div class="item">{{ $user->position_label }}</div></td>
+                      <td>
+                        <div class="item">
+                          {{ $user->position_label }}
+                        </div>
+                      </td>
                       <!-- 等級 -->
-                      <td><div class="item">{{ $user->grade_label }}</div></td>
+                      <td>
+                        <div class="item">
+                          {{ $user->grade_label }}
+                        </div>
+                      </td>
                       <!-- 号俸 -->
-                      <td><div class="item">{{ $user->salary_label }}</div></td>
+                      <td>
+                        <div class="item">
+                          {{ $user->salary_label }}
+                        </div>
+                      </td>
                       <!-- 雇用形態 -->
-                      <td><div class="item">{{ $user->employment_label }}</div></td>
+                      <td>
+                        <div class="item">
+                          {{ $user->employment_label }}
+                        </div>
+                      </td>
                       <!-- 入社日 -->
-                      <td class="u-tac"><div class="item">{{ $user->display_joined }}</div></td>
+                      <td class="u-tac">
+                        <div class="item">
+                          {{ $user->display_joined }}
+                        </div>
+                      </td>
                       <!-- ログインID -->
-                      <td><div class="item">{{ $user->login_code }}</div></td>
+                      <td>
+                        <div class="item">
+                          {{ $user->login_code }}
+                        </div>
+                      </td>
                       <!-- 評価者/承認者 -->
-                      <td><div class="item item--step">
-                        <p class="name">
-                          評価 :
-                          <span>
-                            {{ $user->reviewers_label }} 
-                          </span>
-                        </p>
-                        <p class="name">
-                          承認 :
-                          <span>
-                            {{ $user->approvers_label }}
-                          </span>
-                        </p>
-                      </div></td>
+                      <td>
+                        <div class="item item--step">
+                          <p class="name">
+                            評価 :
+                            <span>
+                              {{ $user->reviewers_label }}
+                            </span>
+                          </p>
+                          <p class="name">
+                            承認 :
+                            <span>
+                              {{ $user->approvers_label }}
+                            </span>
+                          </p>
+                        </div>
+                      </td>
                       <!-- 作成日 -->
-                      <td class="u-tac"><div class="item">{{ $user->display_created }}</div></td>
+                      <td class="u-tac">
+                        <div class="item">
+                          {{ $user->display_created }}
+                        </div>
+                      </td>
                     </tr>
                   @endforeach
                 </tbody>

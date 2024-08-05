@@ -21,9 +21,12 @@
                 @if(request('employment_id')) / {{ $employments->find(request('employment_id'))->name }} @endif
                 @if(request('unregistered_reviewer_and_approver')) / 表示条件あり                          @endif
             </p>
-            <button class="close">
+            <a
+              href="{{ $back_action }}"
+              class="close"
+            >
               <svg width="12" height="12"><use xlink:href="#close" /></svg>
-            </button>
+            </a>
           </div>
           <p class="c-button" data-remodal-target="modal_search">詳細検索</p>
         </div>

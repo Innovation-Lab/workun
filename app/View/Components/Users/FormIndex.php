@@ -17,11 +17,14 @@ class FormIndex extends Component
     public $positions;
     public $grades;
     public $employments;
+    public $back_action;
 
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(
+        public string $actionType,
+    )
     {
         $user = Auth::user();
         $this->departments = Department::query()
@@ -44,6 +47,8 @@ class FormIndex extends Component
             ->organization($user->organization_id)
             ->orderBy('seq', 'asc')
             ->get();
+
+        $this->back_action = route($this->actionType);
     }
 
     /**
