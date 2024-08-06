@@ -21,7 +21,7 @@
       @endif
     </span>
     <p class="title">
-      {{ $selfCheckSheet->display_title }}
+      {{ $selfCheckSheet->display_task_title }}
     </p>
   </div>
   <p class="name">
