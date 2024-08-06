@@ -411,7 +411,7 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
     {
         $start = data_get($this, 'period.start');
         $end = data_get($this, 'period.end');
-        $self_check_sheet->display_title = "セルフチェック - " . data_get($self_check_sheet, 'period.name') . " | " . $self_check_sheet->title;
+        $self_check_sheet->display_task_title = data_get($self_check_sheet, 'period.name') . " | " . $self_check_sheet->title;
         $self_check_sheet->display_period_for_task = date('Y.m.d', strtotime("{$start}-01")) . " - " . date('Y.m.d', strtotime("{$end}-01"));
         $self_check_sheet->display_status = data_get(
             SelfCheckRating::STATUS_LIST,
