@@ -18,7 +18,12 @@ class UserRepository implements UserRepositoryInterface
      */
     public function search(Request $request): Builder
     {
-        $query = User::query();
+        $query = User::query()
+            ->select('users.*')
+            ->leftJoin('user_departments', 'user_departments.user_id', 'users.id')
+            ->leftJoin('approvers', 'approvers.user_id', 'users.id')
+            ->leftJoin('reviewers', 'reviewers.user_id', 'users.id')
+            ->groupBy('users.id');
         $keyword = $request->get('keyword');
 
         if ($keyword) {
@@ -62,9 +67,7 @@ class UserRepository implements UserRepositoryInterface
         }
 
         if ($request->get('department_id')) {
-            $query->whereHas('departments', function ($q) use ($request) {
-                $q->where('departments.id', $request->get('department_id'));
-            });
+            $query->where('user_departments.department_id', $request->get('department_id'));
         }
 
         if ($request->get('position_id')) {
@@ -80,8 +83,9 @@ class UserRepository implements UserRepositoryInterface
         }
 
         if ($request->get('unregistered_reviewer_and_approver')) {
-            $query->whereDoesntHave('approvers')
-                ->whereDoesntHave('reviewers');
+            $query
+                ->whereNull('approvers.id')
+                ->whereNull('reviewers.id');
         }
 
         return $query;
