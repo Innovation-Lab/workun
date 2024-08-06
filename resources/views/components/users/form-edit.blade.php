@@ -62,7 +62,7 @@
             $reviewers->pluck('manager_user_id')
           ) as $reviewer
         )
-          {{--  承認者一覧  --}}
+          {{--  評価者一覧  --}}
           <x-users.form-selected-reviewer :id="$reviewer" />
         @endforeach
         <div

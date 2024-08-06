@@ -1,8 +1,8 @@
 <div class="remodal p-modal" data-remodal-id="modal_reviewer" data-remodal-options="hashTracking: false, closeOnOutsideClick: false">
   <button data-remodal-action="close" class="remodal-close p-modal__close">閉じる</button>
   <div class="p-modal__head">
-    <p class="title">人事業務の承認者の選択</p>
-    <p class="description">人事業務の承認者を設定してください。</p>
+    <p class="title">人事業務の評価者の選択</p>
+    <p class="description">人事業務の評価者を設定してください。</p>
   </div>
   <div class="p-modal__middle p-formBlock__form list">
     <div class="p-inputField">
@@ -44,13 +44,13 @@
   </div>
   <div class="p-modal__body">
     <div id="reviewer-list" class="p-table c-scroll">
-      {{--  ここに承認者一覧が表示される。  --}}
+      {{--  ここに評価者一覧が表示される。  --}}
     </div>
     <div class="p-formBlock__action">
       <button data-remodal-action="close" class="c-button c-button--cancel u-w120">キャンセル</button>
       <button
         onclick="showReviewers()"
-        class="c-button c-button--brandPrimary u-w160">承認者を登録</button>
+        class="c-button c-button--brandPrimary u-w160">評価者を登録</button>
     </div>
   </div>
 </div>

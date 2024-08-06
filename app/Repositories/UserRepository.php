@@ -62,8 +62,9 @@ class UserRepository implements UserRepositoryInterface
         }
 
         if ($request->get('department_id')) {
-            $query->join('user_departments', 'users.id', '=', 'user_departments.user_id')
-                ->where('user_departments.department_id', $request->get('department_id'));
+            $query->whereHas('departments', function ($q) use ($request) {
+                $q->where('departments.id', $request->get('department_id'));
+            });
         }
 
         if ($request->get('position_id')) {
