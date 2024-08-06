@@ -156,7 +156,7 @@
       <div class="p-formBlock__action center u-align--horizontal">
         <button class="c-button c-button--brandAccent c-button--md u-w240">
           @if(!$selfCheckSheet->id)
-            セルフチェックシートを作成
+            セルフチェックシートを追加
           @else
             セルフチェックシートを更新
           @endif

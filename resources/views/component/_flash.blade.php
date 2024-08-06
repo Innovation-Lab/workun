@@ -90,11 +90,20 @@
         </div>
     </div>
     <?php }};?>
-    @if (session('flash_message'))
+    @if (session('success'))
         <div class="flash_success">
             <article class="link_float">
                 <div class="data_flash">
-                    <p>{{ session('flash_message') }}</p>
+                    <p>{{ session('success') }}</p>
+                </div>
+            </article>
+        </div>
+    @endif
+    @if (session('alert'))
+        <div class="flash_error">
+            <article class="link_float">
+                <div class="data_flash">
+                    <p>{{ session('alert') }}</p>
                 </div>
             </article>
         </div>

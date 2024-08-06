@@ -13,6 +13,7 @@ class SelfCheckController extends BaseController
 {
     protected string $directory = "master/self-check";
     protected string $model_name = "selfCheckSheet";
+    protected string $entity_name = "セルフチェックシート";
 
     public function __construct(
         public UserRepositoryInterface $user_repository
