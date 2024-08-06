@@ -6,7 +6,7 @@
     let positionId = $('#approver_position_id').val();
 
     $.ajax({
-      url:'{{ route('master.member._lodeUsers',  ['type' => 'authorizer']) }}',
+      url:'{{ route('master.member._lodeUsers',  ['type' => 'approver']) }}',
       type:'GET',
       data:{
         'department_id': departmentId,
@@ -62,7 +62,7 @@
     let positionId = $('#reviewer_position_id').val();
 
     $.ajax({
-      url:'{{ route('master.member._lodeUsers',  ['type' => 'rater']) }}',
+      url:'{{ route('master.member._lodeUsers',  ['type' => 'reviewer']) }}',
       type:'GET',
       data:{
         'department_id': departmentId,
