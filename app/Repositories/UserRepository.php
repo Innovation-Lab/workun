@@ -49,8 +49,8 @@ class UserRepository implements UserRepositoryInterface
 
         if ($request->get('name')) {
             $query->where(function ($q) use ($request) {
-                $q->where('users.sei', $request->get('name'))
-                    ->orWhere('users.mei', $request->get('name'));
+                $q->where('users.sei', 'LIKE', "%{$request->get('name')}%")
+                    ->orWhere('users.mei', 'LIKE', "%{$request->get('name')}%");
             });
         }
 
@@ -58,7 +58,7 @@ class UserRepository implements UserRepositoryInterface
             $query->where('users.email', $request->get('email'));
         }
 
-        if ($request->get('number')) {
+        if ($request->filled('number')) {
             $query->where('users.number', $request->get('number'));
         }
 
