@@ -92,14 +92,6 @@ class SelfCheckRating extends Model
         return $this->approved_at ? date('Y/m/d', strtotime($this->approved_at)) : null;
     }
 
-    public function getStatusCssAttribute()
-    {
-        if($this->status == self::STATUS_RATING || $this->status == self::STATUS_APPROVING) {
-            return 'assessment';
-        }
-        return 'alert';
-    }
-
     protected function scopeOnTerm($query, $term)
     {
         return $query->where('self_check_ratings.target', $term);

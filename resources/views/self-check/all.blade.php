@@ -2,7 +2,8 @@
 @section('title', 'セルフチェック-人事業務')
 @section('content')
   <div class="l-index__split">
-    @include('component._todoTask')
+    {{--  TODOリスト  --}}
+    <x-todo-task />
     <div class="p-page">
       <div class="p-page__head u-align u-gap40">
         <h1 class="p-page__head--title">セルフチェック</h1>
@@ -12,7 +13,7 @@
         </div>
       </div>
       <div class="p-page__body">
-        
+
         <div class="p-tableBox">
           <div class="p-tableBox__head">
             <div class="mainText">
@@ -24,7 +25,7 @@
           <div class="p-tableBox__body">
             {{-- テーブル一覧 --}}
             <div class="p-table c-scroll">
-              <?php 
+              <?php
                 $tableHead = [
                   [
                     'title' => 'タイトル',

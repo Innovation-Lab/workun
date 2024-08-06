@@ -21,10 +21,15 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
      */
     public function search(Request $request): Builder
     {
-        return SelfCheckSheet::query()
+        $query = SelfCheckSheet::query()
             ->keyword($request->get('keyword'))
-            ->period($request->get('period_id'))
             ->orderBy('self_check_sheets.id', 'desc');
+
+        if ($request->get('period_id')) {
+            $query->where('self_check_sheets.period_id', $request->get('period_id'));
+        };
+
+        return $query;
     }
 
     /**
@@ -317,11 +322,13 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
         string $term
     ): SelfCheckSheet
     {
+        $self_check_sheet->rating = $self_check_sheet->self_check_rating($user, $term);
         // 期間表示
         $start = date('Y-m-d', strtotime("{$term}-01"));
         $check_days = $self_check_sheet->check_days - 1;
         $self_check_sheet->display_term = date('Y/m/d', strtotime("{$start} + {$check_days} days"));
         $self_check_sheet->action_type = 'answer';
+        $this->setTaskAttributes($self_check_sheet, $term);
         return $self_check_sheet;
     }
 
@@ -338,6 +345,7 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
         $rating_days = $self_check_sheet->rating_days - 1;
         $self_check_sheet->display_term = date('Y/m/d', strtotime("{$start} + {$rating_days} days"));
         $self_check_sheet->action_type = 'answers';
+        $this->setTaskAttributes($self_check_sheet, $term);
 
         // 対象数
         $self_check_sheet->all_target_count = $self_check_sheet
@@ -374,6 +382,7 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
         $approval_days = $self_check_sheet->approval_days - 1;
         $self_check_sheet->display_term = date('Y/m/d', strtotime("{$start} + {$approval_days} days"));
         $self_check_sheet->action_type = 'approvals';
+        $this->setTaskAttributes($self_check_sheet, $term);
 
         // 対象数
         $self_check_sheet->all_target_count = $self_check_sheet
@@ -395,24 +404,38 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
         return $self_check_sheet;
     }
 
-    private function setTaskAttributes(SelfCheckSheet $self_check_sheet, $user, string $term): SelfCheckSheet
+    private function setTaskAttributes(
+        SelfCheckSheet $self_check_sheet,
+        string $term
+    ): SelfCheckSheet
     {
-        $self_check_sheet->display_title = "セルフチェック - " . date('Y年m月', strtotime("{$term}-01"));
-        $self_check_sheet->display_sub_title = data_get($self_check_sheet, 'period.name') . " | " . $self_check_sheet->title;
-        $self_check_sheet->display_status = data_get(SelfCheckRating::STATUS_LIST, $self_check_sheet->rating_status);
-        // クラス
-        $list_class = null;
-        $status_class = null;
-        switch ($self_check_sheet->rating_status) {
-            case SelfCheckRating::STATUS_NOT_ANSWERED:
-            case SelfCheckRating::STATUS_ANSWERING:
-                $list_class = "alert";
-                $status_class = "waiting";
-                break;
-            case SelfCheckRating::STATUS_RATING:
-                $list_class = "assessment";
-                $status_class = "assessment";
-                break;
+        $start = data_get($this, 'period.start');
+        $end = data_get($this, 'period.end');
+        $self_check_sheet->display_title = "セルフチェック - " . data_get($self_check_sheet, 'period.name') . " | " . $self_check_sheet->title;
+        $self_check_sheet->display_period_for_task = date('Y.m.d', strtotime("{$start}-01")) . " - " . date('Y.m.d', strtotime("{$end}-01"));
+        $self_check_sheet->display_status = data_get(
+            SelfCheckRating::STATUS_LIST,
+            $self_check_sheet->rating->status ?? SelfCheckRating::STATUS_NOT_ANSWERED
+        );
+
+        $self_check_sheet->sub_title = date('Y年m月', strtotime($term));
+        // クラスの初期値
+        $list_class = "alert";
+        $status_class = "waiting";
+        // クラスの設定
+        if ($self_check_sheet->rating) {
+            $status = $self_check_sheet->rating->status;
+            $status_class_map = [
+                SelfCheckRating::STATUS_NOT_ANSWERED => ["alert", "waiting"],
+                SelfCheckRating::STATUS_ANSWERING => ["alert", "waiting"],
+                SelfCheckRating::STATUS_RATING => ["assessment", "assessment"],
+                SelfCheckRating::STATUS_APPROVING => ["assessment", "assessment"],
+                SelfCheckRating::STATUS_APPROVED => ["", "paused"],
+            ];
+
+            if (isset($status_class_map[$status])) {
+                [$list_class, $status_class] = $status_class_map[$status];
+            }
         }
         $self_check_sheet->list_class = $list_class;
         $self_check_sheet->status_class = $status_class;
