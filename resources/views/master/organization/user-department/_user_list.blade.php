@@ -72,7 +72,7 @@
                     id="check_{{ $user->id }}"
                     type="checkbox"
                     class="check"
-                    name="user_id[]"
+                    name="user_ids[]"
                     value="{{ $user->id }}"
                   />
                 </label>
