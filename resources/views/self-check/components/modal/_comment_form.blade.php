@@ -3,6 +3,7 @@
   data-remodal-id="modal_commentForm_{{ $self_check_sheet_item->id }}"
   data-remodal-options="hashTracking: false, closeOnOutsideClick: false, appendTo: #rating_form"
 >
+  <button data-remodal-action="close" class="remodal-close p-modal__close">閉じる</button>
   <div class="p-modal__head">
     <p class="title">コメント</p>
   </div>
