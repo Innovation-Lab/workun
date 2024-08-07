@@ -70,6 +70,18 @@ class SelfCheckSheet extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function getStickyClass(
+        $baseClass,
+        $firstTitle,
+        $secondTitle
+    )
+    {
+        $offset = 0;
+        if (is_null($firstTitle)) $offset++;
+        if (is_null($secondTitle)) $offset++;
+        return "sticky_" . $baseClass - $offset;
+    }
+
     protected function getDisplayTitleAttribute()
     {
         return data_get($this, 'period.name') . " | " . $this->title;

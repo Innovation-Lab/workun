@@ -684,5 +684,34 @@
         }
       }
     }
+    &:has(table thead th.p-table__check--head[colspan="1"]){
+      .p-table__check--head{
+        width: 400px;
+      }
+      thead{
+        .sticky_4{
+          left: 400px;
+        }
+      }
+      tbody {
+        .sticky_2{
+          left: 400px;
+        }
+      } 
+    }
+    &:has(table thead th.p-table__check--head[colspan="2"]){
+      tbody {
+        .sticky_2{
+          left: 270px;
+        }
+        .sticky_3{
+          left: 540px;
+        }
+      } 
+    }
   }
+}
+
+.remodal-overlay{
+  cursor: pointer;
 }

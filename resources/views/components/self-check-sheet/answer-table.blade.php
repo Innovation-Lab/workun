@@ -4,7 +4,11 @@
 >
   <thead>
     <tr>
-      <th colspan="3" rowspan="" class="sticky_1 p-table__check--head">
+      <th
+        colspan="{{ $selfCheckSheet->hierarchy ?? 3 }}"
+        rowspan=""
+        class="sticky_1 p-table__check--head"
+      >
         <div class="u-pd16">セルフチェック項目</div>
       </th>
       @if($type === "answer")
@@ -135,7 +139,10 @@
             @if($loop->parent->index < 1 && $loop->index < 1)
               <th
                 rowspan="{{ $first_self_check_sheet_item->rowspan }}"
-                class="u-w100 sticky_1"
+                class="
+                  u-w100
+                  {{ $selfCheckSheet->getStickyClass(1, $first_self_check_sheet_item->title, null) }}
+                "
                 @if($selfCheckSheet->hierarchy < \App\Models\SelfCheckSheet::HIERARCHY_TRIPLE)
                   style="display: none;"
                 @endif
@@ -146,7 +153,10 @@
             @if($loop->index < 1)
               <th
                 rowspan="{{ $second_self_check_sheet_item->rowspan }}"
-                class="u-w140 sticky_2"
+                class="
+                  u-w140
+                  {{ $selfCheckSheet->getStickyClass(2, $first_self_check_sheet_item->title, $second_self_check_sheet_item->title) }}
+                "
                 @if($selfCheckSheet->hierarchy < \App\Models\SelfCheckSheet::HIERARCHY_TWICE)
                   style="display: none;"
                 @endif
@@ -154,13 +164,24 @@
                 {{ $second_self_check_sheet_item->title }}
               </th>
             @endif
-            <th class="u-w300 sticky_3">
+            <th
+              class="
+                u-w300
+                {{ $selfCheckSheet->getStickyClass(3, $first_self_check_sheet_item->title, $second_self_check_sheet_item->title) }}
+              "
+            >
               <p class="c-txt__xs">
                 {{ $third_self_check_sheet_item->title }}
               </p>
             </th>
             @if($type === "answer")
-              <th class="u-w200 sticky_4 c-border_r2">
+              <th
+                class="
+                  u-w200
+                  {{ $selfCheckSheet->getStickyClass(4, $first_self_check_sheet_item->title, $second_self_check_sheet_item->title) }}
+                  c-border_r2
+                "
+              >
                 @if($third_self_check_sheet_item->movie_url)
                   <a
                     class="c-button--underline"
