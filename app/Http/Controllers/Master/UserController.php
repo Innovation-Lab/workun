@@ -9,6 +9,7 @@ class UserController extends BaseController
 {
     protected string $directory = "master/member";
     protected string $model_name = "user";
+    protected string $redirect_after_edit = "master/member.index";
     protected string $entity_name = "従業員情報";
 
     public function _lodeUsers(Request $request)
