@@ -12,4 +12,5 @@ class SalaryController extends BaseController
     protected string $redirect_after_edit = "master/organization.index";
     protected string $redirect_after_delete = "master/organization.index";
     protected string $model_name = "salary";
+    protected string $entity_name = "号俸";
 }

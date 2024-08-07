@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SelfCheckRating;
 use App\Models\SelfCheckSheet;
 use App\Repositories\SelfCheckSheetRepositoryInterface;
+use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;

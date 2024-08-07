@@ -12,4 +12,5 @@ class EmploymentController extends BaseController
     protected string $redirect_after_edit = "master/organization.index";
     protected string $redirect_after_delete = "master/organization.index";
     protected string $model_name = "employment";
+    protected string $entity_name = "雇用形態";
 }

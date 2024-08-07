@@ -17,6 +17,7 @@ class BaseController extends Controller
 {
     protected string $directory = "";
     protected string $model_name = "";
+    protected string $entity_name = "";
     protected $model;
     protected $repository;
     protected Authenticatable $auth_user;
@@ -118,7 +119,7 @@ class BaseController extends Controller
 
         return redirect()
             ->route($route, $entity)
-            ->with('success', '更新しました。');
+            ->with('success', $this->entity_name . 'を追加しました。');
     }
 
     /**
@@ -177,7 +178,7 @@ class BaseController extends Controller
 
         return redirect()
             ->route($route, $entity)
-            ->with('success', '更新しました。');
+            ->with('success', $this->entity_name . 'を更新しました。');
     }
 
     /**
@@ -207,7 +208,7 @@ class BaseController extends Controller
 
         return redirect()
             ->route($route)
-            ->with('success', '削除しました。');
+            ->with('success', $this->entity_name . 'を削除しました。');
     }
 
     private function getEntity($id)
