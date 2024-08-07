@@ -64,7 +64,7 @@ class User extends Authenticatable
     const ROLE_LIST = [
         self::ROLE_GENERAL => '一般',
         self::ROLE_MANAGER => 'マネージャー',
-        self::ROLE_ADMIN => '管理',
+        self::ROLE_ADMIN => '管理者',
     ];
 
     public function organization(): BelongsTo
