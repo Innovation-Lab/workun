@@ -85,6 +85,7 @@ class BaseController extends Controller
         # バリデーション
         $modelClass = ucfirst($this->model_name);
         $requestClass = new ("\App\Http\Requests\\{$modelClass}Request");
+        $requestClass->merge($request->all());
         $validator = Validator::make(
             $request->all(),
             $requestClass->rules(),
@@ -147,6 +148,7 @@ class BaseController extends Controller
         # バリデーション
         $modelClass = ucfirst($this->model_name);
         $requestClass = new ("\App\Http\Requests\\{$modelClass}Request");
+        $requestClass->merge($request->all());
         $validator = Validator::make(
                 $request->all(),
                 $requestClass->rules(),

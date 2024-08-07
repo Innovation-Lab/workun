@@ -37,6 +37,14 @@ class SelfCheckSheetRequest extends FormRequest
             'self_check_sheet_items.*.self_check_sheet_items.*.self_check_sheet_items.*.movie_url' => 'max:200',
         ];
 
+        $hierarchy = $this->input('hierarchy');
+        if ($hierarchy == 1) {
+            unset($rules['self_check_sheet_items.*.title']);
+            unset($rules['self_check_sheet_items.*.self_check_sheet_items.*.title']);
+        } elseif ($hierarchy == 2) {
+            unset($rules['self_check_sheet_items.*.title']);
+        }
+
         return $rules;
     }
 
@@ -55,9 +63,9 @@ class SelfCheckSheetRequest extends FormRequest
             'check_days' => '入力期限',
             'rating_days' => '評価期限',
             'approval_days' => '承認期限',
-            'self_check_sheet_items.*.title' => 'タイトル',
-            'self_check_sheet_items.*.self_check_sheet_items.*.title' => 'タイトル',
-            'self_check_sheet_items.*.self_check_sheet_items.*.self_check_sheet_items.*.title' => 'タイトル',
+            'self_check_sheet_items.*.title' => '項目1のタイトル',
+            'self_check_sheet_items.*.self_check_sheet_items.*.title' => '階層2のタイトル',
+            'self_check_sheet_items.*.self_check_sheet_items.*.self_check_sheet_items.*.title' => '階層3のタイトル',
             'self_check_sheet_items.*.self_check_sheet_items.*.self_check_sheet_items.*.movie_title' => '動画タイトル',
             'self_check_sheet_items.*.self_check_sheet_items.*.self_check_sheet_items.*.movie_url' => '動画URL',
         ];
