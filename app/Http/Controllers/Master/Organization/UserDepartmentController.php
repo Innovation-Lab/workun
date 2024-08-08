@@ -55,7 +55,7 @@ class UserDepartmentController extends Controller
             'users' => $this->user_repository
                 ->search($request)
                 ->organization($this->auth_user->organization_id)
-                ->whereNotIn('id', $existingUserIds) // 既に登録されているユーザーを除外
+                ->whereNotIn('users.id', $existingUserIds) // 既に登録されているユーザーを除外
                 ->paginate(),
         ]);
     }
@@ -108,7 +108,7 @@ class UserDepartmentController extends Controller
             'users' => $this->user_repository
                 ->search($request)
                 ->organization($this->auth_user->organization_id)
-                ->whereIn('id', $existingUserIds) // 既に登録されているユーザーを表示
+                ->whereIn('users.id', $existingUserIds) // 既に登録されているユーザーを表示
                 ->paginate(),
         ]);
     }
