@@ -73,12 +73,14 @@ class SelfCheckSheet extends Model
     public function getStickyClass(
         $baseClass,
         $firstTitle,
-        $secondTitle
+        $secondTitle = null
     )
     {
         $offset = 0;
-        if (is_null($firstTitle)) $offset++;
-        if (is_null($secondTitle)) $offset++;
+        if($this->hierarchy !== self::HIERARCHY_TRIPLE) {
+            if (is_null($firstTitle)) $offset++;
+            if (is_null($secondTitle)) $offset++;
+        }
         return "sticky_" . $baseClass - $offset;
     }
 

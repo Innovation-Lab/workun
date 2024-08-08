@@ -141,7 +141,7 @@
                 rowspan="{{ $first_self_check_sheet_item->rowspan }}"
                 class="
                   u-w100
-                  {{ $selfCheckSheet->getStickyClass(1, $first_self_check_sheet_item->title, null) }}
+                  {{ $selfCheckSheet->getStickyClass(1, $first_self_check_sheet_item->title) }}
                 "
                 @if($selfCheckSheet->hierarchy < \App\Models\SelfCheckSheet::HIERARCHY_TRIPLE)
                   style="display: none;"
