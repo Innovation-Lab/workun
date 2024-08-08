@@ -160,11 +160,11 @@ class UserDepartmentController extends Controller
 
         $action_type = $request->get('actionType');
         if ($action_type == 'register') {
-            $query->whereNotIn('id', $existingUserIds);
+            $query->whereNotIn('users.id', $existingUserIds);
         } elseif ($action_type == 'delete') {
-            $query->whereIn('id', $existingUserIds);
+            $query->whereIn('users.id', $existingUserIds);
         }
 
-        return $query->pluck('id')->toArray();
+        return $query->pluck('users.id')->toArray();
     }
 }
