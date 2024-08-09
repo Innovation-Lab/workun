@@ -1,5 +1,11 @@
 @foreach($months as $month)
-  @if($month === $term)
+  @if(
+    $month === $term &&
+    (
+      empty($selfCheckRating) ||
+      $selfCheckRating->answer_status
+    )
+  )
     <div class="u-flex cell cell--item u-w100">
       <x-form.select
         id=""
@@ -10,7 +16,7 @@
         :value='old("self_check_sheet_item.{$selfCheckSheetItem->id}", data_get($selfCheckRating, "details.{$selfCheckSheetItem->id}.answer", 3))'
       />
     </div>
-  @elseif($month !== $term && data_get($selfCheckRatingHistories, $month))
+  @elseif(data_get($selfCheckRatingHistories, $month))
     <div class="u-flex u-w140 cell cell--item">
       <div class="cell--number targeter c-txt__md c-txt__weight--600">
         {{ data_get($selfCheckRatingHistories, "{$month}.details.{$selfCheckSheetItem->id}.answer", "-") }}

@@ -470,6 +470,7 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
             $self_check_rating->status = SelfCheckRating::STATUS_ANSWERING;
         } else {
             $self_check_rating->status = SelfCheckRating::STATUS_RATING;
+            $self_check_rating->remand_flag = null;  // 差し戻しフラグを解除
             $self_check_rating->answered_at = date('Y-m-d H:i:s');
             if ($request->get('reviewer_id')) {
                 // 評価者の設定
@@ -529,6 +530,7 @@ class SelfCheckSheetRepository implements SelfCheckSheetRepositoryInterface
         } else {
             $self_check_rating->status = SelfCheckRating::STATUS_APPROVING;
             $self_check_rating->remand_flag = null;
+            $self_check_rating->rating_remand_flag = null;  // 評価差し戻しフラグを解除
             $self_check_rating->reviewed_at = date('Y-m-d H:i:s');
             if ($request->get('approver_id')) {
                 // 評価者の設定

@@ -6,7 +6,11 @@
   <button data-remodal-action="close" class="remodal-close p-modal__close">閉じる</button>
   <div class="p-modal__head">
     <p class="title">評価内容を最終承認 / 評価を確定</p>
-    <p class="description">セルフチェックシートの記入内容を承認します。よろしいですか。<br />承認後は対象者が最終的な評価を閲覧することが可能になります。</p>
+    <p class="description">
+      セルフチェックシートの記入内容を承認し、評価を確定します。<br>
+      確定後の内容変更はできません。<br>
+      承認後は対象者が最終的な評価を閲覧することが可能になります。
+    </p>
   </div>
   <div class="p-modal__body">
     <form action="">

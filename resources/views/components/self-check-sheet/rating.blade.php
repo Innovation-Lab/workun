@@ -1,6 +1,9 @@
 <div class="p-tableBox">
   <div class="p-tableBox__head between">
     <div class="mainText">
+      <x-self-check-sheet.answer-status
+        :status="data_get($selfCheckRating, 'status', \App\Models\SelfCheckRating::STATUS_NOT_ANSWERED)"
+      />
       <p class="title">
         {{ date('Y年m月', strtotime("{$selfCheckRating->target}-01")) }}
         評価入力 : {{ $selfCheckSheet->display_title }}
@@ -34,19 +37,35 @@
           />
         </div>
       </div>
-      <div class="u-align--end u-pd24">
-        <input type="hidden" name="draft" value="" />
-        <input type="hidden" name="remand" value="" />
-        <input
-          type="submit"
-          class="c-button--text"
-          onclick="saveDraft(this)"
-          value="下書き保存する"
-        />
-        <a data-remodal-target="modal_remand" class="c-button c-button--delete u-w100">差戻し</a>
-        <a data-remodal-target="modal_request" class="c-button c-button--primary u-w160">承認を依頼する</a>
+      @if($selfCheckRating->status == App\Models\SelfCheckRating::STATUS_RATING)
+        <div class="u-align--end u-pd24">
+          <input type="hidden" name="draft" value="" />
+          <input type="hidden" name="remand" value="" />
+          <input
+            type="submit"
+            class="c-button--text"
+            onclick="saveDraft(this)"
+            value="下書き保存する"
+          />
+          <a
+            data-remodal-target="modal_remand"
+            class="c-button c-button--delete u-w100"
+          >
+            差戻し
+          </a>
+          <a
+            data-remodal-target="modal_request"
+            class="c-button c-button--primary u-w160"
+          >
+            承認を依頼する
+          </a>
+        </div>
+      @elseif ($selfCheckRating->remand_flag)
+        <div class="u-align--end u-pd24">
+          <a class="c-button c-button--delete u-w100">差戻し中</a>
+        </div>
+      @endif
 {{--        <a class="c-button c-button--primary u-w160">入力内容を反映</a>--}}
-      </div>
     </form>
   </div>
 </div>

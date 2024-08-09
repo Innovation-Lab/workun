@@ -5,7 +5,13 @@
     <div class="p-page">
       <div class="p-page__head">
         <h1 class="p-page__head--title u-align">
-          <a href="{{ route('self-check.index') }}" class="c-button__back">
+          <a
+            href="{{ route('self-check.approvals', [
+              'selfCheckSheet' => $selfCheckSheet,
+              'term' => $term,
+            ]) }}"
+            class="c-button__back"
+          >
             <svg width="28" height="28"><use xlink:href="#chevron_left" /></svg>
           </a>
           セルフチェック評価

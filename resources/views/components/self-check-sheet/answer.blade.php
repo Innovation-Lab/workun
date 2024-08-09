@@ -31,24 +31,29 @@
           />
         </div>
       </div>
-      <div class="u-align--end u-pd24">
-        <input type="hidden" name="draft" value="" />
-        <input
-          type="submit"
-          class="c-button--text"
-          onclick="saveDraft(this)"
-          value="下書き保存する"
-        />
-        <a
-          data-remodal-target="modal_submission"
-          class="c-button c-button--primary u-w160"
-        >
-          記入を完了する
-        </a>
-        <!-- <input type="submit" class="c-button c-button--primary u-w160" value="記入を完了する"> -->
-        <!-- <a data-remodal-target="modal_submission" class="c-button c-button--primary u-w160">入力内容を反映する</a> -->
-        <!-- <input type="submit" class="c-button c-button--primary u-w160" value="入力内容を反映する"> -->
-      </div>
+      @if(
+        empty($selfCheckRating) ||
+        $selfCheckRating->answer_status
+      )
+        <div class="u-align--end u-pd24">
+          <input type="hidden" name="draft" value="" />
+          <input
+            type="submit"
+            class="c-button--text"
+            onclick="saveDraft(this)"
+            value="下書き保存する"
+          />
+          <a
+            data-remodal-target="modal_submission"
+            class="c-button c-button--primary u-w160"
+          >
+            記入を完了する
+          </a>
+          <!-- <input type="submit" class="c-button c-button--primary u-w160" value="記入を完了する"> -->
+          <!-- <a data-remodal-target="modal_submission" class="c-button c-button--primary u-w160">入力内容を反映する</a> -->
+          <!-- <input type="submit" class="c-button c-button--primary u-w160" value="入力内容を反映する"> -->
+        </div>
+      @endif
     </form>
   </div>
 </div>

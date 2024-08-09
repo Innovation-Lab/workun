@@ -92,6 +92,14 @@ class SelfCheckRating extends Model
         return $this->approved_at ? date('Y/m/d', strtotime($this->approved_at)) : null;
     }
 
+    protected function getAnswerStatusAttribute()
+    {
+        return in_array($this->status, [
+            self::STATUS_NOT_ANSWERED,
+            self::STATUS_ANSWERING
+        ]);
+    }
+
     protected function scopeOnTerm($query, $term)
     {
         return $query->where('self_check_ratings.target', $term);
