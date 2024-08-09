@@ -103,6 +103,10 @@ class OrganizationController extends Controller
             data_set($department, 'id', null);
             $result[] = $department;
         }
+        usort($result, function ($a, $b) {
+            return $a['seq'] <=> $b['seq'];
+        });
+
         return $result;
     }
 }
