@@ -15,7 +15,11 @@ class Alert extends Component
         public string $type
     )
     {
-        //
+        if (preg_match('/\[(.*?)\]/', $type)) {
+            $this->type = preg_replace('/\[(.*?)\]/', '.$1', $type);
+        } else {
+            $this->type = $type;
+        }
     }
 
     /**

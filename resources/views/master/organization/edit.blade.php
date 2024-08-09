@@ -52,13 +52,23 @@
                         </div>
                       </div>
                       <div class="layer--container">
-                        @foreach($organization->first_departments as $department)
-                          @include('master.organization._layer_item', [
-                            'parent' => 'departments[0]',
-                            'index' => $loop->index,
-                            'department' => $department
-                          ])
-                        @endforeach
+                        @if(old('departments.0.departments'))
+                          @foreach(old('departments.0.departments') as $childDepartment)
+                            @include('master.organization._layer_item', [
+                              'parent' => 'departments[0]',
+                              'index' => $loop->index,
+                              'department' => (object) $childDepartment
+                            ])
+                          @endforeach
+                        @else
+                          @foreach($organization->first_departments as $department)
+                            @include('master.organization._layer_item', [
+                              'parent' => 'departments[0]',
+                              'index' => $loop->index,
+                              'department' => $department
+                            ])
+                          @endforeach
+                        @endif
                       </div>
                     </div>
                   </div>

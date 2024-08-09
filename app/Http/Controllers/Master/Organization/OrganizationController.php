@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Master\Organization;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DepartmentRequest;
 use App\Models\Department;
 use App\Repositories\DepartmentRepositoryInterface;
 use App\Repositories\UserRepositoryInterface;
+use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\RedirectResponse;
 
 class OrganizationController extends Controller
 {
@@ -54,7 +57,7 @@ class OrganizationController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(DepartmentRequest $request): RedirectResponse
     {
         # 更新処理
         DB::beginTransaction();
@@ -72,7 +75,7 @@ class OrganizationController extends Controller
 
         return redirect()
             ->route('master.organization.index')
-            ->with('success', '更新しました。');
+            ->with('success', '組織図を更新しました。');
     }
 
     public function _preview(Request $request)
